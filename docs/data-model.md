@@ -1,7 +1,7 @@
 # Modelo de Datos
 
 Entidades del sistema con sus campos. Solo se documentan las entidades con definición completa o parcial.
-Las entidades de módulos pendientes (Planes, Pagos, Gamificación, Notificaciones) tienen esqueleto.
+Las entidades de módulos pendientes (Gamificación) tienen esqueleto.
 
 ---
 
@@ -198,10 +198,16 @@ Glosario de ejercicios. Pueden ser globales del sistema o propios del gym.
 |-------|------|-------|
 | `id` | UUID PK | |
 | `gym_id` | UUID FK → gyms | nullable — null = ejercicio global del sistema |
-| `name` | VARCHAR | |
+| `name_es` | VARCHAR | requerido si no hay `name_en` |
+| `name_en` | VARCHAR | requerido si no hay `name_es` |
 | `description` | TEXT | nullable |
-| `video_url` | VARCHAR | nullable |
+| `video_url` | VARCHAR | nullable — YouTube / Vimeo |
+| `image_url` | VARCHAR | nullable — thumbnail de referencia |
+| `muscle_group` | VARCHAR | nullable |
+| `difficulty` | ENUM | nullable: `beginner`, `intermediate`, `advanced` |
+| `equipment` | VARCHAR[] | nullable: `barbell`, `dumbbell`, `none`, etc. |
 | `created_at` | TIMESTAMPTZ | |
+| `updated_at` | TIMESTAMPTZ | |
 
 ---
 
@@ -252,10 +258,105 @@ PR de un member en un ejercicio.
 
 ---
 
+---
+
+## Planes, Membresías y Pagos
+
+### `plans`
+Catálogo de membresías que ofrece el gym.
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `name` | VARCHAR | |
+| `description` | TEXT | nullable |
+| `type` | ENUM | `class_bundle`, `unlimited` |
+| `periodicity` | ENUM | `monthly`, `quarterly`, `biannual`, `annual` |
+| `price_clp` | INTEGER | precio en pesos chilenos |
+| `class_quota` | INTEGER | nullable — null = ilimitado |
+| `allows_freeze` | BOOLEAN | default false |
+| `renewal` | ENUM | `manual`, `automatic` |
+| `grace_period_days` | INTEGER | default 0 |
+| `status` | ENUM | `active`, `inactive`, `archived` |
+| `created_at` | TIMESTAMPTZ | |
+| `updated_at` | TIMESTAMPTZ | |
+
+---
+
+### `memberships`
+Membresía activa (o histórica) de un miembro en un gym.
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `member_id` | UUID FK → members | |
+| `plan_id` | UUID FK → plans | |
+| `status` | ENUM | `active`, `frozen`, `cancelled`, `expired` |
+| `starts_at` | DATE | |
+| `ends_at` | DATE | vencimiento del período actual |
+| `classes_used` | INTEGER | clases consumidas en el período actual |
+| `frozen_at` | TIMESTAMPTZ | nullable |
+| `frozen_until` | DATE | nullable |
+| `freeze_reason` | TEXT | nullable |
+| `cancelled_at` | TIMESTAMPTZ | nullable |
+| `renewal` | ENUM | `manual`, `automatic` |
+| `created_at` | TIMESTAMPTZ | |
+| `updated_at` | TIMESTAMPTZ | |
+
+---
+
+### `payments`
+Registro de cada cobro / pago.
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `member_id` | UUID FK → members | |
+| `membership_id` | UUID FK → memberships | nullable |
+| `amount_clp` | INTEGER | |
+| `method` | ENUM | `manual`, `mercadopago`, `khipu`, `flow` |
+| `status` | ENUM | `pending`, `paid`, `failed`, `refunded` |
+| `paid_at` | TIMESTAMPTZ | nullable |
+| `due_date` | DATE | |
+| `reference` | VARCHAR | nullable — comprobante externo |
+| `dte_url` | VARCHAR | nullable — boleta/factura electrónica SII |
+| `notes` | TEXT | nullable |
+| `created_at` | TIMESTAMPTZ | |
+| `updated_at` | TIMESTAMPTZ | |
+
+---
+
+## Métricas y Progreso
+
+### `physical_progress_records`
+Registro periódico de medidas corporales del atleta.
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `member_id` | UUID FK → members | |
+| `recorded_at` | DATE | |
+| `height_cm` | DECIMAL | nullable |
+| `weight_kg` | DECIMAL | nullable |
+| `waist_cm` | DECIMAL | nullable |
+| `hip_cm` | DECIMAL | nullable |
+| `chest_cm` | DECIMAL | nullable |
+| `thigh_cm` | DECIMAL | nullable |
+| `arm_cm` | DECIMAL | nullable |
+| `body_fat_pct` | DECIMAL | nullable |
+| `photo_url` | VARCHAR | nullable |
+| `created_at` | TIMESTAMPTZ | |
+
+---
+
 ## Pendientes de definición
 
-### `plans` / `memberships` / `payments`
-> Esqueleto — se define cuando se trabaje Planes y Pagos en Miro.
+### `gamification_profiles` / `badges` / `missions` / `challenges`
+> Esqueleto — se define cuando se trabaje Gamificación en Miro.
 
 ### `gamification_profiles` / `badges` / `missions` / `challenges`
 > Esqueleto — se define cuando se trabaje Gamificación en Miro.

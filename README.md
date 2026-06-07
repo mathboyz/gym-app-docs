@@ -41,10 +41,11 @@ docs/
 | Calendario | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Notificaciones | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Reservas | ✅ | ✅ | ✅ | 🔲 | 🔲 |
-| Planes | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
-| Pagos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
+| Planes | ✅ | ✅ | ✅ | 🔲 | 🔲 |
+| Pagos | ✅ | ✅ | ✅ | 🔲 | 🔲 |
+| Rutinas y Ejercicios | ✅ | ✅ | 🔲 | 🔲 | 🔲 |
+| Ejercicios (Glosario) | ✅ | ✅ | ✅ | 🔲 | 🔲 |
+| Métricas | ✅ | ✅ | 🔲 | 🔲 | 🔲 |
 | Gamificación | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Desafíos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Perfil Atleta | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
-| Rutinas y Ejercicios | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
-| Métricas | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
