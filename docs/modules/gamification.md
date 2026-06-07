@@ -1,31 +1,79 @@
 # Módulo: Gamificación
 
-**Estado:** Funcionalidades 🔲 · Campos 🔲 · Conexiones 🔲 · Mockups 🔲 · Modelo 🔲
-**Superficie:** Web Dashboard (admin crea y configura) · App Mobile (atleta experimenta)
+**Estado:** Funcionalidades ✅ · Campos ✅ · Conexiones ✅ · Mockups 🔲 · Modelo 🔲
+**Superficie:** Web Dashboard (admin configura) · App Mobile (atleta experimenta)
 
 ---
 
-## Rol por superficie
+## Sistema transversal de progresión y engagement
 
-| Superficie | Qué hace |
-|------------|---------|
-| Web Dashboard | Crear/editar misiones, badges, desafíos, configurar niveles y reglas de XP, ver métricas de gamificación del gym |
-| App Mobile | Ganar XP, subir de nivel, completar misiones, desbloquear badges, ver ranking, feed social tipo whiteboard |
+La gamificación es el diferenciador principal del producto. Es un módulo **transversal** — se alimenta de eventos de otros módulos (reservas, asistencia, PRs, misiones, competencias).
 
----
+## 🕹️ Mecánicas
 
-> Pendiente de definición detallada en Miro. **Módulo prioritario** — es el diferenciador principal del producto.
+| Mecánica | Descripción |
+|----------|-------------|
+| XP → Nivel | Progresión general. Numérico, no baja. |
+| Puntaje de competición → Rango | Bronce → Diamante, sube/baja. Por temporadas (estilo Valorant, con histórico). |
+| Misiones | Objetivos con recompensa: "asistir 3x semana", "primer Murph" |
+| Badges / logros | Coleccionables, desbloqueables por condiciones |
+| Logros de desafío robables | Único por rutina — "cinturón de campeón" que otro puede quitarte |
+| Rachas | Ligadas al plan: cumplir el cupo del mes; en ilimitado = meta configurable |
+| Rankings | General (XP/nivel) y de competición (puntaje/rango) |
 
-## Lo que se sabe hasta ahora
+## 📈 Fuentes de puntos
 
-- **XP** — puntos de experiencia que gana el atleta por acciones
-- **Niveles** — el atleta sube de nivel al acumular XP
-- **Misiones** — tareas con objetivo y recompensa (ej. "asistir 5 veces esta semana")
-- **Badges** — logros desbloqueables
-- **Desafíos** — competencias entre miembros del gym
-- **Ranking** — tabla de posiciones por gym
-- **Feed social tipo whiteboard** — resultados del día, logros, PRs
+**XP:**
+- Asistir a clase (check-in)
+- Reservar a tiempo
+- Nuevo PR
+- Completar una misión
+- Mantener racha
+
+**Puntaje de competición:**
+- Ganar desafíos
+- Posición en torneos / competencias
+
+## Funcionalidades
+
+### 🖥️ Backoffice (Web)
+- Configurar reglas de XP por acción (feature flags)
+- Crear / gestionar misiones
+- Crear / gestionar badges y condiciones de desbloqueo
+- Definir niveles / rangos y la curva de progresión (detalle numérico PENDIENTE)
+- Gestionar temporadas del puntaje de competición
+- Configurar rachas (qué cuenta, metas)
+
+### 📱 App (Atleta)
+- Ver nivel, rango, XP, puntaje y racha actual
+- Misiones activas y progreso hacia cada una
+- Colección de badges y logros en posesión
+- Logros de desafío robables (cinturones)
+- Rankings general y de competición
+
+## Campos — perfil de gamificación del atleta
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `xp_total` | INTEGER | acumulado histórico |
+| `level` | INTEGER | calculado a partir de XP |
+| `rank` | ENUM | `bronze`, `silver`, `gold`, `platinum`, `diamond` |
+| `competition_score` | INTEGER | temporada actual |
+| `competition_score_history` | JSONB | por temporada |
+| `badges` | referencia → `member_badges` | |
+| `active_missions` | referencia → `member_missions` | |
+| `current_streak` | INTEGER | días/clases consecutivos |
+
+## Conexiones
+
+- **Reservas / Asistencia** → XP por asistir, rachas por check-in
+- **Planes** → racha ligada al cupo mensual
+- **Competencias + Desafíos** → puntaje de competición y badges
+- **Clases / Rutina** → PRs, badges por rutina (logros robables)
+- **Clientes** → perfil del atleta muestra sus datos de gamificación
+- **Red Social** → logros y PRs se publican en el feed
+- **Métricas** → distribución de niveles/XP, engagement por badges/misiones
 
 ## Preguntas abiertas
 
-Ver `open-questions.md` — sección Gamificación.
+- Detalle numérico de la curva de niveles (cuánto XP por nivel) — PENDIENTE
