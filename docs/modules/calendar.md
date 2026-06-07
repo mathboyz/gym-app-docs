@@ -1,26 +1,41 @@
 # Módulo: Calendario
 
-**Estado:** Funcionalidades 🔲 · Campos 🔲 · Conexiones 🔲 · Mockups 🔲 · Modelo 🔲
+**Estado:** Funcionalidades ✅ · Campos ✅ · Conexiones 🔲 · Mockups 🔲 · Modelo 🔲
+**Superficie:** Web Dashboard (admin gestiona) · App Mobile (atleta ve para reservar)
 
 ---
 
-> Pendiente de definición en Miro.
+## Funcionalidades
 
-## Lo que se sabe hasta ahora
+- Crear / editar / cancelar / bloquear sesiones
+- Múltiples clases en el mismo horario (ej. CrossFit y Gimnasia a la vez)
+- Duplicar horario en la semana
+- Recurrencia avanzada (quincenal, mensual, skip feriados)
+- Ocultar días en el calendario
+- Bloquear horarios y días específicos
+- Detección de conflictos de instructor (alerta si doble-agendado)
+- Notificación automática al cancelar / bloquear un slot
+- Lista de espera visible en el slot (cuando cupo lleno)
+- Historial de cambios del slot (audit log)
+- Vistas: diaria / semanal / mensual
+- Render con color del tipo de clase
 
-- Múltiples clases pueden ocurrir en el mismo horario (ej. CrossFit y Gimnasia a la vez)
-- Se puede duplicar un horario para toda la semana
-- Se pueden ocultar días en el calendario
-- Se pueden bloquear horarios y días específicos
+## Campos
 
-## Campos (preliminares)
+| Campo | Notas |
+|-------|-------|
+| Tipo de clase | hereda color, cupos y política de reserva |
+| Instructor / Coach | nullable |
+| Fecha y hora de inicio | |
+| Duración | en minutos |
+| Estado | `scheduled`, `in_progress`, `completed`, `cancelled`, `blocked` |
+| Cupos override | nullable — sobreescribe el default del tipo de clase |
+| Cupos usados / máximo | calculado en tiempo real |
 
-| Campo | Tipo | Notas |
-|-------|------|-------|
-| Horario | datetime | |
-| Tipo de Clase | FK | |
-| Estado | enum | activo / bloqueado |
+## Conexiones
 
-## Preguntas abiertas
-
-Ver `open-questions.md` — sección Reservas.
+- **Tipo de Clases** → hereda color, cupos, planes permitidos y política de reserva
+- **Reservas** → cada sesión tiene sus reservas y lista de espera
+- **Rutinas** → se asigna una rutina del día a la sesión
+- **Miembros** → el instructor es un member con rol coach
+- **Notificaciones** → aviso automático al cancelar / bloquear

@@ -1,5 +1,12 @@
 # Preguntas Abiertas y Decisiones Pendientes
 
+## Roles y superficies
+
+- [ ] **¿Un owner/coach puede tener simultáneamente rol de atleta en su propio gym?**
+  Ej. el dueño quiere aparecer en el ranking de gamificación y reservar clases como cualquier miembro.
+  Opciones: un solo `member` record con rol `owner` que tiene acceso a ambas superficies / dos records separados (uno como owner, uno como athlete).
+  Impacta: modelo de `members`, lógica de auth, qué muestra la app mobile según el usuario.
+
 ## Reservas
 
 - [ ] **¿Con cuánta anticipación se puede reservar un horario?**

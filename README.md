@@ -9,18 +9,22 @@ docs/
   vision.md            # qué es, para quién, tesis, competidores
   architecture.md      # stack, decisiones técnicas
   working-method.md    # cómo trabajamos (Miro, fases, convenciones)
+  data-model.md        # entidades y campos de la DB
   open-questions.md    # dudas y decisiones abiertas
+  surfaces/
+    web-dashboard.md   # panel admin — qué hace el dueño/coach
+    mobile-app.md      # app atleta — qué hace el miembro
   modules/
     clients.md         # ✅ Clientes
     class-types.md     # ✅ Tipo de Clases
-    calendar.md        # 🔲 Calendario
+    calendar.md        # ✅ Calendario
     reservations.md    # 🔲 Reservas
     plans.md           # 🔲 Planes
     payments.md        # 🔲 Pagos
     gamification.md    # 🔲 Gamificación
     challenges.md      # 🔲 Desafíos
     athlete-profile.md # 🔲 Perfil Atleta
-    routines.md        # 🔲 Rutinas
+    routines.md        # 🔲 Rutinas y Ejercicios
     metrics.md         # 🔲 Métricas
     notifications.md   # 🔲 Mensajes / Notificaciones
   decisions/
@@ -28,19 +32,19 @@ docs/
     002-multi-tenant-rls.md
 ```
 
-## Estado
+## Estado de módulos
 
 | Módulo | Funcionalidades | Campos | Conexiones | Mockups | Modelo |
 |--------|:-:|:-:|:-:|:-:|:-:|
 | Clientes | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Tipo de Clases | ✅ | ✅ | ✅ | 🔲 | 🔲 |
-| Calendario | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
+| Calendario | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Reservas | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Planes | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Pagos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Gamificación | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Desafíos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Perfil Atleta | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
-| Rutinas | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
+| Rutinas y Ejercicios | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Métricas | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Notificaciones | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |

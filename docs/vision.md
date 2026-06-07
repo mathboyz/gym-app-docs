@@ -5,8 +5,23 @@
 Plataforma de gestión para gimnasios pequeños y medianos de CrossFit/funcional en Chile.
 
 Dos superficies:
-- **Backoffice web** — para el dueño, admin y coaches
-- **App mobile** — para el atleta
+
+### 1. Web Dashboard (Next.js)
+Para el **dueño/admin/coach** del gym. El admin *crea y configura* — no consume como atleta.
+- Gestión de miembros, clases, calendario, planes, pagos
+- Configuración del gym (branding, instructores, políticas)
+- **Gamificación**: crear/editar misiones, badges, desafíos, niveles, configurar reglas de XP
+- **Rutinas y ejercicios**: crear rutinas, asignarlas a sesiones, gestionar el glosario de ejercicios
+- Métricas y reportes del negocio
+
+### 2. App Mobile (React Native / Expo) — iOS y Android
+Para los **miembros del gym** (atletas). El atleta *experimenta y consume* lo que el admin configuró.
+El dueño/admin puede descargarse la app y usarla como miembro de su propio gym — ve exactamente lo mismo que cualquier atleta.
+- Reserva de clases
+- Ver rutinas del día y registrar resultados / PRs
+- Gamificación (ganar XP, completar misiones, ver ranking, desbloquear badges)
+- Feed social tipo whiteboard
+- Perfil personal
 
 ## Tesis
 

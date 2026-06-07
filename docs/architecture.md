@@ -19,10 +19,10 @@
 | Auth | Supabase Auth |
 
 ### Frontend
-| Superficie | Tecnología |
-|------------|-----------|
-| Backoffice web | Next.js + Tailwind + shadcn/ui |
-| App mobile atleta | React Native (Expo) |
+| Superficie | Tecnología | Usuarios |
+|------------|-----------|----------|
+| Web Dashboard | Next.js + Tailwind + shadcn/ui | Dueño / Admin / Coach — **crea y configura**: miembros, clases, calendario, planes, pagos, rutinas, gamificación |
+| App Mobile (iOS + Android) | React Native (Expo) | Miembros (atletas) — **experimenta y consume**: reservas, rutinas del día, XP, misiones, ranking. El dueño puede usarla también como miembro de su propio gym |
 
 ### Servicios externos
 | Propósito | Servicio |
