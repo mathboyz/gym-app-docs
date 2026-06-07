@@ -158,7 +158,7 @@ Instancia concreta en el calendario (día + hora + tipo de clase).
 ---
 
 ### `reservations`
-Un member reserva un class_session.
+Un member reserva un class_session. El flujo requiere confirmación explícita antes de la clase.
 
 | Campo | Tipo | Notas |
 |-------|------|-------|
@@ -166,12 +166,19 @@ Un member reserva un class_session.
 | `gym_id` | UUID FK → gyms | |
 | `class_session_id` | UUID FK → class_sessions | |
 | `member_id` | UUID FK → members | |
-| `status` | ENUM | `confirmed`, `cancelled`, `no_show`, `waitlist` |
-| `waitlist_position` | INTEGER | nullable — posición en lista de espera |
+| `status` | ENUM | `pending_confirmation`, `confirmed`, `auto_cancelled`, `cancelled`, `no_show`, `waitlist` |
+| `waitlist_position` | INTEGER | nullable |
+| `confirmation_deadline` | TIMESTAMPTZ | nullable — cuándo expira el plazo para confirmar |
+| `confirmed_at` | TIMESTAMPTZ | nullable |
+| `cancelled_at` | TIMESTAMPTZ | nullable |
+| `cancellation_source` | ENUM | nullable: `member`, `admin`, `system` |
+| `promoted_from_waitlist_at` | TIMESTAMPTZ | nullable — audit trail |
 | `created_at` | TIMESTAMPTZ | |
 | `updated_at` | TIMESTAMPTZ | |
 
 UNIQUE: `(class_session_id, member_id)`
+
+**Flujo:** reserva → `pending_confirmation` → push X horas antes → atleta confirma → `confirmed`. Si no confirma en el plazo → `auto_cancelled`, cupo liberado. Una reserva `confirmed` no puede ser cancelada por el atleta.
 
 ---
 
@@ -353,10 +360,104 @@ Registro periódico de medidas corporales del atleta.
 
 ---
 
-## Pendientes de definición
+---
 
-### `gamification_profiles` / `badges` / `missions` / `challenges`
-> Esqueleto — se define cuando se trabaje Gamificación en Miro.
+## Configuración
+
+### `gym_branding` (1:1 por tenant)
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | UNIQUE |
+| `logo_url` | VARCHAR | nullable |
+| `logo_dark_url` | VARCHAR | nullable |
+| `color_primary` | VARCHAR | hex |
+| `color_background` | VARCHAR | hex |
+| `color_foreground` | VARCHAR | hex |
+| `color_button` | VARCHAR | hex |
+| `color_button_text` | VARCHAR | hex |
+| `color_accent` | VARCHAR | hex |
+| `color_success` | VARCHAR | hex |
+| `color_error` | VARCHAR | hex |
+| `updated_at` | TIMESTAMPTZ | |
+| `updated_by` | UUID FK → users | |
+
+### `professionals`
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `name` | VARCHAR | |
+| `photo_url` | VARCHAR | nullable |
+| `email` | VARCHAR | nullable |
+| `phone` | VARCHAR | nullable |
+| `bio` | TEXT | nullable |
+| `specialties` | VARCHAR[] | nullable |
+| `status` | ENUM | `active`, `inactive` |
+| `created_at` | TIMESTAMPTZ | |
+
+---
+
+## Gamificación
+
+### `member_gamification` (perfil por atleta)
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `member_id` | UUID FK → members | UNIQUE per gym |
+| `xp_total` | INTEGER | acumulado histórico |
+| `level` | INTEGER | calculado a partir de XP |
+| `rank` | ENUM | `bronze`, `silver`, `gold`, `platinum`, `diamond` |
+| `competition_score` | INTEGER | temporada actual |
+| `current_streak` | INTEGER | racha actual |
+| `updated_at` | TIMESTAMPTZ | |
+
+### `missions`, `member_missions`, `badges`, `member_badges`
+> Esquema detallado pendiente de definición (curva de niveles PENDIENTE).
+
+---
+
+## Competencias
+
+### `competitions`
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `name` | VARCHAR | |
+| `type` | ENUM | `tournament`, `weekly_league`, `benchmark_leaderboard` |
+| `status` | ENUM | `draft`, `open`, `in_progress`, `finished` |
+| `eligibility` | JSONB | nivel, plan(es), género, edad, sede |
+| `registration_mode` | ENUM | `open`, `invite`, `admin` |
+| `scoring_system` | JSONB | |
+| `prizes` | JSONB | puntaje + badges + XP + premios externos |
+| `created_at` | TIMESTAMPTZ | |
+
+Tablas relacionadas: `competition_categories`, `competition_heats`, `competition_wods`, `competition_results`, `competition_judges`, `competition_registrations`
+
+---
+
+## Reseñas (NPS)
+
+### `surveys`
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `title` | VARCHAR | |
+| `is_anonymous` | BOOLEAN | si true → `athlete_id = null` en respuestas |
+| `status` | ENUM | `active`, `inactive` |
+| `created_by` | UUID FK → users | |
+
+Tablas relacionadas: `survey_questions`, `survey_triggers`, `survey_responses`, `survey_answers`, `survey_templates`
+
+> Disparador: `attendance.status = attended` → sistema evalúa frecuencia → envía push.
 
 ### `gamification_profiles` / `badges` / `missions` / `challenges`
 > Esqueleto — se define cuando se trabaje Gamificación en Miro.

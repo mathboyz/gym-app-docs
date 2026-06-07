@@ -29,6 +29,9 @@ docs/
     metrics.md         # ✅ Métricas
     notifications.md   # ✅ Mensajes / Notificaciones
     settings.md        # ✅ Configuración
+    gamification.md    # ✅ Gamificación
+    competitions.md    # ✅ Competencias
+    reviews.md         # ✅ Reseñas (NPS)
   decisions/
     001-modular-monolith.md
     002-multi-tenant-rls.md
@@ -49,6 +52,9 @@ docs/
 | Ejercicios (Glosario) | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Métricas | ✅ | ✅ | 🔲 | 🔲 | 🔲 |
 | Configuración | ✅ | ✅ | ✅ | 🔲 | 🔲 |
-| Gamificación | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
+| Gamificación | ✅ | ✅ | ✅ | 🔲 | 🔲 |
+| Competencias | ✅ | ✅ | ✅ | 🔲 | 🔲 |
+| Reseñas (NPS) | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Desafíos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Perfil Atleta | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
+| Red Social | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
