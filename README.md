@@ -40,7 +40,7 @@ docs/
 | Tipo de Clases | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Calendario | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Notificaciones | ✅ | ✅ | ✅ | 🔲 | 🔲 |
-| Reservas | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
+| Reservas | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Planes | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Pagos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Gamificación | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
