@@ -9,10 +9,12 @@
 
 ```
 Tipo de Clase (ej. CrossFit)
-  └── Categorías (ej. Strength, WOD, Mobility)
-        └── Rutina
+  └── Categorías (ej. Calentamiento · Skill · WOD)  ← el tipo define QUÉ categorías y su orden
+        └── Rutina  ← el contenido se asigna por sesión en el Calendario
               └── Ejercicios
 ```
+
+El tipo define **qué categorías existen y en qué orden**. El contenido concreto (rutina + ejercicios) se asigna por sesión desde el Calendario.
 
 ## Funcionalidades
 
@@ -35,7 +37,7 @@ Tipo de Clase (ej. CrossFit)
 | Descripción | TEXT | nullable |
 | Color | VARCHAR | hex — se usa en el calendario |
 | Icono / Imagen | VARCHAR | nullable |
-| Planes permitidos | FK[] | solo atletas con estos planes pueden reservar |
+| Incluida en planes | referencia de lectura | se gestiona desde el módulo Planes, no desde aquí |
 | Cupos | INTEGER | por sesión (default, override en calendario) |
 | Sobrecupo | INTEGER | default 0 |
 | Categorías | lista ordenada | ver `class_type_categories` |
@@ -45,7 +47,7 @@ Tipo de Clase (ej. CrossFit)
 ## Conexiones
 
 - **Calendario** → cada sesión referencia un tipo de clase (hereda color, cupos, política de reserva)
-- **Reservas** → cupos y planes permitidos controlan quién puede reservar
-- **Planes** → define qué tipos de clase incluye cada plan
+- **Reservas** → cupos controlan quién puede reservar. No-show = pierde la clase, sin penalización económica
+- **Planes** → los planes definen qué tipos de clase incluyen — se gestiona desde Planes
 - **Rutinas** → jerarquía Tipo → Categorías → Rutina → Ejercicios
 - **Gamificación** → asistencia a ciertos tipos puede dar XP o completar misiones

@@ -111,7 +111,7 @@ Tipos de clase que ofrece el gym (ej. CrossFit, Weightlifting, Yoga).
 ---
 
 ### `class_type_plan_permissions`
-Qué planes tienen acceso a cada tipo de clase.
+Qué planes tienen acceso a cada tipo de clase. Se gestiona desde el módulo Planes — el tipo de clase solo lo lee.
 
 | Campo | Tipo |
 |-------|------|
@@ -149,6 +149,9 @@ Instancia concreta en el calendario (día + hora + tipo de clase).
 | `duration_minutes` | INTEGER | derivado de starts_at/ends_at, útil para queries |
 | `capacity_override` | INTEGER | nullable — sobreescribe el capacity del class_type |
 | `status` | ENUM | `scheduled`, `in_progress`, `completed`, `cancelled`, `blocked` |
+| `recurrence_type` | ENUM | `once`, `weekly`, `biweekly`, `monthly` |
+| `recurrence_days` | INTEGER[] | nullable — días de la semana (0=dom…6=sáb), aplica si weekly/biweekly |
+| `recurrence_ends_at` | DATE | nullable — fecha fin de recurrencia |
 | `created_at` | TIMESTAMPTZ | |
 | `updated_at` | TIMESTAMPTZ | |
 
@@ -257,5 +260,45 @@ PR de un member en un ejercicio.
 ### `gamification_profiles` / `badges` / `missions` / `challenges`
 > Esqueleto — se define cuando se trabaje Gamificación en Miro.
 
-### `notifications` / `notification_preferences`
-> Esqueleto — se define cuando se trabaje Notificaciones en Miro.
+### `messages`
+Mensajes manuales y automáticos enviados a miembros.
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `sender_id` | UUID FK → members | admin o instructor |
+| `type` | ENUM | `manual`, `system` |
+| `title` | VARCHAR | |
+| `body` | TEXT | |
+| `channel` | ENUM | `push`, `email`, `whatsapp` |
+| `audience` | ENUM | `all`, `by_class`, `by_plan` |
+| `audience_ref_id` | UUID | nullable — FK a class_session o plan según audience |
+| `scheduled_at` | TIMESTAMPTZ | nullable — si es programado |
+| `sent_at` | TIMESTAMPTZ | nullable |
+| `status` | ENUM | `draft`, `sent`, `failed` |
+| `created_at` | TIMESTAMPTZ | |
+
+### `message_deliveries`
+Estado de entrega por destinatario.
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `message_id` | UUID FK → messages | |
+| `member_id` | UUID FK → members | |
+| `status` | ENUM | `sent`, `read`, `failed` |
+| `delivered_at` | TIMESTAMPTZ | nullable |
+| `read_at` | TIMESTAMPTZ | nullable |
+
+### `notification_preferences`
+Preferencias del atleta sobre qué notificaciones recibir y por qué canal.
+
+| Campo | Tipo | Notas |
+|-------|------|-------|
+| `id` | UUID PK | |
+| `gym_id` | UUID FK → gyms | |
+| `member_id` | UUID FK → members | |
+| `event_type` | VARCHAR | ej. `reservation_reminder`, `spot_available`, `class_cancelled` |
+| `channel` | ENUM | `push`, `email`, `whatsapp` |
+| `enabled` | BOOLEAN | default true |

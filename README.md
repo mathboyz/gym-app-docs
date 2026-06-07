@@ -39,6 +39,7 @@ docs/
 | Clientes | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Tipo de Clases | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Calendario | ✅ | ✅ | ✅ | 🔲 | 🔲 |
+| Notificaciones | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Reservas | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Planes | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Pagos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
@@ -47,4 +48,3 @@ docs/
 | Perfil Atleta | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Rutinas y Ejercicios | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Métricas | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
-| Notificaciones | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |

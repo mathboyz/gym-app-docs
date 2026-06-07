@@ -31,6 +31,9 @@
 | Estado | `scheduled`, `in_progress`, `completed`, `cancelled`, `blocked` |
 | Cupos override | nullable — sobreescribe el default del tipo de clase |
 | Cupos usados / máximo | calculado en tiempo real |
+| Tipo de recurrencia | `once`, `weekly`, `biweekly`, `monthly` |
+| Días de la semana | aplica si recurrencia `weekly` o `biweekly` |
+| Fecha fin de recurrencia | nullable |
 
 ## Conexiones
 
