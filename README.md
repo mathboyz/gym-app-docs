@@ -24,9 +24,11 @@ docs/
     gamification.md    # 🔲 Gamificación
     challenges.md      # 🔲 Desafíos
     athlete-profile.md # 🔲 Perfil Atleta
-    routines.md        # 🔲 Rutinas y Ejercicios
-    metrics.md         # 🔲 Métricas
-    notifications.md   # 🔲 Mensajes / Notificaciones
+    routines.md        # ✅ Rutinas y Ejercicios
+    exercises.md       # ✅ Ejercicios (Glosario)
+    metrics.md         # ✅ Métricas
+    notifications.md   # ✅ Mensajes / Notificaciones
+    settings.md        # ✅ Configuración
   decisions/
     001-modular-monolith.md
     002-multi-tenant-rls.md
@@ -46,6 +48,7 @@ docs/
 | Rutinas y Ejercicios | ✅ | ✅ | 🔲 | 🔲 | 🔲 |
 | Ejercicios (Glosario) | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Métricas | ✅ | ✅ | 🔲 | 🔲 | 🔲 |
+| Configuración | ✅ | ✅ | ✅ | 🔲 | 🔲 |
 | Gamificación | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Desafíos | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
 | Perfil Atleta | 🔲 | 🔲 | 🔲 | 🔲 | 🔲 |
