@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Tu opinión</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+<style>
+  /* ── NPS scale ── */
+  .nps-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 7px;
+  }
+  .nps-grid-row2 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 7px;
+    margin-top: 7px;
+  }
+  .nps-pill {
+    height: 44px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--fj-ink-600);
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+    display: grid;
+    place-items: center;
+  }
+  .nps-pill:active { transform: scale(.92); }
+
+  /* Detractor (0-6) tint */
+  .nps-pill[data-zone="detractor"][aria-selected="true"] {
+    background: rgba(239,68,68,.15);
+    border-color: rgba(239,68,68,.6);
+    color: #ef4444;
+  }
+  /* Pasivo (7-8) tint */
+  .nps-pill[data-zone="pasivo"][aria-selected="true"] {
+    background: rgba(234,179,8,.15);
+    border-color: rgba(234,179,8,.6);
+    color: #ca8a04;
+  }
+  /* Promotor (9-10) tint */
+  .nps-pill[data-zone="promotor"][aria-selected="true"] {
+    background: rgba(34,197,94,.16);
+    border-color: rgba(34,197,94,.55);
+    color: #16a34a;
+  }
+
+  /* NPS zona label */
+  .nps-zone-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .03em;
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .nps-zone-detractor {
+    background: rgba(239,68,68,.1);
+    color: #ef4444;
+  }
+  .nps-zone-pasivo {
+    background: rgba(234,179,8,.12);
+    color: #ca8a04;
+  }
+  .nps-zone-promotor {
+    background: rgba(34,197,94,.13);
+    color: #16a34a;
+  }
+
+  /* ── Caritas coach ── */
+  .fj-stars-row {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+  }
+  .fj-star-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    cursor: pointer;
+    font-size: 24px;
+    display: grid;
+    place-items: center;
+    transition: background .15s, border-color .15s, transform .12s;
+    flex-shrink: 0;
+  }
+  .fj-star-btn:active { transform: scale(.88); }
+  .fj-star-btn[aria-selected="true"] {
+    background: rgba(251,82,21,.12);
+    border-color: var(--fj-brand);
+  }
+
+  /* ── Chips multiselect ── */
+  .fj-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .fj-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fj-ink-600);
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+    user-select: none;
+  }
+  .fj-chip:active { transform: scale(.94); }
+  .fj-chip[aria-selected="true"] {
+    background: rgba(251,82,21,.12);
+    border-color: var(--fj-brand);
+    color: var(--fj-brand);
+  }
+
+  /* ── Textarea ── */
+  .fj-textarea {
+    width: 100%;
+    background: var(--fj-ink-100);
+    border: 1.5px solid var(--fj-ink-200);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--fj-ink-900);
+    resize: none;
+    outline: none;
+    min-height: 90px;
+    transition: border-color .15s, background .15s;
+    line-height: 1.55;
+  }
+  .fj-textarea:focus {
+    border-color: var(--fj-brand);
+    background: rgba(251,82,21,.06);
+  }
+  .fj-textarea::placeholder { color: var(--fj-ink-400); }
+
+  /* ── Footer fijo ── */
+  .fj-footer-fixed {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px 20px;
+    background: var(--fj-surface);
+    border-top: 1px solid var(--fj-ink-100);
+    z-index: 10;
+  }
+
+  /* ── Estado gracias ── */
+  #estado-gracias {
+    display: none;
+    text-align: center;
+    padding: 48px 24px 32px;
+  }
+  .gracias-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 28px;
+    background: rgba(34,197,94,.14);
+    border: 1.5px solid rgba(34,197,94,.3);
+    display: grid;
+    place-items: center;
+    margin: 0 auto 20px;
+  }
+  .gracias-xp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(251,82,21,.12);
+    border: 1.5px solid rgba(251,82,21,.28);
+    border-radius: 999px;
+    padding: 7px 16px 7px 10px;
+    margin-top: 16px;
+  }
+  .gracias-xp-dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--fj-brand);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+<div class="app-frame">
+
+  <!-- App bar con back -->
+  <header class="app-bar">
+    <a href="notificaciones.html" class="fj-icon-btn" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1 min-w-0">
+      <p class="a-eyebrow">Encuesta post-clase</p>
+      <p class="app-bar-title">Tu opinión</p>
+    </div>
+    <!-- XP preview chip -->
+    <span style="display:inline-flex;align-items:center;gap:5px;background:rgba(251,82,21,.1);border:1px solid rgba(251,82,21,.22);border-radius:999px;padding:5px 11px 5px 7px">
+      <span style="width:22px;height:22px;border-radius:50%;background:var(--fj-brand);display:grid;place-items:center;flex-shrink:0">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </span>
+      <span class="font-mono text-xs font-bold" style="color:var(--fj-brand)">+20 XP</span>
+    </span>
+  </header>
+
+  <main class="app-screen space-y-4" style="padding-bottom:0">
+
+    <!-- ── Formulario ── -->
+    <div id="form-encuesta">
+
+      <!-- 1. Contexto -->
+      <div class="acard acard-pad" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.2)">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl grid place-items-center shrink-0" style="background:rgba(251,82,21,.14)">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-ink-900">¿Cómo estuvo tu CrossFit de hoy?</p>
+            <p class="a-muted text-xs mt-0.5">Coach Vale Fuentes · 09:00</p>
+          </div>
+        </div>
+        <div style="height:1px;background:rgba(251,82,21,.16);margin:12px 0"></div>
+        <p class="a-muted text-xs flex items-center gap-1.5">
+          <span>🔒</span>
+          <span>Tu respuesta es anónima. No la verá el coach ni el equipo.</span>
+        </p>
+      </div>
+
+      <!-- 2. NPS -->
+      <div class="acard acard-pad">
+        <p class="a-h text-base mb-0.5">¿Qué tan probable es que recomiendes Forja Box a un amigo?</p>
+        <p class="a-muted text-xs mb-4">Elige un número del 0 al 10</p>
+
+        <!-- Fila 1: 0–5 -->
+        <div class="nps-grid" id="nps-grid-1">
+          <button class="nps-pill" data-nps="0" data-zone="detractor" aria-selected="false" onclick="selectNps(0)">0</button>
+          <button class="nps-pill" data-nps="1" data-zone="detractor" aria-selected="false" onclick="selectNps(1)">1</button>
+          <button class="nps-pill" data-nps="2" data-zone="detractor" aria-selected="false" onclick="selectNps(2)">2</button>
+          <button class="nps-pill" data-nps="3" data-zone="detractor" aria-selected="false" onclick="selectNps(3)">3</button>
+          <button class="nps-pill" data-nps="4" data-zone="detractor" aria-selected="false" onclick="selectNps(4)">4</button>
+          <button class="nps-pill" data-nps="5" data-zone="detractor" aria-selected="false" onclick="selectNps(5)">5</button>
+        </div>
+        <!-- Fila 2: 6–10 -->
+        <div class="nps-grid-row2" id="nps-grid-2">
+          <button class="nps-pill" data-nps="6"  data-zone="detractor" aria-selected="false" onclick="selectNps(6)">6</button>
+          <button class="nps-pill" data-nps="7"  data-zone="pasivo"    aria-selected="false" onclick="selectNps(7)">7</button>
+          <button class="nps-pill" data-nps="8"  data-zone="pasivo"    aria-selected="false" onclick="selectNps(8)">8</button>
+          <button class="nps-pill" data-nps="9"  data-zone="promotor"  aria-selected="true"  onclick="selectNps(9)">9</button>
+          <button class="nps-pill" data-nps="10" data-zone="promotor"  aria-selected="false" onclick="selectNps(10)">10</button>
+        </div>
+
+        <!-- Etiquetas extremos -->
+        <div class="flex items-center justify-between mt-3">
+          <span class="a-muted text-xs">Nada probable</span>
+          <!-- Zona activa -->
+          <span id="nps-zona-lbl" class="nps-zone-label nps-zone-promotor">Promotor 🙌</span>
+          <span class="a-muted text-xs">Muy probable</span>
+        </div>
+      </div>
+
+      <!-- 3. Caritas coach -->
+      <div class="acard acard-pad">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <p class="a-h text-base">¿Cómo te sentiste con el coach?</p>
+            <p class="a-muted text-xs mt-0.5">Coach Vale Fuentes</p>
+          </div>
+          <span id="coach-lbl" class="font-mono text-xs font-bold px-2.5 py-1 rounded-full" style="background:rgba(251,82,21,.1);color:var(--fj-brand)">4 / 5</span>
+        </div>
+        <div class="fj-stars-row" id="coach-stars">
+          <button class="fj-star-btn" data-val="1" aria-selected="false" onclick="selectCoach(1)" aria-label="1 — Muy mala">😕</button>
+          <button class="fj-star-btn" data-val="2" aria-selected="false" onclick="selectCoach(2)" aria-label="2 — Regular">😐</button>
+          <button class="fj-star-btn" data-val="3" aria-selected="false" onclick="selectCoach(3)" aria-label="3 — Ok">🙂</button>
+          <button class="fj-star-btn" data-val="4" aria-selected="true"  onclick="selectCoach(4)" aria-label="4 — Buena">😄</button>
+          <button class="fj-star-btn" data-val="5" aria-selected="false" onclick="selectCoach(5)" aria-label="5 — Excelente">🤩</button>
+        </div>
+        <p class="a-muted text-xs text-center mt-3" id="coach-desc">Buena clase · El coach estuvo presente y motivó bien</p>
+      </div>
+
+      <!-- 4. Chips destacados -->
+      <div class="acard acard-pad">
+        <div class="flex items-center justify-between mb-3">
+          <p class="a-h text-base">¿Qué destacarías?</p>
+          <span class="a-muted text-xs">Multi-selección</span>
+        </div>
+        <div class="fj-chip-row" id="chips-destacar">
+          <button class="fj-chip" data-chip="energia"    aria-selected="true"  onclick="toggleChip(this)">⚡ Energía</button>
+          <button class="fj-chip" data-chip="musica"     aria-selected="false" onclick="toggleChip(this)">🎵 Música</button>
+          <button class="fj-chip" data-chip="tecnica"    aria-selected="true"  onclick="toggleChip(this)">🎯 Técnica del coach</button>
+          <button class="fj-chip" data-chip="comunidad"  aria-selected="false" onclick="toggleChip(this)">🤝 Comunidad</button>
+          <button class="fj-chip" data-chip="instalaciones" aria-selected="false" onclick="toggleChip(this)">🏋️ Instalaciones</button>
+        </div>
+      </div>
+
+      <!-- 5. Texto libre -->
+      <div class="acard acard-pad">
+        <div class="flex items-center justify-between mb-3">
+          <p class="a-h text-base">¿Algo que podríamos mejorar?</p>
+          <span class="a-muted text-xs">Opcional</span>
+        </div>
+        <textarea
+          class="fj-textarea"
+          id="mejora-texto"
+          placeholder="Cuéntanos lo que quieras… todo feedback sirve."
+          maxlength="300"
+          oninput="updateCharCount(this)"
+        ></textarea>
+        <div class="flex justify-end mt-1.5">
+          <span class="a-muted text-xs" id="char-count">0/300</span>
+        </div>
+      </div>
+
+      <!-- Espacio para footer fijo -->
+      <div style="height:4px"></div>
+
+    </div><!-- /form-encuesta -->
+
+    <!-- ── Estado gracias (oculto hasta enviar) ── -->
+    <div id="estado-gracias">
+      <div class="gracias-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="rgba(34,197,94,.85)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <p class="font-display font-bold text-2xl text-ink-900 leading-tight">¡Gracias por tu feedback!</p>
+      <p class="a-muted text-sm mt-2 leading-relaxed">Tu opinión nos ayuda a mejorar<br>cada clase para toda la comunidad.</p>
+      <!-- XP ganado -->
+      <div class="gracias-xp-badge">
+        <span class="gracias-xp-dot">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </span>
+        <span class="font-mono text-sm font-bold" style="color:var(--fj-brand)">+20 XP</span>
+        <span class="text-sm font-semibold text-ink-700">sumados a tu perfil</span>
+      </div>
+      <!-- Barra de XP -->
+      <div class="mt-6 mx-auto" style="max-width:260px">
+        <div class="flex items-center justify-between mb-1.5">
+          <span class="a-muted text-xs">Nivel 12</span>
+          <span class="font-mono text-xs font-bold" style="color:var(--fj-brand)">2.860 XP</span>
+        </div>
+        <div class="a-prog"><div id="xp-bar-gracias" style="width:0%;transition:width 1s ease .3s"></div></div>
+        <p class="a-muted text-xs mt-1.5 text-center">340 XP para Nivel 13</p>
+      </div>
+      <!-- CTA volver -->
+      <div style="padding:24px 0 8px">
+        <a href="notificaciones.html" class="a-btn a-btn-primary">
+          Volver al inicio
+        </a>
+      </div>
+    </div><!-- /estado-gracias -->
+
+  </main>
+
+  <!-- Footer fijo con botón enviar -->
+  <div class="fj-footer-fixed" id="footer-encuesta">
+    <button class="a-btn a-btn-primary" id="btn-enviar" onclick="enviarEncuesta()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Enviar
+    </button>
+  </div>
+
+</div><!-- /app-frame -->
+
+<script>
+/* ── NPS ── */
+var npsSeleccionado = 9;
+var npsZoneLabels = {
+  'detractor': 'Detractor 😬',
+  'pasivo':    'Pasivo 😊',
+  'promotor':  'Promotor 🙌'
+};
+
+function selectNps(val) {
+  npsSeleccionado = val;
+  document.querySelectorAll('.nps-pill').forEach(function(p) {
+    p.setAttribute('aria-selected', parseInt(p.dataset.nps) === val ? 'true' : 'false');
+  });
+  var zone = val <= 6 ? 'detractor' : val <= 8 ? 'pasivo' : 'promotor';
+  var lbl = document.getElementById('nps-zona-lbl');
+  lbl.textContent = npsZoneLabels[zone];
+  lbl.className = 'nps-zone-label nps-zone-' + zone;
+}
+
+/* ── Coach caritas ── */
+var coachSeleccionado = 4;
+var coachDescs = {
+  1: 'Mala clase · El coach no estaba presente',
+  2: 'Regular · Faltó más motivación y corrección',
+  3: 'Ok · Clase normal sin nada especial',
+  4: 'Buena clase · El coach estuvo presente y motivó bien',
+  5: '¡Excelente! · El coach lo dio todo, 10/10'
+};
+
+function selectCoach(val) {
+  coachSeleccionado = val;
+  document.querySelectorAll('.fj-star-btn').forEach(function(b) {
+    b.setAttribute('aria-selected', parseInt(b.dataset.val) === val ? 'true' : 'false');
+  });
+  document.getElementById('coach-lbl').textContent = val + ' / 5';
+  document.getElementById('coach-desc').textContent = coachDescs[val] || '';
+}
+
+/* ── Chips multi-select ── */
+function toggleChip(btn) {
+  var current = btn.getAttribute('aria-selected') === 'true';
+  btn.setAttribute('aria-selected', current ? 'false' : 'true');
+}
+
+/* ── Char count textarea ── */
+function updateCharCount(el) {
+  document.getElementById('char-count').textContent = el.value.length + '/300';
+}
+
+/* ── Enviar encuesta ── */
+function enviarEncuesta() {
+  var btn = document.getElementById('btn-enviar');
+  btn.disabled = true;
+  btn.style.opacity = '.65';
+  btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Enviando…';
+
+  setTimeout(function() {
+    /* Ocultar formulario y footer, mostrar estado gracias */
+    document.getElementById('form-encuesta').style.display = 'none';
+    document.getElementById('footer-encuesta').style.display = 'none';
+    var gracias = document.getElementById('estado-gracias');
+    gracias.style.display = 'block';
+
+    /* Animar barra XP con un pequeño delay para que se vea */
+    setTimeout(function() {
+      document.getElementById('xp-bar-gracias').style.width = '69%'; /* 2860/3200 */
+    }, 200);
+  }, 750);
+}
+
+/* Init: sincronizar estados pre-seleccionados */
+(function() {
+  /* NPS 9 ya tiene aria-selected="true" en el HTML */
+  /* Coach 4 ya tiene aria-selected="true" en el HTML */
+  /* Chips energía y técnica ya tienen aria-selected="true" */
+})();
+</script>
+</body>
+</html>

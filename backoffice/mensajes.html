@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Mensajes</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+</head>
+<body data-page="mensajes" data-title="Mensajes" data-eyebrow="Forja Box · Anuncios"
+      data-cta-label="Nuevo mensaje" data-cta-href="#">
+<div data-fj-content>
+<div class="fj-pad fj-maxw space-y-4">
+
+  <!-- Barra filtros + búsqueda -->
+  <div class="flex items-center justify-between gap-4 flex-wrap">
+    <div class="fj-pills">
+      <button class="fj-pill" aria-selected="true" data-filter="">Todos</button>
+      <button class="fj-pill" aria-selected="false" data-filter="enviado">Enviados</button>
+      <button class="fj-pill" aria-selected="false" data-filter="programado">Programados</button>
+      <button class="fj-pill" aria-selected="false" data-filter="borrador">Borradores</button>
+    </div>
+    <div class="relative">
+      <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400 pointer-events-none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="msg-search" type="search" placeholder="Buscar mensaje…" aria-label="Buscar mensaje"
+        class="fj-input pl-8 h-8 text-sm w-60">
+    </div>
+  </div>
+
+  <!-- Tabla mensajes -->
+  <div class="fj-list">
+    <div class="overflow-x-auto">
+      <table class="fj-table" id="msg-table">
+        <thead>
+          <tr>
+            <th style="min-width:260px">Mensaje</th>
+            <th>Remitente</th>
+            <th>Destinatarios</th>
+            <th>Canal</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th class="text-right">Entrega</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="msg-tbody">
+
+          <!-- 1: Recordatorio clase 07:00 -->
+          <tr class="msg-row" data-estado="enviado" data-titulo="recordatorio clase crossfit">
+            <td>
+              <div style="max-width:280px">
+                <p class="text-sm font-semibold text-ink-900 leading-snug">Recordatorio: clase CrossFit 07:00</p>
+                <p class="text-xs text-ink-400 mt-0.5 leading-relaxed" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px">Hola! Te recordamos que mañana tienes clase a las 07:00 hrs. ¡Llega 5 min antes!</p>
+              </div>
+            </td>
+            <td><span class="fj-badge fj-badge-brand">Admin</span></td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="white-space:nowrap">Clase: CrossFit 07:00</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-brand-rgb,251,82,21),0.1);color:var(--fj-brand)">Push</span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-info-rgb,52,130,246),0.1);color:var(--fj-info)">Email</span>
+              </div>
+            </td>
+            <td class="font-mono text-xs text-ink-500" style="white-space:nowrap">hoy 08:00</td>
+            <td><span class="fj-badge fj-badge-success">Enviado</span></td>
+            <td class="text-right font-mono text-xs text-ink-500" style="white-space:nowrap">144/150 ✓</td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones mensaje">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- 2: Cambio de horario -->
+          <tr class="msg-row" data-estado="enviado" data-titulo="cambio de horario clase haltero">
+            <td>
+              <div style="max-width:280px">
+                <p class="text-sm font-semibold text-ink-900 leading-snug">Cambio de horario: Halterofilia martes</p>
+                <p class="text-xs text-ink-400 mt-0.5 leading-relaxed" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px">La clase del martes 10 jun se mueve de las 19:00 a las 20:00 hrs por mantención.</p>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral">Coach: Nacho</span>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="white-space:nowrap">Clase: Haltero 19:00</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-brand-rgb,251,82,21),0.1);color:var(--fj-brand)">Push</span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-success-rgb,24,169,87),0.1);color:var(--fj-success)">WhatsApp</span>
+              </div>
+            </td>
+            <td class="font-mono text-xs text-ink-500" style="white-space:nowrap">ayer 17:30</td>
+            <td><span class="fj-badge fj-badge-success">Enviado</span></td>
+            <td class="text-right font-mono text-xs text-ink-500" style="white-space:nowrap">22/22 ✓</td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones mensaje">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- 3: Promo plan full -->
+          <tr class="msg-row" data-estado="enviado" data-titulo="promoción plan full junio">
+            <td>
+              <div style="max-width:280px">
+                <p class="text-sm font-semibold text-ink-900 leading-snug">Promo junio: Plan Full a $75.000</p>
+                <p class="text-xs text-ink-400 mt-0.5 leading-relaxed" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px">Solo hasta el viernes 13 jun. Renueva tu plan Full con $14.000 de descuento.</p>
+              </div>
+            </td>
+            <td><span class="fj-badge fj-badge-brand">Admin</span></td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="white-space:nowrap">Todos · 248</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-brand-rgb,251,82,21),0.1);color:var(--fj-brand)">Push</span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-info-rgb,52,130,246),0.1);color:var(--fj-info)">Email</span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-success-rgb,24,169,87),0.1);color:var(--fj-success)">WhatsApp</span>
+              </div>
+            </td>
+            <td class="font-mono text-xs text-ink-500" style="white-space:nowrap">06 jun 10:00</td>
+            <td><span class="fj-badge fj-badge-success">Enviado</span></td>
+            <td class="text-right font-mono text-xs text-ink-500" style="white-space:nowrap">231/248 ✓</td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones mensaje">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- 4: Programado -->
+          <tr class="msg-row" data-estado="programado" data-titulo="encuesta satisfacción junio">
+            <td>
+              <div style="max-width:280px">
+                <p class="text-sm font-semibold text-ink-900 leading-snug">Encuesta de satisfacción · Junio</p>
+                <p class="text-xs text-ink-400 mt-0.5 leading-relaxed" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px">¿Cómo fue tu mes en Forja? Cuéntanos en 2 minutos y gana un mes gratis.</p>
+              </div>
+            </td>
+            <td><span class="fj-badge fj-badge-brand">Admin</span></td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="white-space:nowrap">Plan: Full</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-1">
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-info-rgb,52,130,246),0.1);color:var(--fj-info)">Email</span>
+              </div>
+            </td>
+            <td class="font-mono text-xs text-ink-500" style="white-space:nowrap">Prog. · 12 jun 09:00</td>
+            <td><span class="fj-badge fj-badge-info">Programado</span></td>
+            <td class="text-right font-mono text-xs text-ink-400" style="white-space:nowrap">—</td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones mensaje">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- 5: Mantención sistema -->
+          <tr class="msg-row" data-estado="programado" data-titulo="mantención sistema viernes">
+            <td>
+              <div style="max-width:280px">
+                <p class="text-sm font-semibold text-ink-900 leading-snug">Mantención: app fuera de servicio 02:00–04:00</p>
+                <p class="text-xs text-ink-400 mt-0.5 leading-relaxed" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px">El viernes 13 realizaremos mantención nocturna. La app no estará disponible de 02:00 a 04:00 hrs.</p>
+              </div>
+            </td>
+            <td><span class="fj-badge fj-badge-brand">Admin</span></td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="white-space:nowrap">Todos · 248</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-1">
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-brand-rgb,251,82,21),0.1);color:var(--fj-brand)">Push</span>
+              </div>
+            </td>
+            <td class="font-mono text-xs text-ink-500" style="white-space:nowrap">Prog. · 13 jun 01:50</td>
+            <td><span class="fj-badge fj-badge-info">Programado</span></td>
+            <td class="text-right font-mono text-xs text-ink-400" style="white-space:nowrap">—</td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones mensaje">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- 6: Fallido -->
+          <tr class="msg-row" data-estado="fallido" data-titulo="bienvenida nuevos socios mayo">
+            <td>
+              <div style="max-width:280px">
+                <p class="text-sm font-semibold text-ink-900 leading-snug">Bienvenida socios nuevos · Mayo</p>
+                <p class="text-xs text-ink-400 mt-0.5 leading-relaxed" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px">¡Bienvenido a Forja! Este es tu primer mes. Aquí tienes todo lo que necesitas saber.</p>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral">Coach: Vale</span>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="white-space:nowrap">Todos · 248</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-1">
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-info-rgb,52,130,246),0.1);color:var(--fj-info)">Email</span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-success-rgb,24,169,87),0.1);color:var(--fj-success)">WhatsApp</span>
+              </div>
+            </td>
+            <td class="font-mono text-xs text-ink-500" style="white-space:nowrap">01 may 09:00</td>
+            <td><span class="fj-badge fj-badge-danger">Fallido</span></td>
+            <td class="text-right font-mono text-xs text-danger" style="white-space:nowrap">8/12 ✗</td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones mensaje">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+
+          <!-- 7: Borrador -->
+          <tr class="msg-row" data-estado="borrador" data-titulo="torneo interno julio">
+            <td>
+              <div style="max-width:280px">
+                <p class="text-sm font-semibold text-ink-900 leading-snug">Torneo interno · Julio 2026</p>
+                <p class="text-xs text-ink-400 mt-0.5 leading-relaxed" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px">Este julio volvemos con nuestro torneo inter-clases. Inscripción abierta desde el 15 jun.</p>
+              </div>
+            </td>
+            <td><span class="fj-badge fj-badge-brand">Admin</span></td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="white-space:nowrap">Todos · 248</span>
+            </td>
+            <td>
+              <div class="flex items-center gap-1 flex-wrap">
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-brand-rgb,251,82,21),0.1);color:var(--fj-brand)">Push</span>
+                <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(var(--fj-info-rgb,52,130,246),0.1);color:var(--fj-info)">Email</span>
+              </div>
+            </td>
+            <td class="font-mono text-xs text-ink-400" style="white-space:nowrap">—</td>
+            <td><span class="fj-badge fj-badge-neutral">Borrador</span></td>
+            <td class="text-right font-mono text-xs text-ink-400" style="white-space:nowrap">—</td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones mensaje">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Pie -->
+    <div class="px-5 py-3 flex items-center justify-between" style="border-top:1px solid var(--fj-ink-100)">
+      <span class="font-mono text-xs text-ink-400">Mostrando <span id="msg-count">7</span> mensajes</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+/* ---- Filtros ---- */
+document.querySelectorAll('.fj-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('.fj-pill').forEach(p => p.setAttribute('aria-selected', 'false'));
+    pill.setAttribute('aria-selected', 'true');
+    applyFilters();
+  });
+});
+
+document.getElementById('msg-search').addEventListener('input', applyFilters);
+
+function applyFilters() {
+  const activeFilter = document.querySelector('.fj-pill[aria-selected="true"]').dataset.filter;
+  const searchVal = document.getElementById('msg-search').value.toLowerCase();
+  const rows = document.querySelectorAll('.msg-row');
+  let visible = 0;
+  rows.forEach(row => {
+    const estadoMatch = !activeFilter || row.dataset.estado === activeFilter;
+    const tituloMatch = !searchVal || row.dataset.titulo.includes(searchVal);
+    if (estadoMatch && tituloMatch) {
+      row.style.display = '';
+      visible++;
+    } else {
+      row.style.display = 'none';
+    }
+  });
+  document.getElementById('msg-count').textContent = visible;
+}
+
+/* ---- Compositor de mensaje (drawer) ---- */
+function abrirCompositor() {
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div>
+        <p class="fj-eyebrow">Forja Box · Anuncios</p>
+        <h2 class="font-display font-bold text-lg text-ink-900">Nuevo mensaje</h2>
+      </div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="fj-drawer-body space-y-4">
+
+      <!-- Remitente -->
+      <div>
+        <label class="fj-label">Remitente</label>
+        <select class="fj-input">
+          <option value="admin">Admin (Forja Box)</option>
+          <option value="vale">Coach: Vale Fuentes</option>
+          <option value="nacho">Coach: Nacho Tapia</option>
+        </select>
+      </div>
+
+      <!-- Destinatarios -->
+      <div>
+        <label class="fj-label">Destinatarios</label>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:10px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="radio" name="dest" value="todos" checked style="accent-color:var(--fj-brand)">
+            <span style="color:var(--fj-ink-700)">Todos los socios <span style="color:var(--fj-ink-400);font-family:var(--font-mono,monospace)">· 248</span></span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="radio" name="dest" value="clase" style="accent-color:var(--fj-brand)">
+            <span style="color:var(--fj-ink-700)">Por clase</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="radio" name="dest" value="plan" style="accent-color:var(--fj-brand)">
+            <span style="color:var(--fj-ink-700)">Por plan</span>
+          </label>
+        </div>
+        <div id="dest-clase" style="display:none">
+          <select class="fj-input">
+            <option>CrossFit · 07:00</option>
+            <option>CrossFit · 09:00</option>
+            <option>CrossFit · 12:00</option>
+            <option>CrossFit · 18:00</option>
+            <option>CrossFit · 19:00</option>
+            <option>CrossFit · 20:00</option>
+            <option>Halterofilia · 19:00</option>
+            <option>Endurance · 07:30</option>
+            <option>Gimnasia · 18:30</option>
+          </select>
+        </div>
+        <div id="dest-plan" style="display:none">
+          <select class="fj-input">
+            <option>Plan Full</option>
+            <option>Plan Ilimitado</option>
+            <option>Plan 3x semana</option>
+            <option>Pack 10 clases</option>
+            <option>Plan Estudiante</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Plantilla -->
+      <div>
+        <label class="fj-label">Plantilla (opcional)</label>
+        <select class="fj-input" id="plantilla-select">
+          <option value="">Usar plantilla…</option>
+          <option value="recordatorio">Recordatorio de clase</option>
+          <option value="cambio">Cambio de horario</option>
+          <option value="promo">Promoción</option>
+          <option value="bienvenida">Bienvenida nuevo socio</option>
+          <option value="mantencion">Mantención del sistema</option>
+        </select>
+      </div>
+
+      <!-- Título -->
+      <div>
+        <label class="fj-label" for="msg-titulo">Título</label>
+        <input id="msg-titulo" class="fj-input" type="text" placeholder="Ej: Recordatorio clase CrossFit 07:00">
+      </div>
+
+      <!-- Cuerpo -->
+      <div>
+        <label class="fj-label" for="msg-cuerpo">Cuerpo del mensaje</label>
+        <textarea id="msg-cuerpo" class="fj-input" rows="4" placeholder="Escribe el mensaje que recibirán tus socios…" style="resize:vertical"></textarea>
+      </div>
+
+      <!-- Canal -->
+      <div>
+        <label class="fj-label">Canal de envío</label>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="checkbox" checked style="accent-color:var(--fj-brand)">
+            <span style="display:inline-flex;align-items:center;gap:6px">
+              <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(251,82,21,0.1);color:#FB5215">Push</span>
+              <span style="color:var(--fj-ink-500)">Notificación push en la app</span>
+            </span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="checkbox" style="accent-color:var(--fj-brand)">
+            <span style="display:inline-flex;align-items:center;gap:6px">
+              <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(52,130,246,0.1);color:#3482F6">Email</span>
+              <span style="color:var(--fj-ink-500)">Correo electrónico</span>
+            </span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="checkbox" style="accent-color:var(--fj-brand)">
+            <span style="display:inline-flex;align-items:center;gap:6px">
+              <span class="inline-flex items-center gap-1 text-xs font-medium rounded-md px-2 py-0.5" style="background:rgba(24,169,87,0.1);color:#18A957">WhatsApp</span>
+              <span style="color:var(--fj-ink-500)">Mensaje vía WhatsApp</span>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Envío -->
+      <div>
+        <label class="fj-label">Cuándo enviar</label>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="radio" name="cuando" value="ahora" checked style="accent-color:var(--fj-brand)">
+            <span style="color:var(--fj-ink-700)">Enviar ahora</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer">
+            <input type="radio" name="cuando" value="programar" id="radio-programar" style="accent-color:var(--fj-brand)">
+            <span style="color:var(--fj-ink-700)">Programar envío</span>
+          </label>
+        </div>
+        <div id="cuando-datetime" style="display:none;margin-top:10px">
+          <input type="datetime-local" class="fj-input fj-mono" style="font-family:var(--font-mono,monospace);font-size:13px">
+        </div>
+      </div>
+
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-ghost fj-btn-sm" data-fj-close>Cancelar</button>
+      <button class="fj-btn fj-btn-primary fj-btn-sm" data-fj-close>Enviar mensaje</button>
+    </div>
+  `);
+
+  /* Lógica interactiva dentro del drawer */
+  requestAnimationFrame(() => {
+    /* Destinatarios radios */
+    document.querySelectorAll('input[name="dest"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.getElementById('dest-clase').style.display = 'none';
+        document.getElementById('dest-plan').style.display = 'none';
+        if (radio.value === 'clase') document.getElementById('dest-clase').style.display = 'block';
+        if (radio.value === 'plan')  document.getElementById('dest-plan').style.display = 'block';
+      });
+    });
+
+    /* Cuándo enviar */
+    document.querySelectorAll('input[name="cuando"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.getElementById('cuando-datetime').style.display =
+          radio.value === 'programar' ? 'block' : 'none';
+      });
+    });
+
+    /* Plantillas */
+    const PLANTILLAS = {
+      recordatorio: {
+        titulo: 'Recordatorio: clase CrossFit mañana 07:00',
+        cuerpo:  'Hola! Solo para recordarte que mañana tienes clase de CrossFit a las 07:00 hrs. ¡Llega 5 min antes y recuerda traer tu toalla!'
+      },
+      cambio: {
+        titulo: 'Cambio de horario · [nombre clase]',
+        cuerpo:  'Te informamos que la clase del [día] se traslada de las [hora actual] a las [nueva hora] hrs. Disculpa los inconvenientes.'
+      },
+      promo: {
+        titulo: 'Promo especial · [mes] [año]',
+        cuerpo:  'Solo esta semana: renueva tu plan [nombre] y obtén $[descuento] de descuento. Oferta válida hasta el [fecha].'
+      },
+      bienvenida: {
+        titulo: '¡Bienvenido/a a Forja Box!',
+        cuerpo:  'Hola [nombre]! Es un gusto tenerte en Forja. Aquí tienes todo lo que necesitas para comenzar: horarios, app y contacto de tu coach. ¡Nos vemos en la caja!'
+      },
+      mantencion: {
+        titulo: 'Mantención programada del sistema',
+        cuerpo:  'Este [día] realizaremos mantenimiento en la plataforma. La app no estará disponible entre las [hora inicio] y [hora fin] hrs. Pedimos disculpas por los inconvenientes.'
+      }
+    };
+    document.getElementById('plantilla-select').addEventListener('change', function() {
+      const p = PLANTILLAS[this.value];
+      if (p) {
+        document.getElementById('msg-titulo').value = p.titulo;
+        document.getElementById('msg-cuerpo').value = p.cuerpo;
+      }
+    });
+  });
+}
+
+/* Enganchar el botón CTA "Nuevo mensaje" inyectado por forja.js */
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('a.fj-btn-primary').forEach(b => {
+    if (b.textContent.trim().includes('Nuevo mensaje')) {
+      b.addEventListener('click', e => { e.preventDefault(); abrirCompositor(); });
+    }
+  });
+});
+</script>
+</body>
+</html>

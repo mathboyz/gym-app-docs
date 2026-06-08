@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Cupones y descuentos</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+</head>
+<body data-page="pagos" data-title="Cupones y descuentos" data-eyebrow="Pagos · Cupones"
+      data-cta-label="Nuevo cupón" data-cta-href="#">
+<div data-fj-content>
+<div class="fj-pad fj-maxw space-y-4">
+
+  <!-- Back link + descripción -->
+  <div class="flex items-start justify-between gap-4 flex-wrap">
+    <div>
+      <a href="pagos.html" class="fj-btn fj-btn-ghost fj-btn-sm inline-flex items-center gap-1.5 mb-3" aria-label="Volver a Pagos">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        Volver a Pagos
+      </a>
+      <p class="text-sm text-ink-500 max-w-lg">Los cupones permiten aplicar descuentos automáticos al momento de cobrar una membresía. Puedes fijar límite de usos, fecha de vencimiento y planes específicos.</p>
+    </div>
+  </div>
+
+  <!-- Mini-stats -->
+  <div class="fj-panel p-5">
+    <div class="grid grid-cols-3 gap-6 sm:divide-x" style="--tw-divide-opacity:1;divide-color:var(--fj-ink-100)">
+      <div>
+        <p class="fj-eyebrow mb-1">Cupones activos</p>
+        <p class="font-mono font-bold text-2xl text-ink-900">5</p>
+        <p class="text-xs text-ink-400 mt-1">de 7 en total</p>
+      </div>
+      <div class="sm:pl-6">
+        <p class="fj-eyebrow mb-1">Usos este mes</p>
+        <p class="font-mono font-bold text-2xl text-ink-900">23</p>
+        <p class="text-xs text-ink-400 mt-1">jun 2026</p>
+      </div>
+      <div class="sm:pl-6">
+        <p class="fj-eyebrow mb-1">Descuento entregado</p>
+        <p class="font-mono font-bold text-2xl text-success">$612.000</p>
+        <p class="text-xs text-ink-400 mt-1">este mes</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista de cupones -->
+  <div class="fj-list">
+    <div class="fj-list-head">
+      <div class="flex-1 flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <p class="fj-eyebrow">Descuentos configurados</p>
+          <h3 class="fj-section-h mt-0.5">Cupones y descuentos</h3>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="fj-pills">
+            <button class="fj-pill" aria-selected="true" data-filter="todos">Todos</button>
+            <button class="fj-pill" aria-selected="false" data-filter="activo">Activos</button>
+            <button class="fj-pill" aria-selected="false" data-filter="agotado">Agotados</button>
+            <button class="fj-pill" aria-selected="false" data-filter="expirado">Expirados</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="fj-table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Descripción</th>
+            <th>Descuento</th>
+            <th>Planes</th>
+            <th>Vigencia</th>
+            <th class="text-right">Usos</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- VERANO20 -->
+          <tr class="cupon-row" data-status="activo">
+            <td>
+              <span class="font-mono font-bold text-sm text-ink-900 tracking-wide">VERANO20</span>
+            </td>
+            <td class="text-sm text-ink-600">Promo verano 2026 — redes sociales</td>
+            <td>
+              <span class="fj-badge fj-badge-brand" style="font-variant-numeric:tabular-nums">% 20%</span>
+            </td>
+            <td>
+              <div class="flex flex-wrap gap-1">
+                <span class="fj-badge fj-badge-neutral">Full</span>
+                <span class="fj-badge fj-badge-neutral">Ilimitado</span>
+              </div>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-ink-500">01 dic 2025<br>→ 28 feb 2026</span>
+            </td>
+            <td class="text-right">
+              <span class="font-mono text-sm text-ink-900">48 / 100</span>
+            </td>
+            <td><span class="fj-badge fj-badge-success">Activo</span></td>
+            <td>
+              <div class="flex items-center gap-1">
+                <button class="fj-icon-btn" aria-label="Editar cupón VERANO20" onclick="openEditDrawer('VERANO20')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="fj-icon-btn" aria-label="Copiar código VERANO20" onclick="copiarCodigo('VERANO20', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- BIENVENIDA -->
+          <tr class="cupon-row" data-status="activo">
+            <td>
+              <span class="font-mono font-bold text-sm text-ink-900 tracking-wide">BIENVENIDA</span>
+            </td>
+            <td class="text-sm text-ink-600">Primer mes con descuento para nuevos socios</td>
+            <td>
+              <span class="fj-badge fj-badge-info" style="font-variant-numeric:tabular-nums">$ $15.000</span>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral">Todos los planes</span>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-ink-500">Sin vencimiento</span>
+            </td>
+            <td class="text-right">
+              <span class="font-mono text-sm text-ink-900">12 / ∞</span>
+            </td>
+            <td><span class="fj-badge fj-badge-success">Activo</span></td>
+            <td>
+              <div class="flex items-center gap-1">
+                <button class="fj-icon-btn" aria-label="Editar cupón BIENVENIDA" onclick="openEditDrawer('BIENVENIDA')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="fj-icon-btn" aria-label="Copiar código BIENVENIDA" onclick="copiarCodigo('BIENVENIDA', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- ESTUDIANTE15 -->
+          <tr class="cupon-row" data-status="activo">
+            <td>
+              <span class="font-mono font-bold text-sm text-ink-900 tracking-wide">ESTUDIANTE15</span>
+            </td>
+            <td class="text-sm text-ink-600">Descuento permanente para estudiantes con credencial</td>
+            <td>
+              <span class="fj-badge fj-badge-brand" style="font-variant-numeric:tabular-nums">% 15%</span>
+            </td>
+            <td>
+              <div class="flex flex-wrap gap-1">
+                <span class="fj-badge fj-badge-neutral">3x Semana</span>
+                <span class="fj-badge fj-badge-neutral">Pack 10</span>
+              </div>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-ink-500">Sin vencimiento</span>
+            </td>
+            <td class="text-right">
+              <span class="font-mono text-sm text-ink-900">7 / ∞</span>
+            </td>
+            <td><span class="fj-badge fj-badge-success">Activo</span></td>
+            <td>
+              <div class="flex items-center gap-1">
+                <button class="fj-icon-btn" aria-label="Editar cupón ESTUDIANTE15" onclick="openEditDrawer('ESTUDIANTE15')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="fj-icon-btn" aria-label="Copiar código ESTUDIANTE15" onclick="copiarCodigo('ESTUDIANTE15', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- BLACKFRIDAY -->
+          <tr class="cupon-row" data-status="agotado">
+            <td>
+              <span class="font-mono font-bold text-sm text-ink-900 tracking-wide">BLACKFRIDAY</span>
+            </td>
+            <td class="text-sm text-ink-600">Black Friday 2025 — 50 usos únicamente</td>
+            <td>
+              <span class="fj-badge fj-badge-brand" style="font-variant-numeric:tabular-nums">% 30%</span>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral">Todos los planes</span>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-ink-500">29 nov 2025<br>→ 02 dic 2025</span>
+            </td>
+            <td class="text-right">
+              <span class="font-mono text-sm text-warning font-bold">50 / 50</span>
+            </td>
+            <td><span class="fj-badge fj-badge-warning">Agotado</span></td>
+            <td>
+              <div class="flex items-center gap-1">
+                <button class="fj-icon-btn" aria-label="Editar cupón BLACKFRIDAY" onclick="openEditDrawer('BLACKFRIDAY')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="fj-icon-btn" aria-label="Copiar código BLACKFRIDAY" onclick="copiarCodigo('BLACKFRIDAY', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- AMIGO -->
+          <tr class="cupon-row" data-status="activo">
+            <td>
+              <span class="font-mono font-bold text-sm text-ink-900 tracking-wide">AMIGO</span>
+            </td>
+            <td class="text-sm text-ink-600">Referido — socio trae a un amigo</td>
+            <td>
+              <span class="fj-badge fj-badge-info" style="font-variant-numeric:tabular-nums">$ $10.000</span>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral">Todos los planes</span>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-ink-500">Sin vencimiento</span>
+            </td>
+            <td class="text-right">
+              <span class="font-mono text-sm text-ink-900">31 / ∞</span>
+            </td>
+            <td><span class="fj-badge fj-badge-success">Activo</span></td>
+            <td>
+              <div class="flex items-center gap-1">
+                <button class="fj-icon-btn" aria-label="Editar cupón AMIGO" onclick="openEditDrawer('AMIGO')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="fj-icon-btn" aria-label="Copiar código AMIGO" onclick="copiarCodigo('AMIGO', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- RETORNO -->
+          <tr class="cupon-row" data-status="expirado">
+            <td>
+              <span class="font-mono font-bold text-sm text-ink-500 tracking-wide">RETORNO</span>
+            </td>
+            <td class="text-sm text-ink-400">Campaña de reactivación socios inactivos</td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="font-variant-numeric:tabular-nums">% 25%</span>
+            </td>
+            <td>
+              <div class="flex flex-wrap gap-1">
+                <span class="fj-badge fj-badge-neutral">Full</span>
+                <span class="fj-badge fj-badge-neutral">3x Semana</span>
+              </div>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-ink-400">01 abr 2026<br>→ 30 abr 2026</span>
+            </td>
+            <td class="text-right">
+              <span class="font-mono text-sm text-ink-400">8 / 30</span>
+            </td>
+            <td><span class="fj-badge fj-badge-neutral">Expirado</span></td>
+            <td>
+              <div class="flex items-center gap-1">
+                <button class="fj-icon-btn" aria-label="Editar cupón RETORNO" onclick="openEditDrawer('RETORNO')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="fj-icon-btn" aria-label="Copiar código RETORNO" onclick="copiarCodigo('RETORNO', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- PRIMERMES -->
+          <tr class="cupon-row" data-status="inactivo">
+            <td>
+              <span class="font-mono font-bold text-sm text-ink-400 tracking-wide">PRIMERMES</span>
+            </td>
+            <td class="text-sm text-ink-400">Mes gratuito — prueba piloto (desactivado)</td>
+            <td>
+              <span class="fj-badge fj-badge-neutral" style="font-variant-numeric:tabular-nums">% 100%</span>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral">Todos los planes</span>
+            </td>
+            <td>
+              <span class="font-mono text-xs text-ink-400">Sin vencimiento</span>
+            </td>
+            <td class="text-right">
+              <span class="font-mono text-sm text-ink-400">3 / 10</span>
+            </td>
+            <td><span class="fj-badge fj-badge-neutral">Inactivo</span></td>
+            <td>
+              <div class="flex items-center gap-1">
+                <button class="fj-icon-btn" aria-label="Editar cupón PRIMERMES" onclick="openEditDrawer('PRIMERMES')">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+                <button class="fj-icon-btn" aria-label="Copiar código PRIMERMES" onclick="copiarCodigo('PRIMERMES', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+/* ---- Filtro pills ---- */
+document.querySelectorAll('.fj-pill').forEach(function(pill) {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.fj-pill').forEach(function(p) { p.setAttribute('aria-selected', 'false'); });
+    pill.setAttribute('aria-selected', 'true');
+    var filter = pill.dataset.filter;
+    document.querySelectorAll('.cupon-row').forEach(function(row) {
+      if (filter === 'todos' || row.dataset.status === filter) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+});
+
+/* ---- Copiar código ---- */
+function copiarCodigo(codigo, btn) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(codigo);
+  }
+  var icon = btn.innerHTML;
+  btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-success)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+  setTimeout(function() { btn.innerHTML = icon; }, 1500);
+}
+
+/* ---- Drawer: Nuevo cupón ---- */
+function openNuevoCupon() {
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div>
+        <p class="fj-eyebrow">Pagos · Cupones</p>
+        <h2 class="font-display font-bold text-lg text-ink-900">Nuevo cupón</h2>
+      </div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="fj-drawer-body space-y-5">
+
+      <!-- Código -->
+      <div>
+        <label class="fj-label" for="cupon-codigo">Código del cupón</label>
+        <div style="display:flex;gap:8px">
+          <input id="cupon-codigo" class="fj-input" style="font-family:var(--font-mono,monospace);text-transform:uppercase;letter-spacing:0.05em;flex:1" placeholder="Ej: VERANO20" maxlength="20">
+          <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="generarCodigo()" style="white-space:nowrap;flex-shrink:0" aria-label="Generar código aleatorio">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;margin-right:5px"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.57"/></svg>
+            Generar
+          </button>
+        </div>
+      </div>
+
+      <!-- Descripción -->
+      <div>
+        <label class="fj-label" for="cupon-desc">Descripción interna</label>
+        <input id="cupon-desc" class="fj-input" placeholder="Para qué es este cupón (uso interno)">
+      </div>
+
+      <!-- Tipo de descuento -->
+      <div>
+        <label class="fj-label">Tipo de descuento</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <label id="tipo-pct-label" style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--fj-brand);border-radius:12px;cursor:pointer;background:rgba(251,82,21,0.05)">
+            <input type="radio" name="cupon-tipo" value="pct" checked style="accent-color:var(--fj-brand)" onchange="toggleTipo(this)">
+            <div>
+              <p style="font-size:13px;font-weight:600;color:var(--fj-ink-900)">Porcentaje</p>
+              <p style="font-size:11px;color:var(--fj-ink-400)">Ej: 20% de descuento</p>
+            </div>
+          </label>
+          <label id="tipo-monto-label" style="display:flex;align-items:center;gap:10px;padding:12px 14px;border:1.5px solid var(--fj-ink-200);border-radius:12px;cursor:pointer">
+            <input type="radio" name="cupon-tipo" value="monto" style="accent-color:var(--fj-brand)" onchange="toggleTipo(this)">
+            <div>
+              <p style="font-size:13px;font-weight:600;color:var(--fj-ink-900)">Monto fijo</p>
+              <p style="font-size:11px;color:var(--fj-ink-400)">Ej: $10.000 off</p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Valor -->
+      <div>
+        <label class="fj-label" for="cupon-valor" id="cupon-valor-label">Porcentaje de descuento</label>
+        <div style="position:relative">
+          <span id="cupon-valor-prefix" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--fj-ink-400);pointer-events:none;font-family:var(--font-mono,monospace)">%</span>
+          <input id="cupon-valor" type="number" class="fj-input" style="padding-left:28px;font-family:var(--font-mono,monospace)" placeholder="20" min="1" max="100">
+        </div>
+      </div>
+
+      <!-- Planes aplicables -->
+      <div>
+        <label class="fj-label">Planes aplicables</label>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fj-ink-700);cursor:pointer">
+            <input type="checkbox" id="plan-todos" style="accent-color:var(--fj-brand)" onchange="toggleTodosPlanes(this)"> Todos los planes
+          </label>
+          <div id="planes-checks" style="display:flex;flex-direction:column;gap:6px;padding-left:24px;border-left:2px solid var(--fj-ink-100);margin-left:6px">
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fj-ink-700);cursor:pointer"><input type="checkbox" name="plan" value="full" style="accent-color:var(--fj-brand)"> Full</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fj-ink-700);cursor:pointer"><input type="checkbox" name="plan" value="ilimitado" style="accent-color:var(--fj-brand)"> Ilimitado</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fj-ink-700);cursor:pointer"><input type="checkbox" name="plan" value="3x" style="accent-color:var(--fj-brand)"> 3x Semana</label>
+            <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fj-ink-700);cursor:pointer"><input type="checkbox" name="plan" value="pack10" style="accent-color:var(--fj-brand)"> Pack 10 clases</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vigencia -->
+      <div>
+        <label class="fj-label">Vigencia</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div>
+            <label class="fj-label" for="cupon-desde" style="font-size:11px">Desde</label>
+            <input id="cupon-desde" type="date" class="fj-input" style="font-family:var(--font-mono,monospace)">
+          </div>
+          <div>
+            <label class="fj-label" for="cupon-hasta" style="font-size:11px">Hasta <span style="color:var(--fj-ink-400);font-weight:400">(opcional)</span></label>
+            <input id="cupon-hasta" type="date" class="fj-input" style="font-family:var(--font-mono,monospace)">
+          </div>
+        </div>
+      </div>
+
+      <!-- Límite de usos -->
+      <div>
+        <label class="fj-label">Límite de usos</label>
+        <div style="display:flex;align-items:center;gap:10px">
+          <input id="cupon-limite" type="number" class="fj-input" style="font-family:var(--font-mono,monospace);width:120px" placeholder="50" min="1">
+          <label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--fj-ink-700);cursor:pointer;white-space:nowrap">
+            <input type="checkbox" id="limite-ilimitado" style="accent-color:var(--fj-brand)" onchange="toggleLimite(this)"> Ilimitado
+          </label>
+        </div>
+      </div>
+
+      <!-- Aplica a primer pago / trial -->
+      <div style="padding:12px 14px;border-radius:12px;background:rgba(var(--fj-ink-100-rgb,230,232,237),0.5);border:1px solid var(--fj-ink-100)">
+        <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer">
+          <input type="checkbox" id="cupon-primer-pago" style="accent-color:var(--fj-brand);margin-top:2px">
+          <div>
+            <p style="font-size:13px;font-weight:600;color:var(--fj-ink-900)">Aplica solo al primer pago / trial</p>
+            <p style="font-size:11px;color:var(--fj-ink-400);margin-top:2px">El descuento se aplicará únicamente en el cobro inicial del socio, no en renovaciones.</p>
+          </div>
+        </label>
+      </div>
+
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-ghost fj-btn-sm" data-fj-close>Cancelar</button>
+      <button class="fj-btn fj-btn-primary fj-btn-sm" data-fj-close>Crear cupón</button>
+    </div>`);
+
+  /* Lógica interna del drawer — se ejecuta tras insertar el HTML */
+  setTimeout(function() {
+    window.generarCodigo = function() {
+      var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      var code = '';
+      for (var i = 0; i < 8; i++) code += chars[Math.floor(Math.random() * chars.length)];
+      var el = document.getElementById('cupon-codigo');
+      if (el) el.value = code;
+    };
+    window.toggleTipo = function(radio) {
+      var isPct = radio.value === 'pct';
+      var labelEl = document.getElementById('cupon-valor-label');
+      var prefixEl = document.getElementById('cupon-valor-prefix');
+      var inputEl = document.getElementById('cupon-valor');
+      if (labelEl) labelEl.textContent = isPct ? 'Porcentaje de descuento' : 'Monto de descuento (CLP)';
+      if (prefixEl) prefixEl.textContent = isPct ? '%' : '$';
+      if (inputEl) { inputEl.placeholder = isPct ? '20' : '10000'; inputEl.max = isPct ? '100' : ''; }
+      var pctLabel = document.getElementById('tipo-pct-label');
+      var montoLabel = document.getElementById('tipo-monto-label');
+      if (pctLabel) pctLabel.style.borderColor = isPct ? 'var(--fj-brand)' : 'var(--fj-ink-200)';
+      if (pctLabel) pctLabel.style.background = isPct ? 'rgba(251,82,21,0.05)' : '';
+      if (montoLabel) montoLabel.style.borderColor = !isPct ? 'var(--fj-brand)' : 'var(--fj-ink-200)';
+      if (montoLabel) montoLabel.style.background = !isPct ? 'rgba(251,82,21,0.05)' : '';
+    };
+    window.toggleTodosPlanes = function(cb) {
+      var checks = document.querySelectorAll('#planes-checks input[type="checkbox"]');
+      checks.forEach(function(c) { c.disabled = cb.checked; c.checked = false; });
+    };
+    window.toggleLimite = function(cb) {
+      var inputEl = document.getElementById('cupon-limite');
+      if (inputEl) { inputEl.disabled = cb.checked; if (cb.checked) inputEl.value = ''; }
+    };
+  }, 50);
+}
+
+/* ---- Drawer: Editar (simplificado, mismo esqueleto) ---- */
+function openEditDrawer(codigo) {
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div>
+        <p class="fj-eyebrow">Pagos · Cupones</p>
+        <h2 class="font-display font-bold text-lg text-ink-900">Editar cupón</h2>
+      </div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="fj-drawer-body">
+      <div style="padding:16px;border-radius:12px;background:rgba(var(--fj-ink-100-rgb,230,232,237),0.5);border:1px solid var(--fj-ink-100);margin-bottom:20px">
+        <p class="fj-eyebrow mb-1">Código</p>
+        <p class="font-mono font-bold text-xl" style="color:var(--fj-ink-900);letter-spacing:0.06em">${codigo}</p>
+      </div>
+      <p class="text-sm text-ink-500">Edición de cupones — formulario completo disponible en producción.</p>
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-danger fj-btn-sm" data-fj-close>Eliminar cupón</button>
+      <button class="fj-btn fj-btn-ghost fj-btn-sm" data-fj-close>Cancelar</button>
+      <button class="fj-btn fj-btn-primary fj-btn-sm" data-fj-close>Guardar cambios</button>
+    </div>`);
+}
+
+/* ---- Enganchar CTA topbar ---- */
+document.addEventListener('DOMContentLoaded', function() {
+  function wireCtaBtn() {
+    var ctaBtn = document.querySelector('.fj-topbar a.fj-btn-primary');
+    if (ctaBtn && ctaBtn.textContent.indexOf('cup') !== -1) {
+      ctaBtn.setAttribute('href', '#');
+      ctaBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        openNuevoCupon();
+      });
+    } else {
+      setTimeout(wireCtaBtn, 100);
+    }
+  }
+  wireCtaBtn();
+});
+</script>
+</body>
+</html>
