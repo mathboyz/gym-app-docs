@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Ejercicio</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+</head>
+<body data-page="ejercicios" data-title="Editar ejercicio" data-eyebrow="Ejercicios · Editor">
+<div data-fj-content>
+<div class="fj-pad fj-form-w space-y-5">
+
+  <a href="ejercicios.html" class="fj-btn fj-btn-ghost fj-btn-sm" style="display:inline-flex;width:auto">← Volver a Ejercicios</a>
+
+  <!-- Identidad -->
+  <div class="fj-panel p-6 space-y-4">
+    <h2 class="fj-section-h">Identidad</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div><label class="fj-label">Nombre</label><input class="fj-input" value="Thruster" placeholder="Ej: Thruster"></div>
+      <div><label class="fj-label">Categoría</label>
+        <select class="fj-input">
+          <option>Halterofilia</option><option>Gimnástico</option><option>Cardio</option><option>Accesorio</option>
+        </select>
+      </div>
+    </div>
+    <div><label class="fj-label">Descripción corta</label><input class="fj-input" value="Front squat + push press en un solo movimiento." placeholder="Una línea que lo describa"></div>
+  </div>
+
+  <!-- Músculos -->
+  <div class="fj-panel p-6 space-y-3">
+    <h2 class="fj-section-h">Músculos trabajados</h2>
+    <p class="text-xs text-ink-400 -mt-2">Toca para activar/desactivar.</p>
+    <div class="flex flex-wrap gap-2" id="musculos">
+      <button class="fj-badge fj-badge-brand" data-on="1">Cuádriceps</button>
+      <button class="fj-badge fj-badge-brand" data-on="1">Hombros</button>
+      <button class="fj-badge fj-badge-brand" data-on="1">Tríceps</button>
+      <button class="fj-badge fj-badge-neutral" data-on="0">Glúteos</button>
+      <button class="fj-badge fj-badge-neutral" data-on="0">Core</button>
+      <button class="fj-badge fj-badge-neutral" data-on="0">Pantorrillas</button>
+      <button class="fj-badge fj-badge-neutral" data-on="0">Espalda baja</button>
+    </div>
+  </div>
+
+  <!-- Video / demo -->
+  <div class="fj-panel p-6 space-y-4">
+    <h2 class="fj-section-h">Video de demostración</h2>
+    <div class="rounded-2xl border border-dashed border-ink-200 p-6 text-center" style="background:var(--fj-ink-50)">
+      <span class="w-12 h-12 rounded-2xl grid place-items-center mx-auto mb-2" style="background:rgba(251,82,21,.12);color:var(--fj-brand-700)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </span>
+      <p class="text-sm font-semibold text-ink-700">Subir video o pegar un enlace</p>
+      <div class="flex gap-2 justify-center mt-3">
+        <button class="fj-btn fj-btn-ghost fj-btn-sm">Subir archivo</button>
+        <button class="fj-btn fj-btn-ghost fj-btn-sm">Pegar URL (YouTube)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Técnica -->
+  <div class="fj-panel p-6 space-y-3">
+    <div class="flex items-center justify-between">
+      <h2 class="fj-section-h">Técnica · pasos</h2>
+      <button class="fj-btn fj-btn-ghost fj-btn-sm">+ Agregar paso</button>
+    </div>
+    <div class="space-y-2">
+      <div class="flex items-start gap-3 p-3 rounded-xl border border-ink-200">
+        <span class="w-6 h-6 rounded-full grid place-items-center text-xs font-bold shrink-0 mt-0.5" style="background:var(--fj-brand);color:#fff">1</span>
+        <input class="fj-input" value="Barra en rack frontal, codos arriba, pies al ancho de cadera." style="height:40px">
+        <button class="fj-icon-btn" style="width:32px;height:32px" aria-label="Quitar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E5484D" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-xl border border-ink-200">
+        <span class="w-6 h-6 rounded-full grid place-items-center text-xs font-bold shrink-0 mt-0.5" style="background:var(--fj-brand);color:#fff">2</span>
+        <input class="fj-input" value="Squat profundo, espalda neutra, peso en talones." style="height:40px">
+        <button class="fj-icon-btn" style="width:32px;height:32px" aria-label="Quitar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E5484D" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+      <div class="flex items-start gap-3 p-3 rounded-xl border border-ink-200">
+        <span class="w-6 h-6 rounded-full grid place-items-center text-xs font-bold shrink-0 mt-0.5" style="background:var(--fj-brand);color:#fff">3</span>
+        <input class="fj-input" value="Extiende cadera y proyecta la barra sobre la cabeza." style="height:40px">
+        <button class="fj-icon-btn" style="width:32px;height:32px" aria-label="Quitar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E5484D" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variaciones / escalas -->
+  <div class="fj-panel p-6 space-y-4">
+    <h2 class="fj-section-h">Variaciones</h2>
+    <div class="grid grid-cols-3 gap-3">
+      <div><label class="fj-label"><span class="fj-tag-rx">Rx</span></label><input class="fj-input" value="43/30 kg" placeholder="Estándar"></div>
+      <div><label class="fj-label">Scaled</label><input class="fj-input" value="20/15 kg o barra vacía" placeholder="Escalado"></div>
+      <div><label class="fj-label">Rx+</label><input class="fj-input" value="61/43 kg" placeholder="Avanzado"></div>
+    </div>
+    <p class="text-xs text-ink-400">Usado actualmente en <span class="font-mono font-semibold text-ink-600">18 rutinas</span>.</p>
+  </div>
+
+  <!-- Zona de riesgo -->
+  <div class="fj-panel p-6 flex items-center justify-between">
+    <div><p class="text-sm font-semibold text-ink-900">Eliminar ejercicio</p><p class="text-xs text-ink-400">No se puede si está en rutinas activas.</p></div>
+    <button class="fj-btn fj-btn-danger fj-btn-sm">Eliminar</button>
+  </div>
+
+</div>
+</div>
+<script>
+  document.getElementById('musculos').addEventListener('click', e=>{
+    const b=e.target.closest('button[data-on]'); if(!b) return;
+    const on=b.getAttribute('data-on')==='1';
+    b.setAttribute('data-on', on?'0':'1');
+    b.className = 'fj-badge ' + (on?'fj-badge-neutral':'fj-badge-brand');
+  });
+  Forja.SaveBar.bindDirty('[data-fj-content]',{msg:'Cambios sin guardar en el ejercicio'});
+</script>
+</body>
+</html>
