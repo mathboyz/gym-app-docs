@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Clientes</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
+        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
+        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
+        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
+      },
+      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
+      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
+      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
+    }
+  }
+}
+</script>
+<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+</head>
+<body class="bg-ink-50 text-ink-900 font-sans">
+
+<div class="flex h-screen overflow-hidden">
+
+  <!-- Sidebar -->
+  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col">
+    <div class="h-16 flex items-center px-5 border-b border-ink-200">
+      <div class="flex items-center gap-2.5">
+        <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+        </span>
+        <span class="font-display font-bold text-xl tracking-tight">Forja<span class="text-brand-500">.</span></span>
+      </div>
+    </div>
+    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
+      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </a>
+      <a href="clientes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-brand-500/10 text-brand-600 font-semibold text-sm">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Clientes
+      </a>
+      <a href="calendario.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Calendario
+      </a>
+      <a href="tipo-clases.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Clases
+      </a>
+      <a href="constructor-rutina.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        Rutinas
+      </a>
+      <a href="planes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        Planes
+      </a>
+      <a href="pagos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Pagos
+      </a>
+      <a href="metricas.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Métricas
+      </a>
+      <a href="competencias.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
+        Competencias
+      </a>
+      <a href="configuracion.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        Configuración
+      </a>
+    </nav>
+    <div class="px-3 py-4 border-t border-ink-200">
+      <div class="flex items-center gap-3 px-2">
+        <div class="w-8 h-8 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 text-xs font-bold">VF</div>
+        <div class="min-w-0">
+          <p class="text-sm font-semibold text-ink-900 truncate">Vale Fuentes</p>
+          <p class="text-xs text-ink-400">Admin</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- Topbar -->
+    <header class="h-16 bg-white border-b border-ink-200 flex items-center justify-between px-6 shrink-0">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Forja Box · Providencia</p>
+        <h1 class="font-display font-bold text-xl text-ink-900">Clientes</h1>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="relative">
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search-input" type="text" placeholder="Buscar cliente…" class="pl-9 pr-4 h-9 text-sm bg-ink-50 border border-ink-200 rounded-full focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 w-56 text-ink-700 placeholder-ink-400">
+        </div>
+        <a href="nuevo-cliente.html" class="h-9 px-4 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors flex items-center gap-1.5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nuevo cliente
+        </a>
+        <div class="w-9 h-9 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 text-sm font-bold">VF</div>
+      </div>
+    </header>
+
+    <!-- Contenido -->
+    <main class="flex-1 overflow-y-auto p-6">
+
+      <!-- Banner filtro moroso -->
+      <div id="moroso-banner" class="hidden mb-4 flex items-center gap-3 px-4 py-3 rounded-xl border border-danger/30 bg-danger/5">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E5484D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <p class="text-sm font-semibold text-danger flex-1">Filtrando: Morosos</p>
+        <button onclick="clearMorosoFilter()" class="text-xs font-semibold text-danger/70 hover:text-danger transition-colors underline underline-offset-2">Limpiar filtro</button>
+      </div>
+
+      <!-- Filtros -->
+      <div class="bg-white border border-ink-200 rounded-xl mb-4">
+        <div class="flex items-center gap-4 px-5 py-3.5">
+          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 shrink-0">Filtrar por</p>
+          <div class="flex items-center gap-2 flex-wrap">
+            <!-- Plan -->
+            <select id="filter-plan" class="h-8 text-xs font-medium bg-ink-50 border border-ink-200 rounded-full px-3 text-ink-700 focus:outline-none focus:border-brand-500 cursor-pointer">
+              <option value="">Todos los planes</option>
+              <option value="Full">Full</option>
+              <option value="3x">3x/semana</option>
+              <option value="Ilimitado">Ilimitado</option>
+              <option value="Pack 10">Pack 10</option>
+            </select>
+            <!-- Estado -->
+            <select id="filter-estado" class="h-8 text-xs font-medium bg-ink-50 border border-ink-200 rounded-full px-3 text-ink-700 focus:outline-none focus:border-brand-500 cursor-pointer">
+              <option value="">Todos los estados</option>
+              <option value="activo">Activo</option>
+              <option value="por-vencer">Por vencer</option>
+              <option value="moroso">Moroso</option>
+            </select>
+            <button onclick="applyFilters()" class="h-8 px-3 text-xs font-semibold rounded-full bg-ink-900 text-white hover:bg-ink-700 transition-colors">Aplicar</button>
+            <button onclick="resetFilters()" class="h-8 px-3 text-xs font-medium rounded-full border border-ink-200 text-ink-600 hover:bg-ink-50 transition-colors">Limpiar</button>
+          </div>
+          <div class="ml-auto">
+            <span id="result-count" class="text-xs text-ink-400 font-medium">5 clientes</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="bg-white border border-ink-200 rounded-xl overflow-hidden">
+        <table class="w-full">
+          <thead>
+            <tr class="border-b border-ink-200">
+              <th class="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Cliente</th>
+              <th class="text-left px-4 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">RUT</th>
+              <th class="text-left px-4 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Plan</th>
+              <th class="text-left px-4 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Estado</th>
+              <th class="text-left px-4 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Vencimiento</th>
+              <th class="text-left px-4 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Última asistencia</th>
+              <th class="px-4 py-3"></th>
+            </tr>
+          </thead>
+          <tbody id="clients-table" class="divide-y divide-ink-100">
+            <!-- Camila Soto -->
+            <tr class="hover:bg-ink-50/60 transition-colors cursor-pointer client-row" data-plan="Full" data-estado="activo" onclick="location.href='cliente-perfil.html'">
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 text-sm font-bold shrink-0">CS</div>
+                  <div>
+                    <p class="text-sm font-semibold text-ink-900">Camila Soto</p>
+                    <p class="text-xs text-ink-400">camila@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">12.345.678-9</span></td>
+              <td class="px-4 py-3.5"><span class="text-sm text-ink-700 font-medium">Full</span></td>
+              <td class="px-4 py-3.5"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Activo</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">30 jun 2026</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-500">Hoy, 09:30</span></td>
+              <td class="px-4 py-3.5" onclick="event.stopPropagation()">
+                <a href="editar-cliente.html" class="h-7 px-3 text-xs font-semibold rounded-full border border-ink-200 text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors inline-flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Editar
+                </a>
+              </td>
+            </tr>
+            <!-- Pancho Díaz -->
+            <tr class="hover:bg-ink-50/60 transition-colors cursor-pointer client-row" data-plan="3x" data-estado="por-vencer" onclick="location.href='cliente-perfil.html'">
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-ink-100 flex items-center justify-center text-ink-600 text-sm font-bold shrink-0">PD</div>
+                  <div>
+                    <p class="text-sm font-semibold text-ink-900">Pancho Díaz</p>
+                    <p class="text-xs text-ink-400">pancho@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">9.876.543-2</span></td>
+              <td class="px-4 py-3.5"><span class="text-sm text-ink-700 font-medium">3x/semana</span></td>
+              <td class="px-4 py-3.5"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-warning/10 text-warning">Por vencer</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-warning">12 jun 2026</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-500">Ayer, 07:00</span></td>
+              <td class="px-4 py-3.5" onclick="event.stopPropagation()">
+                <a href="editar-cliente.html" class="h-7 px-3 text-xs font-semibold rounded-full border border-ink-200 text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors inline-flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Editar
+                </a>
+              </td>
+            </tr>
+            <!-- Javiera Núñez -->
+            <tr class="hover:bg-ink-50/60 transition-colors cursor-pointer client-row" data-plan="Ilimitado" data-estado="activo" onclick="location.href='cliente-perfil.html'">
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-info/10 flex items-center justify-center text-info text-sm font-bold shrink-0">JN</div>
+                  <div>
+                    <p class="text-sm font-semibold text-ink-900">Javiera Núñez</p>
+                    <p class="text-xs text-ink-400">javiera@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">15.432.100-K</span></td>
+              <td class="px-4 py-3.5"><span class="text-sm text-ink-700 font-medium">Ilimitado</span></td>
+              <td class="px-4 py-3.5"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Activo</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">31 ago 2026</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-500">Hoy, 07:00</span></td>
+              <td class="px-4 py-3.5" onclick="event.stopPropagation()">
+                <a href="editar-cliente.html" class="h-7 px-3 text-xs font-semibold rounded-full border border-ink-200 text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors inline-flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Editar
+                </a>
+              </td>
+            </tr>
+            <!-- Ignacio Vera (moroso) -->
+            <tr class="hover:bg-ink-50/60 transition-colors cursor-pointer client-row" data-plan="Pack 10" data-estado="moroso" onclick="location.href='cliente-perfil.html'">
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-danger/10 flex items-center justify-center text-danger text-sm font-bold shrink-0">IV</div>
+                  <div>
+                    <p class="text-sm font-semibold text-ink-900">Ignacio Vera</p>
+                    <p class="text-xs text-ink-400">ignacio@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">11.223.344-5</span></td>
+              <td class="px-4 py-3.5"><span class="text-sm text-ink-700 font-medium">Pack 10</span></td>
+              <td class="px-4 py-3.5"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-danger/10 text-danger">Moroso</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-danger">1 jun 2026</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-500">Hace 8 días</span></td>
+              <td class="px-4 py-3.5" onclick="event.stopPropagation()">
+                <a href="editar-cliente.html" class="h-7 px-3 text-xs font-semibold rounded-full border border-ink-200 text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors inline-flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Editar
+                </a>
+              </td>
+            </tr>
+            <!-- Matías Rojas -->
+            <tr class="hover:bg-ink-50/60 transition-colors cursor-pointer client-row" data-plan="Full" data-estado="activo" onclick="location.href='cliente-perfil.html'">
+              <td class="px-5 py-3.5">
+                <div class="flex items-center gap-3">
+                  <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 text-sm font-bold shrink-0">MR</div>
+                  <div>
+                    <p class="text-sm font-semibold text-ink-900">Matías Rojas</p>
+                    <p class="text-xs text-ink-400">matias@email.com</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">18.765.432-1</span></td>
+              <td class="px-4 py-3.5"><span class="text-sm text-ink-700 font-medium">Full</span></td>
+              <td class="px-4 py-3.5"><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Activo</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-600">30 jun 2026</span></td>
+              <td class="px-4 py-3.5"><span class="font-mono text-sm text-ink-500">Ayer, 18:30</span></td>
+              <td class="px-4 py-3.5" onclick="event.stopPropagation()">
+                <a href="editar-cliente.html" class="h-7 px-3 text-xs font-semibold rounded-full border border-ink-200 text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors inline-flex items-center gap-1">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  Editar
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Footer tabla -->
+        <div class="px-5 py-3 border-t border-ink-100 flex items-center justify-between">
+          <p class="text-xs text-ink-400">Mostrando <span id="showing-count" class="font-semibold text-ink-700">5</span> de 248 clientes</p>
+          <div class="flex items-center gap-1">
+            <button class="h-7 w-7 rounded-lg border border-ink-200 flex items-center justify-center text-ink-400 hover:bg-ink-50 transition-colors disabled:opacity-40" disabled>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="h-7 px-3 text-xs font-semibold rounded-lg bg-brand-500 text-white">1</button>
+            <button class="h-7 px-3 text-xs font-medium rounded-lg border border-ink-200 text-ink-600 hover:bg-ink-50 transition-colors">2</button>
+            <button class="h-7 px-3 text-xs font-medium rounded-lg border border-ink-200 text-ink-600 hover:bg-ink-50 transition-colors">3</button>
+            <span class="text-xs text-ink-400 px-1">…</span>
+            <button class="h-7 px-3 text-xs font-medium rounded-lg border border-ink-200 text-ink-600 hover:bg-ink-50 transition-colors">50</button>
+            <button class="h-7 w-7 rounded-lg border border-ink-200 flex items-center justify-center text-ink-600 hover:bg-ink-50 transition-colors">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<script>
+// Filtro moroso desde URL
+(function() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('estado') === 'moroso') {
+    document.getElementById('moroso-banner').classList.remove('hidden');
+    document.getElementById('moroso-banner').classList.add('flex');
+    document.getElementById('filter-estado').value = 'moroso';
+    applyFilters();
+  }
+})();
+
+function applyFilters() {
+  const planVal = document.getElementById('filter-plan').value;
+  const estadoVal = document.getElementById('filter-estado').value;
+  const searchVal = document.getElementById('search-input').value.toLowerCase();
+  const rows = document.querySelectorAll('.client-row');
+  let visible = 0;
+  rows.forEach(row => {
+    const plan = row.dataset.plan;
+    const estado = row.dataset.estado;
+    const name = row.querySelector('p.font-semibold').textContent.toLowerCase();
+    const planMatch = !planVal || plan.includes(planVal);
+    const estadoMatch = !estadoVal || estado === estadoVal;
+    const searchMatch = !searchVal || name.includes(searchVal);
+    if (planMatch && estadoMatch && searchMatch) {
+      row.classList.remove('hidden');
+      visible++;
+    } else {
+      row.classList.add('hidden');
+    }
+  });
+  document.getElementById('showing-count').textContent = visible;
+  document.getElementById('result-count').textContent = visible + ' cliente' + (visible !== 1 ? 's' : '');
+}
+
+function resetFilters() {
+  document.getElementById('filter-plan').value = '';
+  document.getElementById('filter-estado').value = '';
+  document.getElementById('search-input').value = '';
+  document.getElementById('moroso-banner').classList.add('hidden');
+  document.getElementById('moroso-banner').classList.remove('flex');
+  applyFilters();
+  history.pushState({}, '', window.location.pathname);
+}
+
+function clearMorosoFilter() {
+  resetFilters();
+}
+
+document.getElementById('search-input').addEventListener('input', applyFilters);
+document.getElementById('filter-plan').addEventListener('change', applyFilters);
+document.getElementById('filter-estado').addEventListener('change', applyFilters);
+</script>
+
+</body>
+</html>

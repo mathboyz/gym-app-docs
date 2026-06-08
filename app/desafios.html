@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Desafíos</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
+        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
+        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
+        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
+      },
+      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
+      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
+      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
+    }
+  }
+}
+</script>
+<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+</head>
+<body class="bg-ink-50 text-ink-900 font-sans min-h-screen">
+
+<div class="max-w-[420px] mx-auto bg-white min-h-screen flex flex-col relative">
+
+  <!-- Top bar -->
+  <header class="sticky top-0 z-10 bg-white border-b border-ink-200 px-4 pt-10 pb-3">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Gamificación</p>
+        <h1 class="font-display font-bold text-xl text-ink-900 mt-0.5">Desafíos</h1>
+      </div>
+      <!-- XP ganado hoy -->
+      <div class="flex items-center gap-1.5 rounded-full px-3 py-1.5 bg-brand-50 border border-brand-100">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#FB5215"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        <span class="text-xs font-semibold font-mono text-brand-600">+150 XP hoy</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Scroll -->
+  <div class="flex-1 overflow-y-auto pb-24">
+
+    <!-- Aviso coach -->
+    <div class="mx-4 mt-4 flex items-start gap-3 rounded-xl bg-info/5 border border-info/20 p-3">
+      <div class="w-8 h-8 rounded-full bg-info/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <p class="text-xs text-ink-600 leading-relaxed"><span class="font-semibold text-ink-800">Como funcionan.</span> Los desafios se completan en el box y el coach los valida presencialmente. No se aceptan videos.</p>
+    </div>
+
+    <!-- Desafío 1 — VALIDADO por coach -->
+    <div class="mx-4 mt-4 rounded-xl border border-success/30 bg-white overflow-hidden">
+      <!-- Header estado -->
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-success/20 bg-success/5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        <span class="text-[11px] font-semibold text-success">Validado por Vale Fuentes · Hoy 07:42</span>
+      </div>
+      <div class="p-4">
+        <div class="flex items-start gap-3">
+          <!-- Icono -->
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-success/10 flex-shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.2"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Resistencia</p>
+            <h3 class="font-display font-semibold text-base text-ink-900 mt-0.5">Cindy sub-20</h3>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">Completa el WOD Cindy en menos de 20 minutos con rx.</p>
+          </div>
+        </div>
+
+        <!-- Tu resultado -->
+        <div class="mt-3 rounded-lg bg-ink-50 border border-ink-100 px-3 py-2 flex items-center gap-3">
+          <div>
+            <p class="text-[10px] text-ink-400">Tu tiempo</p>
+            <p class="font-mono font-bold text-xl text-ink-900">18:42</p>
+          </div>
+          <div class="h-8 w-px bg-ink-200"></div>
+          <div>
+            <p class="text-[10px] text-ink-400">Rondas</p>
+            <p class="font-mono font-bold text-xl text-ink-900">22</p>
+          </div>
+          <div class="ml-auto text-right">
+            <p class="text-[10px] text-ink-400">Recompensa</p>
+            <p class="text-sm font-semibold text-success">+150 XP</p>
+            <p class="text-[10px] text-ink-400">Badge obtenido</p>
+          </div>
+        </div>
+
+        <!-- Badge ganado -->
+        <div class="mt-3 flex items-center gap-2 rounded-lg border border-success/20 bg-success/5 px-3 py-2">
+          <div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="#18A957"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-ink-800">Badge desbloqueado: Cindy Sub-20</p>
+            <p class="text-[10px] text-ink-400">Aparece en tu perfil publico</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desafío 2 — POR VALIDAR -->
+    <div class="mx-4 mt-3 rounded-xl border border-warning/40 bg-white overflow-hidden">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-warning/20 bg-warning/5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#E8A317"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span class="text-[11px] font-semibold text-warning">Por validar · Habla con tu coach en el box</span>
+      </div>
+      <div class="p-4">
+        <div class="flex items-start gap-3">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-warning/10 flex-shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#E8A317" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Velocidad</p>
+            <h3 class="font-display font-semibold text-base text-ink-900 mt-0.5">Helen sub-10</h3>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">Completa el WOD Helen en menos de 10 minutos.</p>
+          </div>
+        </div>
+
+        <div class="mt-3 rounded-lg bg-ink-50 border border-ink-100 px-3 py-2 flex items-center gap-3">
+          <div>
+            <p class="text-[10px] text-ink-400">Tu tiempo</p>
+            <p class="font-mono font-bold text-xl text-ink-900">9:47</p>
+          </div>
+          <div class="ml-auto text-right">
+            <p class="text-[10px] text-ink-400">Recompensa</p>
+            <p class="text-sm font-semibold text-warning">+200 XP + Badge</p>
+          </div>
+        </div>
+
+        <div class="mt-3 flex items-start gap-2 rounded-lg border border-warning/20 bg-warning/5 px-3 py-2">
+          <svg class="mt-0.5 flex-shrink-0" width="13" height="13" viewBox="0 0 24 24" fill="#E8A317"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <p class="text-[11px] text-ink-600">Muestrale este tiempo a <span class="font-semibold text-ink-800">Vale Fuentes</span> o <span class="font-semibold text-ink-800">Nacho Tapia</span> en el box para que lo validen.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desafío 3 — EN PROGRESO -->
+    <div class="mx-4 mt-3 rounded-xl border border-ink-200 bg-white overflow-hidden">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-ink-100 bg-ink-50">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <span class="text-[11px] font-semibold text-ink-500">En progreso</span>
+      </div>
+      <div class="p-4">
+        <div class="flex items-start gap-3">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-brand-50 flex-shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2.2"><path d="M17 6H7L5 12H19L17 6Z M12 22C9 22 6 20 5 17H19C18 20 15 22 12 22Z M4 3H20V5H4V3Z"/></svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Fuerza</p>
+            <h3 class="font-display font-semibold text-base text-ink-900 mt-0.5">Fran sub-3:30</h3>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">Completa el WOD Fran en menos de 3 minutos 30 segundos rx.</p>
+          </div>
+        </div>
+
+        <!-- Progreso -->
+        <div class="mt-3">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="text-[11px] text-ink-400">Tu mejor tiempo</span>
+            <span class="font-mono font-semibold text-sm text-ink-700">3:58 <span class="text-ink-400 font-normal">/ meta 3:30</span></span>
+          </div>
+          <div class="h-2 rounded-full bg-ink-100 overflow-hidden">
+            <div class="h-full rounded-full bg-brand-400" style="width:70%"></div>
+          </div>
+          <p class="text-[10px] text-ink-400 mt-1.5">Faltan 28 seg para lograrlo. Recompensa: <span class="font-semibold text-brand-600">+250 XP + badge Rey de Fran</span></p>
+        </div>
+
+        <button class="mt-3 w-full h-10 rounded-full border border-brand-200 text-brand-600 text-sm font-semibold hover:bg-brand-50 transition-colors cursor-pointer">
+          Ver mis intentos
+        </button>
+      </div>
+    </div>
+
+    <!-- Desafío 4 — PENDIENTE -->
+    <div class="mx-4 mt-3 rounded-xl border border-ink-200 bg-white overflow-hidden">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-ink-100 bg-ink-50">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B6BCC8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span class="text-[11px] font-semibold text-ink-400">Pendiente · Aun no lo intentas</span>
+      </div>
+      <div class="p-4">
+        <div class="flex items-start gap-3">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-ink-100 flex-shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2.2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Cardio</p>
+            <h3 class="font-display font-semibold text-base text-ink-900 mt-0.5">Murph en 45 min</h3>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">Completa el heroe Murph (con chaleco) en menos de 45 minutos.</p>
+          </div>
+        </div>
+        <div class="mt-3 flex items-center justify-between">
+          <span class="text-xs text-ink-400">Recompensa: <span class="font-semibold text-ink-700">+400 XP + badge Murph</span></span>
+          <span class="text-[11px] rounded-full px-2.5 py-1 bg-ink-100 text-ink-500 font-medium">Dificil</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desafío 5 — PROGRESO automatico -->
+    <div class="mx-4 mt-3 rounded-xl border border-ink-200 bg-white overflow-hidden">
+      <div class="flex items-center gap-2 px-4 py-2 border-b border-ink-100 bg-ink-50">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#B6BCC8" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span class="text-[11px] font-semibold text-ink-400">Pendiente · Disponible para ti</span>
+      </div>
+      <div class="p-4">
+        <div class="flex items-start gap-3">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center bg-ink-100 flex-shrink-0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2.2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <div class="flex-1">
+            <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Constancia</p>
+            <h3 class="font-display font-semibold text-base text-ink-900 mt-0.5">Racha de 10 dias</h3>
+            <p class="text-xs text-ink-500 mt-1 leading-relaxed">Asiste al box 10 dias seguidos sin faltar.</p>
+          </div>
+        </div>
+        <div class="mt-3">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="text-[11px] text-ink-400">Progreso actual</span>
+            <span class="font-mono font-semibold text-sm text-ink-700">7 / 10 dias</span>
+          </div>
+          <div class="h-2 rounded-full bg-ink-100 overflow-hidden">
+            <div class="h-full rounded-full bg-brand-500" style="width:70%"></div>
+          </div>
+          <p class="text-[10px] text-ink-400 mt-1.5">Faltan 3 dias. Recompensa: <span class="font-semibold text-brand-600">+100 XP + badge Constante</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="mx-4 mt-3 mb-2">
+      <button class="w-full h-11 rounded-full border border-ink-200 text-ink-600 text-sm font-semibold hover:bg-ink-50 transition-colors cursor-pointer">
+        Ver todos los desafios disponibles
+      </button>
+    </div>
+
+  </div><!-- /scroll -->
+
+  <!-- Bottom tab bar -->
+  <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] z-20 bg-white border-t border-ink-200">
+    <div class="flex items-center justify-around h-16 px-2">
+
+      <a href="hoy.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
+        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Hoy</span>
+      </a>
+
+      <a href="reservar.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
+        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Reservar</span>
+      </a>
+
+      <a href="ranking.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
+        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Ranking</span>
+      </a>
+
+      <a href="red-social.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
+        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Social</span>
+      </a>
+
+      <a href="perfil.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
+        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Perfil</span>
+      </a>
+    </div>
+  </nav>
+
+</div>
+</body>
+</html>

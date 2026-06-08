@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Design System</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
+        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
+        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
+        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
+      },
+      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
+      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
+      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
+    }
+  }
+}
+</script>
+<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+</head>
+<body class="bg-ink-50 text-ink-900 font-sans">
+
+<!-- Top bar -->
+<header class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-ink-200">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="grid place-items-center w-9 h-9 rounded-lg bg-brand-500 text-white shadow-glow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+      </span>
+      <span class="font-display font-bold text-xl tracking-tight">Forja<span class="text-brand-500">.</span></span>
+      <span class="ml-2 text-xs font-semibold uppercase tracking-wider text-ink-400">Design System</span>
+    </div>
+    <span class="text-sm text-ink-500">Mockup · brandeable por gimnasio</span>
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-12 space-y-16">
+
+  <!-- Intro -->
+  <section>
+    <p class="text-xs font-semibold uppercase tracking-[.08em] text-brand-600">Sistema de gestión de gimnasios</p>
+    <h1 class="font-display font-bold text-4xl mt-2">Forja Design System</h1>
+    <p class="text-ink-500 mt-3 max-w-2xl text-lg">Moderno, atlético, gamificado. Dos temas sobre un mismo sistema: <strong class="text-ink-900 font-semibold">App dark</strong> para el atleta y <strong class="text-ink-900 font-semibold">Backoffice light</strong> para el admin. Sin itálicas, color de marca configurable por gym.</p>
+  </section>
+
+  <!-- Color -->
+  <section class="space-y-6">
+    <h2 class="font-display font-semibold text-2xl">Color</h2>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-3">Marca · Ember (configurable por gym)</p>
+      <div class="grid grid-cols-5 md:grid-cols-9 gap-2">
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-100 border border-ink-200"></div><p class="text-[11px] font-mono text-ink-500">100</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-200"></div><p class="text-[11px] font-mono text-ink-500">200</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-300"></div><p class="text-[11px] font-mono text-ink-500">300</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-400"></div><p class="text-[11px] font-mono text-ink-500">400</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-500 ring-2 ring-offset-2 ring-brand-500"></div><p class="text-[11px] font-mono text-ink-900 font-bold">500</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-600"></div><p class="text-[11px] font-mono text-ink-500">600</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-700"></div><p class="text-[11px] font-mono text-ink-500">700</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-800"></div><p class="text-[11px] font-mono text-ink-500">800</p></div>
+        <div class="space-y-1"><div class="h-16 rounded-lg bg-brand-900"></div><p class="text-[11px] font-mono text-ink-500">900</p></div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-3">Neutros · Ink</p>
+        <div class="flex rounded-lg overflow-hidden border border-ink-200">
+          <div class="h-12 flex-1 bg-ink-950"></div><div class="h-12 flex-1 bg-ink-800"></div><div class="h-12 flex-1 bg-ink-600"></div><div class="h-12 flex-1 bg-ink-400"></div><div class="h-12 flex-1 bg-ink-200"></div><div class="h-12 flex-1 bg-ink-50"></div>
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-3">Semánticos</p>
+        <div class="grid grid-cols-4 gap-2">
+          <div class="rounded-lg p-3 bg-success/10 text-center"><div class="w-6 h-6 rounded-full bg-success mx-auto"></div><p class="text-xs mt-1 font-medium">success</p></div>
+          <div class="rounded-lg p-3 bg-warning/10 text-center"><div class="w-6 h-6 rounded-full bg-warning mx-auto"></div><p class="text-xs mt-1 font-medium">warning</p></div>
+          <div class="rounded-lg p-3 bg-danger/10 text-center"><div class="w-6 h-6 rounded-full bg-danger mx-auto"></div><p class="text-xs mt-1 font-medium">danger</p></div>
+          <div class="rounded-lg p-3 bg-info/10 text-center"><div class="w-6 h-6 rounded-full bg-info mx-auto"></div><p class="text-xs mt-1 font-medium">info</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-3">Gamificación · Tiers de rango</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold" style="background:#C77B3C20;color:#C77B3C"><span class="w-2.5 h-2.5 rounded-full bg-tier-bronce"></span>Bronce</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold" style="background:#AEB7C420;color:#7c8696"><span class="w-2.5 h-2.5 rounded-full bg-tier-plata"></span>Plata</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold" style="background:#ECC04A20;color:#a8842a"><span class="w-2.5 h-2.5 rounded-full bg-tier-oro"></span>Oro</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold" style="background:#61D2C420;color:#2f9488"><span class="w-2.5 h-2.5 rounded-full bg-tier-platino"></span>Platino</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold" style="background:#6AA8FF20;color:#3e7bfa"><span class="w-2.5 h-2.5 rounded-full bg-tier-diamante"></span>Diamante</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typography -->
+  <section class="space-y-5">
+    <h2 class="font-display font-semibold text-2xl">Tipografía <span class="text-ink-400 text-base font-sans font-normal">· Space Grotesk + Inter + JetBrains Mono · sin itálicas</span></h2>
+    <div class="bg-white border border-ink-200 rounded-xl p-8 space-y-4">
+      <div class="flex items-baseline gap-4 border-b border-ink-100 pb-4"><span class="text-xs font-mono text-ink-400 w-20">display</span><span class="font-display font-bold text-4xl">Forja tu fuerza</span></div>
+      <div class="flex items-baseline gap-4 border-b border-ink-100 pb-4"><span class="text-xs font-mono text-ink-400 w-20">h1</span><span class="font-display font-bold text-[32px]">Panel del gimnasio</span></div>
+      <div class="flex items-baseline gap-4 border-b border-ink-100 pb-4"><span class="text-xs font-mono text-ink-400 w-20">h2</span><span class="font-display font-semibold text-[26px]">Clase de CrossFit</span></div>
+      <div class="flex items-baseline gap-4 border-b border-ink-100 pb-4"><span class="text-xs font-mono text-ink-400 w-20">h3</span><span class="font-display font-semibold text-[21px]">Warm-up</span></div>
+      <div class="flex items-baseline gap-4 border-b border-ink-100 pb-4"><span class="text-xs font-mono text-ink-400 w-20">body</span><span class="text-[15px] text-ink-700">El atleta reserva su clase, entrena y sube de nivel. Texto base en Inter, 15px.</span></div>
+      <div class="flex items-baseline gap-4 border-b border-ink-100 pb-4"><span class="text-xs font-mono text-ink-400 w-20">overline</span><span class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Próxima clase</span></div>
+      <div class="flex items-baseline gap-4"><span class="text-xs font-mono text-ink-400 w-20">stat</span><span class="font-mono font-bold text-4xl text-brand-600">3:42<span class="text-base text-ink-400 ml-1">min</span></span></div>
+    </div>
+  </section>
+
+  <!-- Components light -->
+  <section class="space-y-5">
+    <h2 class="font-display font-semibold text-2xl">Componentes <span class="text-ink-400 text-base font-sans font-normal">· Backoffice (light)</span></h2>
+    <div class="bg-white border border-ink-200 rounded-xl p-8 space-y-8">
+      <!-- buttons -->
+      <div class="flex flex-wrap items-center gap-3">
+        <button class="rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold text-sm px-5 h-10 transition">Botón primario</button>
+        <button class="rounded-full border border-ink-300 hover:bg-ink-50 text-ink-800 font-semibold text-sm px-5 h-10 transition">Secundario</button>
+        <button class="rounded-full hover:bg-ink-100 text-ink-700 font-semibold text-sm px-5 h-10 transition">Ghost</button>
+        <button class="rounded-full bg-danger/10 hover:bg-danger/20 text-danger font-semibold text-sm px-5 h-10 transition">Eliminar</button>
+      </div>
+      <!-- inputs + chips -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-2">
+          <label class="text-sm font-medium text-ink-700">Nombre del cliente</label>
+          <input class="w-full h-11 rounded-md border border-ink-300 px-4 text-sm outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15" placeholder="Ej. Camila Soto">
+        </div>
+        <div class="space-y-2">
+          <span class="text-sm font-medium text-ink-700 block">Estados (chips)</span>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-success/12 text-success">Activo</span>
+            <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-warning/15 text-[#a87a12]">Por vencer</span>
+            <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-danger/12 text-danger">Moroso</span>
+            <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-info/12 text-info">Congelado</span>
+          </div>
+        </div>
+      </div>
+      <!-- cards -->
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="rounded-xl border border-ink-200 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wider text-ink-400">Clientes activos</p>
+          <p class="font-mono font-bold text-3xl mt-2">248</p>
+          <p class="text-sm text-success mt-1 font-medium">+12 este mes</p>
+        </div>
+        <div class="rounded-xl border border-ink-200 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wider text-ink-400">Ingresos del mes</p>
+          <p class="font-mono font-bold text-3xl mt-2">$4.2M</p>
+          <p class="text-sm text-ink-500 mt-1">CLP</p>
+        </div>
+        <div class="rounded-xl border border-ink-200 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wider text-ink-400">Asistencia hoy</p>
+          <p class="font-mono font-bold text-3xl mt-2">86<span class="text-ink-300 text-xl">%</span></p>
+          <p class="text-sm text-ink-500 mt-1">de cupos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Components dark + gamification -->
+  <section class="space-y-5">
+    <h2 class="font-display font-semibold text-2xl">Componentes <span class="text-ink-400 text-base font-sans font-normal">· App del atleta (dark) + gamificación</span></h2>
+    <div class="bg-ink-950 text-ink-50 rounded-2xl p-8 space-y-8 border border-ink-800">
+      <!-- buttons dark -->
+      <div class="flex flex-wrap items-center gap-3">
+        <button class="rounded-full bg-brand-500 hover:bg-brand-400 text-white font-semibold text-sm px-5 h-11 shadow-glow transition">Reservar clase</button>
+        <button class="rounded-full border border-white/15 hover:bg-white/5 text-ink-50 font-semibold text-sm px-5 h-11 transition">Ver rutina</button>
+        <button class="rounded-full hover:bg-white/5 text-ink-300 font-semibold text-sm px-5 h-11 transition">Cancelar</button>
+      </div>
+
+      <!-- gamification row -->
+      <div class="grid md:grid-cols-3 gap-4">
+        <!-- level + xp -->
+        <div class="rounded-xl bg-ink-850 border border-white/8 p-5">
+          <div class="flex items-center justify-between">
+            <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-bold" style="background:#ECC04A20;color:#ECC04A">★ Nivel 12 · Oro</span>
+            <span class="font-mono text-sm text-ink-400">62%</span>
+          </div>
+          <div class="mt-4 h-2.5 rounded-full bg-ink-800 overflow-hidden">
+            <div class="h-full rounded-full bg-brand-500" style="width:62%"></div>
+          </div>
+          <p class="mt-2 font-mono text-xs text-ink-400">1.240 / 2.000 XP</p>
+        </div>
+        <!-- streak -->
+        <div class="rounded-xl bg-ink-850 border border-white/8 p-5 flex items-center gap-4">
+          <span class="grid place-items-center w-12 h-12 rounded-full bg-brand-500/15 text-brand-400 text-2xl">🔥</span>
+          <div>
+            <p class="font-mono font-bold text-3xl leading-none">7</p>
+            <p class="text-sm text-ink-400 mt-1">semanas de racha</p>
+          </div>
+        </div>
+        <!-- robable badge -->
+        <div class="rounded-xl bg-ink-850 border border-white/8 p-5">
+          <p class="text-xs font-semibold uppercase tracking-wider text-ink-400">Logro en disputa</p>
+          <p class="font-display font-semibold text-lg mt-1">Rey de "Fran"</p>
+          <p class="text-sm text-brand-400 mt-1 font-medium">En poder de @pancho_wod</p>
+        </div>
+      </div>
+
+      <!-- leaderboard -->
+      <div class="rounded-xl bg-ink-850 border border-white/8 overflow-hidden">
+        <div class="px-5 py-3 border-b border-white/8 flex items-center justify-between">
+          <p class="font-display font-semibold">Ranking · Temporada 3</p>
+          <span class="text-xs font-semibold text-ink-400">esta semana</span>
+        </div>
+        <div class="divide-y divide-white/5">
+          <div class="flex items-center gap-3 px-5 py-3">
+            <span class="font-mono font-bold w-6 text-center" style="color:#ECC04A">1</span>
+            <div class="w-8 h-8 rounded-full bg-brand-500/30"></div>
+            <span class="flex-1 text-sm font-medium">Camila Soto</span>
+            <span class="font-mono text-sm text-ink-300">2.480</span>
+          </div>
+          <div class="flex items-center gap-3 px-5 py-3">
+            <span class="font-mono font-bold w-6 text-center" style="color:#AEB7C4">2</span>
+            <div class="w-8 h-8 rounded-full bg-ink-700"></div>
+            <span class="flex-1 text-sm font-medium">Pancho Díaz</span>
+            <span class="font-mono text-sm text-ink-300">2.310</span>
+          </div>
+          <div class="flex items-center gap-3 px-5 py-3 bg-brand-500/5">
+            <span class="font-mono font-bold w-6 text-center" style="color:#C77B3C">3</span>
+            <div class="w-8 h-8 rounded-full bg-brand-500/30 ring-2 ring-brand-500"></div>
+            <span class="flex-1 text-sm font-semibold">Tú</span>
+            <span class="font-mono text-sm text-brand-400">2.190</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="pt-8 border-t border-ink-200 text-sm text-ink-400">
+    Forja Design System · placeholder brandeable por gimnasio · App dark + Backoffice light · sin itálicas
+  </footer>
+</main>
+</body>
+</html>

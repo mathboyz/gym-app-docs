@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Crear publicación</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
+        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
+        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
+        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
+      },
+      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
+      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
+      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
+    }
+  }
+}
+</script>
+<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+</head>
+<body class="bg-ink-50 text-ink-900 font-sans min-h-screen">
+
+<div class="max-w-[420px] mx-auto bg-white min-h-screen flex flex-col">
+
+  <!-- Top bar -->
+  <header class="sticky top-0 z-20 bg-white border-b border-ink-200 px-4 h-14 flex items-center justify-between">
+    <a href="red-social.html" class="text-sm font-semibold text-ink-600 hover:text-ink-900 cursor-pointer">Cancelar</a>
+    <h1 class="font-display font-bold text-base">Nueva publicación</h1>
+    <button class="h-9 px-4 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors cursor-pointer">Publicar</button>
+  </header>
+
+  <!-- Scroll area -->
+  <div class="flex-1 overflow-y-auto">
+
+    <!-- Zona foto/video -->
+    <div class="mx-4 mt-5">
+      <div class="border-2 border-dashed border-ink-200 rounded-xl aspect-video flex flex-col items-center justify-center gap-3 bg-ink-50 cursor-pointer hover:border-brand-300 hover:bg-brand-50 transition-colors">
+        <div class="w-14 h-14 rounded-full bg-white border border-ink-200 flex items-center justify-center shadow-sm">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-ink-400"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div class="text-center">
+          <p class="text-sm font-semibold text-ink-700">Agregar foto o video</p>
+          <p class="text-xs text-ink-400 mt-0.5">Toca para elegir desde tu galería</p>
+        </div>
+        <div class="flex gap-2">
+          <button class="h-8 px-3 rounded-full bg-white border border-ink-200 text-xs font-semibold text-ink-700 flex items-center gap-1.5 hover:border-brand-300 transition-colors cursor-pointer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Galería
+          </button>
+          <button class="h-8 px-3 rounded-full bg-white border border-ink-200 text-xs font-semibold text-ink-700 flex items-center gap-1.5 hover:border-brand-300 transition-colors cursor-pointer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            Video
+          </button>
+          <button class="h-8 px-3 rounded-full bg-white border border-ink-200 text-xs font-semibold text-ink-700 flex items-center gap-1.5 hover:border-brand-300 transition-colors cursor-pointer">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Cámara
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Autor -->
+    <div class="px-4 mt-5 flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-gradient-to-br from-brand-300 to-brand-500 flex items-center justify-center text-white font-display font-bold text-sm flex-shrink-0">MR</div>
+      <div>
+        <p class="font-semibold text-sm text-ink-900">Matías Rojas</p>
+        <p class="text-xs text-ink-400">@matias.rojas</p>
+      </div>
+    </div>
+
+    <!-- Caption -->
+    <div class="px-4 mt-4">
+      <textarea
+        class="w-full min-h-[100px] bg-transparent text-sm text-ink-900 placeholder-ink-400 resize-none outline-none leading-relaxed"
+        placeholder="¿Qué lograste hoy? Cuéntale a tu tribu..."
+        maxlength="500"
+        id="caption"
+        oninput="updateCount()"
+      ></textarea>
+      <div class="flex justify-end">
+        <span id="char-count" class="text-xs text-ink-300 font-mono">0 / 500</span>
+      </div>
+    </div>
+
+    <!-- Separador -->
+    <div class="border-t border-ink-100 mx-4 mt-2"></div>
+
+    <!-- Adjuntar resultado/PR -->
+    <div class="px-4 mt-4">
+      <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-3">Adjuntar resultado</p>
+
+      <!-- PR no adjuntado -->
+      <div id="pr-empty" class="border border-ink-200 rounded-xl p-4 flex items-center gap-3 cursor-pointer hover:border-brand-300 hover:bg-brand-50 transition-colors" onclick="attachPR()">
+        <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center flex-shrink-0">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-brand-500"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-semibold text-ink-800">Adjuntar PR o resultado</p>
+          <p class="text-xs text-ink-400 mt-0.5">WOD, tiempo, carga, reps...</p>
+        </div>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-300"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+
+      <!-- PR adjuntado (oculto por defecto) -->
+      <div id="pr-attached" class="hidden border border-brand-200 rounded-xl p-4 bg-brand-50">
+        <div class="flex items-center justify-between mb-3">
+          <p class="text-xs font-semibold uppercase tracking-wider text-brand-600">Resultado adjunto</p>
+          <button onclick="removePR()" class="text-xs text-ink-400 hover:text-danger cursor-pointer">Quitar</button>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="flex-1">
+            <p class="text-xs text-ink-500 mb-1">WOD</p>
+            <p class="font-semibold text-ink-900">Fran</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-xs text-ink-500 mb-1">Tiempo</p>
+            <p class="font-mono font-bold text-xl text-brand-600">3:42</p>
+          </div>
+          <div class="flex-1">
+            <p class="text-xs text-ink-500 mb-1">Tipo</p>
+            <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold bg-brand-100 text-brand-700">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+              PR
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacidad -->
+    <div class="px-4 mt-5 pb-8">
+      <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-3">Privacidad</p>
+      <div class="flex gap-2">
+        <button id="priv-tribu" onclick="setPriv('tribu')" class="flex-1 h-10 rounded-full text-sm font-semibold bg-brand-500 text-white cursor-pointer transition-colors flex items-center justify-center gap-1.5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Solo tribu
+        </button>
+        <button id="priv-publico" onclick="setPriv('publico')" class="flex-1 h-10 rounded-full text-sm font-semibold bg-ink-100 text-ink-600 cursor-pointer hover:bg-ink-200 transition-colors flex items-center justify-center gap-1.5">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          Público
+        </button>
+      </div>
+      <p class="text-xs text-ink-400 mt-2 text-center">Solo tribu = visible para miembros de Forja Box</p>
+    </div>
+
+  </div><!-- /scroll -->
+
+</div>
+
+<script>
+function updateCount() {
+  var ta = document.getElementById('caption');
+  document.getElementById('char-count').textContent = ta.value.length + ' / 500';
+}
+function attachPR() {
+  document.getElementById('pr-empty').classList.add('hidden');
+  document.getElementById('pr-attached').classList.remove('hidden');
+}
+function removePR() {
+  document.getElementById('pr-attached').classList.add('hidden');
+  document.getElementById('pr-empty').classList.remove('hidden');
+}
+function setPriv(v) {
+  ['tribu','publico'].forEach(function(k) {
+    var btn = document.getElementById('priv-'+k);
+    if (k === v) { btn.classList.add('bg-brand-500','text-white'); btn.classList.remove('bg-ink-100','text-ink-600'); }
+    else { btn.classList.remove('bg-brand-500','text-white'); btn.classList.add('bg-ink-100','text-ink-600'); }
+  });
+}
+</script>
+</body>
+</html>

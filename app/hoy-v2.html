@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Hoy</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800;900&family=Hanken+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<script>
+tailwind.config = { theme: { extend: {
+  colors: {
+    brand:{50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E'},
+    ink:{950:'#0A0A0B',900:'#121214',850:'#161618',800:'#1D1D21',700:'#29292F',600:'#3A3A42',500:'#5C5C66',400:'#8A8A94',300:'#B6B6BE',200:'#D8D6D0',100:'#ECEAE4',50:'#F3F1EC'},
+    tier:{bronce:'#C77B3C',plata:'#AEB7C4',oro:'#ECC04A',platino:'#61D2C4',diamante:'#6AA8FF'},
+    success:'#18A957',warning:'#E8A317',danger:'#E5484D',info:'#3E7BFA',
+  },
+  fontFamily:{ display:['Archivo','sans-serif'], sans:['"Hanken Grotesk"','sans-serif'], mono:['"Space Mono"','monospace'] },
+  borderRadius:{md:'12px',lg:'16px',xl:'20px','2xl':'28px'},
+}}}
+</script>
+<style>
+  html,body{background:#0A0A0B;}
+  body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;}
+  .grain{position:absolute;inset:0;pointer-events:none;z-index:60;opacity:.6;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .tt{letter-spacing:-.03em;}
+  .up{letter-spacing:.14em;}
+  .glow{box-shadow:0 10px 30px -6px rgba(251,82,21,.5);}
+  .mesh{background:
+     radial-gradient(120% 80% at 80% -10%, rgba(251,82,21,.28), transparent 55%),
+     radial-gradient(90% 60% at -10% 5%, rgba(251,82,21,.10), transparent 50%);}
+  .ringbar{background:conic-gradient(#FB5215 0% 62%, rgba(255,255,255,.08) 62% 100%);}
+  ::-webkit-scrollbar{width:0;}
+</style>
+</head>
+<body class="font-sans text-ink-50">
+<div class="relative max-w-[430px] mx-auto min-h-screen bg-ink-950 overflow-hidden">
+  <div class="grain"></div>
+
+  <!-- giant watermark -->
+  <span class="pointer-events-none select-none absolute -right-6 top-[200px] font-display font-900 text-[150px] leading-none tracking-tighter text-white/[.025] rotate-90 origin-top-right">FORJA</span>
+
+  <!-- status bar -->
+  <div class="relative z-10 flex justify-between items-center px-6 pt-4 text-[12px] font-mono text-ink-400">
+    <span>9:41</span>
+    <span class="flex gap-1.5 items-center"><span>5G</span><span>100%</span></span>
+  </div>
+
+  <!-- header -->
+  <header class="relative z-10 flex items-center justify-between px-6 pt-3 pb-2">
+    <div class="flex items-center gap-2.5">
+      <span class="grid place-items-center w-9 h-9 rounded-lg bg-brand-500 text-white glow">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+      </span>
+      <span class="font-display font-800 text-lg tracking-tight">FORJA</span>
+    </div>
+    <button class="relative w-10 h-10 grid place-items-center rounded-full bg-white/5 border border-white/10">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+      <span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-brand-500 ring-2 ring-ink-950"></span>
+    </button>
+  </header>
+
+  <!-- greeting -->
+  <div class="relative z-10 px-6 pt-3">
+    <p class="up text-[11px] font-semibold text-brand-400">SÁBADO 07 · JUNIO</p>
+    <h1 class="font-display font-800 tt text-[34px] leading-[1.02] mt-1">HOLA,<br>MATÍAS<span class="text-brand-500">.</span></h1>
+  </div>
+
+  <!-- HERO next session: editorial, number-led -->
+  <section class="relative z-10 mt-5 mx-4 rounded-2xl overflow-hidden mesh bg-ink-900 border border-white/8">
+    <div class="px-6 pt-5 pb-6 relative">
+      <div class="flex items-center justify-between">
+        <span class="up text-[10px] font-bold text-ink-400">PRÓXIMA SESIÓN</span>
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-brand-500/15 text-brand-400 px-2.5 py-1 text-[11px] font-mono font-bold"><span class="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse"></span>EN 2H 14M</span>
+      </div>
+
+      <div class="flex items-end justify-between mt-3">
+        <div>
+          <h2 class="font-display font-900 tt text-[44px] leading-[.9] uppercase">Cross<br>Fit</h2>
+        </div>
+        <div class="text-right pb-1">
+          <p class="font-mono font-bold text-4xl text-brand-500 leading-none">19:00</p>
+          <p class="font-mono text-[12px] text-ink-400 mt-1">60 MIN</p>
+        </div>
+      </div>
+
+      <div class="mt-5 flex items-center gap-3 border-t border-white/8 pt-4">
+        <div class="w-9 h-9 rounded-full bg-ink-700 grid place-items-center font-display font-700 text-xs">VF</div>
+        <div class="flex-1">
+          <p class="text-sm font-semibold leading-tight">Vale Fuentes</p>
+          <p class="text-[12px] text-ink-400">Coach</p>
+        </div>
+        <div class="text-right">
+          <p class="font-mono font-bold text-sm"><span class="text-brand-400">08</span><span class="text-ink-500">/12</span></p>
+          <p class="text-[11px] text-ink-500">cupos</p>
+        </div>
+      </div>
+
+      <button class="mt-5 w-full h-12 rounded-full bg-brand-500 hover:bg-brand-400 text-white font-display font-700 up text-[13px] glow transition flex items-center justify-center gap-2">
+        VER LA CLASE
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- streak + xp : asymmetric -->
+  <section class="relative z-10 mt-4 mx-4 grid grid-cols-5 gap-3">
+    <!-- streak big -->
+    <div class="col-span-2 rounded-2xl bg-ink-900 border border-white/8 p-4 flex flex-col justify-between">
+      <span class="text-2xl">🔥</span>
+      <div>
+        <p class="font-mono font-bold text-4xl leading-none text-brand-500">07</p>
+        <p class="text-[11px] text-ink-400 mt-1 leading-tight">semanas<br>de racha</p>
+      </div>
+    </div>
+    <!-- level + xp -->
+    <div class="col-span-3 rounded-2xl bg-ink-900 border border-white/8 p-4 flex flex-col justify-between">
+      <div class="flex items-center justify-between">
+        <span class="inline-flex items-center gap-1.5 rounded-full px-2 py-1 text-[11px] font-display font-700 up" style="background:#ECC04A1a;color:#ECC04A">★ NIVEL 12</span>
+        <span class="font-mono text-[11px] text-ink-400">62%</span>
+      </div>
+      <div>
+        <div class="flex items-baseline gap-1.5">
+          <span class="font-mono font-bold text-2xl">1.240</span>
+          <span class="font-mono text-[12px] text-ink-500">/ 2.000 XP</span>
+        </div>
+        <div class="mt-2 h-2 rounded-full bg-white/8 overflow-hidden">
+          <div class="h-full rounded-full bg-gradient-to-r from-brand-600 to-brand-400" style="width:62%"></div>
+        </div>
+        <p class="text-[11px] text-ink-500 mt-1.5 font-mono">FALTAN 760 PARA NIVEL 13</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- quick actions: editorial row, not 3 identical cards -->
+  <section class="relative z-10 mt-7 px-6">
+    <p class="up text-[10px] font-bold text-ink-500 mb-3">ACCESOS</p>
+    <div class="flex gap-2.5">
+      <a class="group flex-1 rounded-xl bg-white/[.04] hover:bg-white/[.07] border border-white/8 p-3.5 transition">
+        <svg class="text-brand-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <p class="text-[12px] font-semibold mt-2">Reservar</p>
+      </a>
+      <a class="group flex-1 rounded-xl bg-white/[.04] hover:bg-white/[.07] border border-white/8 p-3.5 transition">
+        <svg class="text-brand-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        <p class="text-[12px] font-semibold mt-2">Mi rutina</p>
+      </a>
+      <a class="group flex-1 rounded-xl bg-white/[.04] hover:bg-white/[.07] border border-white/8 p-3.5 transition">
+        <svg class="text-brand-400" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+        <p class="text-[12px] font-semibold mt-2">Ranking</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- mission: numbered editorial list -->
+  <section class="relative z-10 mt-7 px-6">
+    <div class="flex items-center justify-between mb-3">
+      <p class="up text-[10px] font-bold text-ink-500">MISIÓN DEL DÍA</p>
+      <span class="font-mono text-[12px] font-bold text-brand-400">+80 XP</span>
+    </div>
+    <div class="rounded-2xl bg-ink-900 border border-white/8 divide-y divide-white/5">
+      <div class="flex items-center gap-3 px-4 py-3">
+        <span class="grid place-items-center w-6 h-6 rounded-full bg-success/20 text-success"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span class="flex-1 text-sm text-ink-400 line-through">Iniciar sesión hoy</span>
+        <span class="font-mono text-[12px] text-success">+20</span>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3">
+        <span class="grid place-items-center w-6 h-6 rounded-full bg-success/20 text-success"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <span class="flex-1 text-sm text-ink-400 line-through">Reservar una clase</span>
+        <span class="font-mono text-[12px] text-success">+30</span>
+      </div>
+      <div class="flex items-center gap-3 px-4 py-3">
+        <span class="w-6 h-6 rounded-full border-2 border-ink-600"></span>
+        <span class="flex-1 text-sm font-medium">Anotar tu resultado del WOD</span>
+        <span class="font-mono text-[12px] text-ink-400">+30</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- tribe feed teaser -->
+  <section class="relative z-10 mt-7 px-6 pb-32">
+    <div class="flex items-center justify-between mb-3">
+      <p class="up text-[10px] font-bold text-ink-500">TU TRIBU HOY</p>
+      <a class="text-[12px] font-semibold text-brand-400">Ver todo</a>
+    </div>
+    <div class="space-y-2.5">
+      <div class="flex items-center gap-3 rounded-xl bg-white/[.03] border border-white/8 px-4 py-3">
+        <div class="w-9 h-9 rounded-full bg-brand-500/25 grid place-items-center font-display font-700 text-xs text-brand-300">CS</div>
+        <div class="flex-1 leading-tight">
+          <p class="text-sm font-semibold">Camila Soto</p>
+          <p class="text-[12px] text-ink-400">Completó <span class="text-ink-200">Fran</span> · <span class="font-mono text-brand-400">3:42</span></p>
+        </div>
+        <span class="text-[11px] font-mono text-ink-500">2H</span>
+      </div>
+      <div class="flex items-center gap-3 rounded-xl bg-white/[.03] border border-white/8 px-4 py-3">
+        <div class="w-9 h-9 rounded-full bg-tier-oro/20 grid place-items-center font-display font-700 text-xs" style="color:#ECC04A">JN</div>
+        <div class="flex-1 leading-tight">
+          <p class="text-sm font-semibold">Javiera Núñez 🏆</p>
+          <p class="text-[12px] text-ink-400">Nuevo PR en Clean & Jerk · <span class="font-mono text-ink-200">62kg</span></p>
+        </div>
+        <span class="text-[11px] font-mono text-ink-500">5H</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- bottom tab bar -->
+  <nav class="absolute bottom-0 inset-x-0 z-40">
+    <div class="h-20 bg-gradient-to-t from-ink-950 via-ink-950/95 to-transparent"></div>
+    <div class="absolute bottom-0 inset-x-0 bg-ink-900/90 backdrop-blur border-t border-white/8 px-6 pb-6 pt-2.5 flex items-end justify-between">
+      <a class="flex flex-col items-center gap-1 text-brand-500"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="text-[10px] font-bold up">HOY</span></a>
+      <a class="flex flex-col items-center gap-1 text-ink-500"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span class="text-[10px] font-semibold up">RESERVAR</span></a>
+      <a class="flex flex-col items-center -mt-6"><span class="grid place-items-center w-14 h-14 rounded-full bg-brand-500 text-white glow border-4 border-ink-950"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg></span></a>
+      <a class="flex flex-col items-center gap-1 text-ink-500"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="text-[10px] font-semibold up">SOCIAL</span></a>
+      <a class="flex flex-col items-center gap-1 text-ink-500"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg><span class="text-[10px] font-semibold up">PERFIL</span></a>
+    </div>
+  </nav>
+</div>
+</body>
+</html>
