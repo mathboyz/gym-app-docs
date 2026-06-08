@@ -1,8 +1,10 @@
-# Skills del equipo backend
+# Skills del equipo
 
-Tecnologías y conceptos que el equipo necesita dominar para construir este proyecto.
+Tecnologías, frameworks y principios que el equipo necesita dominar para construir este proyecto.
 
-## Índice
+---
+
+## Backend
 
 | Skill | Categoría | Prioridad |
 |-------|-----------|:---------:|
@@ -18,3 +20,18 @@ Tecnologías y conceptos que el equipo necesita dominar para construir este proy
 | [MercadoPago](mercadopago.md) | Pagos | 🟡 Media |
 | [Docker](docker.md) | Infra | 🟡 Media |
 | [OpenTelemetry](opentelemetry.md) | Observabilidad | 🟢 Baja |
+
+---
+
+## Frontend
+
+| Skill | Categoría | Prioridad |
+|-------|-----------|:---------:|
+| [shadcn/ui](shadcn.md) | UI Components | 🔴 Alta |
+| [Frontend Design](frontend-design.md) | Arquitectura Frontend | 🔴 Alta |
+| [Refactoring UI](refactoring-ui.md) | Diseño Visual | 🔴 Alta |
+| [UX/UI Pro](ux-ui.md) | UX · Diseño | 🔴 Alta |
+| [Interface Design](interface-design.md) | Patrones de UI | 🟡 Media |
+| [Modern Web](modern-web.md) | Web Platform | 🟡 Media |
+| [Hooked](hooked.md) | Producto · Hábitos | 🔴 Alta |
+| [UX Heretics](ux-heretics.md) | Pensamiento Crítico | 🟢 Baja |
