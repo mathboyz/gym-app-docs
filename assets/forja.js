@@ -95,7 +95,7 @@
     return `<div class="fj-notif-panel" hidden>
       <div class="fj-notif-head">
         <div><p class="fj-eyebrow">Bandeja</p><p style="font-family:'Space Grotesk';font-weight:700;font-size:16px;margin:1px 0 0">Notificaciones</p></div>
-        <button class="text-xs font-semibold" style="color:var(--fj-brand-600);background:none;border:0;cursor:pointer">Marcar leídas</button>
+        <button data-fj-mark class="text-xs font-semibold" style="color:var(--fj-brand-600);background:none;border:0;cursor:pointer">Marcar leídas</button>
       </div>
       <div class="fj-notif-list">${items}</div>
       <div class="fj-notif-foot"><a href="#" class="text-sm font-semibold" style="color:var(--fj-ink-600)">Ver todas las notificaciones</a></div>
@@ -174,6 +174,11 @@
       nBtn.addEventListener('click', e => { e.stopPropagation(); nPanel.hidden = !nPanel.hidden; });
       document.addEventListener('click', e => { if (!e.target.closest('.fj-notif')) nPanel.hidden = true; });
       document.addEventListener('keydown', e => { if (e.key === 'Escape') nPanel.hidden = true; });
+      const mark = nPanel.querySelector('[data-fj-mark]');
+      if (mark) mark.addEventListener('click', () => {
+        nPanel.querySelectorAll('.fj-notif-item.unread').forEach(i => i.classList.remove('unread'));
+        const dot = nBtn.querySelector('.fj-notif-dot'); if (dot) dot.remove();
+      });
     }
   }
 

@@ -451,6 +451,32 @@ function applyFilters() {
     }
   }
 })();
+
+// Acciones rápidas por fila → drawer
+document.addEventListener('click', e => {
+  const ren = e.target.closest('[aria-label="Renovar plan"]');
+  const pay = e.target.closest('[aria-label="Registrar pago"]');
+  if (!ren && !pay) return;
+  e.preventDefault(); e.stopPropagation();
+  const nombre = (ren||pay).closest('tr')?.querySelector('.font-semibold')?.textContent || 'Cliente';
+  const x = Forja.svg('<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>');
+  if (ren) Forja.Drawer.open(`
+    <div class="fj-drawer-head"><div><p class="fj-eyebrow">${nombre}</p><h2 class="font-display font-bold text-lg">Renovar plan</h2></div><button class="fj-icon-btn" data-fj-close aria-label="Cerrar">${x}</button></div>
+    <div class="fj-drawer-body space-y-4">
+      <div><label class="fj-label">Plan</label><select class="fj-input"><option>Full · $89.000/mes</option><option>Ilimitado · $99.000/mes</option><option>3x semana · $59.000/mes</option></select></div>
+      <div class="grid grid-cols-2 gap-3"><div><label class="fj-label">Periodo</label><select class="fj-input"><option>Mensual</option><option>Trimestral</option><option>Anual</option></select></div><div><label class="fj-label">Método</label><select class="fj-input"><option>Transferencia</option><option>MercadoPago</option><option>Efectivo</option></select></div></div>
+      <label class="flex items-center gap-2 text-sm text-ink-600"><input type="checkbox" checked style="accent-color:var(--fj-brand)"> Renovación automática</label>
+    </div>
+    <div class="fj-drawer-foot"><button class="fj-btn fj-btn-ghost fj-btn-sm" data-fj-close>Cancelar</button><button class="fj-btn fj-btn-primary fj-btn-sm" data-fj-close>Renovar membresía</button></div>`);
+  else Forja.Drawer.open(`
+    <div class="fj-drawer-head"><div><p class="fj-eyebrow">${nombre}</p><h2 class="font-display font-bold text-lg">Registrar pago</h2></div><button class="fj-icon-btn" data-fj-close aria-label="Cerrar">${x}</button></div>
+    <div class="fj-drawer-body space-y-4">
+      <div class="grid grid-cols-2 gap-3"><div><label class="fj-label">Monto</label><input class="fj-input fj-mono" value="89.000"></div><div><label class="fj-label">Fecha</label><input class="fj-input fj-mono" type="date" value="2026-06-08"></div></div>
+      <div><label class="fj-label">Método</label><select class="fj-input"><option>Transferencia</option><option>MercadoPago</option><option>Efectivo en caja</option></select></div>
+      <div><label class="fj-label">Concepto</label><input class="fj-input" value="Mensualidad junio 2026"></div>
+    </div>
+    <div class="fj-drawer-foot"><button class="fj-btn fj-btn-ghost fj-btn-sm" data-fj-close>Cancelar</button><button class="fj-btn fj-btn-success fj-btn-sm" data-fj-close>Registrar pago</button></div>`);
+});
 </script>
 </body>
 </html>
