@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Constructor de competencia</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+<style>
+  .build{flex:1;display:flex;overflow:hidden;}
+  .rail{width:212px;flex-shrink:0;border-right:1px solid var(--fj-ink-200);background:var(--fj-surface);padding:16px 12px;display:flex;flex-direction:column;gap:4px;}
+  .rail-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--fj-ink-600);font-size:14px;font-weight:500;}
+  .rail-item:hover{background:var(--fj-ink-50);color:var(--fj-ink-900);}
+  .rail-item[aria-current="true"]{background:rgba(251,82,21,.10);color:var(--fj-brand-600);font-weight:600;}
+  .rail-num{width:22px;height:22px;border-radius:99px;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--fj-ink-100);color:var(--fj-ink-500);flex-shrink:0;font-family:"JetBrains Mono";}
+  .rail-item[aria-current="true"] .rail-num{background:var(--fj-brand);color:#fff;}
+  .pane{flex:1;overflow-y:auto;padding:28px;background:var(--fj-ink-50);}
+  .pane-inner{max-width:880px;margin:0 auto;}
+  .sec[hidden]{display:none;}
+  .wod-table{width:100%;border-collapse:collapse;}
+  .wod-table th{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--fj-ink-400);text-align:left;padding:8px 10px;border-bottom:1px solid var(--fj-ink-200);}
+  .wod-table td{padding:8px 10px;border-bottom:1px solid var(--fj-ink-100);vertical-align:middle;}
+  .vinput{width:100%;height:34px;padding:0 10px;border:1px solid var(--fj-ink-200);border-radius:8px;font-family:"JetBrains Mono";font-size:12px;background:var(--fj-surface);}
+  .vinput:focus{outline:none;border-color:var(--fj-brand);}
+  .divcol{min-width:130px;}
+</style>
+</head>
+<body data-immersive>
+<div class="fj-shell" data-immersive>
+  <div class="fj-main">
+
+    <!-- Barra inmersiva -->
+    <div class="fj-immersive-bar">
+      <div style="display:flex;align-items:center;gap:14px;min-width:0">
+        <a href="competencias.html" class="fj-icon-btn" title="Volver" aria-label="Volver"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></a>
+        <span class="fj-dot" style="width:11px;height:11px;background:var(--m-crossfit)"></span>
+        <div style="min-width:0"><p class="fj-eyebrow">Liga · CrossFit · 3–29 jun 2026</p>
+          <input value="Liga de Verano" class="fj-title bg-transparent border-0 focus:outline-none" style="font-size:18px;width:auto;min-width:0"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="fj-pills"><span class="fj-pill" aria-selected="true">Borrador</span><span class="fj-pill">Publicada</span></div>
+        <button class="fj-btn fj-btn-ghost fj-btn-sm">Previsualizar</button>
+        <button class="fj-btn fj-btn-primary fj-btn-sm">Publicar competencia</button>
+      </div>
+    </div>
+
+    <div class="build">
+      <!-- Rail de secciones -->
+      <aside class="rail">
+        <p class="fj-eyebrow" style="padding:0 12px 6px">Secciones</p>
+        <div class="rail-item" aria-current="true" data-sec="general"><span class="rail-num">1</span>General</div>
+        <div class="rail-item" data-sec="divisiones"><span class="rail-num">2</span>Divisiones</div>
+        <div class="rail-item" data-sec="pruebas"><span class="rail-num">3</span>Pruebas / WODs</div>
+        <div class="rail-item" data-sec="inscritos"><span class="rail-num">4</span>Inscritos</div>
+        <div style="margin-top:auto;padding:12px;border-radius:12px;background:var(--fj-ink-50);font-size:12px;color:var(--fj-ink-500);line-height:1.5">
+          Una sola competencia. Cada <b>división</b> tiene sus cupos, su variante de la prueba y su propio leaderboard.
+        </div>
+      </aside>
+
+      <!-- Paneles -->
+      <main class="pane">
+        <div class="pane-inner">
+
+          <!-- 1. GENERAL -->
+          <section class="sec" data-panel="general">
+            <p class="fj-eyebrow mb-1">Paso 1</p>
+            <h2 class="font-display font-bold text-2xl text-ink-900 mb-5">General</h2>
+            <div class="fj-panel p-6 space-y-4">
+              <div class="grid grid-cols-2 gap-4">
+                <div><label class="fj-label">Nombre</label><input class="fj-input" value="Liga de Verano"></div>
+                <div><label class="fj-label">Tipo</label><select class="fj-input"><option>Liga</option><option>Torneo</option><option>Benchmark</option></select></div>
+              </div>
+              <div class="grid grid-cols-3 gap-4">
+                <div><label class="fj-label">Modalidad</label><select class="fj-input"><option>CrossFit</option><option>Halterofilia</option><option>Endurance</option></select></div>
+                <div><label class="fj-label">Inicio</label><input class="fj-input fj-mono" value="2026-06-03" type="date"></div>
+                <div><label class="fj-label">Fin</label><input class="fj-input fj-mono" value="2026-06-29" type="date"></div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                <div><label class="fj-label">Lugar</label><input class="fj-input" value="Forja Box, Providencia"></div>
+                <div><label class="fj-label">Premio</label><input class="fj-input" value="$150.000 + medallas"></div>
+              </div>
+              <div><label class="fj-label">Descripción</label><textarea class="fj-input" placeholder="Reglas, formato general, cómo se puntúa…">Liga mensual de 4 semanas. Se acumulan puntos por WOD; gana quien sume más en su división.</textarea></div>
+            </div>
+            <div class="flex justify-end mt-5"><button class="fj-btn fj-btn-primary" onclick="goSec('divisiones')">Continuar a Divisiones →</button></div>
+          </section>
+
+          <!-- 2. DIVISIONES -->
+          <section class="sec" data-panel="divisiones" hidden>
+            <p class="fj-eyebrow mb-1">Paso 2</p>
+            <div class="flex items-end justify-between mb-5">
+              <div><h2 class="font-display font-bold text-2xl text-ink-900">Divisiones</h2>
+                <p class="text-sm text-ink-500 mt-1">Cada división tiene sus cupos, su variante de cada prueba y su leaderboard.</p></div>
+              <button onclick="openDivCatalog()" class="fj-btn fj-btn-primary fj-btn-sm">+ Agregar división</button>
+            </div>
+            <div id="divList" class="space-y-3"></div>
+            <div class="flex justify-between mt-5"><button class="fj-btn fj-btn-ghost" onclick="goSec('general')">← Atrás</button><button class="fj-btn fj-btn-primary" onclick="goSec('pruebas')">Continuar a Pruebas →</button></div>
+          </section>
+
+          <!-- 3. PRUEBAS -->
+          <section class="sec" data-panel="pruebas" hidden>
+            <p class="fj-eyebrow mb-1">Paso 3</p>
+            <div class="flex items-end justify-between mb-5">
+              <div><h2 class="font-display font-bold text-2xl text-ink-900">Pruebas / WODs</h2>
+                <p class="text-sm text-ink-500 mt-1">Arma cada prueba con ejercicios. Cada división lleva su propia variante (reps / peso).</p></div>
+              <button onclick="addWod()" class="fj-btn fj-btn-primary fj-btn-sm">+ Agregar prueba</button>
+            </div>
+            <div id="wodList" class="space-y-4"></div>
+            <div class="flex justify-between mt-5"><button class="fj-btn fj-btn-ghost" onclick="goSec('divisiones')">← Atrás</button><button class="fj-btn fj-btn-primary" onclick="goSec('inscritos')">Continuar a Inscritos →</button></div>
+          </section>
+
+          <!-- 4. INSCRITOS -->
+          <section class="sec" data-panel="inscritos" hidden>
+            <p class="fj-eyebrow mb-1">Paso 4</p>
+            <h2 class="font-display font-bold text-2xl text-ink-900 mb-5">Inscritos por división</h2>
+            <div id="inscList" class="space-y-3"></div>
+            <p class="text-xs text-ink-400 mt-4">La inscripción de cada atleta queda ligada a su división → métricas por torneo y por división.</p>
+            <div class="flex justify-between mt-5"><button class="fj-btn fj-btn-ghost" onclick="goSec('pruebas')">← Atrás</button><button class="fj-btn fj-btn-primary">Publicar competencia</button></div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+
+<script>
+const FORMATS = [['fortime','For Time'],['amrap','AMRAP'],['emom','EMOM'],['tabata','Tabata']];
+const SCORES = [['tiempo','Por tiempo'],['reps','Por reps'],['carga','Por carga (kg)']];
+const fmtLabel = f => (FORMATS.find(x=>x[0]===f)||['','—'])[1];
+const xsvg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+// catálogo de divisiones reutilizable (a nivel gym)
+const DIV_CATALOG = [
+  ['Rx','Movimientos a peso y estándar completo'],['Scaled','Modificaciones de peso o técnica'],
+  ['Masters +40','Atletas de 40+ con pesos adaptados'],['Principiante','Primera competencia, foco en técnica'],
+  ['Rx Femenino','Estándar Rx, categoría femenina'],['Teams','Equipos de 2–4 atletas'],
+];
+
+let DIVS = [
+  {name:'Rx', cupos:16, insc:14, color:'#FB5215'},
+  {name:'Scaled', cupos:12, insc:8, color:'#3E7BFA'},
+  {name:'Masters +40', cupos:8, insc:2, color:'#7C3AED'},
+];
+let WODS = [
+  {name:'WOD 1 · "Fran"', fmt:'fortime', cap:'10:00', score:'tiempo', ex:[
+    {ex:'Thruster', v:['21-15-9 · 43kg','21-15-9 · 30kg','21-15-9 · 35kg']},
+    {ex:'Pull-up', v:['21-15-9','21-15-9 jumping','21-15-9 banda']},
+  ]},
+  {name:'WOD 2 · AMRAP 12\'', fmt:'amrap', cap:'12:00', score:'reps', ex:[
+    {ex:'Box Jump', v:['24"','20"','20"']},
+    {ex:'Wall Ball', v:['9 kg','6 kg','6 kg']},
+  ]},
+];
+const LIB = ['Thruster','Clean & Jerk','Snatch','Deadlift','Front Squat','Pull-up','Toes to Bar','Muscle-up','Box Jump','Burpee','Wall Ball','Row','Run','Double Unders','Assault Bike'];
+
+/* ---- Secciones ---- */
+document.querySelector('.rail').addEventListener('click', e=>{
+  const it = e.target.closest('[data-sec]'); if(!it) return;
+  document.querySelectorAll('.rail-item').forEach(x=>x.setAttribute('aria-current','false'));
+  it.setAttribute('aria-current','true');
+  const sec = it.getAttribute('data-sec');
+  document.querySelectorAll('.sec').forEach(p=>p.hidden = p.getAttribute('data-panel')!==sec);
+});
+
+function goSec(name){ document.querySelector('[data-sec="'+name+'"]').click(); const p=document.querySelector('.pane'); if(p) p.scrollTop=0; }
+
+/* ---- Divisiones ---- */
+function renderDivs(){
+  document.getElementById('divList').innerHTML = DIVS.map((d,i)=>`
+    <div class="fj-panel p-4 flex items-center gap-4">
+      <span class="fj-dot" style="width:12px;height:12px;background:${d.color}"></span>
+      <input value="${d.name}" onchange="DIVS[${i}].name=this.value" class="font-display font-semibold text-ink-900 bg-transparent border-0 focus:outline-none flex-1" style="min-width:0">
+      <div class="flex items-center gap-2">
+        <label class="text-xs text-ink-400">Cupos</label>
+        <input type="number" value="${d.cupos}" onchange="DIVS[${i}].cupos=+this.value;renderInsc()" class="fj-input fj-mono" style="width:78px;height:38px;text-align:center">
+      </div>
+      <span class="fj-badge fj-badge-neutral fj-mono">${d.insc}/${d.cupos} inscritos</span>
+      ${DIVS.length>1?`<button onclick="removeDiv(${i})" class="fj-icon-btn" style="width:30px;height:30px" aria-label="Quitar división">${xsvg}</button>`:''}
+    </div>`).join('');
+}
+function removeDiv(i){ DIVS.splice(i,1); WODS.forEach(w=>w.ex.forEach(e=>e.v.splice(i,1))); render(); }
+function addDiv(name){
+  const colors=['#FB5215','#3E7BFA','#7C3AED','#18A957','#E8A317','#E5484D'];
+  DIVS.push({name, cupos:12, insc:0, color:colors[DIVS.length%colors.length]});
+  WODS.forEach(w=>w.ex.forEach(e=>e.v.push('')));
+  render(); Forja.Drawer.close();
+}
+function openDivCatalog(){
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head"><div><p class="fj-eyebrow">Catálogo del gym</p><h2 class="font-display font-bold text-lg">Agregar división</h2></div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar">${xsvg}</button></div>
+    <div class="fj-drawer-body">
+      <p class="text-xs text-ink-400 mb-3">Divisiones guardadas — se reutilizan entre competencias.</p>
+      <div class="space-y-2">
+        ${DIV_CATALOG.map(d=>`<button onclick="addDiv('${d[0]}')" class="fj-row" style="width:100%;border:1px solid var(--fj-ink-200);border-radius:11px;margin-bottom:0;text-align:left">
+          <div class="flex-1"><p class="text-sm font-bold text-ink-900">${d[0]}</p><p class="text-xs text-ink-400">${d[1]}</p></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>`).join('')}
+      </div>
+      <div class="fj-divider my-4"></div>
+      <label class="fj-label">O crea una nueva</label>
+      <div class="flex gap-2"><input id="newDiv" class="fj-input" placeholder="Nombre de la división"><button class="fj-btn fj-btn-primary fj-btn-sm" onclick="addDiv(document.getElementById('newDiv').value||'Nueva división')">Agregar</button></div>
+    </div>`);
+}
+
+/* ---- Pruebas / WODs (builder con columnas por división) ---- */
+let curWod = 0;
+function renderWods(){
+  document.getElementById('wodList').innerHTML = WODS.map((w,wi)=>`
+    <div class="fj-panel overflow-hidden">
+      <div class="flex items-center gap-3 p-4 border-b border-ink-100" style="flex-wrap:wrap">
+        <span class="fj-fmt fj-fmt-${w.fmt}">${fmtLabel(w.fmt)}</span>
+        <input value="${w.name}" onchange="WODS[${wi}].name=this.value" class="font-display font-bold text-ink-900 bg-transparent border-0 focus:outline-none" style="min-width:0;flex:1;font-size:16px">
+        <div class="flex items-center gap-2 text-xs text-ink-400">Formato
+          <select onchange="WODS[${wi}].fmt=this.value;render()" class="seln" style="height:30px;border:1px solid var(--fj-ink-200);border-radius:8px;padding:0 6px;font-size:12px">${FORMATS.map(f=>`<option value="${f[0]}" ${f[0]===w.fmt?'selected':''}>${f[1]}</option>`).join('')}</select>
+        </div>
+        <div class="flex items-center gap-2 text-xs text-ink-400">Time cap <input value="${w.cap}" onchange="WODS[${wi}].cap=this.value" class="vinput" style="width:70px"></div>
+        <div class="flex items-center gap-2 text-xs text-ink-400">Puntúa
+          <select onchange="WODS[${wi}].score=this.value" class="seln" style="height:30px;border:1px solid var(--fj-ink-200);border-radius:8px;padding:0 6px;font-size:12px">${SCORES.map(s=>`<option value="${s[0]}" ${s[0]===w.score?'selected':''}>${s[1]}</option>`).join('')}</select>
+        </div>
+        <button onclick="WODS.splice(${wi},1);render()" class="fj-icon-btn" style="width:30px;height:30px" aria-label="Quitar prueba">${xsvg}</button>
+      </div>
+      <div class="p-2 overflow-x-auto">
+        <table class="wod-table">
+          <thead><tr>
+            <th style="min-width:150px">Ejercicio</th>
+            ${DIVS.map(d=>`<th class="divcol"><span style="display:inline-flex;align-items:center;gap:5px"><span class="fj-dot" style="width:7px;height:7px;background:${d.color}"></span>${d.name}</span></th>`).join('')}
+            <th style="width:34px"></th>
+          </tr></thead>
+          <tbody>
+            ${w.ex.map((e,ei)=>`<tr>
+              <td><span class="text-sm font-semibold text-ink-900">${e.ex}</span></td>
+              ${DIVS.map((d,di)=>`<td class="divcol"><input class="vinput" value="${e.v[di]||''}" placeholder="—" onchange="WODS[${wi}].ex[${ei}].v[${di}]=this.value"></td>`).join('')}
+              <td><button onclick="WODS[${wi}].ex.splice(${ei},1);render()" class="fj-icon-btn" style="width:26px;height:26px" aria-label="Quitar">${xsvg}</button></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        <button onclick="curWod=${wi};openExLib()" class="w-full mt-2 text-sm font-semibold text-ink-500 hover:text-brand-600 border border-dashed border-ink-200 rounded-xl py-2.5 transition-colors">+ Agregar ejercicio a esta prueba</button>
+      </div>
+    </div>`).join('') || '<div class="fj-empty"><p class="text-sm text-ink-400">Aún no hay pruebas. Agrega la primera.</p></div>';
+}
+function addWod(){ WODS.push({name:'Nueva prueba', fmt:'fortime', cap:'', score:'tiempo', ex:[]}); render(); }
+function openExLib(){
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head"><h2 class="font-display font-bold text-lg">Agregar ejercicio</h2>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar">${xsvg}</button></div>
+    <div class="fj-drawer-body">
+      <div class="fj-search" style="display:block;margin-bottom:12px"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input placeholder="Buscar ejercicio…" style="width:100%"></div>
+      <div class="space-y-2">
+        ${LIB.map(e=>`<button onclick="addEx('${e}')" class="fj-row" style="width:100%;border:1px solid var(--fj-ink-200);border-radius:11px;margin-bottom:0;text-align:left">
+          <span class="flex-1 text-sm font-medium text-ink-800">${e}</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>`).join('')}
+      </div>
+    </div>`);
+}
+function addEx(name){ WODS[curWod].ex.push({ex:name, v:DIVS.map(()=> '')}); render(); Forja.Drawer.close(); }
+
+/* ---- Inscritos por división (métricas) ---- */
+function renderInsc(){
+  const total = DIVS.reduce((a,d)=>a+d.insc,0), cap = DIVS.reduce((a,d)=>a+d.cupos,0);
+  document.getElementById('inscList').innerHTML = `
+    <div class="fj-panel p-4 flex items-center justify-between">
+      <span class="fj-eyebrow">Total inscritos</span>
+      <span class="font-mono font-bold text-2xl text-brand-600">${total}<span class="text-sm text-ink-400 font-medium"> / ${cap}</span></span>
+    </div>` + DIVS.map(d=>`
+    <div class="fj-panel p-4">
+      <div class="flex items-center justify-between mb-2">
+        <span class="flex items-center gap-2 text-sm font-semibold text-ink-900"><span class="fj-dot" style="background:${d.color}"></span>${d.name}</span>
+        <span class="fj-mono text-sm text-ink-600">${d.insc} / ${d.cupos}</span>
+      </div>
+      <div class="h-2 rounded-full bg-ink-100"><div class="h-2 rounded-full" style="width:${Math.min(100,d.insc/d.cupos*100)}%;background:${d.color}"></div></div>
+    </div>`).join('');
+}
+
+function render(){ renderDivs(); renderWods(); renderInsc(); }
+render();
+</script>
+</body>
+</html>

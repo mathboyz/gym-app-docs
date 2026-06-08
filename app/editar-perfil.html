@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Editar perfil</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+<style>
+  /* Inputs y labels nativos */
+  .fj-field { display:flex; flex-direction:column; gap:4px; }
+  .fj-label {
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.04em;
+    text-transform:uppercase;
+    color:var(--fj-ink-500);
+  }
+  .fj-input {
+    width:100%;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1px solid var(--fj-ink-200);
+    background:var(--fj-ink-50);
+    color:var(--fj-ink-900);
+    font-size:14px;
+    font-family:Inter,sans-serif;
+    outline:none;
+    transition:border-color .15s,box-shadow .15s;
+  }
+  .fj-input:focus {
+    border-color:var(--fj-brand);
+    box-shadow:0 0 0 3px rgba(251,82,21,.15);
+  }
+  .fj-input::placeholder { color:var(--fj-ink-400); }
+  .fj-input[readonly] {
+    opacity:.6;
+    cursor:not-allowed;
+  }
+  .fj-textarea { resize:none; min-height:88px; }
+
+  /* Nota helper */
+  .fj-hint {
+    font-size:11px;
+    color:var(--fj-ink-400);
+    margin-top:2px;
+    line-height:1.4;
+  }
+
+  /* Radios de género */
+  .fj-radio-group { display:flex; flex-direction:column; gap:8px; }
+  .fj-radio-opt {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1px solid var(--fj-ink-200);
+    background:var(--fj-ink-50);
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .fj-radio-opt:has(input:checked) {
+    border-color:var(--fj-brand);
+    background:rgba(251,82,21,.07);
+  }
+  .fj-radio-opt input[type="radio"] { display:none; }
+  .fj-radio-dot {
+    width:18px;
+    height:18px;
+    border-radius:50%;
+    border:2px solid var(--fj-ink-300);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    transition:border-color .15s;
+  }
+  .fj-radio-opt:has(input:checked) .fj-radio-dot {
+    border-color:var(--fj-brand);
+  }
+  .fj-radio-dot::after {
+    content:'';
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--fj-brand);
+    opacity:0;
+    transition:opacity .15s;
+  }
+  .fj-radio-opt:has(input:checked) .fj-radio-dot::after { opacity:1; }
+  .fj-radio-lbl {
+    font-size:14px;
+    font-weight:500;
+    color:var(--fj-ink-800);
+  }
+
+  /* Nota tenant */
+  .fj-tenant-note {
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    padding:10px 12px;
+    border-radius:10px;
+    background:rgba(251,82,21,.06);
+    border:1px solid rgba(251,82,21,.18);
+  }
+  .fj-tenant-note p {
+    font-size:12px;
+    color:var(--fj-ink-600);
+    line-height:1.5;
+  }
+
+  /* Botón guardar de la app-bar */
+  .app-bar-save {
+    padding:6px 14px;
+    border-radius:8px;
+    background:var(--fj-brand);
+    color:#fff;
+    font-size:13px;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    transition:opacity .15s;
+  }
+  .app-bar-save:active { opacity:.75; }
+</style>
+</head>
+<body>
+<div class="app-frame">
+
+  <!-- App bar con back + título + Guardar -->
+  <header class="app-bar">
+    <a href="perfil.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1">
+      <p class="a-eyebrow">tu vitrina</p>
+      <p class="app-bar-title">Editar perfil</p>
+    </div>
+    <button class="app-bar-save" onclick="location.href='perfil.html'" aria-label="Guardar cambios">
+      Guardar
+    </button>
+  </header>
+
+  <main class="app-screen space-y-4">
+
+    <!-- Foto de perfil -->
+    <div class="acard acard-pad flex flex-col items-center gap-3">
+      <div class="relative">
+        <div class="a-av" style="width:80px;height:80px;font-size:26px;font-weight:700">VF</div>
+        <!-- Overlay cámara -->
+        <div class="absolute bottom-0 right-0 w-7 h-7 rounded-full flex items-center justify-center"
+             style="background:var(--fj-brand);border:2px solid var(--fj-surface)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+        </div>
+      </div>
+      <button class="a-btn a-btn-ghost" style="padding-top:8px;padding-bottom:8px;height:auto;width:auto;min-width:140px;font-size:13px">
+        Cambiar foto
+      </button>
+    </div>
+
+    <!-- Campos del formulario -->
+    <div class="acard acard-pad space-y-4">
+
+      <!-- Nombre -->
+      <div class="fj-field">
+        <label class="fj-label" for="campo-nombre">Nombre</label>
+        <input id="campo-nombre" class="fj-input" type="text" value="Vale Fuentes" placeholder="Tu nombre">
+      </div>
+
+      <!-- Usuario -->
+      <div class="fj-field">
+        <label class="fj-label" for="campo-usuario">@usuario</label>
+        <input id="campo-usuario" class="fj-input" type="text" value="vale.fuentes" placeholder="tu.usuario">
+      </div>
+
+      <!-- Bio -->
+      <div class="fj-field">
+        <label class="fj-label" for="campo-bio">Bio</label>
+        <textarea id="campo-bio" class="fj-input fj-textarea" placeholder="Cuéntale a la comunidad quién eres…">CrossFit desde 2021. PR Fran 3:48. Master 35-39. Forja Box Providencia 🏔️</textarea>
+      </div>
+
+      <!-- Divisor -->
+      <div style="height:1px;background:var(--fj-ink-100)"></div>
+
+      <!-- Email (read-only) -->
+      <div class="fj-field">
+        <label class="fj-label" for="campo-email">Correo electrónico</label>
+        <input id="campo-email" class="fj-input" type="email" value="vale@forja.cl" readonly>
+        <p class="fj-hint">Para cambiarlo, contacta a tu gimnasio.</p>
+      </div>
+
+      <!-- Teléfono -->
+      <div class="fj-field">
+        <label class="fj-label" for="campo-telefono">Teléfono</label>
+        <input id="campo-telefono" class="fj-input" type="tel" value="+56 9 8765 4321" placeholder="+56 9 XXXX XXXX">
+      </div>
+
+    </div>
+
+    <!-- Género (opcional) -->
+    <div>
+      <p class="a-eyebrow px-1 mb-2">Género <span style="font-size:10px;opacity:.6;text-transform:none;letter-spacing:0">(opcional)</span></p>
+      <div class="acard acard-pad">
+        <div class="fj-radio-group">
+
+          <label class="fj-radio-opt">
+            <input type="radio" name="genero" value="femenino" checked>
+            <span class="fj-radio-dot"></span>
+            <span class="fj-radio-lbl">Femenino</span>
+          </label>
+
+          <label class="fj-radio-opt">
+            <input type="radio" name="genero" value="masculino">
+            <span class="fj-radio-dot"></span>
+            <span class="fj-radio-lbl">Masculino</span>
+          </label>
+
+          <label class="fj-radio-opt">
+            <input type="radio" name="genero" value="no-binario">
+            <span class="fj-radio-dot"></span>
+            <span class="fj-radio-lbl">No binario</span>
+          </label>
+
+          <label class="fj-radio-opt">
+            <input type="radio" name="genero" value="no-decir">
+            <span class="fj-radio-dot"></span>
+            <span class="fj-radio-lbl">Prefiero no decir</span>
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Nota tenant -->
+    <div class="fj-tenant-note">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-brand);flex-shrink:0;margin-top:1px">
+        <circle cx="12" cy="12" r="10"/>
+        <line x1="12" y1="8" x2="12" y2="12"/>
+        <line x1="12" y1="16" x2="12.01" y2="16"/>
+      </svg>
+      <p>Algunos datos como tu correo y plan de membresía los gestiona directamente tu gimnasio.</p>
+    </div>
+
+    <!-- Botón principal footer -->
+    <button class="a-btn a-btn-primary" onclick="location.href='perfil.html'">
+      Guardar cambios
+    </button>
+
+    <!-- Spacer inferior -->
+    <div style="height:8px"></div>
+
+  </main>
+</div>
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Mi plan</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+<style>
+  /* ── Dropzone comprobante ─────────────────────────────────────────── */
+  .fj-dropzone {
+    border: 2px dashed var(--fj-ink-200);
+    border-radius: 14px;
+    padding: 18px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color .2s, background .2s;
+  }
+  .fj-dropzone:hover {
+    border-color: var(--fj-brand);
+    background: rgba(251,82,21,.06);
+  }
+  .fj-dropzone-icon {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: rgba(251,82,21,.12);
+    color: var(--fj-brand-700);
+    display: grid; place-items: center;
+    margin: 0 auto 10px;
+  }
+
+  /* ── Método de pago tab activo ────────────────────────────────────── */
+  .pay-tab[aria-selected="true"] {
+    color: var(--fj-ink-900);
+    font-weight: 600;
+  }
+  .pay-tab[aria-selected="false"] {
+    color: var(--fj-ink-400);
+    font-weight: 500;
+  }
+  .pay-tab-underline {
+    height: 2px;
+    border-radius: 2px;
+    background: var(--fj-brand);
+    transition: transform .2s, width .2s;
+  }
+
+  /* ── Datos banco (mono table) ─────────────────────────────────────── */
+  .fj-bank-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 7px 0;
+    border-bottom: 1px solid var(--fj-ink-100);
+  }
+  .fj-bank-row:last-child { border-bottom: none; }
+  .fj-bank-key {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--fj-ink-400);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    flex-shrink: 0;
+  }
+  .fj-bank-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--fj-ink-900);
+    text-align: right;
+  }
+
+  /* ── Congelar: select y date inputs ──────────────────────────────── */
+  .fj-select, .fj-date {
+    width: 100%;
+    appearance: none;
+    background: var(--fj-ink-50);
+    border: 1px solid var(--fj-ink-200);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: var(--fj-ink-900);
+    outline: none;
+    transition: border-color .15s;
+  }
+  .fj-select:focus, .fj-date:focus {
+    border-color: var(--fj-brand);
+  }
+  .fj-select-wrap {
+    position: relative;
+  }
+  .fj-select-wrap::after {
+    content: '';
+    position: absolute;
+    right: 12px; top: 50%;
+    transform: translateY(-50%);
+    border: 5px solid transparent;
+    border-top-color: var(--fj-ink-400);
+    margin-top: 3px;
+    pointer-events: none;
+  }
+  .fj-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--fj-ink-400);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ── Historial: método badge custom ──────────────────────────────── */
+  .fj-badge-mp {
+    background: rgba(0,154,68,.13);
+    color: #009A44;
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 99px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: .01em;
+    white-space: nowrap;
+  }
+  .fj-badge-transf {
+    background: rgba(62,123,250,.13);
+    color: #3E7BFA;
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 99px;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: .01em;
+    white-space: nowrap;
+  }
+
+  /* ── Hero plan: override oscuro garantizado ──────────────────────── */
+  .plan-hero {
+    background: linear-gradient(135deg,#1A1F2E 0%,#222840 100%);
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .plan-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: rgba(251,82,21,.14);
+    pointer-events: none;
+  }
+  .plan-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -20px;
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: rgba(251,82,21,.08);
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+<div class="app-frame">
+
+  <!-- App bar con back -->
+  <header class="app-bar">
+    <a href="ajustes.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1">
+      <p class="a-eyebrow">membresía</p>
+      <p class="app-bar-title">Mi plan</p>
+    </div>
+  </header>
+
+  <main class="app-screen space-y-5">
+
+    <!-- ── 1. Plan actual (hero oscuro) ──────────────────────────────── -->
+    <div class="plan-hero">
+      <!-- Eyebrow -->
+      <div class="flex items-center justify-between mb-4" style="position:relative;z-index:1">
+        <span class="inline-flex items-center gap-1.5 text-xs font-semibold rounded-full px-2.5 py-1" style="background:rgba(251,82,21,.22);color:#FF8A60">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Plan activo
+        </span>
+        <span class="fj-badge fj-badge-success">Al día</span>
+      </div>
+
+      <!-- Nombre del plan -->
+      <div style="position:relative;z-index:1">
+        <p class="font-display font-bold text-3xl leading-tight" style="color:#FFFFFF">Plan Full</p>
+        <p class="text-sm mt-1" style="color:#B6BCC8">Clases ilimitadas · Forja Box Providencia</p>
+      </div>
+
+      <!-- Stat: clases usadas -->
+      <div class="flex items-center gap-3 mt-4" style="position:relative;z-index:1">
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:10px 14px;flex:1">
+          <p class="font-mono font-bold text-2xl leading-none" style="color:#FFFFFF">18</p>
+          <p class="text-xs mt-1" style="color:#8A91A1">clases este mes</p>
+        </div>
+        <div style="background:rgba(255,255,255,.08);border-radius:12px;padding:10px 14px;flex:1">
+          <p class="font-mono font-bold text-2xl leading-none" style="color:#FFFFFF">1 jul</p>
+          <p class="text-xs mt-1" style="color:#8A91A1">próximo cobro</p>
+        </div>
+      </div>
+
+      <!-- Monto próximo cobro -->
+      <div class="flex items-center justify-between mt-3" style="position:relative;z-index:1">
+        <p class="text-sm" style="color:#8A91A1">Próximo cobro</p>
+        <p class="font-mono font-bold text-lg" style="color:#FFFFFF">$89.000</p>
+      </div>
+    </div>
+
+    <!-- ── 2. Pagar / Renovar ─────────────────────────────────────────── -->
+    <div>
+      <p class="a-eyebrow px-1 mb-3">Pagar membresía</p>
+
+      <!-- Botón principal -->
+      <button class="a-btn a-btn-primary mb-3" onclick="scrollToPayMethods()">
+        Renovar ahora · $89.000
+      </button>
+
+      <!-- Tabs métodos de pago -->
+      <div class="acard" id="pay-methods">
+        <!-- Tab selector -->
+        <div class="acard-pad" style="padding-bottom:0;border-bottom:1px solid var(--fj-ink-100)">
+          <div class="flex gap-4">
+            <button class="pay-tab pb-3 text-sm" aria-selected="true" onclick="setPayTab('mp',this)">MercadoPago</button>
+            <button class="pay-tab pb-3 text-sm" aria-selected="false" onclick="setPayTab('transf',this)">Transferencia</button>
+          </div>
+        </div>
+
+        <!-- Panel: MercadoPago -->
+        <div id="tab-mp" class="acard-pad">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(0,154,68,.12)">
+              <!-- MP logo simplificado -->
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:#009A44"><path d="M2 12C2 6.48 6.48 2 12 2s10 4.48 10 10-4.48 10-10 10S2 17.52 2 12z"/><path d="M8 12l2.5 2.5L16 9"/></svg>
+            </span>
+            <div>
+              <p class="text-sm font-semibold text-ink-900">Pago online instantáneo</p>
+              <p class="a-muted text-xs">Tarjetas, débito, cuenta MP</p>
+            </div>
+          </div>
+          <p class="a-muted text-xs mb-3">Se acredita de inmediato. Tu membresía se activa automáticamente al pagar.</p>
+          <button class="a-btn a-btn-primary" style="background:#009A44;border-color:#009A44" onclick="alert('Redirigiendo a MercadoPago…')">
+            Pagar con MercadoPago
+          </button>
+        </div>
+
+        <!-- Panel: Transferencia (oculto por defecto) -->
+        <div id="tab-transf" class="acard-pad" style="display:none">
+          <p class="text-sm font-semibold text-ink-900 mb-3">Datos bancarios</p>
+          <div class="mb-3">
+            <div class="fj-bank-row">
+              <span class="fj-bank-key">Banco</span>
+              <span class="fj-bank-val">BancoEstado</span>
+            </div>
+            <div class="fj-bank-row">
+              <span class="fj-bank-key">Tipo</span>
+              <span class="fj-bank-val">Cta. Corriente</span>
+            </div>
+            <div class="fj-bank-row">
+              <span class="fj-bank-key">N° cuenta</span>
+              <span class="fj-bank-val" style="display:flex;align-items:center;gap:6px">
+                18293847
+                <button onclick="copyText('18293847',this)" class="fj-icon-btn" style="width:22px;height:22px" aria-label="Copiar número de cuenta">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                </button>
+              </span>
+            </div>
+            <div class="fj-bank-row">
+              <span class="fj-bank-key">RUT</span>
+              <span class="fj-bank-val">76.543.210-K</span>
+            </div>
+            <div class="fj-bank-row">
+              <span class="fj-bank-key">Titular</span>
+              <span class="fj-bank-val" style="font-family:'Inter',sans-serif;font-size:12px">Forja Box SpA</span>
+            </div>
+            <div class="fj-bank-row">
+              <span class="fj-bank-key">Monto</span>
+              <span class="fj-bank-val" style="color:var(--fj-brand)">$89.000</span>
+            </div>
+          </div>
+
+          <!-- Dropzone comprobante -->
+          <div class="fj-dropzone" onclick="triggerUpload()">
+            <div class="fj-dropzone-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            </div>
+            <p class="text-sm font-semibold text-ink-800">Subir comprobante</p>
+            <p class="a-muted text-xs mt-1">PNG, JPG o PDF · máx 10 MB</p>
+            <input type="file" id="comprobante-input" accept="image/*,.pdf" style="display:none" onchange="onFileSelected(this)">
+          </div>
+          <p class="a-muted text-xs mt-2 text-center">El gym aprueba tu pago en ~24 h hábiles</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 3. Congelar membresía ──────────────────────────────────────── -->
+    <div>
+      <p class="a-eyebrow px-1 mb-3">Congelar membresía</p>
+      <div class="acard acard-pad">
+        <div class="flex items-start gap-3 mb-4">
+          <span class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0 mt-0.5" style="background:rgba(62,123,250,.12);color:#3E7BFA">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M7.757 4.243l8.486 15.514M4.243 7.757l15.514 8.486M4.243 16.243L19.757 7.757M7.757 19.757L4.243 7.757"/></svg>
+          </span>
+          <div>
+            <p class="text-sm font-semibold text-ink-900">¿Te vas de viaje o estás lesionado?</p>
+            <p class="a-muted text-xs mt-1">Puedes solicitar congelar tu membresía. El gym debe aprobarlo antes de que entre en efecto.</p>
+          </div>
+        </div>
+
+        <!-- Formulario congelamiento (colapsable) -->
+        <div id="freeze-form" style="display:none">
+          <div class="mb-3">
+            <label class="fj-label" for="freeze-motivo">Motivo</label>
+            <div class="fj-select-wrap">
+              <select id="freeze-motivo" class="fj-select">
+                <option value="">Selecciona un motivo…</option>
+                <option value="viaje">Viaje al extranjero</option>
+                <option value="vacaciones">Vacaciones en Chile</option>
+                <option value="lesion">Lesión o enfermedad</option>
+                <option value="trabajo">Viaje de trabajo</option>
+                <option value="otro">Otro motivo</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <label class="fj-label" for="freeze-desde">Desde</label>
+              <input type="date" id="freeze-desde" class="fj-date" value="2026-06-15">
+            </div>
+            <div>
+              <label class="fj-label" for="freeze-hasta">Hasta</label>
+              <input type="date" id="freeze-hasta" class="fj-date" value="2026-07-15">
+            </div>
+          </div>
+          <div class="flex items-center gap-2 mb-3 rounded-xl p-3" style="background:rgba(62,123,250,.09)">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p class="text-xs" style="color:#3E7BFA">El congelamiento está sujeto a aprobación del gym. Máximo 30 días por año.</p>
+          </div>
+          <button class="a-btn a-btn-ghost" style="margin-bottom:8px" onclick="submitFreeze()">
+            Enviar solicitud
+          </button>
+        </div>
+
+        <!-- Toggle mostrar/ocultar formulario -->
+        <button id="freeze-toggle" class="a-btn a-btn-ghost" onclick="toggleFreeze()">
+          Solicitar congelamiento
+        </button>
+      </div>
+    </div>
+
+    <!-- ── 4. Historial de pagos ──────────────────────────────────────── -->
+    <div>
+      <p class="a-eyebrow px-1 mb-3">Historial de pagos</p>
+      <div class="acard">
+
+        <!-- Fila: Junio 2026 -->
+        <div class="arow">
+          <div class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(251,82,21,.10)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-brand)"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Junio 2026</p>
+            <p class="a-muted text-xs">2 jun 2026 · <span class="fj-badge-mp">MercadoPago</span></p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono text-sm font-bold text-ink-900">$89.000</p>
+            <span class="fj-badge fj-badge-success" style="font-size:10px">Pagado</span>
+          </div>
+        </div>
+
+        <!-- Fila: Mayo 2026 -->
+        <div class="arow">
+          <div class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:var(--fj-ink-100)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-400"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Mayo 2026</p>
+            <p class="a-muted text-xs">30 abr 2026 · <span class="fj-badge-transf">Transferencia</span></p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono text-sm font-bold text-ink-900">$89.000</p>
+            <span class="fj-badge fj-badge-success" style="font-size:10px">Pagado</span>
+          </div>
+        </div>
+
+        <!-- Fila: Abril 2026 -->
+        <div class="arow">
+          <div class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:var(--fj-ink-100)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-400"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Abril 2026</p>
+            <p class="a-muted text-xs">1 abr 2026 · <span class="fj-badge-mp">MercadoPago</span></p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono text-sm font-bold text-ink-900">$89.000</p>
+            <span class="fj-badge fj-badge-success" style="font-size:10px">Pagado</span>
+          </div>
+        </div>
+
+        <!-- Fila: Marzo 2026 -->
+        <div class="arow">
+          <div class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:var(--fj-ink-100)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-400"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Marzo 2026</p>
+            <p class="a-muted text-xs">28 feb 2026 · <span class="fj-badge-transf">Transferencia</span></p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono text-sm font-bold text-ink-900">$89.000</p>
+            <span class="fj-badge fj-badge-success" style="font-size:10px">Pagado</span>
+          </div>
+        </div>
+
+        <!-- Fila: Febrero 2026 (atrasado → pagado) -->
+        <div class="arow" style="border-bottom:none">
+          <div class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:var(--fj-ink-100)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-400"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Febrero 2026</p>
+            <p class="a-muted text-xs">5 feb 2026 · <span class="fj-badge-mp">MercadoPago</span></p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono text-sm font-bold text-ink-900">$79.000</p>
+            <span class="fj-badge fj-badge-success" style="font-size:10px">Pagado</span>
+          </div>
+        </div>
+
+      </div>
+      <p class="a-muted text-xs text-center mt-2">Feb 2026 tenía precio anterior $79.000</p>
+    </div>
+
+    <!-- Espaciado final -->
+    <div style="height:8px"></div>
+
+  </main>
+</div>
+
+<script>
+// ── Tab métodos de pago ──────────────────────────────────────────────
+function setPayTab(tab, btn) {
+  // Actualizar botones
+  btn.closest('.acard').querySelectorAll('.pay-tab').forEach(function(b) {
+    b.setAttribute('aria-selected', 'false');
+  });
+  btn.setAttribute('aria-selected', 'true');
+
+  // Mostrar panel correcto
+  var mp = document.getElementById('tab-mp');
+  var transf = document.getElementById('tab-transf');
+  if (tab === 'mp') {
+    mp.style.display = '';
+    transf.style.display = 'none';
+  } else {
+    mp.style.display = 'none';
+    transf.style.display = '';
+  }
+}
+
+// ── Scroll a métodos de pago ─────────────────────────────────────────
+function scrollToPayMethods() {
+  var el = document.getElementById('pay-methods');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Copiar al portapapeles ───────────────────────────────────────────
+function copyText(text, btn) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(function() {
+      var orig = btn.innerHTML;
+      btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+      setTimeout(function() { btn.innerHTML = orig; }, 1500);
+    });
+  }
+}
+
+// ── Upload comprobante ───────────────────────────────────────────────
+function triggerUpload() {
+  document.getElementById('comprobante-input').click();
+}
+function onFileSelected(input) {
+  if (input.files && input.files[0]) {
+    var dropzone = input.closest('.fj-dropzone');
+    var name = input.files[0].name;
+    dropzone.querySelector('p:first-of-type').textContent = name;
+    dropzone.querySelector('p:last-of-type').textContent = 'Listo para enviar';
+    dropzone.style.borderColor = 'var(--fj-brand)';
+    dropzone.style.background = 'rgba(251,82,21,.07)';
+  }
+}
+
+// ── Congelar membresía (toggle form) ────────────────────────────────
+function toggleFreeze() {
+  var form = document.getElementById('freeze-form');
+  var btn = document.getElementById('freeze-toggle');
+  var shown = form.style.display !== 'none';
+  form.style.display = shown ? 'none' : '';
+  btn.textContent = shown ? 'Solicitar congelamiento' : 'Cancelar';
+}
+
+function submitFreeze() {
+  var motivo = document.getElementById('freeze-motivo').value;
+  var desde = document.getElementById('freeze-desde').value;
+  var hasta = document.getElementById('freeze-hasta').value;
+  if (!motivo) {
+    alert('Elige un motivo para el congelamiento.');
+    return;
+  }
+  if (!desde || !hasta) {
+    alert('Elige las fechas de inicio y fin.');
+    return;
+  }
+  // Simular envío
+  var form = document.getElementById('freeze-form');
+  var btn = document.getElementById('freeze-toggle');
+  form.innerHTML = '<div class="flex items-center gap-2 rounded-xl p-3" style="background:rgba(24,169,87,.12)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg><p class="text-sm font-semibold" style="color:#18A957">Solicitud enviada. El gym la revisará en 24–48 h.</p></div>';
+  btn.style.display = 'none';
+}
+</script>
+</body>
+</html>

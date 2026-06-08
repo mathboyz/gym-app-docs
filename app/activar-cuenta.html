@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Activar cuenta</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+</head>
+<body>
+<div class="app-frame">
+  <header class="app-bar">
+    <a href="login.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    </a>
+    <p class="app-bar-title" style="font-size:18px">Activar cuenta</p>
+  </header>
+
+  <div class="auth-wrap" style="padding-top:10px">
+
+    <!-- Bienvenida del tenant: el gym ya creó la cuenta -->
+    <div class="a-hero">
+      <div class="p-5">
+        <div class="flex items-center gap-3">
+          <span class="w-11 h-11 rounded-2xl grid place-items-center shrink-0" style="background:var(--fj-brand);color:#fff">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+          </span>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-wider" style="color:#B6BCC8">Te invitó</p>
+            <p class="font-display font-bold text-lg">Forja Box · Providencia</p>
+          </div>
+        </div>
+        <p class="text-sm mt-4" style="color:#D7DBE2">Hola <b style="color:#fff">Vale Fuentes</b> 👋 Tu gimnasio ya creó tu cuenta y te asignó un plan. Solo crea tu contraseña para entrar.</p>
+      </div>
+    </div>
+
+    <!-- Plan asignado por el gym -->
+    <div class="acard acard-pad mt-4 flex items-center gap-3">
+      <span class="w-10 h-10 rounded-xl grid place-items-center shrink-0" style="background:rgba(251,82,21,.12);color:var(--fj-brand-700)">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+      </span>
+      <div class="flex-1 min-w-0">
+        <p class="a-muted text-xs">Plan asignado por tu gimnasio</p>
+        <p class="text-sm font-semibold text-ink-900">Plan Full · clases ilimitadas</p>
+      </div>
+      <span class="fj-badge fj-badge-brand">$89.000/mes</span>
+    </div>
+
+    <!-- Crear contraseña -->
+    <div class="space-y-4 mt-5">
+      <div>
+        <label class="fj-label">Crea tu contraseña</label>
+        <input class="fj-input auth-input" type="password" placeholder="Mínimo 8 caracteres">
+      </div>
+      <div>
+        <label class="fj-label">Confírmala</label>
+        <input class="fj-input auth-input" type="password" placeholder="Repite tu contraseña">
+      </div>
+      <label class="flex items-start gap-2.5 text-xs" style="color:var(--fj-ink-600)">
+        <input type="checkbox" checked style="accent-color:var(--fj-brand);width:16px;height:16px;margin-top:1px">
+        <span>Acepto los <a href="#" class="font-semibold" style="color:var(--fj-brand-600)">términos</a> y la <a href="#" class="font-semibold" style="color:var(--fj-brand-600)">política de privacidad</a> de Forja Box.</span>
+      </label>
+      <a href="hoy.html" class="a-btn a-btn-primary">Activar mi cuenta</a>
+    </div>
+
+    <div class="auth-foot">
+      <p class="a-muted text-xs">¿Ya activaste tu cuenta? <a href="login.html" class="font-semibold" style="color:var(--fj-brand-600)">Inicia sesión</a></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -4,296 +4,266 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Reservar</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: {
-        display: ['"Space Grotesk"','sans-serif'],
-        sans: ['Inter','sans-serif'],
-        mono: ['"JetBrains Mono"','monospace'],
-      },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: {
-        sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)',
-        glow:'0 6px 20px rgba(251,82,21,.35)',
-      },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} ::-webkit-scrollbar{width:0;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
 </head>
-<body class="bg-ink-50 font-sans text-ink-900">
+<body data-app-tab="reservar">
+<div class="app-frame">
 
-<div class="max-w-[420px] mx-auto min-h-screen bg-white flex flex-col">
-
-  <!-- Status bar -->
-  <div class="flex justify-between items-center px-5 pt-4 text-[12px] font-mono text-ink-400">
-    <span>9:41</span>
-    <div class="flex gap-1 items-center">
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="4.5" y="4" width="3" height="8" rx="1"/><rect x="9" y="1.5" width="3" height="10.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg>
-      <span>5G</span><span>100%</span>
+  <!-- App bar -->
+  <header class="app-bar">
+    <div class="flex-1 min-w-0">
+      <p class="a-eyebrow">Forja Box · Providencia</p>
+      <p class="app-bar-title">Reservar</p>
     </div>
-  </div>
-
-  <!-- Header -->
-  <header class="px-5 pt-4 pb-3">
-    <h1 class="font-display font-bold text-2xl text-ink-900">Reservar clase</h1>
-    <p class="text-sm text-ink-400 mt-0.5">Forja Box · Providencia</p>
+    <button class="fj-icon-btn" aria-label="Filtrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+    </button>
   </header>
 
-  <!-- Selector de día horizontal -->
-  <div class="px-5 mb-4">
-    <div class="flex gap-2 overflow-x-auto pb-1" style="scrollbar-width:none">
-      <!-- Lunes -->
-      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl border border-ink-200 bg-white cursor-pointer hover:border-brand-300 transition-colors">
-        <span class="text-[10px] font-semibold text-ink-400 uppercase tracking-wide">Lun</span>
-        <span class="font-mono font-bold text-ink-700 text-base">2</span>
+  <main class="app-screen space-y-4">
+
+    <!-- Selector de días horizontal -->
+    <div class="flex gap-2 overflow-x-auto pb-1" style="scrollbar-width:none;-webkit-overflow-scrolling:touch;">
+      <!-- Lun -->
+      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl cursor-pointer transition-colors" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-200)">
+        <span class="text-[10px] font-semibold uppercase tracking-wide" style="color:var(--fj-ink-400)">Lun</span>
+        <span class="font-mono font-bold text-base" style="color:var(--fj-ink-700)">2</span>
       </button>
-      <!-- Martes -->
-      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl border border-ink-200 bg-white cursor-pointer hover:border-brand-300 transition-colors">
-        <span class="text-[10px] font-semibold text-ink-400 uppercase tracking-wide">Mar</span>
-        <span class="font-mono font-bold text-ink-700 text-base">3</span>
+      <!-- Mar -->
+      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl cursor-pointer transition-colors" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-200)">
+        <span class="text-[10px] font-semibold uppercase tracking-wide" style="color:var(--fj-ink-400)">Mar</span>
+        <span class="font-mono font-bold text-base" style="color:var(--fj-ink-700)">3</span>
       </button>
-      <!-- Miércoles -->
-      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl border border-ink-200 bg-white cursor-pointer hover:border-brand-300 transition-colors">
-        <span class="text-[10px] font-semibold text-ink-400 uppercase tracking-wide">Mié</span>
-        <span class="font-mono font-bold text-ink-700 text-base">4</span>
+      <!-- Mié -->
+      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl cursor-pointer transition-colors" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-200)">
+        <span class="text-[10px] font-semibold uppercase tracking-wide" style="color:var(--fj-ink-400)">Mié</span>
+        <span class="font-mono font-bold text-base" style="color:var(--fj-ink-700)">4</span>
       </button>
-      <!-- Jueves -->
-      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl border border-ink-200 bg-white cursor-pointer hover:border-brand-300 transition-colors">
-        <span class="text-[10px] font-semibold text-ink-400 uppercase tracking-wide">Jue</span>
-        <span class="font-mono font-bold text-ink-700 text-base">5</span>
+      <!-- Jue -->
+      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl cursor-pointer transition-colors" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-200)">
+        <span class="text-[10px] font-semibold uppercase tracking-wide" style="color:var(--fj-ink-400)">Jue</span>
+        <span class="font-mono font-bold text-base" style="color:var(--fj-ink-700)">5</span>
       </button>
-      <!-- Viernes -->
-      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl border border-ink-200 bg-white cursor-pointer hover:border-brand-300 transition-colors">
-        <span class="text-[10px] font-semibold text-ink-400 uppercase tracking-wide">Vie</span>
-        <span class="font-mono font-bold text-ink-700 text-base">6</span>
+      <!-- Vie -->
+      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl cursor-pointer transition-colors" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-200)">
+        <span class="text-[10px] font-semibold uppercase tracking-wide" style="color:var(--fj-ink-400)">Vie</span>
+        <span class="font-mono font-bold text-base" style="color:var(--fj-ink-700)">6</span>
       </button>
-      <!-- Sábado (activo/hoy) -->
-      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl border-2 border-brand-500 bg-brand-50 cursor-pointer">
-        <span class="text-[10px] font-semibold text-brand-600 uppercase tracking-wide">Sáb</span>
-        <span class="font-mono font-bold text-brand-600 text-base">7</span>
+      <!-- Sáb — ACTIVO -->
+      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl cursor-pointer" style="background:rgba(251,82,21,.12);border:2px solid var(--fj-brand)">
+        <span class="text-[10px] font-semibold uppercase tracking-wide" style="color:var(--fj-brand)">Sáb</span>
+        <span class="font-mono font-bold text-base" style="color:var(--fj-brand)">7</span>
       </button>
-      <!-- Domingo -->
-      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl border border-ink-200 bg-white cursor-pointer hover:border-brand-300 transition-colors">
-        <span class="text-[10px] font-semibold text-ink-400 uppercase tracking-wide">Dom</span>
-        <span class="font-mono font-bold text-ink-700 text-base">8</span>
+      <!-- Dom -->
+      <button class="flex flex-col items-center gap-1 min-w-[52px] py-2.5 rounded-xl cursor-pointer transition-colors" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-200)">
+        <span class="text-[10px] font-semibold uppercase tracking-wide" style="color:var(--fj-ink-400)">Dom</span>
+        <span class="font-mono font-bold text-base" style="color:var(--fj-ink-700)">8</span>
       </button>
     </div>
-  </div>
 
-  <!-- Separador fecha -->
-  <div class="flex items-center gap-3 px-5 mb-3">
-    <span class="text-xs font-semibold text-ink-900">Sábado 7 de junio</span>
-    <div class="flex-1 h-px bg-ink-100"></div>
-    <span class="text-xs text-ink-400">6 clases</span>
-  </div>
+    <!-- Separador fecha -->
+    <div class="flex items-center gap-3">
+      <span class="text-xs font-semibold" style="color:var(--fj-ink-900)">Sábado 7 de junio</span>
+      <div class="flex-1 h-px" style="background:var(--fj-ink-200)"></div>
+      <span class="text-xs" style="color:var(--fj-ink-400)">6 clases</span>
+    </div>
 
-  <!-- Lista de horarios -->
-  <div class="flex-1 overflow-y-auto px-5 pb-28 space-y-3">
+    <!-- Tu próxima clase — resaltada arriba -->
+    <div class="acard acard-pad" style="background:rgba(251,82,21,.08);border-color:rgba(251,82,21,.25)">
+      <div class="flex items-center gap-2 mb-3">
+        <span class="fj-dot" style="background:var(--fj-brand)"></span>
+        <span class="a-eyebrow" style="color:var(--fj-brand)">Tu próxima clase</span>
+        <span class="ml-auto fj-badge fj-badge-brand">en 1h 20min</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="min-w-[52px] text-center">
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-brand)">19:00</span>
+          <p class="a-muted text-[10px] mt-0.5">60 min</p>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+            <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
+            <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+          </div>
+          <p class="a-muted text-xs">Coach Vale Fuentes</p>
+          <div class="flex items-center gap-1 mt-1">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-400)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">8<span style="color:var(--fj-ink-300)">/12</span></span>
+          </div>
+        </div>
+        <button class="a-btn a-btn-primary" style="width:auto;height:36px;padding:0 16px;font-size:13px">Reservar</button>
+      </div>
+    </div>
+
+    <!-- Leyenda -->
+    <div class="flex items-center gap-4">
+      <div class="flex items-center gap-1.5">
+        <span class="fj-dot" style="background:var(--fj-brand)"></span>
+        <span class="text-xs" style="color:var(--fj-ink-400)">Disponible</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="fj-dot" style="background:#18A957"></span>
+        <span class="text-xs" style="color:var(--fj-ink-400)">Reservada</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="fj-dot" style="background:#E8A317"></span>
+        <span class="text-xs" style="color:var(--fj-ink-400)">Lista espera</span>
+      </div>
+    </div>
+
+    <!-- Lista de clases -->
 
     <!-- 07:00 — Disponible -->
-    <div class="bg-white rounded-xl border border-ink-200 overflow-hidden">
-      <div class="flex items-center gap-4 px-4 py-4">
-        <div class="text-center min-w-[44px]">
-          <span class="font-mono font-bold text-ink-900 text-base">07:00</span>
+    <div class="acard acard-pad">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[52px] text-center">
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">07:00</span>
+          <p class="a-muted text-[10px] mt-0.5">60 min</p>
         </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-ink-900 text-sm">CrossFit</span>
-            <span class="text-xs text-ink-400 font-medium">· Rodri Moya</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+            <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
+            <span class="fj-dot" style="background:var(--fj-brand)"></span>
+            <span class="fj-fmt fj-fmt-fortime">For Time</span>
           </div>
           <div class="flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="text-xs text-ink-400">60 min</span>
-            <span class="text-ink-200">·</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span class="font-mono text-xs text-ink-400">10<span class="text-ink-300">/12</span></span>
+            <span class="a-muted text-xs">Coach Rodri Moya</span>
+            <span style="color:var(--fj-ink-300)">·</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-400)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">10<span style="color:var(--fj-ink-300)">/12</span></span>
           </div>
         </div>
-        <button class="bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-full px-4 py-2 text-sm transition-colors cursor-pointer whitespace-nowrap">Reservar</button>
+        <button class="a-btn a-btn-primary" style="width:auto;height:36px;padding:0 14px;font-size:13px">Reservar</button>
       </div>
     </div>
 
-    <!-- 09:00 — Reservada (por mí) -->
-    <div class="bg-white rounded-xl border border-success/30 overflow-hidden">
-      <div class="flex items-center gap-4 px-4 py-4">
-        <div class="text-center min-w-[44px]">
-          <span class="font-mono font-bold text-ink-900 text-base">09:00</span>
+    <!-- 09:00 — Reservada -->
+    <div class="acard acard-pad">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[52px] text-center">
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">09:00</span>
+          <p class="a-muted text-[10px] mt-0.5">45 min</p>
         </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-ink-900 text-sm">Funcional</span>
-            <span class="text-xs text-ink-400 font-medium">· Caro Ríos</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+            <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Funcional</span>
+            <span class="fj-dot" style="background:#18A957"></span>
+            <span class="fj-badge fj-badge-success" style="font-size:10px;padding:1px 7px">Reservada</span>
           </div>
           <div class="flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="text-xs text-ink-400">45 min</span>
-            <span class="text-ink-200">·</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span class="font-mono text-xs text-ink-400">12<span class="text-ink-300">/12</span></span>
+            <span class="a-muted text-xs">Coach Caro Ríos</span>
+            <span style="color:var(--fj-ink-300)">·</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-400)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">12<span style="color:var(--fj-ink-300)">/12</span></span>
           </div>
         </div>
-        <div class="flex flex-col items-end gap-1">
-          <span class="text-xs font-semibold text-success bg-success/10 rounded-full px-2.5 py-1">Reservada</span>
-          <button class="text-xs text-ink-400 cursor-pointer hover:text-danger transition-colors">Cancelar</button>
-        </div>
+        <button class="a-btn a-btn-ghost" style="width:auto;height:36px;padding:0 14px;font-size:13px;color:#E5484D;border-color:rgba(229,72,77,.3)">Cancelar</button>
       </div>
     </div>
 
-    <!-- 12:00 — Lista de espera -->
-    <div class="bg-white rounded-xl border border-ink-200 overflow-hidden">
-      <div class="flex items-center gap-4 px-4 py-4">
-        <div class="text-center min-w-[44px]">
-          <span class="font-mono font-bold text-ink-900 text-base">12:00</span>
+    <!-- 12:00 — Llena / Lista de espera -->
+    <div class="acard acard-pad">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[52px] text-center">
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">12:00</span>
+          <p class="a-muted text-[10px] mt-0.5">60 min</p>
         </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-ink-900 text-sm">CrossFit</span>
-            <span class="text-xs text-ink-400 font-medium">· Vale Fuentes</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+            <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
+            <span class="fj-dot" style="background:#E8A317"></span>
+            <span class="fj-fmt fj-fmt-emom">EMOM</span>
           </div>
           <div class="flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="text-xs text-ink-400">60 min</span>
-            <span class="text-ink-200">·</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span class="font-mono text-xs font-bold text-danger">12<span class="text-ink-300">/12</span></span>
+            <span class="a-muted text-xs">Coach Vale Fuentes</span>
+            <span style="color:var(--fj-ink-300)">·</span>
+            <span class="font-mono text-xs font-bold" style="color:#E5484D">12<span style="color:var(--fj-ink-300)">/12</span></span>
           </div>
         </div>
-        <button class="border border-warning text-warning font-semibold rounded-full px-4 py-2 text-sm cursor-pointer hover:bg-warning/10 transition-colors whitespace-nowrap">Lista espera</button>
+        <button class="a-btn a-btn-ghost" style="width:auto;height:36px;padding:0 10px;font-size:12px;color:#E8A317;border-color:rgba(232,163,23,.35)">Lista espera</button>
       </div>
     </div>
 
     <!-- 14:00 — Disponible -->
-    <div class="bg-white rounded-xl border border-ink-200 overflow-hidden">
-      <div class="flex items-center gap-4 px-4 py-4">
-        <div class="text-center min-w-[44px]">
-          <span class="font-mono font-bold text-ink-900 text-base">14:00</span>
+    <div class="acard acard-pad">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[52px] text-center">
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">14:00</span>
+          <p class="a-muted text-[10px] mt-0.5">90 min</p>
         </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-ink-900 text-sm">Halterofilía</span>
-            <span class="text-xs text-ink-400 font-medium">· Nico Salas</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+            <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Halterofilía</span>
+            <span class="fj-dot" style="background:var(--fj-brand)"></span>
           </div>
           <div class="flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="text-xs text-ink-400">90 min</span>
-            <span class="text-ink-200">·</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span class="font-mono text-xs text-ink-400">3<span class="text-ink-300">/8</span></span>
+            <span class="a-muted text-xs">Coach Nico Salas</span>
+            <span style="color:var(--fj-ink-300)">·</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-400)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">3<span style="color:var(--fj-ink-300)">/8</span></span>
           </div>
         </div>
-        <button class="bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-full px-4 py-2 text-sm transition-colors cursor-pointer whitespace-nowrap">Reservar</button>
+        <button class="a-btn a-btn-primary" style="width:auto;height:36px;padding:0 14px;font-size:13px">Reservar</button>
       </div>
     </div>
 
     <!-- 17:00 — Disponible -->
-    <div class="bg-white rounded-xl border border-ink-200 overflow-hidden">
-      <div class="flex items-center gap-4 px-4 py-4">
-        <div class="text-center min-w-[44px]">
-          <span class="font-mono font-bold text-ink-900 text-base">17:00</span>
+    <div class="acard acard-pad">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[52px] text-center">
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">17:00</span>
+          <p class="a-muted text-[10px] mt-0.5">60 min</p>
         </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-ink-900 text-sm">CrossFit</span>
-            <span class="text-xs text-ink-400 font-medium">· Vale Fuentes</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+            <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
+            <span class="fj-dot" style="background:var(--fj-brand)"></span>
+            <span class="fj-fmt fj-fmt-tabata">Tabata</span>
           </div>
           <div class="flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="text-xs text-ink-400">60 min</span>
-            <span class="text-ink-200">·</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span class="font-mono text-xs text-ink-400">6<span class="text-ink-300">/12</span></span>
+            <span class="a-muted text-xs">Coach Vale Fuentes</span>
+            <span style="color:var(--fj-ink-300)">·</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-400)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">6<span style="color:var(--fj-ink-300)">/12</span></span>
           </div>
         </div>
-        <button class="bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-full px-4 py-2 text-sm transition-colors cursor-pointer whitespace-nowrap">Reservar</button>
+        <button class="a-btn a-btn-primary" style="width:auto;height:36px;padding:0 14px;font-size:13px">Reservar</button>
       </div>
     </div>
 
-    <!-- 19:00 — Disponible (la de hoy, resaltada) -->
-    <div class="bg-white rounded-xl border-2 border-brand-300 overflow-hidden">
-      <div class="bg-brand-50 px-4 py-1.5 flex items-center gap-1.5">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span class="text-xs font-semibold text-brand-600">Tu próxima clase</span>
-      </div>
-      <div class="flex items-center gap-4 px-4 py-4">
-        <div class="text-center min-w-[44px]">
-          <span class="font-mono font-bold text-brand-500 text-base">19:00</span>
+    <!-- 20:00 — Disponible -->
+    <div class="acard acard-pad">
+      <div class="flex items-center gap-3">
+        <div class="min-w-[52px] text-center">
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">20:00</span>
+          <p class="a-muted text-[10px] mt-0.5">60 min</p>
         </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-0.5">
-            <span class="font-semibold text-ink-900 text-sm">CrossFit</span>
-            <span class="text-xs text-ink-400 font-medium">· Vale Fuentes</span>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 mb-0.5 flex-wrap">
+            <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Funcional</span>
+            <span class="fj-dot" style="background:var(--fj-brand)"></span>
+            <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
           </div>
           <div class="flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <span class="text-xs text-ink-400">60 min</span>
-            <span class="text-ink-200">·</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span class="font-mono text-xs text-ink-400">8<span class="text-ink-300">/12</span></span>
+            <span class="a-muted text-xs">Coach Rodri Moya</span>
+            <span style="color:var(--fj-ink-300)">·</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-400)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">4<span style="color:var(--fj-ink-300)">/12</span></span>
           </div>
         </div>
-        <button class="bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-full px-4 py-2 text-sm transition-colors cursor-pointer whitespace-nowrap">Reservar</button>
+        <button class="a-btn a-btn-primary" style="width:auto;height:36px;padding:0 14px;font-size:13px">Reservar</button>
       </div>
     </div>
 
-    <!-- Leyenda estados -->
-    <div class="flex items-center gap-4 pt-2 pb-2">
-      <div class="flex items-center gap-1.5">
-        <div class="w-2 h-2 rounded-full bg-brand-500"></div>
-        <span class="text-xs text-ink-400">Disponible</span>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <div class="w-2 h-2 rounded-full bg-success"></div>
-        <span class="text-xs text-ink-400">Reservada</span>
-      </div>
-      <div class="flex items-center gap-1.5">
-        <div class="w-2 h-2 rounded-full bg-warning"></div>
-        <span class="text-xs text-ink-400">Lista de espera</span>
-      </div>
-    </div>
-
-  </div><!-- /scrollable -->
-
-  <!-- Bottom tab bar -->
-  <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] bg-white border-t border-ink-200 flex items-center justify-around px-2 py-2 pb-5 z-20">
-    <a href="hoy.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Hoy</span>
-    </a>
-    <!-- Reservar (activo) -->
-    <a href="reservar.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <span class="text-[10px] font-semibold text-brand-500">Reservar</span>
-    </a>
-    <a href="ranking.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer -mt-5">
-      <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center shadow-glow">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      </div>
-      <span class="text-[10px] font-medium text-ink-400">Ranking</span>
-    </a>
-    <a href="red-social.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Social</span>
-    </a>
-    <a href="perfil.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Perfil</span>
-    </a>
-  </nav>
-
+  </main>
 </div>
 </body>
 </html>

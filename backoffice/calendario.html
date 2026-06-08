@@ -4,445 +4,266 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Calendario</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
 <style>
-body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;}
-.cal-grid{display:grid;grid-template-columns:56px repeat(7,1fr);}
-.class-block{border-radius:10px;padding:6px 8px;font-size:11px;font-weight:600;line-height:1.3;cursor:pointer;transition:filter .15s;}
-.class-block:hover{filter:brightness(.95);}
-/* CrossFit — ember/brand */
-.cls-crossfit{background:#FFF3EE;border-left:3px solid #FB5215;color:#B83309;}
-/* Gimnasia — info azul */
-.cls-gimnasia{background:#EEF3FF;border-left:3px solid #3E7BFA;color:#2350B0;}
-/* Halterofilia — violeta */
-.cls-haltero{background:#F3EFFF;border-left:3px solid #7C3AED;color:#5B21B6;}
-/* Endurance — success verde */
-.cls-endurance{background:#EDFAF3;border-left:3px solid #18A957;color:#0F7A3F;}
-/* HOY: columna Sáb (índice 7) */
-.col-hoy{background:#FFF8F5;}
-.col-hoy-header{background:#FB5215;color:#fff;border-radius:8px;padding:4px 10px;}
+  .cal-wrap{flex:1;overflow:auto;}
+  .cal-grid{display:grid;grid-template-columns:60px repeat(7,minmax(150px,1fr));min-width:1100px;}
+  .cal-cell{border-right:1px solid var(--fj-ink-100);border-bottom:1px solid var(--fj-ink-100);min-height:62px;padding:5px;position:relative;}
+  .cal-cell:hover .cal-add{opacity:1;}
+  .cal-add{position:absolute;inset:5px;border:1.5px dashed var(--fj-ink-200);border-radius:9px;display:grid;place-items:center;
+    color:var(--fj-ink-300);opacity:0;transition:opacity .12s;cursor:pointer;}
+  .cal-add:hover{border-color:var(--fj-brand);color:var(--fj-brand);background:rgba(251,82,21,.04);}
+  .cal-hourcol{border-right:1px solid var(--fj-ink-200);border-bottom:1px solid var(--fj-ink-100);
+    font-family:"JetBrains Mono";font-size:11px;color:var(--fj-ink-400);text-align:right;padding:6px 8px;}
+  .cal-headcell{padding:10px 8px;text-align:center;border-right:1px solid var(--fj-ink-100);}
+  .cls{display:block;border-radius:9px;padding:6px 8px;font-size:11.5px;line-height:1.35;cursor:pointer;border:1px solid;transition:transform .08s,box-shadow .08s;height:100%;}
+  .cls:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.10);}
+  .cls-crossfit{background:#FFF3EE;border-color:var(--m-crossfit);color:#B83309;}
+  .cls-gimnasia{background:#EEF3FF;border-color:var(--m-gimnasia);color:#2350B0;}
+  .cls-haltero{background:#F3EFFF;border-color:var(--m-haltero);color:#5B21B6;}
+  .cls-endurance{background:#EDFAF3;border-color:var(--m-endurance);color:#0F7A3F;}
+  .col-hoy{background:#FFFBF9;}
+  [data-theme="dark"] .cls-crossfit{background:rgba(251,82,21,.12);border-color:rgba(251,82,21,.55);color:#FFB088;}
+  [data-theme="dark"] .cls-gimnasia{background:rgba(62,123,250,.12);border-color:rgba(62,123,250,.5);color:#8FB4FF;}
+  [data-theme="dark"] .cls-haltero{background:rgba(124,58,237,.16);border-color:rgba(124,58,237,.55);color:#BFA3FF;}
+  [data-theme="dark"] .cls-endurance{background:rgba(24,169,87,.13);border-color:rgba(24,169,87,.5);color:#5EE49B;}
+  [data-theme="dark"] .col-hoy{background:rgba(251,82,21,.06);}
+  .seg[hidden]{display:none;}
 </style>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
-<div class="flex min-h-screen">
+<body data-immersive>
+<div class="fj-shell" id="fj-shell" data-immersive>
+  <div class="fj-main">
 
-  <!-- SIDEBAR -->
-  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col fixed inset-y-0 z-10">
-    <div class="px-5 h-16 flex items-center gap-2.5 border-b border-ink-100">
-      <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white shadow-glow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-      </span>
-      <span class="font-display font-bold text-lg tracking-tight">Forja<span class="text-brand-500">.</span></span>
-    </div>
-    <nav class="flex-1 px-3 py-4 space-y-0.5 text-sm">
-      <a href="dashboard.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
-        <span>Dashboard</span>
-      </a>
-      <a href="clientes.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        <span>Clientes</span>
-      </a>
-      <a href="calendario.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg bg-brand-500/10 text-brand-600 font-semibold">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        <span>Calendario</span>
-      </a>
-      <a href="tipo-clases.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M10 20H4v-6M20 4l-8 8M4 20l5-5"/></svg>
-        <span>Clases</span>
-      </a>
-      <a href="constructor-rutina.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-        <span>Rutinas</span>
-      </a>
-      <a href="planes.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-        <span>Planes</span>
-      </a>
-      <a href="pagos.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        <span>Pagos</span>
-      </a>
-      <a href="metricas.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-        <span>Métricas</span>
-      </a>
-      <a href="competencias.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
-        <span>Competencias</span>
-      </a>
-      <a href="configuracion.html" class="flex items-center gap-2.5 px-3 h-9 rounded-lg text-ink-500 hover:bg-ink-50 hover:text-ink-900 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        <span>Configuración</span>
-      </a>
-    </nav>
-    <div class="px-4 py-4 border-t border-ink-100 flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-brand-100 grid place-items-center font-display font-semibold text-xs text-brand-600">VF</div>
-      <div class="leading-tight flex-1 min-w-0">
-        <p class="text-sm font-semibold text-ink-900 truncate">Vale Fuentes</p>
-        <p class="text-xs text-ink-400">Forja Box · Providencia</p>
-      </div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="flex-1 ml-60 flex flex-col min-h-screen">
-    <!-- Topbar -->
-    <div class="h-16 px-8 flex items-center justify-between border-b border-ink-200 bg-white sticky top-0 z-10">
-      <div class="relative w-72">
-        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input class="w-full h-9 rounded-full bg-ink-50 border border-ink-200 pl-9 pr-4 text-sm outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition" placeholder="Buscar clientes, clases…">
-      </div>
-      <div class="flex items-center gap-3">
-        <button class="w-9 h-9 grid place-items-center rounded-full bg-ink-50 border border-ink-200 hover:bg-ink-100 transition cursor-pointer" aria-label="Notificaciones">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
-        </button>
-        <div class="w-9 h-9 rounded-full bg-ink-900 grid place-items-center font-display font-semibold text-xs text-white cursor-pointer">VF</div>
-      </div>
-    </div>
-
-    <!-- Page header -->
-    <div class="px-8 pt-7 pb-5 flex items-center justify-between bg-white border-b border-ink-200">
-      <div>
-        <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Forja Box · Providencia</p>
-        <h1 class="font-display font-bold text-2xl mt-0.5">Calendario</h1>
-      </div>
-      <div class="flex items-center gap-3">
-        <!-- Leyenda tipos -->
-        <div class="flex items-center gap-4 mr-2">
-          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span><span class="text-xs text-ink-500">CrossFit</span></div>
-          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-info"></span><span class="text-xs text-ink-500">Gimnasia</span></div>
-          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full" style="background:#7C3AED"></span><span class="text-xs text-ink-500">Halterofilia</span></div>
-          <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-success"></span><span class="text-xs text-ink-500">Endurance</span></div>
-        </div>
-        <!-- Navegación semana -->
-        <div class="flex items-center gap-1 border border-ink-200 rounded-full overflow-hidden">
-          <button class="px-3 h-9 text-ink-500 hover:bg-ink-50 transition cursor-pointer" aria-label="Semana anterior">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m15 18-6-6 6-6"/></svg>
-          </button>
-          <span class="px-3 text-sm font-semibold text-ink-900">2 – 8 jun 2026</span>
-          <button class="px-3 h-9 text-ink-500 hover:bg-ink-50 transition cursor-pointer" aria-label="Semana siguiente">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m9 18 6-6-6-6"/></svg>
-          </button>
-        </div>
-        <a href="agendar-clase.html" class="flex items-center gap-2 px-5 h-10 rounded-full bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold transition cursor-pointer">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-          Agendar clase
+    <!-- Barra inmersiva -->
+    <div class="fj-immersive-bar">
+      <div style="display:flex;align-items:center;gap:14px">
+        <a href="dashboard.html" class="fj-icon-btn" title="Volver al panel" aria-label="Volver al panel">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
         </a>
+        <span class="fj-logo-mark" style="width:28px;height:28px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+        </span>
+        <div>
+          <p class="fj-eyebrow">Forja Box · Providencia</p>
+          <h1 class="fj-title" style="font-size:18px">Calendario</h1>
+        </div>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="fj-icon-btn" aria-label="Semana anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <span class="fj-mono text-sm font-semibold text-ink-700">2 – 8 jun 2026</span>
+        <button class="fj-icon-btn" aria-label="Semana siguiente"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        <button class="fj-btn fj-btn-ghost fj-btn-sm">Hoy</button>
+      </div>
+
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="fj-pills">
+          <span class="fj-pill" aria-selected="true">Semana</span>
+          <span class="fj-pill">Día</span>
+        </div>
+        <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="openCreate(null,null)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Nueva clase
+        </button>
       </div>
     </div>
 
-    <!-- CALENDARIO GRID -->
-    <div class="flex-1 overflow-auto px-8 py-0">
-      <div class="bg-white border border-ink-200 rounded-xl overflow-hidden mt-6 mb-8">
-
-        <!-- Header días -->
-        <div class="cal-grid border-b border-ink-200 bg-ink-50">
-          <!-- col hora -->
-          <div class="border-r border-ink-200"></div>
-          <!-- Lun -->
-          <div class="py-3 px-2 text-center border-r border-ink-200">
-            <p class="text-[10px] font-semibold uppercase tracking-[.08em] text-ink-400">Lun</p>
-            <p class="text-lg font-display font-bold text-ink-900 mt-0.5">2</p>
-          </div>
-          <!-- Mar -->
-          <div class="py-3 px-2 text-center border-r border-ink-200">
-            <p class="text-[10px] font-semibold uppercase tracking-[.08em] text-ink-400">Mar</p>
-            <p class="text-lg font-display font-bold text-ink-900 mt-0.5">3</p>
-          </div>
-          <!-- Mié -->
-          <div class="py-3 px-2 text-center border-r border-ink-200">
-            <p class="text-[10px] font-semibold uppercase tracking-[.08em] text-ink-400">Mié</p>
-            <p class="text-lg font-display font-bold text-ink-900 mt-0.5">4</p>
-          </div>
-          <!-- Jue -->
-          <div class="py-3 px-2 text-center border-r border-ink-200">
-            <p class="text-[10px] font-semibold uppercase tracking-[.08em] text-ink-400">Jue</p>
-            <p class="text-lg font-display font-bold text-ink-900 mt-0.5">5</p>
-          </div>
-          <!-- Vie -->
-          <div class="py-3 px-2 text-center border-r border-ink-200">
-            <p class="text-[10px] font-semibold uppercase tracking-[.08em] text-ink-400">Vie</p>
-            <p class="text-lg font-display font-bold text-ink-900 mt-0.5">6</p>
-          </div>
-          <!-- Sáb · HOY -->
-          <div class="py-3 px-2 text-center border-r border-ink-200 col-hoy">
-            <p class="text-[10px] font-semibold uppercase tracking-[.08em] text-brand-600">Sáb · Hoy</p>
-            <p class="inline-block col-hoy-header text-lg font-display font-bold mt-0.5">7</p>
-          </div>
-          <!-- Dom -->
-          <div class="py-3 px-2 text-center">
-            <p class="text-[10px] font-semibold uppercase tracking-[.08em] text-ink-400">Dom</p>
-            <p class="text-lg font-display font-bold text-ink-900 mt-0.5">8</p>
-          </div>
-        </div>
-
-        <!-- Franjas horarias 07:00 – 20:00 -->
-        <!-- 07:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">07:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>7:00 · Vale · 12/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>7:00 · Vale · 10/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>7:00 · Vale · 14/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>7:00 · Vale · 8/12</a>
-          </div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 08:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">08:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-gimnasia block">Gimnasia<br>8:00 · Nacho · 8/12</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-gimnasia block">Gimnasia<br>8:00 · Nacho · 7/12</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-gimnasia block">Gimnasia<br>8:00 · Nacho · 9/12</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy"></div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 09:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">09:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-haltero block">Halterofilia<br>9:00 · Nacho · 6/10</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-haltero block">Halterofilia<br>9:00 · Nacho · 5/10</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>9:00 · Vale · 11/12</a>
-          </div>
-          <div class="p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-endurance block">Endurance<br>9:00 · Vale · 10/16</a>
-          </div>
-        </div>
-
-        <!-- 10:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">10:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-endurance block">Endurance<br>10:00 · Vale · 14/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-endurance block">Endurance<br>10:00 · Vale · 12/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-endurance block">Endurance<br>10:00 · Vale · 15/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy"></div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 11:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">11:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy">
-            <a href="detalle-sesion.html" class="class-block cls-gimnasia block">Gimnasia<br>11:00 · Nacho · 7/12</a>
-          </div>
-          <div class="p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>11:00 · Nacho · 6/12</a>
-          </div>
-        </div>
-
-        <!-- 12:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">12:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>12:00 · Nacho · 10/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>12:00 · Nacho · 9/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>12:00 · Nacho · 11/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>12:00 · Nacho · 8/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>12:00 · Nacho · 13/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy"></div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 13:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">13:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy"></div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 14:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">14:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-haltero block">Halterofilia<br>14:00 · Nacho · 4/10</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-haltero block">Halterofilia<br>14:00 · Nacho · 6/10</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy"></div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 17:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">17:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>17:00 · Vale · 15/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>17:00 · Vale · 16/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5"></div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>17:00 · Vale · 14/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy"></div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 18:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">18:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-gimnasia block">Gimnasia<br>18:00 · Nacho · 8/12</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>18:00 · Vale · 12/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-gimnasia block">Gimnasia<br>18:00 · Nacho · 10/12</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>18:00 · Vale · 11/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-gimnasia block">Gimnasia<br>18:00 · Nacho · 9/12</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy"></div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 19:00 -->
-        <div class="cal-grid border-b border-ink-200" style="min-height:56px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">19:00</span>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>19:00 · Vale · 14/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-endurance block">Endurance<br>19:00 · Vale · 10/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>19:00 · Vale · 13/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-endurance block">Endurance<br>19:00 · Vale · 9/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>19:00 · Vale · 16/16</a>
-          </div>
-          <div class="border-r border-ink-200 p-1.5 col-hoy">
-            <a href="detalle-sesion.html" class="class-block cls-crossfit block">CrossFit<br>19:00 · Vale · 8/12</a>
-          </div>
-          <div class="p-1.5"></div>
-        </div>
-
-        <!-- 20:00 -->
-        <div class="cal-grid" style="min-height:40px">
-          <div class="border-r border-ink-200 px-2 flex items-start pt-1.5">
-            <span class="text-[11px] font-mono text-ink-400">20:00</span>
-          </div>
-          <div class="border-r border-ink-200"></div>
-          <div class="border-r border-ink-200"></div>
-          <div class="border-r border-ink-200"></div>
-          <div class="border-r border-ink-200"></div>
-          <div class="border-r border-ink-200"></div>
-          <div class="border-r border-ink-200 col-hoy"></div>
-          <div></div>
-        </div>
-
-      </div>
+    <!-- Leyenda de modalidades -->
+    <div style="display:flex;align-items:center;gap:18px;padding:8px 18px;background:var(--fj-surface);border-bottom:1px solid var(--fj-ink-100);">
+      <span class="fj-eyebrow">Modalidades</span>
+      <span class="flex items-center gap-1.5 text-xs text-ink-500"><span class="fj-dot" style="background:var(--m-crossfit)"></span>CrossFit</span>
+      <span class="flex items-center gap-1.5 text-xs text-ink-500"><span class="fj-dot" style="background:var(--m-gimnasia)"></span>Gimnasia</span>
+      <span class="flex items-center gap-1.5 text-xs text-ink-500"><span class="fj-dot" style="background:var(--m-haltero)"></span>Halterofilia</span>
+      <span class="flex items-center gap-1.5 text-xs text-ink-500"><span class="fj-dot" style="background:var(--m-endurance)"></span>Endurance</span>
+      <span class="ml-auto text-xs text-ink-400">Clic en una clase para gestionarla · clic en un espacio vacío para agendar</span>
     </div>
-  </main>
+
+    <!-- Grilla -->
+    <div class="cal-wrap">
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+  </div>
 </div>
+
+<script>
+const DAYS = [['LUN','2'],['MAR','3'],['MIÉ','4'],['JUE','5'],['VIE','6'],['SÁB','7'],['DOM','8']];
+const HOURS = ['07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','17:00','18:00','19:00','20:00'];
+const TODAY = 5; // sábado
+// clases: [hora, día, modalidad, coach, inscritos, cupo, formato, nombreWOD]
+const CLASSES = [
+  ['07:00',0,'crossfit','Vale',12,16,'fortime','Fran'], ['07:00',2,'crossfit','Vale',10,16,'amrap',"20'"], ['07:00',4,'crossfit','Vale',14,16,'fortime','Helen'], ['07:00',5,'crossfit','Vale',8,12,'emom',"12'"],
+  ['08:00',0,'gimnasia','Nacho',8,12], ['08:00',2,'gimnasia','Nacho',7,12], ['08:00',4,'gimnasia','Nacho',9,12],
+  ['09:00',1,'haltero','Nacho',6,10,'emom','Snatch'], ['09:00',3,'haltero','Nacho',5,10,'emom','Clean'], ['09:00',5,'crossfit','Vale',11,12,'amrap',"15'"], ['09:00',6,'endurance','Vale',10,16],
+  ['10:00',0,'endurance','Vale',14,16], ['10:00',2,'endurance','Vale',12,16], ['10:00',4,'endurance','Vale',15,16],
+  ['11:00',5,'gimnasia','Nacho',7,12], ['11:00',6,'crossfit','Nacho',6,12,'fortime','Diane'],
+  ['12:00',0,'crossfit','Nacho',10,16,'amrap',"18'"], ['12:00',1,'crossfit','Nacho',9,16,'fortime','Cindy'], ['12:00',2,'crossfit','Nacho',11,16,'emom',"16'"], ['12:00',3,'crossfit','Nacho',8,16,'tabata','Abs'], ['12:00',4,'crossfit','Nacho',13,16,'fortime','Grace'],
+  ['14:00',1,'haltero','Nacho',4,10,'emom','Jerk'], ['14:00',3,'haltero','Nacho',6,10,'emom','Snatch'],
+  ['17:00',0,'crossfit','Vale',15,16,'fortime','Murph'], ['17:00',2,'crossfit','Vale',16,16,'amrap',"20'"], ['17:00',4,'crossfit','Vale',14,16,'fortime','Fran'],
+  ['18:00',0,'gimnasia','Nacho',8,12], ['18:00',1,'crossfit','Vale',12,16,'emom',"14'"], ['18:00',2,'gimnasia','Nacho',10,12], ['18:00',3,'crossfit','Vale',11,16,'fortime','Karen'], ['18:00',4,'gimnasia','Nacho',9,12],
+  ['19:00',0,'crossfit','Vale',14,16,'amrap',"16'"], ['19:00',1,'endurance','Vale',10,16], ['19:00',2,'crossfit','Vale',13,16,'fortime','Annie'], ['19:00',3,'endurance','Vale',9,16], ['19:00',4,'crossfit','Vale',16,16,'emom',"18'"],
+];
+const MODLABEL = {crossfit:'CrossFit',gimnasia:'Gimnasia',haltero:'Halterofilia',endurance:'Endurance'};
+function occBadge(e,c){ const r=e/c; if(r>=1) return 'fj-badge-danger'; if(r>=.85) return 'fj-badge-warning'; if(r>=.5) return 'fj-badge-info'; return 'fj-badge-success'; }
+
+function render() {
+  const grid = document.getElementById('calGrid');
+  let html = '<div style="display:contents">';
+  html += '<div class="cal-headcell" style="position:sticky;top:0;z-index:5;background:var(--fj-surface);border-bottom:1px solid var(--fj-ink-200)"></div>';
+  DAYS.forEach((d,i)=>{ const hoy = i===TODAY;
+    html += `<div class="cal-headcell ${hoy?'col-hoy':''}" style="position:sticky;top:0;z-index:5;background:var(--fj-surface);border-bottom:1px solid var(--fj-ink-200)">
+      <p class="fj-eyebrow ${hoy?'!text-brand-600':''}">${d[0]}${hoy?' · HOY':''}</p>
+      <p class="font-display font-bold text-lg ${hoy?'text-brand-600':'text-ink-900'} mt-0.5">${d[1]}</p></div>`; });
+  html += '</div>';
+  HOURS.forEach(h=>{
+    html += `<div class="cal-hourcol">${h}</div>`;
+    for(let day=0; day<7; day++){
+      const c = CLASSES.find(x=>x[0]===h && x[1]===day);
+      const hoy = day===TODAY;
+      if(c){
+        const mod=c[2], coach=c[3], en=c[4], cap=c[5], fmt=c[6], wod=c[7];
+        const fmtChip = fmt ? `<span class="fj-fmt fj-fmt-${fmt}" style="margin-top:3px;display:inline-flex">${fmt==='fortime'?'For Time':fmt.toUpperCase()}</span>` : '';
+        html += `<div class="cal-cell ${hoy?'col-hoy':''}">
+          <a class="cls cls-${mod}" onclick='openSession(${JSON.stringify(c)})'>
+            <div style="display:flex;justify-content:space-between;align-items:start;gap:4px">
+              <span style="font-weight:700">${MODLABEL[mod]}</span>
+              <span class="fj-badge ${occBadge(en,cap)}" style="height:18px;font-size:10px;padding:0 6px">${en}/${cap}</span>
+            </div>
+            <div style="opacity:.8">${h} · ${coach}${wod?' · '+wod:''}</div>
+            ${fmtChip}
+          </a></div>`;
+      } else {
+        html += `<div class="cal-cell ${hoy?'col-hoy':''}"><div class="cal-add" onclick="openCreate('${h}',${day})">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div></div>`;
+      }
+    }
+  });
+  grid.innerHTML = html;
+}
+
+/* ---- Drawer: GESTIONAR SESIÓN (prioriza RUTINA, asistencia colapsable) ---- */
+function openSession(c){
+  const h=c[0], day=c[1], mod=c[2], coach=c[3], en=c[4], cap=c[5], fmt=c[6], wod=c[7];
+  const dayName = {0:'Lunes 2',1:'Martes 3',2:'Miércoles 4',3:'Jueves 5',4:'Viernes 6',5:'Sábado 7',6:'Domingo 8'}[day];
+  const hasRoutine = !!wod;
+  const fmtLabel = fmt==='fortime'?'For Time':(fmt||'').toUpperCase();
+  const roster = [
+    ['Camila Soto','Plan Full','presente'],['Matías Bravo','Plan Ilimitado','presente'],['Valentina Pérez','Plan Full','pendiente'],
+    ['José Tapia','Pack 10','pendiente'],['Andrea Lagos','Plan 3x','pendiente'],['Diego Mora','Plan Full','presente'],
+    ['Felipe Ramos','Plan Ilimitado','presente'],['Isidora Contreras','Plan Full','pendiente'],['Pancho Díaz','Plan Full','pendiente'],
+    ['Javiera Núñez','Plan Ilimitado','presente'],['Tomás Rojas','Pack 10','pendiente'],['Fernanda Lira','Plan 3x','pendiente'],
+    ['Benjamín Soto','Plan Full','pendiente'],['Antonia Vega','Plan Full','presente'],['Martín Pino','Plan Ilimitado','pendiente'],['Sofía Caro','Plan Full','pendiente']
+  ];
+  const rosterHtml = roster.slice(0,en).map(r=>{
+    const ini = r[0].split(' ').map(w=>w[0]).join('');
+    const pres = r[2]==='presente';
+    return `<div class="fj-row fj-row-static" style="padding:10px 0">
+      <span class="fj-avatar" style="width:30px;height:30px;font-size:11px">${ini}</span>
+      <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">${r[0]}</p><p class="text-xs text-ink-400">${r[1]}</p></div>
+      <span class="fj-badge ${pres?'fj-badge-success':'fj-badge-neutral'}">${pres?'✓ Presente':'Pendiente'}</span></div>`;
+  }).join('');
+
+  const routineBlock = hasRoutine
+    ? `<div class="fj-panel" style="padding:16px;border-color:var(--fj-brand);background:rgba(251,82,21,.03)">
+         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px">
+           <div style="display:flex;align-items:center;gap:8px"><span class="fj-fmt fj-fmt-${fmt}">${fmtLabel}</span><span class="font-display font-bold text-ink-900">${wod}</span></div>
+           <a href="constructor-rutina.html" class="text-xs font-semibold text-brand-600">Editar rutina →</a>
+         </div>
+         <div class="space-y-1.5">
+           <div class="flex items-center gap-2 text-sm text-ink-600"><span class="fj-eyebrow" style="width:64px">Warm-up</span> Row 500m + movilidad</div>
+           <div class="flex items-center gap-2 text-sm text-ink-600"><span class="fj-eyebrow" style="width:64px">Skill</span> Thruster 5×3</div>
+           <div class="flex items-center gap-2 text-sm text-ink-900 font-medium"><span class="fj-eyebrow !text-brand-600" style="width:64px">WOD</span> 21-15-9 Thrusters + Pull-ups</div>
+         </div>
+       </div>`
+    : `<div class="fj-panel" style="padding:20px;border-style:dashed;text-align:center">
+         <p class="text-sm font-semibold text-ink-700 mb-1">Esta clase no tiene rutina asignada</p>
+         <p class="text-xs text-ink-400 mb-4">Carga una plantilla o construye una nueva</p>
+         <div style="display:flex;gap:8px;justify-content:center">
+           <a href="rutinas.html" class="fj-btn fj-btn-ghost fj-btn-sm">Cargar plantilla</a>
+           <a href="constructor-rutina.html" class="fj-btn fj-btn-primary fj-btn-sm">Construir rutina</a>
+         </div>
+       </div>`;
+
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="fj-dot" style="width:12px;height:12px;background:var(--m-${mod})"></span>
+        <div><p class="fj-eyebrow">${dayName} · ${h}</p><h2 class="font-display font-bold text-lg text-ink-900">${MODLABEL[mod]}</h2></div>
+      </div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="fj-drawer-body space-y-5">
+
+      <div><p class="fj-eyebrow mb-2">Rutina del día</p>${routineBlock}</div>
+
+      <div>
+        <p class="fj-eyebrow mb-2">Sesión</p>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="fj-panel" style="padding:12px"><p class="text-xs text-ink-400">Coach</p><p class="text-sm font-semibold text-ink-900 mt-0.5">${coach==='Vale'?'Vale Fuentes':'Nacho Tapia'}</p></div>
+          <div class="fj-panel" style="padding:12px"><p class="text-xs text-ink-400">Ocupación</p><p class="text-sm font-semibold text-ink-900 mt-0.5 fj-mono">${en} / ${cap}</p></div>
+        </div>
+      </div>
+
+      <div>
+        <button onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:6px 0">
+          <span class="fj-eyebrow">Inscritos · ${en}</span>
+          <span style="display:flex;align-items:center;gap:8px"><span class="fj-badge fj-badge-success" onclick="event.stopPropagation()">Marcar asistencia</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </button>
+        <div class="seg" hidden>${rosterHtml}</div>
+      </div>
+
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-danger fj-btn-sm" data-fj-close>Cancelar sesión</button>
+      <a href="detalle-sesion.html" class="fj-btn fj-btn-ghost fj-btn-sm">Ver detalle completo</a>
+    </div>`);
+}
+
+/* ---- Drawer: CREAR CLASE rápido (celda vacía) ---- */
+function openCreate(hour, day){
+  const dayName = day!==null ? {0:'Lunes 2',1:'Martes 3',2:'Miércoles 4',3:'Jueves 5',4:'Viernes 6',5:'Sábado 7',6:'Domingo 8'}[day] : '';
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div><p class="fj-eyebrow">Agendar ${dayName?dayName+' · '+hour:''}</p><h2 class="font-display font-bold text-lg text-ink-900">Nueva clase</h2></div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="fj-drawer-body space-y-4">
+      <div><label class="fj-label">Modalidad</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          ${['crossfit','gimnasia','haltero','endurance'].map((m,i)=>`<label style="display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--fj-ink-200);border-radius:12px;cursor:pointer">
+            <input type="radio" name="mod" ${i===0?'checked':''} style="accent-color:var(--fj-brand)"><span class="fj-dot" style="background:var(--m-${m})"></span><span class="text-sm font-medium">${MODLABEL[m]}</span></label>`).join('')}
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="fj-label">Hora</label><input class="fj-input" value="${hour||'07:00'}"></div>
+        <div><label class="fj-label">Duración</label><select class="fj-input"><option>60 min</option><option>45 min</option><option>90 min</option></select></div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="fj-label">Coach</label><select class="fj-input"><option>Vale Fuentes</option><option>Nacho Tapia</option></select></div>
+        <div><label class="fj-label">Cupo</label><input class="fj-input fj-mono" value="16"></div>
+      </div>
+      <div><label class="fj-label">Rutina</label>
+        <select class="fj-input"><option>Sin rutina (asignar después)</option><option>Cargar plantilla guardada…</option></select>
+      </div>
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fj-ink-600)"><input type="checkbox" checked style="accent-color:var(--fj-brand)"> Repetir todas las semanas</label>
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-ghost fj-btn-sm" data-fj-close>Cancelar</button>
+      <button class="fj-btn fj-btn-primary fj-btn-sm" data-fj-close>Crear clase</button>
+    </div>`);
+}
+
+render();
+</script>
 </body>
 </html>

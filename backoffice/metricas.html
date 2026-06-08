@@ -4,325 +4,504 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Métricas</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+<style>
+/* Bar chart */
+.bar-chart { display: flex; align-items: stretch; gap: 6px; }
+.bar-col { flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 5px; }
+.bar-col .bar-body { margin-top: auto; }
+.bar-val { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700; color: #5A6172; }
+.bar-val.brand { color: #E0410A; }
+.bar-body { width: 100%; border-radius: 6px 6px 0 0; min-height: 4px; transition: height .3s; }
+.bar-lbl { font-size: 10px; color: #8A91A1; }
+.bar-lbl.brand { color: #E0410A; font-weight: 600; }
+
+/* Heatmap */
+.heatmap-grid { display: grid; gap: 3px; }
+.hm-cell { border-radius: 3px; height: 20px; }
+.hm-0 { background: #F6F7F9; border: 1px solid #EAECF1; }
+.hm-1 { background: #FFE2D6; }
+.hm-2 { background: #FFC4AD; }
+.hm-3 { background: #FF9E78; }
+.hm-4 { background: #FB5215; }
+.hm-5 { background: #B83309; }
+[data-theme="dark"] .hm-0 { background:#1C2128; border-color:#262B33; }
+[data-theme="dark"] .hm-1 { background:rgba(251,82,21,.16); }
+[data-theme="dark"] .hm-2 { background:rgba(251,82,21,.32); }
+[data-theme="dark"] .hm-3 { background:rgba(251,82,21,.52); }
+[data-theme="dark"] .hm-4 { background:#FB5215; }
+[data-theme="dark"] .hm-5 { background:#FF6A33; }
+
+/* Progress bar */
+.prog-bar { height: 6px; border-radius: 3px; background: var(--fj-ink-100); overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 3px; }
+
+/* KPI delta */
+.delta-up { color: #18A957; }
+.delta-down { color: #E5484D; }
+.delta-neutral { color: #8A91A1; }
+</style>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
-<div class="flex min-h-screen">
+<body data-page="metricas" data-title="Métricas" data-eyebrow="Forja Box · Providencia">
+<div data-fj-content>
+  <div class="fj-pad fj-maxw space-y-5">
 
-  <!-- SIDEBAR -->
-  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col fixed inset-y-0">
-    <div class="px-5 h-16 flex items-center gap-2.5 border-b border-ink-200">
-      <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-      </span>
-      <span class="font-display font-bold text-lg">Forja<span class="text-brand-500">.</span></span>
-    </div>
-    <nav class="flex-1 px-3 py-4 space-y-0.5 text-sm">
-      <a href="dashboard.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Dashboard</a>
-      <a href="clientes.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clientes</a>
-      <a href="calendario.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendario</a>
-      <a href="tipo-clases.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M10 20H4v-6M20 4l-8 8M4 20l5-5"/></svg>Clases</a>
-      <a href="constructor-rutina.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Rutinas</a>
-      <a href="planes.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Planes</a>
-      <a href="pagos.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Pagos</a>
-      <a href="metricas.html" class="flex items-center gap-3 px-3 h-10 rounded-lg bg-brand-500/10 text-brand-600 font-semibold"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Métricas</a>
-      <a href="competencias.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>Competencias</a>
-      <a href="configuracion.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Configuración</a>
-    </nav>
-    <div class="px-4 py-4 border-t border-ink-200 flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-brand-100 grid place-items-center font-semibold text-xs text-brand-700">VF</div>
-      <div class="leading-tight"><p class="text-sm font-semibold">Vale Fuentes</p><p class="text-xs text-ink-400">Forja Box · Providencia</p></div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="flex-1 ml-60">
-    <!-- Topbar -->
-    <div class="h-16 px-8 flex items-center justify-between border-b border-ink-200 bg-white sticky top-0 z-10">
-      <div>
-        <h1 class="font-display font-bold text-xl">Métricas</h1>
-        <p class="text-xs text-ink-400 font-mono">Sáb 07 jun 2026</p>
+    <!-- Selector de rango temporal -->
+    <div class="flex items-center justify-between">
+      <div class="fj-pills" role="group" aria-label="Rango temporal">
+        <button class="fj-pill" data-range="7">7 días</button>
+        <button class="fj-pill" data-range="30">30 días</button>
+        <button class="fj-pill" aria-selected="true" data-range="90">3 meses</button>
+        <button class="fj-pill" data-range="365">Año</button>
       </div>
-      <div class="flex items-center gap-3">
-        <!-- Selector de período -->
-        <div class="flex items-center gap-1 bg-ink-100 rounded-full p-1">
-          <button class="px-3 h-7 rounded-full text-xs font-semibold text-ink-500 hover:text-ink-900 transition-colors">7 días</button>
-          <button class="px-3 h-7 rounded-full text-xs font-semibold text-ink-500 hover:text-ink-900 transition-colors">30 días</button>
-          <button class="px-3 h-7 rounded-full bg-white text-xs font-semibold text-ink-900 shadow-sm">3 meses</button>
-          <button class="px-3 h-7 rounded-full text-xs font-semibold text-ink-500 hover:text-ink-900 transition-colors">Año</button>
-        </div>
-        <button class="h-9 px-4 rounded-full border border-ink-200 bg-white text-sm text-ink-700 hover:bg-ink-50 transition-colors flex items-center gap-2">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Exportar
-        </button>
-        <div class="w-9 h-9 rounded-full bg-ink-100 grid place-items-center font-semibold text-xs text-ink-600">VF</div>
+      <button class="fj-btn fj-btn-ghost fj-btn-sm flex items-center gap-2">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Exportar CSV
+      </button>
+    </div>
+
+    <!-- KPIs row -->
+    <div class="grid grid-cols-6 gap-3">
+      <!-- Ingresos -->
+      <div class="fj-panel p-4 col-span-1">
+        <p class="fj-eyebrow">Ingresos</p>
+        <p class="font-mono font-bold text-[28px] leading-none mt-3 text-ink-900">$4,2M</p>
+        <p class="text-xs mt-2"><span class="delta-up font-semibold">↑ +8%</span> <span class="text-ink-400">vs anterior</span></p>
+      </div>
+      <!-- Clientes activos -->
+      <div class="fj-panel p-4 col-span-1">
+        <p class="fj-eyebrow">Clientes activos</p>
+        <p class="font-mono font-bold text-[28px] leading-none mt-3 text-ink-900">248</p>
+        <p class="text-xs mt-2"><span class="delta-up font-semibold">↑ +12</span> <span class="text-ink-400">este mes</span></p>
+      </div>
+      <!-- Retención -->
+      <div class="fj-panel p-4 col-span-1">
+        <p class="fj-eyebrow">Retención</p>
+        <p class="font-mono font-bold text-[28px] leading-none mt-3 text-ink-900">87%</p>
+        <p class="text-xs mt-2"><span class="delta-up font-semibold">↑ +2pp</span> <span class="text-ink-400">vs anterior</span></p>
+      </div>
+      <!-- Churn -->
+      <div class="fj-panel p-4 col-span-1">
+        <p class="fj-eyebrow">Churn</p>
+        <p class="font-mono font-bold text-[28px] leading-none mt-3 text-danger">13%</p>
+        <p class="text-xs mt-2"><span class="delta-down font-semibold">↓ 4 socios</span> <span class="text-ink-400">no renovaron</span></p>
+      </div>
+      <!-- Asistencia promedio -->
+      <div class="fj-panel p-4 col-span-1">
+        <p class="fj-eyebrow">Asist. promedio</p>
+        <p class="font-mono font-bold text-[28px] leading-none mt-3 text-ink-900">23<span class="text-lg text-ink-400">/sem</span></p>
+        <p class="text-xs mt-2"><span class="delta-up font-semibold">↑ +3</span> <span class="text-ink-400">vs anterior</span></p>
+      </div>
+      <!-- Ocupación clases -->
+      <div class="fj-panel p-4 col-span-1">
+        <p class="fj-eyebrow">Ocupación</p>
+        <p class="font-mono font-bold text-[28px] leading-none mt-3 text-ink-900">86%</p>
+        <p class="text-xs mt-2"><span class="delta-up font-semibold">↑ +4pp</span> <span class="text-ink-400">promedio clases</span></p>
       </div>
     </div>
 
-    <div class="px-8 py-7 space-y-6">
+    <!-- Asistencia detallada: barras por día + heatmap por hora -->
+    <div class="grid grid-cols-2 gap-5">
 
-      <!-- Gráfico 1: Ingresos por mes -->
-      <div class="bg-white border border-ink-200 rounded-xl p-6">
-        <div class="flex items-start justify-between mb-5">
+      <!-- Barras por día de la semana -->
+      <div class="fj-panel p-5">
+        <div class="flex items-start justify-between mb-4">
           <div>
-            <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Ingresos mensuales</p>
-            <p class="font-mono font-bold text-[32px] mt-1 leading-tight">$8.390.000</p>
-            <p class="text-xs text-ink-400 mt-1">Últimos 3 meses · <span class="text-success font-semibold">+11% vs período anterior</span></p>
-          </div>
-          <span class="text-xs font-semibold text-ink-400">CLP</span>
-        </div>
-        <!-- Barras SVG -->
-        <div class="flex items-end gap-3 h-40">
-          <!-- Abril -->
-          <div class="flex-1 flex flex-col items-center gap-2">
-            <span class="font-mono text-xs font-bold text-ink-500">$2.310k</span>
-            <div class="w-full rounded-t-lg bg-brand-200" style="height:55%"></div>
-            <span class="text-xs text-ink-400">Abr</span>
-          </div>
-          <!-- Mayo -->
-          <div class="flex-1 flex flex-col items-center gap-2">
-            <span class="font-mono text-xs font-bold text-ink-500">$2.510k</span>
-            <div class="w-full rounded-t-lg bg-brand-300" style="height:68%"></div>
-            <span class="text-xs text-ink-400">May</span>
-          </div>
-          <!-- Junio (parcial, activo) -->
-          <div class="flex-1 flex flex-col items-center gap-2">
-            <span class="font-mono text-xs font-bold text-brand-600">$2.840k</span>
-            <div class="w-full rounded-t-lg bg-brand-500" style="height:80%"></div>
-            <span class="text-xs font-semibold text-brand-600">Jun</span>
-          </div>
-          <!-- Separador -->
-          <div class="w-px h-full bg-ink-100 mx-1"></div>
-          <!-- Jul (proyectado) -->
-          <div class="flex-1 flex flex-col items-center gap-2">
-            <span class="font-mono text-xs font-bold text-ink-300">~$3.100k</span>
-            <div class="w-full rounded-t-lg bg-ink-100 border border-dashed border-ink-300" style="height:88%"></div>
-            <span class="text-xs text-ink-300">Jul</span>
+            <p class="fj-eyebrow">Asistencia por día</p>
+            <h3 class="fj-section-h mt-0.5">¿Qué días llena el box?</h3>
           </div>
         </div>
-        <div class="mt-3 flex items-center gap-4 text-xs text-ink-400">
-          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-brand-500 inline-block"></span>Real</span>
-          <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-ink-100 border border-dashed border-ink-300 inline-block"></span>Proyección</span>
+        <div class="bar-chart h-36 mb-3">
+          <!-- Lun -->
+          <div class="bar-col">
+            <span class="bar-val">28</span>
+            <div class="bar-body bg-brand-200 w-full" style="height:56%"></div>
+            <span class="bar-lbl">Lun</span>
+          </div>
+          <!-- Mar -->
+          <div class="bar-col">
+            <span class="bar-val">35</span>
+            <div class="bar-body bg-brand-300 w-full" style="height:70%"></div>
+            <span class="bar-lbl">Mar</span>
+          </div>
+          <!-- Mié -->
+          <div class="bar-col">
+            <span class="bar-val">50</span>
+            <div class="bar-body bg-brand-500 w-full" style="height:100%"></div>
+            <span class="bar-lbl brand">Mié</span>
+          </div>
+          <!-- Jue -->
+          <div class="bar-col">
+            <span class="bar-val">41</span>
+            <div class="bar-body bg-brand-400 w-full" style="height:82%"></div>
+            <span class="bar-lbl">Jue</span>
+          </div>
+          <!-- Vie -->
+          <div class="bar-col">
+            <span class="bar-val brand">48</span>
+            <div class="bar-body bg-brand-500 w-full" style="height:96%"></div>
+            <span class="bar-lbl brand">Vie</span>
+          </div>
+          <!-- Sáb -->
+          <div class="bar-col">
+            <span class="bar-val">30</span>
+            <div class="bar-body bg-brand-200 w-full" style="height:60%"></div>
+            <span class="bar-lbl">Sáb</span>
+          </div>
+          <!-- Dom -->
+          <div class="bar-col">
+            <span class="bar-val" style="color:#B6BCC8">8</span>
+            <div class="bar-body w-full" style="height:16%;background:var(--fj-ink-100);"></div>
+            <span class="bar-lbl" style="color:#B6BCC8">Dom</span>
+          </div>
         </div>
-      </div>
-
-      <div class="grid grid-cols-2 gap-6">
-        <!-- Gráfico 2: Asistencia semanal -->
-        <div class="bg-white border border-ink-200 rounded-xl p-6">
-          <div class="flex items-start justify-between mb-5">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Asistencia semanal</p>
-              <p class="font-mono font-bold text-3xl mt-1">142</p>
-              <p class="text-xs text-ink-400 mt-1">visitas esta semana · <span class="text-success font-semibold">+8%</span></p>
-            </div>
-          </div>
-          <div class="flex items-end gap-2 h-32">
-            <div class="flex-1 flex flex-col items-center gap-1">
-              <div class="w-full rounded-t-lg bg-brand-200" style="height:50%"></div>
-              <span class="text-[10px] text-ink-400">Lun</span>
-            </div>
-            <div class="flex-1 flex flex-col items-center gap-1">
-              <div class="w-full rounded-t-lg bg-brand-300" style="height:75%"></div>
-              <span class="text-[10px] text-ink-400">Mar</span>
-            </div>
-            <div class="flex-1 flex flex-col items-center gap-1">
-              <div class="w-full rounded-t-lg bg-brand-400" style="height:90%"></div>
-              <span class="text-[10px] text-ink-400">Mié</span>
-            </div>
-            <div class="flex-1 flex flex-col items-center gap-1">
-              <div class="w-full rounded-t-lg bg-brand-300" style="height:65%"></div>
-              <span class="text-[10px] text-ink-400">Jue</span>
-            </div>
-            <div class="flex-1 flex flex-col items-center gap-1">
-              <div class="w-full rounded-t-lg bg-brand-500" style="height:100%"></div>
-              <span class="text-[10px] font-semibold text-brand-600">Vie</span>
-            </div>
-            <div class="flex-1 flex flex-col items-center gap-1">
-              <div class="w-full rounded-t-lg bg-brand-200" style="height:55%"></div>
-              <span class="text-[10px] text-ink-400">Sáb</span>
-            </div>
-            <div class="flex-1 flex flex-col items-center gap-1">
-              <div class="w-full rounded-t-lg bg-ink-100" style="height:20%"></div>
-              <span class="text-[10px] text-ink-300">Dom</span>
-            </div>
-          </div>
-          <p class="text-xs text-ink-400 mt-3">Pico: viernes 08:00–10:00</p>
-        </div>
-
-        <!-- Gráfico 3: Retención / Churn donut -->
-        <div class="bg-white border border-ink-200 rounded-xl p-6">
-          <div class="mb-5">
-            <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Retención de socios</p>
-            <p class="font-mono font-bold text-3xl mt-1">87%</p>
-            <p class="text-xs text-ink-400 mt-1">este trimestre · churn 13%</p>
-          </div>
-          <!-- Donut SVG -->
-          <div class="flex items-center gap-6">
-            <svg width="120" height="120" viewBox="0 0 36 36">
-              <!-- track -->
-              <circle cx="18" cy="18" r="14" fill="none" stroke="#EAECF1" stroke-width="5"/>
-              <!-- retención 87% = 87/100 * 2π*14 ≈ 76.3 de 87.96 -->
-              <circle cx="18" cy="18" r="14" fill="none" stroke="#FB5215" stroke-width="5" stroke-dasharray="76.3 87.96" stroke-dashoffset="22" stroke-linecap="round"/>
-              <!-- churn 13% -->
-              <circle cx="18" cy="18" r="14" fill="none" stroke="#E5484D" stroke-width="5" stroke-dasharray="11.4 87.96" stroke-dashoffset="-54.3" stroke-linecap="round"/>
-              <text x="18" y="21" text-anchor="middle" font-family="JetBrains Mono" font-weight="700" font-size="7" fill="#131519">87%</text>
-            </svg>
-            <div class="space-y-2">
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-brand-500 inline-block"></span>
-                <span class="text-sm">Retención <span class="font-mono font-bold">87%</span></span>
-              </div>
-              <div class="flex items-center gap-2">
-                <span class="w-3 h-3 rounded-full bg-danger inline-block"></span>
-                <span class="text-sm">Churn <span class="font-mono font-bold text-danger">13%</span></span>
-              </div>
-              <p class="text-xs text-ink-400 pt-1">4 socios no renovaron</p>
-            </div>
-          </div>
+        <div class="flex items-center gap-4 text-[11px] text-ink-400">
+          <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-brand-500"></span>Alta (&gt;40 personas)</span>
+          <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-brand-300"></span>Media (25–40)</span>
+          <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-200)"></span>Baja (&lt;25)</span>
         </div>
       </div>
 
-      <div class="grid grid-cols-2 gap-6">
-        <!-- Gráfico 4: Planes más vendidos (barras horizontales) -->
-        <div class="bg-white border border-ink-200 rounded-xl p-6">
-          <div class="mb-5">
-            <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Planes más vendidos</p>
-            <p class="font-mono font-bold text-3xl mt-1">5 planes</p>
-            <p class="text-xs text-ink-400 mt-1">activos este mes</p>
+      <!-- Heatmap por hora del día -->
+      <div class="fj-panel p-5">
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <p class="fj-eyebrow">Ocupación por horario</p>
+            <h3 class="fj-section-h mt-0.5">¿Cuándo se llena el box?</h3>
           </div>
-          <div class="space-y-4">
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-medium">Plan CrossFit</span>
-                <span class="font-mono font-bold">18 socios</span>
-              </div>
-              <div class="h-2.5 bg-ink-100 rounded-full overflow-hidden">
-                <div class="h-full bg-brand-500 rounded-full" style="width:72%"></div>
-              </div>
+          <span class="fj-badge fj-badge-brand">Pico: 07–08h</span>
+        </div>
+        <!-- Heatmap: filas = horas 07-21, columnas = Lun-Dom -->
+        <div class="flex gap-2">
+          <!-- Hour labels -->
+          <div class="flex flex-col gap-[3px] pt-0" style="width:32px;flex-shrink:0">
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">07h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">08h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">09h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">10h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">11h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">12h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">13h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">14h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">17h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">18h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">19h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">20h</div>
+            <div class="text-[9px] text-ink-400 font-mono h-5 flex items-center">21h</div>
+          </div>
+          <!-- Grid: columnas = días -->
+          <div class="flex-1">
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="text-[9px] text-ink-400 font-semibold text-center">L</div>
+              <div class="text-[9px] text-ink-400 font-semibold text-center">M</div>
+              <div class="text-[9px] text-ink-400 font-semibold text-center">X</div>
+              <div class="text-[9px] text-ink-400 font-semibold text-center">J</div>
+              <div class="text-[9px] text-ink-400 font-semibold text-center">V</div>
+              <div class="text-[9px] text-ink-400 font-semibold text-center">S</div>
+              <div class="text-[9px] text-ink-400 font-semibold text-center">D</div>
             </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-medium">Plan Elite</span>
-                <span class="font-mono font-bold">12 socios</span>
-              </div>
-              <div class="h-2.5 bg-ink-100 rounded-full overflow-hidden">
-                <div class="h-full bg-brand-400 rounded-full" style="width:48%"></div>
-              </div>
+            <!-- 07h: Lun-Dom -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-4" title="Lunes 07h: muy alta"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-5" title="Miércoles 07h: pico máximo"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-5"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-0"></div>
             </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-medium">Halterofilia</span>
-                <span class="font-mono font-bold">8 socios</span>
-              </div>
-              <div class="h-2.5 bg-ink-100 rounded-full overflow-hidden">
-                <div class="h-full bg-brand-300 rounded-full" style="width:32%"></div>
-              </div>
+            <!-- 08h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-5"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-5"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-5"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-0"></div>
             </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-medium">Endurance</span>
-                <span class="font-mono font-bold">5 socios</span>
-              </div>
-              <div class="h-2.5 bg-ink-100 rounded-full overflow-hidden">
-                <div class="h-full bg-brand-200 rounded-full" style="width:20%"></div>
-              </div>
+            <!-- 09h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-3"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-1"></div>
             </div>
-            <div>
-              <div class="flex justify-between text-sm mb-1.5">
-                <span class="font-medium">Elite + Haltero</span>
-                <span class="font-mono font-bold">3 socios</span>
-              </div>
-              <div class="h-2.5 bg-ink-100 rounded-full overflow-hidden">
-                <div class="h-full bg-ink-200 rounded-full" style="width:12%"></div>
-              </div>
+            <!-- 10h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-2"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-1"></div>
+            </div>
+            <!-- 11h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-1"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 12h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-3"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 13h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-1"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 14h (pausa) -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-0"></div><div class="hm-cell hm-0"></div><div class="hm-cell hm-0"></div><div class="hm-cell hm-0"></div><div class="hm-cell hm-0"></div><div class="hm-cell hm-0"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 17h: tarde -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-2"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 18h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-4"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-5"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-5"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 19h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-3"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-4"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 20h -->
+            <div class="grid grid-cols-7 gap-[3px] mb-[3px]">
+              <div class="hm-cell hm-2"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-3"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-0"></div>
+            </div>
+            <!-- 21h -->
+            <div class="grid grid-cols-7 gap-[3px]">
+              <div class="hm-cell hm-1"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-2"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-1"></div><div class="hm-cell hm-0"></div><div class="hm-cell hm-0"></div>
             </div>
           </div>
         </div>
-
-        <!-- Gráfico 5: Distribución por estado -->
-        <div class="bg-white border border-ink-200 rounded-xl p-6">
-          <div class="mb-5">
-            <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Estado de socios</p>
-            <p class="font-mono font-bold text-3xl mt-1">46 socios</p>
-            <p class="text-xs text-ink-400 mt-1">total activos en Forja Box</p>
-          </div>
-          <!-- Mini barras de estado -->
-          <div class="mb-5">
-            <div class="flex h-4 rounded-full overflow-hidden gap-0.5">
-              <div class="bg-success" style="width:65%"></div>
-              <div class="bg-warning" style="width:20%"></div>
-              <div class="bg-danger" style="width:8%"></div>
-              <div class="bg-ink-200" style="width:7%"></div>
-            </div>
-          </div>
-          <div class="space-y-3">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-success inline-block"></span>
-                <span class="text-sm text-ink-600">Al día</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="h-1.5 rounded-full bg-success" style="width:65px"></div>
-                <span class="font-mono font-bold text-sm">30</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-warning inline-block"></span>
-                <span class="text-sm text-ink-600">Pendiente</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="h-1.5 rounded-full bg-warning" style="width:20px"></div>
-                <span class="font-mono font-bold text-sm">9</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-danger inline-block"></span>
-                <span class="text-sm text-ink-600">Moroso</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="h-1.5 rounded-full bg-danger" style="width:8px"></div>
-                <span class="font-mono font-bold text-sm text-danger">4</span>
-              </div>
-            </div>
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-ink-200 inline-block"></span>
-                <span class="text-sm text-ink-600">Inactivo</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <div class="h-1.5 rounded-full bg-ink-200" style="width:7px"></div>
-                <span class="font-mono font-bold text-sm text-ink-400">3</span>
-              </div>
-            </div>
-          </div>
+        <!-- Leyenda heatmap -->
+        <div class="flex items-center gap-1.5 mt-3 text-[10px] text-ink-400">
+          <span>Poco</span>
+          <div class="hm-cell hm-0" style="width:14px;height:10px;border-radius:2px;flex-shrink:0"></div>
+          <div class="hm-cell hm-1" style="width:14px;height:10px;border-radius:2px;flex-shrink:0"></div>
+          <div class="hm-cell hm-2" style="width:14px;height:10px;border-radius:2px;flex-shrink:0"></div>
+          <div class="hm-cell hm-3" style="width:14px;height:10px;border-radius:2px;flex-shrink:0"></div>
+          <div class="hm-cell hm-4" style="width:14px;height:10px;border-radius:2px;flex-shrink:0"></div>
+          <div class="hm-cell hm-5" style="width:14px;height:10px;border-radius:2px;flex-shrink:0"></div>
+          <span>Lleno</span>
         </div>
       </div>
-
     </div>
-  </main>
+
+    <!-- Modalidades populares + Ingresos por plan -->
+    <div class="grid grid-cols-2 gap-5">
+
+      <!-- Modalidades más populares -->
+      <div class="fj-list">
+        <div class="fj-list-head">
+          <div>
+            <p class="fj-eyebrow">Participación</p>
+            <h3 class="fj-section-h mt-0.5">Modalidades más populares</h3>
+          </div>
+        </div>
+        <!-- CrossFit -->
+        <div class="fj-row-static" style="flex-direction:column;align-items:stretch;gap:6px;padding:12px 20px;">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+              <span class="text-sm font-semibold text-ink-900">CrossFit</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-sm font-bold text-ink-900">1.420 asistencias</span>
+              <span class="fj-badge fj-badge-brand">58%</span>
+            </div>
+          </div>
+          <div class="prog-bar"><div class="prog-fill" style="width:58%;background:var(--m-crossfit)"></div></div>
+        </div>
+        <!-- Gimnasia -->
+        <div class="fj-row-static" style="flex-direction:column;align-items:stretch;gap:6px;padding:12px 20px;">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="fj-dot" style="background:var(--m-gimnasia)"></span>
+              <span class="text-sm font-semibold text-ink-900">Gimnasia</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-sm font-bold text-ink-900">560 asistencias</span>
+              <span class="fj-badge fj-badge-info">23%</span>
+            </div>
+          </div>
+          <div class="prog-bar"><div class="prog-fill" style="width:23%;background:var(--m-gimnasia)"></div></div>
+        </div>
+        <!-- Halterofilia -->
+        <div class="fj-row-static" style="flex-direction:column;align-items:stretch;gap:6px;padding:12px 20px;">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="fj-dot" style="background:var(--m-haltero)"></span>
+              <span class="text-sm font-semibold text-ink-900">Halterofilia</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-sm font-bold text-ink-900">220 asistencias</span>
+              <span class="fj-badge fj-badge-neutral">9%</span>
+            </div>
+          </div>
+          <div class="prog-bar"><div class="prog-fill" style="width:9%;background:var(--m-haltero)"></div></div>
+        </div>
+        <!-- Endurance -->
+        <div class="fj-row-static" style="flex-direction:column;align-items:stretch;gap:6px;padding:12px 20px;">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="fj-dot" style="background:var(--m-endurance)"></span>
+              <span class="text-sm font-semibold text-ink-900">Endurance</span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="font-mono text-sm font-bold text-ink-900">245 asistencias</span>
+              <span class="fj-badge fj-badge-neutral" style="color:#18A957;background:rgba(24,169,87,.1)">10%</span>
+            </div>
+          </div>
+          <div class="prog-bar"><div class="prog-fill" style="width:10%;background:var(--m-endurance)"></div></div>
+        </div>
+      </div>
+
+      <!-- Ingresos por plan -->
+      <div class="fj-list">
+        <div class="fj-list-head">
+          <div class="flex-1 flex items-center justify-between">
+            <div>
+              <p class="fj-eyebrow">Recaudación</p>
+              <h3 class="fj-section-h mt-0.5">Ingresos por plan</h3>
+            </div>
+            <span class="font-mono text-sm font-bold text-ink-900">$4.230.000 total</span>
+          </div>
+        </div>
+        <!-- Tabla header -->
+        <div class="fj-row-static" style="background:var(--fj-ink-50);padding:8px 20px;">
+          <p class="text-xs font-semibold text-ink-400 flex-1">Plan</p>
+          <p class="text-xs font-semibold text-ink-400 w-16 text-right">Socios</p>
+          <p class="text-xs font-semibold text-ink-400 w-28 text-right">Ingreso/mes</p>
+          <p class="text-xs font-semibold text-ink-400 w-12 text-right">% total</p>
+        </div>
+        <!-- Plan Full (todos los días) -->
+        <div class="fj-row-static" style="padding:11px 20px;">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Plan Full — Todos los días</p>
+            <p class="text-xs text-ink-400 mt-0.5">$89.000/mes · acceso ilimitado</p>
+          </div>
+          <p class="font-mono font-bold text-sm text-ink-900 w-16 text-right">72</p>
+          <p class="font-mono font-bold text-sm text-ink-900 w-28 text-right">$6.408.000</p>
+          <div class="w-12 flex justify-end">
+            <span class="fj-badge fj-badge-brand">43%</span>
+          </div>
+        </div>
+        <!-- Plan 3x/semana -->
+        <div class="fj-row-static" style="padding:11px 20px;">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Plan 3x Semana</p>
+            <p class="text-xs text-ink-400 mt-0.5">$69.000/mes · 3 clases/sem</p>
+          </div>
+          <p class="font-mono font-bold text-sm text-ink-900 w-16 text-right">86</p>
+          <p class="font-mono font-bold text-sm text-ink-900 w-28 text-right">$5.934.000</p>
+          <div class="w-12 flex justify-end">
+            <span class="fj-badge fj-badge-info">39%</span>
+          </div>
+        </div>
+        <!-- Pack 10 sesiones -->
+        <div class="fj-row-static" style="padding:11px 20px;">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Pack 10 Sesiones</p>
+            <p class="text-xs text-ink-400 mt-0.5">$55.000 pack · sin vencimiento mensual</p>
+          </div>
+          <p class="font-mono font-bold text-sm text-ink-900 w-16 text-right">54</p>
+          <p class="font-mono font-bold text-sm text-ink-900 w-28 text-right">$2.970.000</p>
+          <div class="w-12 flex justify-end">
+            <span class="fj-badge fj-badge-neutral">13%</span>
+          </div>
+        </div>
+        <!-- Plan Halterofilia -->
+        <div class="fj-row-static" style="padding:11px 20px;">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Especialidad Halterofilia</p>
+            <p class="text-xs text-ink-400 mt-0.5">$75.000/mes · acceso especialidad + 2 CF</p>
+          </div>
+          <p class="font-mono font-bold text-sm text-ink-900 w-16 text-right">36</p>
+          <p class="font-mono font-bold text-sm text-ink-900 w-28 text-right">$2.700.000</p>
+          <div class="w-12 flex justify-end">
+            <span class="fj-badge fj-badge-neutral" style="color:#a855f7;background:rgba(168,85,247,.1)">5%</span>
+          </div>
+        </div>
+        <!-- Resumen footer -->
+        <div class="fj-row-static" style="background:rgba(251,82,21,.08);padding:10px 20px;border-top:1px solid var(--fj-ink-200);">
+          <p class="text-sm font-semibold text-brand-800 flex-1">Total · 248 socios activos</p>
+          <p class="font-mono font-bold text-sm text-brand-800 w-16 text-right">248</p>
+          <p class="font-mono font-bold text-sm text-brand-800 w-28 text-right">$18.012.000</p>
+          <p class="text-xs font-semibold text-brand-600 w-12 text-right">100%</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ingresos mensuales (gráfico de barras por mes) -->
+    <div class="fj-panel p-5">
+      <div class="flex items-start justify-between mb-5">
+        <div>
+          <p class="fj-eyebrow">Tendencia</p>
+          <h3 class="fj-section-h mt-0.5">Ingresos mensuales</h3>
+        </div>
+        <div class="text-right">
+          <p class="font-mono font-bold text-[32px] leading-none text-ink-900">$18,0M</p>
+          <p class="text-xs text-ink-400 mt-1">últimos 3 meses · <span class="delta-up font-semibold">+11% vs período anterior</span></p>
+        </div>
+      </div>
+      <div class="bar-chart h-40 mb-3">
+        <!-- Ene -->
+        <div class="bar-col">
+          <span class="bar-val">$4,8M</span>
+          <div class="bar-body bg-brand-100 w-full" style="height:48%;border:1px solid var(--fj-ink-200);"></div>
+          <span class="bar-lbl">Ene</span>
+        </div>
+        <!-- Feb -->
+        <div class="bar-col">
+          <span class="bar-val">$5,1M</span>
+          <div class="bar-body bg-brand-200 w-full" style="height:51%"></div>
+          <span class="bar-lbl">Feb</span>
+        </div>
+        <!-- Mar -->
+        <div class="bar-col">
+          <span class="bar-val">$5,5M</span>
+          <div class="bar-body bg-brand-300 w-full" style="height:55%"></div>
+          <span class="bar-lbl">Mar</span>
+        </div>
+        <!-- Abr -->
+        <div class="bar-col">
+          <span class="bar-val">$5,2M</span>
+          <div class="bar-body bg-brand-200 w-full" style="height:52%"></div>
+          <span class="bar-lbl">Abr</span>
+        </div>
+        <!-- May -->
+        <div class="bar-col">
+          <span class="bar-val">$5,8M</span>
+          <div class="bar-body bg-brand-400 w-full" style="height:58%"></div>
+          <span class="bar-lbl">May</span>
+        </div>
+        <!-- Jun -->
+        <div class="bar-col">
+          <span class="bar-val brand">$6,4M</span>
+          <div class="bar-body bg-brand-500 w-full" style="height:64%"></div>
+          <span class="bar-lbl brand">Jun</span>
+        </div>
+        <!-- Jul proyectado -->
+        <div class="bar-col">
+          <span class="bar-val" style="color:#B6BCC8">~$7,1M</span>
+          <div class="bar-body w-full" style="height:71%;background:var(--fj-ink-100);border:1.5px dashed var(--fj-ink-300);"></div>
+          <span class="bar-lbl" style="color:#B6BCC8">Jul</span>
+        </div>
+        <!-- Ago proyectado -->
+        <div class="bar-col">
+          <span class="bar-val" style="color:#B6BCC8">~$7,5M</span>
+          <div class="bar-body w-full" style="height:75%;background:var(--fj-ink-100);border:1.5px dashed var(--fj-ink-300);"></div>
+          <span class="bar-lbl" style="color:#B6BCC8">Ago</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-5 text-xs text-ink-400">
+        <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm bg-brand-500"></span>Real</span>
+        <span class="flex items-center gap-1.5"><span class="inline-block w-3 h-3 rounded-sm" style="background:var(--fj-ink-100);border:1.5px dashed var(--fj-ink-300);"></span>Proyección (tendencia)</span>
+      </div>
+    </div>
+
+  </div>
 </div>
+
+<script>
+// Range pill switcher
+(function() {
+  var pills = document.querySelectorAll('.fj-pills .fj-pill[data-range]');
+  pills.forEach(function(p) {
+    p.addEventListener('click', function() {
+      pills.forEach(function(x) { x.removeAttribute('aria-selected'); });
+      p.setAttribute('aria-selected', 'true');
+    });
+  });
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Crear duelo</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+<style>
+  /* ── Input de búsqueda ── */
+  .fj-input {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    color: var(--fj-ink-900);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 0 14px 0 40px;
+    outline: none;
+    transition: border-color .15s;
+    -webkit-appearance: none;
+  }
+  .fj-input::placeholder { color: var(--fj-ink-400); }
+  .fj-input:focus { border-color: var(--fj-brand); }
+  .fj-input-wrap {
+    position: relative;
+  }
+  .fj-input-wrap .fj-input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--fj-ink-400);
+  }
+
+  /* ── Textarea ── */
+  .fj-textarea {
+    width: 100%;
+    min-height: 84px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    color: var(--fj-ink-900);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 12px 14px;
+    outline: none;
+    resize: none;
+    transition: border-color .15s;
+    -webkit-appearance: none;
+  }
+  .fj-textarea::placeholder { color: var(--fj-ink-400); }
+  .fj-textarea:focus { border-color: var(--fj-brand); }
+
+  /* ── Date input ── */
+  .fj-date {
+    width: 100%;
+    height: 44px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    color: var(--fj-ink-900);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 0 14px;
+    outline: none;
+    transition: border-color .15s;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  .fj-date:focus { border-color: var(--fj-brand); }
+  .fj-date::-webkit-calendar-picker-indicator { opacity: .4; cursor: pointer; }
+
+  /* ── Number input ── */
+  .fj-input-num {
+    height: 44px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    color: var(--fj-ink-900);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 0 12px;
+    outline: none;
+    width: 90px;
+    text-align: center;
+    -webkit-appearance: none;
+    transition: border-color .15s;
+  }
+  .fj-input-num:focus { border-color: var(--fj-brand); }
+
+  /* ── Atleta seleccionable ── */
+  .rival-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background .12s;
+    border: 1.5px solid transparent;
+  }
+  .rival-row:hover {
+    background: rgba(251,82,21,.06);
+  }
+  .rival-row.selected {
+    background: rgba(251,82,21,.09);
+    border-color: rgba(251,82,21,.35);
+  }
+
+  /* ── WOD seleccionable ── */
+  .wod-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    transition: background .12s, border-color .12s;
+  }
+  .wod-row:hover {
+    background: rgba(251,82,21,.06);
+  }
+  .wod-row.selected {
+    background: rgba(251,82,21,.09);
+    border-color: rgba(251,82,21,.35);
+  }
+  .wod-row .wod-sel-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--fj-ink-300);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: grid;
+    place-items: center;
+    transition: border-color .12s;
+  }
+  .wod-row.selected .wod-sel-dot {
+    border-color: var(--fj-brand);
+    background: var(--fj-brand);
+  }
+
+  /* ── Check icon ── */
+  .rival-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--fj-ink-200);
+    display: grid;
+    place-items: center;
+    margin-left: auto;
+    flex-shrink: 0;
+    transition: border-color .12s, background .12s;
+  }
+  .rival-row.selected .rival-check {
+    border-color: var(--fj-brand);
+    background: var(--fj-brand);
+  }
+
+  /* ── Puntos preset ── */
+  .pts-preset {
+    height: 34px;
+    padding: 0 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    color: var(--fj-ink-700);
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: border-color .12s, background .12s, color .12s;
+    white-space: nowrap;
+  }
+  .pts-preset.active,
+  .pts-preset:hover {
+    border-color: var(--fj-brand);
+    background: rgba(251,82,21,.1);
+    color: var(--fj-brand);
+  }
+
+  /* ── Section label ── */
+  .sec-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: var(--fj-ink-400);
+    margin-bottom: 10px;
+  }
+
+  /* ── Logro toggle row ── */
+  .logro-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    cursor: pointer;
+    transition: border-color .12s, background .12s;
+  }
+  .logro-row.enabled {
+    border-color: rgba(251,82,21,.4);
+    background: rgba(251,82,21,.07);
+  }
+</style>
+</head>
+<body>
+<div class="app-frame">
+
+  <!-- App bar con back a duelos.html -->
+  <header class="app-bar">
+    <a href="duelos.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1">
+      <p class="a-eyebrow">Versus</p>
+      <p class="app-bar-title">Crear duelo</p>
+    </div>
+  </header>
+
+  <main class="app-screen space-y-4">
+
+    <!-- ── 1. TIPO DE DUELO ── -->
+    <div class="acard acard-pad">
+      <p class="sec-label">Tipo de duelo</p>
+      <div class="a-seg" role="tablist" id="seg-tipo">
+        <button role="tab" aria-selected="true" onclick="selectSeg('seg-tipo',this)">1v1</button>
+        <button role="tab" aria-selected="false" onclick="selectSeg('seg-tipo',this)">Duplas</button>
+        <button role="tab" aria-selected="false" onclick="selectSeg('seg-tipo',this)">Equipo</button>
+      </div>
+    </div>
+
+    <!-- ── 2. ELEGIR RIVAL ── -->
+    <div class="acard acard-pad space-y-3">
+      <p class="sec-label">Elegir rival</p>
+
+      <!-- Input búsqueda -->
+      <div class="fj-input-wrap">
+        <span class="fj-input-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <input type="search" class="fj-input" placeholder="Busca por nombre o apodo…" autocomplete="off">
+      </div>
+
+      <!-- Lista de atletas -->
+      <div class="space-y-0.5" id="rival-list">
+
+        <!-- Atleta 1 — seleccionado -->
+        <div class="rival-row selected" onclick="selectRival(this)">
+          <div class="a-av w-10 h-10 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">MR</div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Matías Rojas</p>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="fj-badge fj-badge-neutral" style="font-size:10px">Nivel 14</span>
+              <span class="fj-dot" style="background:var(--tier-gold)"></span>
+              <span class="a-muted" style="font-size:10px">Oro</span>
+              <span class="a-muted" style="font-size:10px">·</span>
+              <span class="a-muted" style="font-size:10px">🔥 21 días</span>
+            </div>
+          </div>
+          <div class="rival-check">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+        </div>
+
+        <!-- Atleta 2 -->
+        <div class="rival-row" onclick="selectRival(this)">
+          <div class="a-av w-10 h-10 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#61D2C4,#18A957)">CS</div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Camila Soto</p>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="fj-badge fj-badge-neutral" style="font-size:10px">Nivel 16</span>
+              <span class="fj-dot" style="background:var(--tier-platinum)"></span>
+              <span class="a-muted" style="font-size:10px">Platino</span>
+              <span class="a-muted" style="font-size:10px">·</span>
+              <span class="a-muted" style="font-size:10px">🔥 43 días</span>
+            </div>
+          </div>
+          <div class="rival-check"></div>
+        </div>
+
+        <!-- Atleta 3 -->
+        <div class="rival-row" onclick="selectRival(this)">
+          <div class="a-av w-10 h-10 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#B6BCC8,#5A6172)">PD</div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Pancho Díaz</p>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="fj-badge fj-badge-neutral" style="font-size:10px">Nivel 13</span>
+              <span class="fj-dot" style="background:var(--tier-silver)"></span>
+              <span class="a-muted" style="font-size:10px">Plata</span>
+              <span class="a-muted" style="font-size:10px">·</span>
+              <span class="a-muted" style="font-size:10px">🔥 9 días</span>
+            </div>
+          </div>
+          <div class="rival-check"></div>
+        </div>
+
+        <!-- Atleta 4 -->
+        <div class="rival-row" onclick="selectRival(this)">
+          <div class="a-av w-10 h-10 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#6AA8FF,#3E7BFA)">BM</div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Bastián Mora</p>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="fj-badge fj-badge-neutral" style="font-size:10px">Nivel 11</span>
+              <span class="fj-dot" style="background:var(--tier-bronze)"></span>
+              <span class="a-muted" style="font-size:10px">Bronce</span>
+              <span class="a-muted" style="font-size:10px">·</span>
+              <span class="a-muted" style="font-size:10px">🔥 5 días</span>
+            </div>
+          </div>
+          <div class="rival-check"></div>
+        </div>
+
+        <!-- Atleta 5 -->
+        <div class="rival-row" onclick="selectRival(this)">
+          <div class="a-av w-10 h-10 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#D4A7FF,#8B5CF6)">JN</div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Javiera Núñez</p>
+            <div class="flex items-center gap-1.5 mt-0.5">
+              <span class="fj-badge fj-badge-neutral" style="font-size:10px">Nivel 15</span>
+              <span class="fj-dot" style="background:var(--tier-gold)"></span>
+              <span class="a-muted" style="font-size:10px">Oro</span>
+              <span class="a-muted" style="font-size:10px">·</span>
+              <span class="a-muted" style="font-size:10px">🔥 18 días</span>
+            </div>
+          </div>
+          <div class="rival-check"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 3. ELEGIR PRUEBA (WOD) ── -->
+    <div class="acard acard-pad space-y-2">
+      <p class="sec-label">Elegir prueba</p>
+
+      <div id="wod-list" class="space-y-1">
+
+        <!-- Fran — seleccionado -->
+        <div class="wod-row selected" onclick="selectWod(this,'fortime','21-15-9 · Thruster 43 kg + Pull-up · Mejor tiempo')">
+          <div class="wod-sel-dot">
+            <svg width="8" height="8" viewBox="0 0 10 10" fill="white"><circle cx="5" cy="5" r="5"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="font-display font-bold text-sm" style="color:var(--fj-ink-900)">Fran</span>
+              <span class="fj-fmt fj-fmt-fortime">For Time</span>
+            </div>
+            <p class="a-muted text-xs">21-15-9 · Thruster 43 kg + Pull-up · Benchmark clásico</p>
+          </div>
+          <span class="a-muted text-xs font-mono flex-shrink-0">PR: 3:22</span>
+        </div>
+
+        <!-- Helen -->
+        <div class="wod-row" onclick="selectWod(this,'fortime','3 rondas · 400 m run + 21 KB swing + 12 Pull-up')">
+          <div class="wod-sel-dot"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="font-display font-bold text-sm" style="color:var(--fj-ink-900)">Helen</span>
+              <span class="fj-fmt fj-fmt-fortime">For Time</span>
+            </div>
+            <p class="a-muted text-xs">3 rondas · 400 m run + 21 KB swing + 12 Pull-up</p>
+          </div>
+          <span class="a-muted text-xs font-mono flex-shrink-0">PR: 9:47</span>
+        </div>
+
+        <!-- Cindy -->
+        <div class="wod-row" onclick="selectWod(this,'amrap','20 min · 5 Pull-up + 10 Push-up + 15 Air squat')">
+          <div class="wod-sel-dot"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="font-display font-bold text-sm" style="color:var(--fj-ink-900)">Cindy</span>
+              <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+            </div>
+            <p class="a-muted text-xs">20 min · 5 Pull-up + 10 Push-up + 15 Air squat</p>
+          </div>
+          <span class="a-muted text-xs font-mono flex-shrink-0">PR: 22 rds</span>
+        </div>
+
+        <!-- Grace -->
+        <div class="wod-row" onclick="selectWod(this,'fortime','30 reps · Clean &amp; Jerk 61 kg · Mejor tiempo')">
+          <div class="wod-sel-dot"></div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="font-display font-bold text-sm" style="color:var(--fj-ink-900)">Grace</span>
+              <span class="fj-fmt fj-fmt-fortime">For Time</span>
+            </div>
+            <p class="a-muted text-xs">30 reps · Clean &amp; Jerk 61 kg · Benchmark de potencia</p>
+          </div>
+          <span class="a-muted text-xs font-mono flex-shrink-0">PR: 1:58</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── 4. FORMATO Y ESCALA ── -->
+    <div class="acard acard-pad space-y-3">
+      <p class="sec-label">Formato y escala</p>
+
+      <!-- Resumen WOD elegido -->
+      <div class="flex items-center gap-2.5 rounded-xl px-3 py-2.5" style="background:var(--fj-ink-100)">
+        <span id="fmt-chip" class="fj-fmt fj-fmt-fortime">For Time</span>
+        <div class="flex-1 min-w-0">
+          <p id="fmt-wod-name" class="text-sm font-semibold" style="color:var(--fj-ink-900)">Fran</p>
+          <p id="fmt-wod-desc" class="a-muted text-xs truncate">21-15-9 · Thruster 43 kg + Pull-up · Mejor tiempo</p>
+        </div>
+      </div>
+
+      <!-- Segment Rx / Scaled -->
+      <div>
+        <p class="a-muted text-xs mb-2">Escala de ejecución</p>
+        <div class="a-seg" role="tablist" id="seg-escala">
+          <button role="tab" aria-selected="true" onclick="selectSeg('seg-escala',this)">Rx</button>
+          <button role="tab" aria-selected="false" onclick="selectSeg('seg-escala',this)">Scaled</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 5. QUÉ SE JUEGA ── -->
+    <div class="acard acard-pad space-y-4">
+      <p class="sec-label">Qué se juega</p>
+
+      <!-- Puntos de competición -->
+      <div>
+        <p class="text-sm font-semibold mb-2.5" style="color:var(--fj-ink-800)">Puntos de competición</p>
+        <div class="flex items-center gap-3 mb-2.5">
+          <input type="number" class="fj-input-num" value="150" min="50" max="500" step="50" id="pts-input">
+          <span class="a-muted text-sm">puntos en juego</span>
+        </div>
+        <!-- Presets -->
+        <div class="flex flex-wrap gap-2">
+          <button class="pts-preset" onclick="setPoints(this,50)">50 pts</button>
+          <button class="pts-preset" onclick="setPoints(this,100)">100 pts</button>
+          <button class="pts-preset active" onclick="setPoints(this,150)">150 pts</button>
+          <button class="pts-preset" onclick="setPoints(this,250)">250 pts</button>
+          <button class="pts-preset" onclick="setPoints(this,500)">500 pts</button>
+        </div>
+      </div>
+
+      <!-- Logro robable -->
+      <div>
+        <p class="text-sm font-semibold mb-2.5" style="color:var(--fj-ink-800)">Logro robable <span class="a-muted font-normal">(opcional)</span></p>
+        <div class="logro-row enabled" id="logro-row" onclick="toggleLogro(this)">
+          <span id="logro-icon" class="w-9 h-9 rounded-full grid place-items-center flex-shrink-0" style="background:rgba(251,82,21,.15)">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          </span>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" id="logro-name" style="color:var(--fj-brand)">Rey de Fran</p>
+            <p class="a-muted text-xs" id="logro-desc">Si ganas, le robas el logro a Camila Soto</p>
+          </div>
+          <div class="a-switch ml-auto" aria-checked="true" id="logro-switch" role="switch" style="flex-shrink:0"></div>
+        </div>
+        <!-- Info logro -->
+        <div id="logro-detail" class="mt-2 rounded-xl px-3 py-2.5 space-y-1" style="background:rgba(251,82,21,.07);border:1px solid rgba(251,82,21,.2)">
+          <p class="a-eyebrow" style="font-size:10px;color:var(--fj-brand)">Logro disponible para robar</p>
+          <p class="text-xs font-semibold" style="color:var(--fj-ink-900)">Rey de Fran</p>
+          <p class="a-muted text-xs">De <span class="font-semibold" style="color:var(--fj-ink-800)">Camila Soto</span> · PR: <span class="font-mono font-semibold">2:58</span>. Debes ganar el duelo de Fran contra ella para obtenerlo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 6. PLAZO ── -->
+    <div class="acard acard-pad space-y-3">
+      <p class="sec-label">Plazo para completar</p>
+
+      <!-- Presets rápidos -->
+      <div class="flex flex-wrap gap-2" id="plazo-presets">
+        <button class="pts-preset" onclick="setPlazo(this,'24h')">24 h</button>
+        <button class="pts-preset active" onclick="setPlazo(this,'48h')">48 h</button>
+        <button class="pts-preset" onclick="setPlazo(this,'72h')">72 h</button>
+        <button class="pts-preset" onclick="setPlazo(this,'1sem')">1 semana</button>
+      </div>
+
+      <!-- Selector fecha/hora -->
+      <div class="flex items-center gap-2">
+        <span class="a-muted text-xs">o elige una fecha exacta:</span>
+      </div>
+      <input type="datetime-local" class="fj-date" id="plazo-date" value="2026-06-10T08:00">
+
+      <!-- Indicador dinámico -->
+      <div class="flex items-center gap-1.5">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <p class="text-xs font-semibold" id="plazo-label" style="color:var(--fj-brand)">Vence en 48 h</p>
+      </div>
+    </div>
+
+    <!-- ── 7. MENSAJE OPCIONAL ── -->
+    <div class="acard acard-pad space-y-2">
+      <p class="sec-label">Mensaje <span style="text-transform:none;font-weight:500;font-size:10px;color:var(--fj-ink-400)">(opcional)</span></p>
+      <textarea class="fj-textarea" placeholder="Tírale un mensaje a tu rival… ej: &quot;A ver si le das a Fran esta vez, Matías 💪&quot;"></textarea>
+    </div>
+
+    <!-- ── RESUMEN PREVIO AL LANZAMIENTO ── -->
+    <div class="acard overflow-hidden" style="border-color:rgba(251,82,21,.25)">
+      <div class="flex items-center gap-2 px-4 py-2.5" style="background:rgba(251,82,21,.1);border-bottom:1px solid rgba(251,82,21,.15)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span class="a-eyebrow" style="color:var(--fj-brand)">Resumen del reto</span>
+      </div>
+      <div class="acard-pad space-y-2.5">
+        <!-- VS mini -->
+        <div class="flex items-center gap-3">
+          <div class="flex items-center gap-2 flex-1 min-w-0">
+            <div class="a-av w-9 h-9 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#6AA8FF,#3E7BFA)">VF</div>
+            <div class="min-w-0">
+              <p class="text-xs font-semibold truncate" style="color:var(--fj-ink-900)">Vale (tú)</p>
+              <p class="a-muted" style="font-size:10px">Nivel 12</p>
+            </div>
+          </div>
+          <div class="w-8 h-8 rounded-full grid place-items-center flex-shrink-0 font-display font-bold text-xs" style="background:rgba(251,82,21,.15);color:var(--fj-brand)">VS</div>
+          <div class="flex items-center gap-2 flex-1 min-w-0 justify-end">
+            <div class="text-right min-w-0">
+              <p class="text-xs font-semibold truncate" style="color:var(--fj-ink-900)">Matías Rojas</p>
+              <p class="a-muted" style="font-size:10px">Nivel 14</p>
+            </div>
+            <div class="a-av w-9 h-9 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">MR</div>
+          </div>
+        </div>
+
+        <!-- Detalles -->
+        <div class="grid grid-cols-3 gap-2 pt-1" style="border-top:1px solid var(--fj-ink-100)">
+          <div class="text-center">
+            <p class="a-eyebrow" style="font-size:9px">WOD</p>
+            <p class="text-xs font-semibold mt-0.5" style="color:var(--fj-ink-900)">Fran · Rx</p>
+          </div>
+          <div class="text-center" style="border-left:1px solid var(--fj-ink-100);border-right:1px solid var(--fj-ink-100)">
+            <p class="a-eyebrow" style="font-size:9px">Puntos</p>
+            <p class="font-mono text-xs font-bold mt-0.5" style="color:var(--fj-brand)">150 pts</p>
+          </div>
+          <div class="text-center">
+            <p class="a-eyebrow" style="font-size:9px">Plazo</p>
+            <p class="text-xs font-semibold mt-0.5" style="color:var(--fj-ink-900)">48 h</p>
+          </div>
+        </div>
+
+        <!-- Logro en juego -->
+        <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(251,82,21,.07);border:1px solid rgba(251,82,21,.18)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+          <p class="text-xs" style="color:var(--fj-ink-800)">Logro en juego: <span class="font-semibold" style="color:var(--fj-brand)">Rey de Fran</span></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FOOTER: LANZAR RETO ── -->
+    <div class="pb-2">
+      <button class="a-btn a-btn-primary" onclick="lanzarReto(this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        Lanzar reto ⚡
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  /* ── Segment control ── */
+  function selectSeg(id, btn) {
+    document.querySelectorAll('#' + id + ' [role="tab"]').forEach(b => b.setAttribute('aria-selected', 'false'));
+    btn.setAttribute('aria-selected', 'true');
+  }
+
+  /* ── Selección de rival ── */
+  function selectRival(row) {
+    document.querySelectorAll('#rival-list .rival-row').forEach(r => r.classList.remove('selected'));
+    row.classList.add('selected');
+  }
+
+  /* ── Selección de WOD ── */
+  function selectWod(row, fmt, desc) {
+    document.querySelectorAll('#wod-list .wod-row').forEach(r => r.classList.remove('selected'));
+    row.classList.add('selected');
+
+    // Actualizar sección Formato
+    var name = row.querySelector('.font-display').textContent;
+    document.getElementById('fmt-wod-name').textContent = name;
+    document.getElementById('fmt-wod-desc').textContent = desc;
+
+    var chip = document.getElementById('fmt-chip');
+    chip.className = 'fj-fmt fj-fmt-' + fmt;
+    chip.textContent = fmt === 'fortime' ? 'For Time' : 'AMRAP';
+  }
+
+  /* ── Puntos preset ── */
+  function setPoints(btn, val) {
+    document.querySelectorAll('.pts-preset').forEach(b => b.classList.remove('active'));
+    // Solo activa el preset de pts (no el de plazo)
+    btn.classList.add('active');
+    document.getElementById('pts-input').value = val;
+  }
+
+  /* ── Plazo preset ── */
+  function setPlazo(btn, val) {
+    document.querySelectorAll('#plazo-presets .pts-preset').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    var labels = { '24h': 'Vence en 24 h', '48h': 'Vence en 48 h', '72h': 'Vence en 72 h', '1sem': 'Vence en 1 semana' };
+    document.getElementById('plazo-label').textContent = labels[val] || 'Plazo configurado';
+  }
+
+  /* ── Toggle logro ── */
+  function toggleLogro(row) {
+    var sw = document.getElementById('logro-switch');
+    var detail = document.getElementById('logro-detail');
+    var enabled = sw.getAttribute('aria-checked') === 'true';
+    if (enabled) {
+      sw.setAttribute('aria-checked', 'false');
+      row.classList.remove('enabled');
+      detail.style.display = 'none';
+    } else {
+      sw.setAttribute('aria-checked', 'true');
+      row.classList.add('enabled');
+      detail.style.display = '';
+    }
+  }
+
+  /* ── Lanzar reto ── */
+  function lanzarReto(btn) {
+    btn.disabled = true;
+    btn.textContent = 'Enviando reto…';
+    setTimeout(function() {
+      window.location.href = 'duelos.html';
+    }, 1200);
+  }
+</script>
+</body>
+</html>

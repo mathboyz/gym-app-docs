@@ -4,137 +4,119 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Ranking</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans min-h-screen">
+<body data-app-tab="ranking">
+<div class="app-frame">
 
-<div class="max-w-[420px] mx-auto bg-white min-h-screen flex flex-col relative">
-
-  <!-- Top bar -->
-  <header class="sticky top-0 z-10 bg-white border-b border-ink-200 px-4 pt-10 pb-3">
-    <div class="flex items-center justify-between">
-      <div>
-        <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Temporada 3</p>
-        <h1 class="font-display font-bold text-xl text-ink-900 mt-0.5">Ranking</h1>
-      </div>
-      <!-- Tabs -->
-      <div class="flex gap-1 bg-ink-100 rounded-full p-1">
-        <button class="px-3 py-1 text-xs font-semibold rounded-full bg-white text-ink-900 shadow-sm">XP</button>
-        <button class="px-3 py-1 text-xs font-semibold rounded-full text-ink-500">Puntaje</button>
-      </div>
+  <!-- App bar -->
+  <header class="app-bar">
+    <div class="flex-1 min-w-0">
+      <p class="a-eyebrow">Temporada 3</p>
+      <p class="app-bar-title">Ranking</p>
+    </div>
+    <!-- Segment XP / Puntaje -->
+    <div class="a-seg">
+      <button aria-selected="true">XP</button>
+      <button aria-selected="false">Puntaje</button>
     </div>
   </header>
 
-  <!-- Scroll content -->
-  <div class="flex-1 overflow-y-auto pb-24">
+  <main class="app-screen space-y-4">
 
-    <!-- Mi tarjeta de atleta -->
-    <div class="mx-4 mt-4 rounded-xl border border-ink-200 bg-white p-4">
+    <!-- Mi posición destacada -->
+    <div class="acard acard-pad" style="background:rgba(251,82,21,.08);border-color:rgba(251,82,21,.25)">
+      <p class="a-eyebrow mb-3" style="color:var(--fj-brand)">Mi posición</p>
       <div class="flex items-center gap-3">
-        <!-- Avatar -->
+        <!-- Avatar con anillo brand -->
         <div class="relative flex-shrink-0">
-          <div class="w-14 h-14 rounded-full bg-brand-100 flex items-center justify-center">
-            <span class="font-display font-bold text-xl text-brand-600">MR</span>
+          <div class="a-ring" style="--ring-color:var(--fj-brand)">
+            <div class="a-av w-14 h-14 text-base" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">MR</div>
           </div>
-          <!-- Nivel badge -->
-          <span class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold font-mono border-2 border-white shadow-sm" style="background:#ECC04A20;color:#a8842a;">12</span>
+          <span class="a-lvl">12</span>
         </div>
         <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-2">
-            <p class="font-semibold text-ink-900 text-sm">Matías Rojas</p>
-            <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold" style="background:#ECC04A20;color:#a8842a">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-              Oro
+          <div class="flex items-center gap-2 flex-wrap mb-0.5">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Matías Rojas</p>
+            <span class="fj-badge" style="background:rgba(236,192,74,.18);color:var(--tier-gold)">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" style="display:inline;margin-right:2px"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>Oro
             </span>
-            <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[11px] font-semibold bg-brand-50 text-brand-600">
-              <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-              7 días
+            <span class="fj-badge fj-badge-brand">
+              <svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" style="display:inline;margin-right:2px"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>7 días
             </span>
           </div>
-          <p class="text-[11px] text-ink-400 mt-0.5">Nivel 12 · Forja Box Providencia</p>
-          <!-- XP bar -->
+          <p class="a-muted text-xs">Nivel 12 · Forja Box Providencia</p>
           <div class="mt-2">
             <div class="flex justify-between items-center mb-1">
-              <span class="text-[10px] font-semibold text-ink-400">XP Nivel</span>
-              <span class="text-[10px] font-mono font-semibold text-ink-500">1.240 / 2.000</span>
+              <span class="text-[10px] font-semibold" style="color:var(--fj-ink-400)">XP Nivel</span>
+              <span class="font-mono text-[10px]" style="color:var(--fj-ink-500)">1.240 / 2.000</span>
             </div>
-            <div class="h-1.5 rounded-full bg-ink-100 overflow-hidden">
-              <div class="h-full rounded-full bg-brand-500" style="width:62%"></div>
-            </div>
+            <div class="a-prog"><div style="width:62%"></div></div>
           </div>
         </div>
         <div class="text-right flex-shrink-0">
-          <p class="font-mono font-bold text-2xl text-ink-900">2.190</p>
-          <p class="text-[10px] text-ink-400">puntaje</p>
-          <p class="text-[11px] font-semibold text-brand-600 mt-0.5">#3 temporada</p>
+          <p class="font-mono font-bold text-2xl leading-none" style="color:var(--fj-ink-900)">2.190</p>
+          <p class="a-muted text-[10px] mt-0.5">puntaje</p>
+          <p class="text-[11px] font-bold mt-1" style="color:var(--fj-brand)">#3 temp.</p>
         </div>
       </div>
     </div>
 
-    <!-- Podio top 3 -->
-    <div class="mx-4 mt-4">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Top 3 · Temporada 3</p>
+
+    <!-- Acceso a Competencias del box -->
+    <a href="competencias.html" class="acard acard-pad flex items-center gap-3">
+      <span class="w-10 h-10 rounded-xl grid place-items-center shrink-0" style="background:rgba(251,82,21,.12);color:var(--fj-brand-700)">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg>
+      </span>
+      <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">Competencias del box</p><p class="a-muted text-xs">Inscríbete a torneos y ligas</p></div>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-300"><polyline points="9 18 15 12 9 6"/></svg>
+    </a>
+
+    <!-- Podio Top 3 -->
+    <div>
+      <p class="a-eyebrow mb-3">Top 3 · Temporada 3</p>
       <div class="flex items-end gap-2">
 
-        <!-- 2do Pancho -->
+        <!-- 2do — Pancho Díaz -->
         <div class="flex-1 flex flex-col items-center">
-          <div class="w-10 h-10 rounded-full bg-ink-100 flex items-center justify-center mb-1">
-            <span class="font-display font-bold text-sm text-ink-600">PD</span>
-          </div>
-          <p class="text-xs font-semibold text-ink-700 text-center leading-tight">Pancho<br>Díaz</p>
-          <p class="font-mono font-bold text-sm text-ink-900 mt-1">2.310</p>
-          <div class="w-full mt-2 rounded-t-lg flex flex-col items-center justify-end pt-3 pb-2" style="background:#AEB7C420;height:72px;">
-            <span class="font-display font-bold text-2xl" style="color:#AEB7C4">2</span>
+          <div class="a-av w-11 h-11 text-sm mb-1" style="background:linear-gradient(135deg,#AEB7C4,#7c8696)">PD</div>
+          <p class="text-xs font-semibold text-center leading-tight" style="color:var(--fj-ink-700)">Pancho<br>Díaz</p>
+          <p class="font-mono font-bold text-sm mt-1" style="color:var(--fj-ink-900)">2.310</p>
+          <div class="w-full mt-2 rounded-t-xl flex flex-col items-center justify-end pb-3 pt-2" style="background:rgba(174,183,196,.18);height:72px;">
+            <span class="font-display font-bold text-2xl" style="color:var(--tier-silver)">2</span>
           </div>
         </div>
 
-        <!-- 1ro Camila -->
+        <!-- 1ro — Camila Soto -->
         <div class="flex-1 flex flex-col items-center">
-          <div class="relative">
-            <div class="w-12 h-12 rounded-full bg-ink-100 flex items-center justify-center mb-1">
-              <span class="font-display font-bold text-base text-ink-600">CS</span>
-            </div>
-            <span class="absolute -top-1 -right-1">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="#ECC04A"><path d="M12 1L9 9H1L7.5 14L5.5 22L12 17.5L18.5 22L16.5 14L23 9H15Z"/></svg>
+          <div class="relative mb-1">
+            <div class="a-av w-13 h-13 text-sm" style="width:52px;height:52px;background:linear-gradient(135deg,#ECC04A,#a8842a)">CS</div>
+            <span class="absolute -top-2 left-1/2 -translate-x-1/2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(236,192,74,.9)"><path d="M2 4l3 12h14l3-12-6 5-4-8-4 8-6-5z"/></svg>
             </span>
           </div>
-          <p class="text-xs font-semibold text-ink-700 text-center leading-tight">Camila<br>Soto</p>
-          <p class="font-mono font-bold text-sm text-ink-900 mt-1">2.480</p>
-          <div class="w-full mt-2 rounded-t-lg flex flex-col items-center justify-end pt-3 pb-2" style="background:#ECC04A20;height:96px;">
-            <span class="font-display font-bold text-2xl" style="color:#a8842a">1</span>
+          <p class="text-xs font-semibold text-center leading-tight" style="color:var(--fj-ink-700)">Camila<br>Soto</p>
+          <p class="font-mono font-bold text-sm mt-1" style="color:var(--fj-ink-900)">2.480</p>
+          <div class="w-full mt-2 rounded-t-xl flex flex-col items-center justify-end pb-3 pt-2" style="background:rgba(236,192,74,.18);height:96px;">
+            <span class="font-display font-bold text-2xl" style="color:var(--tier-gold)">1</span>
           </div>
         </div>
 
-        <!-- 3ro Matías (yo) -->
+        <!-- 3ro — Matías (yo) -->
         <div class="flex-1 flex flex-col items-center">
-          <div class="w-10 h-10 rounded-full bg-brand-50 border-2 border-brand-200 flex items-center justify-center mb-1">
-            <span class="font-display font-bold text-sm text-brand-600">MR</span>
-          </div>
-          <p class="text-xs font-semibold text-brand-600 text-center leading-tight">Matías<br>(tú)</p>
-          <p class="font-mono font-bold text-sm text-brand-600 mt-1">2.190</p>
-          <div class="w-full mt-2 rounded-t-lg flex flex-col items-center justify-end pt-3 pb-2" style="background:#C77B3C20;height:56px;">
-            <span class="font-display font-bold text-2xl" style="color:#C77B3C">3</span>
+          <div class="a-av w-11 h-11 text-sm mb-1" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">MR</div>
+          <p class="text-xs font-bold text-center leading-tight" style="color:var(--fj-brand)">Matías<br>(tú)</p>
+          <p class="font-mono font-bold text-sm mt-1" style="color:var(--fj-brand)">2.190</p>
+          <div class="w-full mt-2 rounded-t-xl flex flex-col items-center justify-end pb-3 pt-2" style="background:rgba(199,123,60,.18);height:56px;">
+            <span class="font-display font-bold text-2xl" style="color:var(--tier-bronze)">3</span>
           </div>
         </div>
 
@@ -142,208 +124,110 @@ tailwind.config = {
     </div>
 
     <!-- Leaderboard completo -->
-    <div class="mx-4 mt-4 rounded-xl border border-ink-200 bg-white overflow-hidden">
-      <div class="px-4 pt-4 pb-2">
-        <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Clasificación general</p>
+    <div class="acard">
+      <div class="acard-pad" style="border-bottom:1px solid var(--fj-ink-100)">
+        <p class="a-eyebrow">Clasificación general</p>
       </div>
 
       <!-- Fila 1 -->
-      <div class="flex items-center gap-3 px-4 py-3 border-b border-ink-100">
-        <span class="w-6 text-center font-mono font-bold text-sm" style="color:#a8842a">1</span>
-        <div class="w-8 h-8 rounded-full bg-ink-100 flex items-center justify-center flex-shrink-0">
-          <span class="text-xs font-bold text-ink-600">CS</span>
-        </div>
+      <div class="arow acard-pad" style="border-bottom:1px solid var(--fj-ink-100)">
+        <span class="font-mono font-bold text-sm w-6 text-center flex-shrink-0" style="color:var(--tier-gold)">1</span>
+        <div class="a-av w-9 h-9 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#ECC04A,#a8842a)">CS</div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-ink-900">Camila Soto</p>
-          <p class="text-[11px] text-ink-400">Nivel 14 · Platino</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Camila Soto</p>
+          <p class="a-muted text-xs">Nivel 14 · <span style="color:#61D2C4">Platino</span></p>
         </div>
-        <p class="font-mono font-bold text-sm text-ink-900">2.480</p>
+        <span class="font-mono font-bold text-sm flex-shrink-0" style="color:var(--fj-ink-900)">2.480</span>
       </div>
 
       <!-- Fila 2 -->
-      <div class="flex items-center gap-3 px-4 py-3 border-b border-ink-100">
-        <span class="w-6 text-center font-mono font-bold text-sm" style="color:#7c8696">2</span>
-        <div class="w-8 h-8 rounded-full bg-ink-100 flex items-center justify-center flex-shrink-0">
-          <span class="text-xs font-bold text-ink-600">PD</span>
-        </div>
+      <div class="arow acard-pad" style="border-bottom:1px solid var(--fj-ink-100)">
+        <span class="font-mono font-bold text-sm w-6 text-center flex-shrink-0" style="color:var(--tier-silver)">2</span>
+        <div class="a-av w-9 h-9 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#AEB7C4,#7c8696)">PD</div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-ink-900">Pancho Díaz</p>
-          <p class="text-[11px] text-ink-400">Nivel 13 · Oro</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Pancho Díaz</p>
+          <p class="a-muted text-xs">Nivel 13 · <span style="color:var(--tier-gold)">Oro</span></p>
         </div>
-        <p class="font-mono font-bold text-sm text-ink-900">2.310</p>
+        <span class="font-mono font-bold text-sm flex-shrink-0" style="color:var(--fj-ink-900)">2.310</span>
       </div>
 
       <!-- Fila 3 — YO -->
-      <div class="flex items-center gap-3 px-4 py-3 border-b border-ink-100 bg-brand-50">
-        <span class="w-6 text-center font-mono font-bold text-sm" style="color:#C77B3C">3</span>
-        <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center flex-shrink-0 border border-brand-200">
-          <span class="text-xs font-bold text-brand-600">MR</span>
-        </div>
+      <div class="arow acard-pad" style="background:rgba(251,82,21,.07);border-bottom:1px solid var(--fj-ink-100)">
+        <span class="font-mono font-bold text-sm w-6 text-center flex-shrink-0" style="color:var(--tier-bronze)">3</span>
+        <div class="a-av w-9 h-9 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">MR</div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-brand-700">Matías Rojas <span class="text-[10px] font-normal text-brand-400">(tú)</span></p>
-          <p class="text-[11px] text-brand-400">Nivel 12 · Oro</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-brand)">Matías Rojas <span class="text-[10px] font-normal" style="color:rgba(251,82,21,.6)">(tú)</span></p>
+          <p class="text-xs" style="color:rgba(251,82,21,.6)">Nivel 12 · <span style="color:var(--tier-gold)">Oro</span></p>
         </div>
-        <p class="font-mono font-bold text-sm text-brand-600">2.190</p>
+        <span class="font-mono font-bold text-sm flex-shrink-0" style="color:var(--fj-brand)">2.190</span>
       </div>
 
       <!-- Fila 4 -->
-      <div class="flex items-center gap-3 px-4 py-3 border-b border-ink-100">
-        <span class="w-6 text-center font-mono font-bold text-sm text-ink-400">4</span>
-        <div class="w-8 h-8 rounded-full bg-ink-100 flex items-center justify-center flex-shrink-0">
-          <span class="text-xs font-bold text-ink-600">KV</span>
-        </div>
+      <div class="arow acard-pad" style="border-bottom:1px solid var(--fj-ink-100)">
+        <span class="font-mono font-bold text-sm w-6 text-center flex-shrink-0" style="color:var(--fj-ink-400)">4</span>
+        <div class="a-av w-9 h-9 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#B6BCC8,#8A91A1)">KV</div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-ink-700">Karin Vera</p>
-          <p class="text-[11px] text-ink-400">Nivel 11 · Oro</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-800)">Karin Vera</p>
+          <p class="a-muted text-xs">Nivel 11 · <span style="color:var(--tier-gold)">Oro</span></p>
         </div>
-        <p class="font-mono font-bold text-sm text-ink-700">2.050</p>
+        <span class="font-mono font-bold text-sm flex-shrink-0" style="color:var(--fj-ink-800)">2.050</span>
       </div>
 
       <!-- Fila 5 -->
-      <div class="flex items-center gap-3 px-4 py-3">
-        <span class="w-6 text-center font-mono font-bold text-sm text-ink-400">5</span>
-        <div class="w-8 h-8 rounded-full bg-ink-100 flex items-center justify-center flex-shrink-0">
-          <span class="text-xs font-bold text-ink-600">BM</span>
-        </div>
+      <div class="arow acard-pad">
+        <span class="font-mono font-bold text-sm w-6 text-center flex-shrink-0" style="color:var(--fj-ink-400)">5</span>
+        <div class="a-av w-9 h-9 text-xs flex-shrink-0" style="background:linear-gradient(135deg,#61D2C4,#3a9e8c)">BM</div>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-ink-700">Bastián Mora</p>
-          <p class="text-[11px] text-ink-400">Nivel 10 · Plata</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-800)">Bastián Mora</p>
+          <p class="a-muted text-xs">Nivel 10 · <span style="color:var(--tier-silver)">Plata</span></p>
         </div>
-        <p class="font-mono font-bold text-sm text-ink-700">1.890</p>
-      </div>
-    </div>
-
-    <!-- Mis logros -->
-    <div class="mx-4 mt-4">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Mis logros</p>
-      <div class="grid grid-cols-3 gap-2">
-
-        <!-- Logro conseguido -->
-        <div class="rounded-xl border border-ink-200 bg-white p-3 flex flex-col items-center gap-1.5">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center" style="background:#ECC04A20">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#a8842a"><path d="M17 6H7L5 12H19L17 6Z M12 22C9 22 6 20 5 17H19C18 20 15 22 12 22Z M4 3H20V5H4V3Z"/></svg>
-          </div>
-          <p class="text-[10px] font-semibold text-ink-800 text-center leading-tight">Rey de Fran</p>
-          <span class="text-[9px] font-semibold rounded-full px-1.5 py-0.5 bg-success/10 text-success">Tuyo</span>
-        </div>
-
-        <!-- Logro conseguido -->
-        <div class="rounded-xl border border-ink-200 bg-white p-3 flex flex-col items-center gap-1.5">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center bg-brand-50">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2.2"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-          </div>
-          <p class="text-[10px] font-semibold text-ink-800 text-center leading-tight">Racha 7</p>
-          <span class="text-[9px] font-semibold rounded-full px-1.5 py-0.5 bg-success/10 text-success">Tuyo</span>
-        </div>
-
-        <!-- Logro conseguido -->
-        <div class="rounded-xl border border-ink-200 bg-white p-3 flex flex-col items-center gap-1.5">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center bg-ink-50">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          </div>
-          <p class="text-[10px] font-semibold text-ink-800 text-center leading-tight">Madrugador</p>
-          <span class="text-[9px] font-semibold rounded-full px-1.5 py-0.5 bg-success/10 text-success">Tuyo</span>
-        </div>
-
-        <!-- Logro bloqueado -->
-        <div class="rounded-xl border border-dashed border-ink-200 bg-ink-50 p-3 flex flex-col items-center gap-1.5">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center bg-ink-100">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B6BCC8" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </div>
-          <p class="text-[10px] font-semibold text-ink-400 text-center leading-tight">Imbatible</p>
-          <span class="text-[9px] font-semibold rounded-full px-1.5 py-0.5 bg-ink-100 text-ink-400">Bloqueado</span>
-        </div>
-
-        <!-- Logro bloqueado -->
-        <div class="rounded-xl border border-dashed border-ink-200 bg-ink-50 p-3 flex flex-col items-center gap-1.5">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center bg-ink-100">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B6BCC8" stroke-width="2.2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-          </div>
-          <p class="text-[10px] font-semibold text-ink-400 text-center leading-tight">Top 1 Global</p>
-          <span class="text-[9px] font-semibold rounded-full px-1.5 py-0.5 bg-ink-100 text-ink-400">Bloqueado</span>
-        </div>
-
-        <!-- Más logros -->
-        <div class="rounded-xl border border-ink-200 bg-white p-3 flex flex-col items-center justify-center gap-1 cursor-pointer hover:bg-ink-50 transition-colors">
-          <p class="text-[10px] font-semibold text-ink-400 text-center">+8 más</p>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-        </div>
+        <span class="font-mono font-bold text-sm flex-shrink-0" style="color:var(--fj-ink-800)">1.890</span>
       </div>
     </div>
 
     <!-- Logros robables -->
-    <div class="mx-4 mt-4 mb-2">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Logros robables</p>
+    <div>
+      <p class="a-eyebrow mb-3">Logros robables</p>
 
-      <div class="rounded-xl border border-brand-200 bg-brand-50 p-4">
+      <!-- Logro 1 — robable destacado -->
+      <div class="acard acard-pad" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.25)">
         <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center bg-white border border-brand-100 flex-shrink-0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#FB5215"><path d="M17 6H7L5 12H19L17 6Z M12 22C9 22 6 20 5 17H19C18 20 15 22 12 22Z M4 3H20V5H4V3Z"/></svg>
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(251,82,21,.15)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-brand)"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg>
           </div>
           <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2">
-              <p class="text-sm font-semibold text-ink-900">Rey de Fran</p>
-              <span class="text-[10px] font-semibold rounded-full px-2 py-0.5 bg-brand-100 text-brand-700">Robable</span>
+            <div class="flex items-center gap-2 flex-wrap mb-0.5">
+              <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Rey de Fran</p>
+              <span class="fj-badge fj-badge-brand">Robable</span>
             </div>
-            <p class="text-xs text-ink-500 mt-0.5">En poder de <span class="font-semibold text-ink-700">Camila Soto</span> · Récord: <span class="font-mono font-semibold">2:58</span></p>
-            <p class="text-[11px] text-ink-400 mt-1">Supera su tiempo en el WOD Fran para arrebatarle el logro.</p>
+            <p class="a-sub text-xs">En poder de <span class="font-semibold" style="color:var(--fj-ink-800)">Camila Soto</span></p>
+            <p class="a-muted text-xs mt-0.5">Récord: <span class="font-mono font-semibold" style="color:var(--fj-ink-700)">2:58</span> · Supera su tiempo en el WOD Fran</p>
           </div>
         </div>
-        <button class="mt-3 w-full h-10 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors cursor-pointer">
-          Ver mi PR en Fran
-        </button>
+        <button class="a-btn a-btn-primary mt-3" onclick="location.href='detalle-ejercicio.html'">Ver mi PR en Fran</button>
       </div>
 
-      <div class="rounded-xl border border-ink-200 bg-white p-4 mt-2">
+      <!-- Logro 2 -->
+      <div class="acard acard-pad mt-3">
         <div class="flex items-start gap-3">
-          <div class="w-10 h-10 rounded-full flex items-center justify-center bg-ink-50 border border-ink-100 flex-shrink-0">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2.2"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+          <div class="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0" style="background:var(--fj-ink-100)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-500)"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
           </div>
           <div class="flex-1 min-w-0">
-            <div class="flex items-center gap-2">
-              <p class="text-sm font-semibold text-ink-900">Cindy Queen</p>
-              <span class="text-[10px] font-semibold rounded-full px-2 py-0.5 bg-ink-100 text-ink-500">Robable</span>
+            <div class="flex items-center gap-2 flex-wrap mb-0.5">
+              <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Cindy Queen</p>
+              <span class="fj-badge fj-badge-neutral">Robable</span>
             </div>
-            <p class="text-xs text-ink-500 mt-0.5">En poder de <span class="font-semibold text-ink-700">Pancho Díaz</span> · Récord: <span class="font-mono font-semibold">18 rondas</span></p>
+            <p class="a-sub text-xs">En poder de <span class="font-semibold" style="color:var(--fj-ink-800)">Pancho Díaz</span></p>
+            <p class="a-muted text-xs mt-0.5">Récord: <span class="font-mono font-semibold" style="color:var(--fj-ink-700)">18 rondas</span></p>
           </div>
+          <button class="a-btn a-btn-ghost" style="width:auto;height:34px;padding:0 14px;font-size:12px;flex-shrink:0" onclick="location.href='crear-duelo.html'">Retar</button>
         </div>
       </div>
+
     </div>
 
-  </div><!-- /scroll -->
-
-  <!-- Bottom tab bar -->
-  <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] z-20 bg-white border-t border-ink-200">
-    <div class="flex items-center justify-around h-16 px-2">
-
-      <a href="hoy.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Hoy</span>
-      </a>
-
-      <a href="reservar.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Reservar</span>
-      </a>
-
-      <!-- Ranking ACTIVO -->
-      <a href="ranking.html" class="flex flex-col items-center gap-0.5 w-14 cursor-pointer">
-        <svg class="w-6 h-6 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-        <span class="text-[10px] font-semibold text-brand-500">Ranking</span>
-      </a>
-
-      <a href="red-social.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Social</span>
-      </a>
-
-      <a href="perfil.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Perfil</span>
-      </a>
-    </div>
-  </nav>
-
+  </main>
 </div>
 </body>
 </html>

@@ -4,506 +4,191 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Camila Soto</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style>
-  body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;}
-  .tab-btn { transition: all .15s; }
-  .tab-btn.active { color: #FB5215; border-bottom-color: #FB5215; }
-  .tab-content { display: none; }
-  .tab-content.active { display: block; }
-</style>
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
+<body data-page="clientes" data-title="Camila Soto" data-eyebrow="Clientes · Perfil">
+<div data-fj-content>
+  <div class="fj-pad fj-maxw space-y-5">
 
-<div class="flex h-screen overflow-hidden">
+    <!-- Layout 2 columnas -->
+    <div class="grid grid-cols-3 gap-5 items-start">
 
-  <!-- Sidebar -->
-  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col">
-    <div class="h-16 flex items-center px-5 border-b border-ink-200">
-      <div class="flex items-center gap-2.5">
-        <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-        </span>
-        <span class="font-display font-bold text-xl tracking-tight">Forja<span class="text-brand-500">.</span></span>
-      </div>
-    </div>
-    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
-      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        Dashboard
-      </a>
-      <a href="clientes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-brand-500/10 text-brand-600 font-semibold text-sm">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Clientes
-      </a>
-      <a href="calendario.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Calendario
-      </a>
-      <a href="tipo-clases.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Clases
-      </a>
-      <a href="constructor-rutina.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        Rutinas
-      </a>
-      <a href="planes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-        Planes
-      </a>
-      <a href="pagos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        Pagos
-      </a>
-      <a href="metricas.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Métricas
-      </a>
-      <a href="competencias.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-        Competencias
-      </a>
-      <a href="configuracion.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 font-medium text-sm transition-colors">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        Configuración
-      </a>
-    </nav>
-    <div class="px-3 py-4 border-t border-ink-200">
-      <div class="flex items-center gap-3 px-2">
-        <div class="w-8 h-8 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 text-xs font-bold">VF</div>
-        <div class="min-w-0">
-          <p class="text-sm font-semibold text-ink-900 truncate">Vale Fuentes</p>
-          <p class="text-xs text-ink-400">Admin</p>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main -->
-  <div class="flex-1 flex flex-col overflow-hidden">
-
-    <!-- Topbar -->
-    <header class="h-16 bg-white border-b border-ink-200 flex items-center justify-between px-6 shrink-0">
-      <div class="flex items-center gap-3">
-        <a href="clientes.html" class="flex items-center gap-1.5 text-sm font-medium text-ink-500 hover:text-ink-900 transition-colors">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          Clientes
-        </a>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-ink-300"><polyline points="9 18 15 12 9 6"/></svg>
-        <span class="text-sm font-semibold text-ink-900">Camila Soto</span>
-      </div>
-      <div class="flex items-center gap-3">
-        <div class="relative">
-          <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" placeholder="Buscar cliente…" class="pl-9 pr-4 h-9 text-sm bg-ink-50 border border-ink-200 rounded-full focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 w-56 text-ink-700 placeholder-ink-400">
-        </div>
-        <div class="w-9 h-9 rounded-full bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 text-sm font-bold">VF</div>
-      </div>
-    </header>
-
-    <!-- Contenido -->
-    <main class="flex-1 overflow-y-auto p-6 space-y-5">
-
-      <!-- Cabecera cliente -->
-      <div class="bg-white border border-ink-200 rounded-xl p-6">
-        <div class="flex items-start justify-between gap-4">
-          <div class="flex items-center gap-4">
-            <!-- Avatar grande -->
-            <div class="w-16 h-16 rounded-2xl bg-brand-100 border border-brand-200 flex items-center justify-center text-brand-700 font-display font-bold text-2xl shrink-0">CS</div>
-            <div>
-              <div class="flex items-center gap-2.5 mb-1">
-                <h2 class="font-display font-bold text-2xl text-ink-900">Camila Soto</h2>
-                <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Activo</span>
-              </div>
-              <p class="text-sm text-ink-500 mb-2">camila.soto@email.com · +56 9 8765 4321 · RUT 12.345.678-9</p>
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-100">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-                  Plan Full
-                </span>
-                <span class="text-xs text-ink-400">Vence 30 jun 2026</span>
-                <span class="text-ink-200">·</span>
-                <span class="text-xs text-ink-400">Ingresó mar 2024</span>
-              </div>
+      <!-- Columna izquierda: ficha del socio -->
+      <div class="space-y-4">
+        <!-- Panel principal -->
+        <div class="fj-panel p-6 flex flex-col items-center text-center gap-4">
+          <!-- Avatar grande -->
+          <div class="w-20 h-20 rounded-2xl bg-brand-100 border-2 border-brand-200 flex items-center justify-center text-brand-700 font-display font-bold text-3xl">CS</div>
+          <div>
+            <h2 class="font-display font-bold text-xl text-ink-900">Camila Soto</h2>
+            <p class="font-mono text-sm text-ink-400 mt-0.5">12.345.678-9</p>
+          </div>
+          <span class="fj-badge fj-badge-success">Al día</span>
+          <div class="w-full pt-3 border-t border-ink-100 text-left space-y-2.5">
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-ink-500">Miembro desde</span>
+              <span class="font-mono text-ink-700">mar 2024</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-ink-500">Email</span>
+              <span class="text-ink-700 text-xs">camila.soto@gmail.com</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-ink-500">Teléfono</span>
+              <span class="font-mono text-xs text-ink-700">+56 9 8765 4321</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-ink-500">Género</span>
+              <span class="text-ink-700">Femenino</span>
+            </div>
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-ink-500">Nacimiento</span>
+              <span class="font-mono text-xs text-ink-700">14 ago 1995</span>
             </div>
           </div>
-          <!-- Acciones -->
-          <div class="flex items-center gap-2 shrink-0">
-            <button class="h-9 px-3.5 rounded-full border border-ink-200 text-ink-600 text-sm font-semibold hover:bg-ink-50 transition-colors flex items-center gap-1.5">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              Mensaje
-            </button>
-            <button class="h-9 px-3.5 rounded-full border border-ink-200 text-ink-600 text-sm font-semibold hover:bg-ink-50 transition-colors flex items-center gap-1.5">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-              Congelar
-            </button>
-            <a href="editar-cliente.html" class="h-9 px-4 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors flex items-center gap-1.5">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-              Editar
-            </a>
-          </div>
+          <a href="editar-cliente.html" class="fj-btn fj-btn-primary w-full justify-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Editar
+          </a>
+        </div>
+
+        <!-- Notas -->
+        <div class="fj-panel p-4">
+          <p class="fj-eyebrow mb-2">Notas</p>
+          <p class="text-sm text-ink-700 leading-relaxed">Tendinitis en rodilla derecha. Evitar saltos de alto impacto por 2 semanas. Prefiere clases de las 09:00.</p>
         </div>
       </div>
 
-      <!-- Stats rápidos -->
-      <div class="grid grid-cols-4 gap-4">
-        <div class="bg-white border border-ink-200 rounded-xl p-4 text-center">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Clases totales</p>
-          <p class="font-mono font-bold text-3xl text-ink-900">54</p>
-          <p class="text-xs text-ink-400 mt-1">desde el ingreso</p>
-        </div>
-        <div class="bg-white border border-ink-200 rounded-xl p-4 text-center">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Este mes</p>
-          <p class="font-mono font-bold text-3xl text-ink-900">12</p>
-          <p class="text-xs text-ink-400 mt-1">clases en jun</p>
-        </div>
-        <div class="bg-white border border-ink-200 rounded-xl p-4 text-center">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Racha actual</p>
-          <p class="font-mono font-bold text-3xl text-brand-600">8</p>
-          <p class="text-xs text-ink-400 mt-1">días seguidos</p>
-        </div>
-        <div class="bg-white border border-ink-200 rounded-xl p-4 text-center">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">XP total</p>
-          <p class="font-mono font-bold text-3xl text-ink-900">1.240</p>
-          <p class="text-xs text-ink-400 mt-1">nivel Plata</p>
-        </div>
-      </div>
+      <!-- Columna derecha: stats + membresía + historial -->
+      <div class="col-span-2 space-y-5">
 
-      <!-- Tabs -->
-      <div class="bg-white border border-ink-200 rounded-xl overflow-hidden">
-        <!-- Tab nav -->
-        <div class="flex border-b border-ink-200 px-2 pt-1">
-          <button onclick="setTab('resumen')" id="tab-btn-resumen" class="tab-btn active px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent -mb-px transition-colors">Resumen</button>
-          <button onclick="setTab('asistencia')" id="tab-btn-asistencia" class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent -mb-px text-ink-500 hover:text-ink-900 transition-colors">Asistencia</button>
-          <button onclick="setTab('pagos')" id="tab-btn-pagos" class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent -mb-px text-ink-500 hover:text-ink-900 transition-colors">Pagos</button>
-          <button onclick="setTab('progreso')" id="tab-btn-progreso" class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent -mb-px text-ink-500 hover:text-ink-900 transition-colors">Progreso</button>
-          <button onclick="setTab('gamificacion')" id="tab-btn-gamificacion" class="tab-btn px-4 py-2.5 text-sm font-medium border-b-2 border-transparent -mb-px text-ink-500 hover:text-ink-900 transition-colors">Gamificación</button>
-        </div>
-
-        <!-- Tab: Resumen -->
-        <div id="tab-resumen" class="tab-content active p-6">
-          <div class="grid grid-cols-2 gap-6">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Información del plan</p>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Plan actual</span>
-                  <span class="text-sm font-semibold text-ink-900">Full</span>
-                </div>
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Monto mensual</span>
-                  <span class="font-mono text-sm font-semibold text-ink-900">$89.000</span>
-                </div>
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Próximo pago</span>
-                  <span class="font-mono text-sm font-semibold text-ink-900">30 jun 2026</span>
-                </div>
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Estado de pago</span>
-                  <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-success/10 text-success">Al día</span>
-                </div>
-                <div class="flex items-center justify-between py-2">
-                  <span class="text-sm text-ink-500">Método de pago</span>
-                  <span class="text-sm text-ink-700">Transferencia</span>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Datos personales</p>
-              <div class="space-y-3">
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Fecha de nacimiento</span>
-                  <span class="font-mono text-sm text-ink-700">15 mar 1995</span>
-                </div>
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Teléfono</span>
-                  <span class="font-mono text-sm text-ink-700">+56 9 8765 4321</span>
-                </div>
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Objetivo</span>
-                  <span class="text-sm text-ink-700">Rendimiento</span>
-                </div>
-                <div class="flex items-center justify-between py-2 border-b border-ink-100">
-                  <span class="text-sm text-ink-500">Ingresó</span>
-                  <span class="font-mono text-sm text-ink-700">3 mar 2024</span>
-                </div>
-                <div class="flex items-center justify-between py-2">
-                  <span class="text-sm text-ink-500">Notas</span>
-                  <span class="text-sm text-ink-500">Lesión hombro derecho</span>
-                </div>
-              </div>
-            </div>
+        <!-- Stats -->
+        <div class="grid grid-cols-4 gap-3">
+          <div class="fj-panel p-4 text-center">
+            <p class="fj-eyebrow mb-2">Este mes</p>
+            <p class="font-mono font-bold text-3xl text-ink-900">12</p>
+            <p class="text-xs text-ink-400 mt-1">clases jun</p>
+          </div>
+          <div class="fj-panel p-4 text-center">
+            <p class="fj-eyebrow mb-2">Asistencia</p>
+            <p class="font-mono font-bold text-3xl text-ink-900">87%</p>
+            <p class="text-xs text-ink-400 mt-1">últimos 30d</p>
+          </div>
+          <div class="fj-panel p-4 text-center">
+            <p class="fj-eyebrow mb-2">Racha</p>
+            <p class="font-mono font-bold text-3xl text-brand-600">8</p>
+            <p class="text-xs text-ink-400 mt-1">días seguidos</p>
+          </div>
+          <div class="fj-panel p-4 text-center">
+            <p class="fj-eyebrow mb-2">Ranking</p>
+            <p class="font-mono font-bold text-3xl text-ink-900">#5</p>
+            <p class="text-xs text-ink-400 mt-1">en competencia</p>
           </div>
         </div>
 
-        <!-- Tab: Asistencia -->
-        <div id="tab-asistencia" class="tab-content p-6">
-          <div class="flex items-center justify-between mb-4">
-            <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Historial de asistencia</p>
-            <span class="text-xs text-ink-400 bg-ink-50 border border-ink-200 rounded-full px-3 py-1">Jun 2026</span>
+        <!-- Membresía -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <p class="fj-section-h">Membresía</p>
           </div>
-          <!-- Mini calendario de asistencia -->
-          <div class="grid grid-cols-7 gap-1.5 mb-6">
-            <div class="text-center text-[11px] font-semibold text-ink-400 pb-1">L</div>
-            <div class="text-center text-[11px] font-semibold text-ink-400 pb-1">M</div>
-            <div class="text-center text-[11px] font-semibold text-ink-400 pb-1">M</div>
-            <div class="text-center text-[11px] font-semibold text-ink-400 pb-1">J</div>
-            <div class="text-center text-[11px] font-semibold text-ink-400 pb-1">V</div>
-            <div class="text-center text-[11px] font-semibold text-ink-400 pb-1">S</div>
-            <div class="text-center text-[11px] font-semibold text-ink-400 pb-1">D</div>
-            <!-- Semana 1 -->
-            <div class="h-9 rounded-lg bg-ink-100 flex items-center justify-center text-xs text-ink-400">28</div>
-            <div class="h-9 rounded-lg bg-ink-100 flex items-center justify-center text-xs text-ink-400">29</div>
-            <div class="h-9 rounded-lg bg-ink-100 flex items-center justify-center text-xs text-ink-400">30</div>
-            <div class="h-9 rounded-lg bg-ink-100 flex items-center justify-center text-xs text-ink-400">31</div>
-            <div class="h-9 rounded-lg bg-brand-500 flex items-center justify-center text-xs text-white font-semibold">1</div>
-            <div class="h-9 rounded-lg bg-brand-500 flex items-center justify-center text-xs text-white font-semibold">2</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">3</div>
-            <!-- Semana 2 -->
-            <div class="h-9 rounded-lg bg-brand-500 flex items-center justify-center text-xs text-white font-semibold">4</div>
-            <div class="h-9 rounded-lg bg-brand-500 flex items-center justify-center text-xs text-white font-semibold">5</div>
-            <div class="h-9 rounded-lg bg-brand-300 flex items-center justify-center text-xs text-white font-semibold">6</div>
-            <div class="h-9 rounded-lg bg-brand-500 flex items-center justify-center text-xs text-white font-semibold">7</div>
-            <div class="h-9 rounded-lg bg-brand-500 flex items-center justify-center text-xs text-white font-semibold">8</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">9</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">10</div>
-            <!-- Semana 3 (hoy = 7) -->
-            <div class="h-9 rounded-lg bg-brand-500 flex items-center justify-center text-xs text-white font-semibold ring-2 ring-brand-500 ring-offset-1">11</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">12</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">13</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">14</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">15</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">16</div>
-            <div class="h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center text-xs text-ink-400">17</div>
+          <div class="fj-row fj-row-static">
+            <span class="text-sm text-ink-500 w-36 shrink-0">Plan</span>
+            <span class="fj-badge fj-badge-brand">Full</span>
           </div>
-          <div class="flex items-center gap-4">
-            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-brand-500 inline-block"></span><span class="text-xs text-ink-500">Asistió</span></div>
-            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-brand-300 inline-block"></span><span class="text-xs text-ink-500">Media clase</span></div>
-            <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-ink-50 border border-ink-200 inline-block"></span><span class="text-xs text-ink-500">No asistió</span></div>
+          <div class="fj-row fj-row-static">
+            <span class="text-sm text-ink-500 w-36 shrink-0">Precio mensual</span>
+            <span class="font-mono text-sm font-semibold text-ink-900">$89.000</span>
+          </div>
+          <div class="fj-row fj-row-static">
+            <span class="text-sm text-ink-500 w-36 shrink-0">Próximo cobro</span>
+            <span class="font-mono text-sm text-ink-700">30 jun 2026</span>
+          </div>
+          <div class="fj-row fj-row-static">
+            <span class="text-sm text-ink-500 w-36 shrink-0">Método de pago</span>
+            <span class="text-sm text-ink-700">Transferencia bancaria</span>
+          </div>
+          <div class="fj-row fj-row-static">
+            <span class="text-sm text-ink-500 w-36 shrink-0">Estado de pago</span>
+            <span class="fj-badge fj-badge-success">Al día</span>
           </div>
         </div>
 
-        <!-- Tab: Pagos -->
-        <div id="tab-pagos" class="tab-content p-6">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-4">Historial de pagos</p>
-          <div class="space-y-2">
-            <div class="flex items-center gap-4 p-3.5 rounded-xl border border-ink-100 bg-ink-50/40">
-              <div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div class="flex-1">
-                <p class="text-sm font-semibold text-ink-900">Plan Full · Jun 2026</p>
-                <p class="text-xs text-ink-400">Transferencia · 5 jun 2026</p>
-              </div>
-              <span class="font-mono text-sm font-semibold text-ink-900">$89.000</span>
-              <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Pagado</span>
-            </div>
-            <div class="flex items-center gap-4 p-3.5 rounded-xl border border-ink-100 bg-ink-50/40">
-              <div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div class="flex-1">
-                <p class="text-sm font-semibold text-ink-900">Plan Full · May 2026</p>
-                <p class="text-xs text-ink-400">Transferencia · 2 may 2026</p>
-              </div>
-              <span class="font-mono text-sm font-semibold text-ink-900">$89.000</span>
-              <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Pagado</span>
-            </div>
-            <div class="flex items-center gap-4 p-3.5 rounded-xl border border-ink-100 bg-ink-50/40">
-              <div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div class="flex-1">
-                <p class="text-sm font-semibold text-ink-900">Plan Full · Abr 2026</p>
-                <p class="text-xs text-ink-400">Transferencia · 3 abr 2026</p>
-              </div>
-              <span class="font-mono text-sm font-semibold text-ink-900">$89.000</span>
-              <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Pagado</span>
-            </div>
-            <div class="flex items-center gap-4 p-3.5 rounded-xl border border-ink-100 bg-ink-50/40">
-              <div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
-              <div class="flex-1">
-                <p class="text-sm font-semibold text-ink-900">Plan Full · Mar 2026</p>
-                <p class="text-xs text-ink-400">Transferencia · 1 mar 2026</p>
-              </div>
-              <span class="font-mono text-sm font-semibold text-ink-900">$89.000</span>
-              <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-success/10 text-success">Pagado</span>
-            </div>
+        <!-- Historial de asistencia -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <p class="fj-section-h">Historial de asistencia</p>
+            <span class="text-xs text-ink-400 font-mono ml-auto">últimas 8 clases</span>
           </div>
-          <div class="mt-4 pt-4 border-t border-ink-100 flex items-center justify-between">
-            <p class="text-sm text-ink-500">Total pagado en 2026</p>
-            <p class="font-mono font-bold text-lg text-ink-900">$356.000</p>
-          </div>
-        </div>
 
-        <!-- Tab: Progreso -->
-        <div id="tab-progreso" class="tab-content p-6">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-4">Registros de progreso</p>
-          <div class="grid grid-cols-3 gap-4 mb-6">
-            <div class="bg-ink-50 rounded-xl p-4 border border-ink-100">
-              <p class="text-xs text-ink-500 mb-1">Peso actual</p>
-              <p class="font-mono font-bold text-2xl text-ink-900">63,5<span class="text-sm font-sans text-ink-400 ml-1">kg</span></p>
-              <p class="text-xs text-success font-medium mt-1">-1,5 kg en 3 meses</p>
-            </div>
-            <div class="bg-ink-50 rounded-xl p-4 border border-ink-100">
-              <p class="text-xs text-ink-500 mb-1">% Grasa corporal</p>
-              <p class="font-mono font-bold text-2xl text-ink-900">22,4<span class="text-sm font-sans text-ink-400 ml-1">%</span></p>
-              <p class="text-xs text-success font-medium mt-1">-2,1% en 3 meses</p>
-            </div>
-            <div class="bg-ink-50 rounded-xl p-4 border border-ink-100">
-              <p class="text-xs text-ink-500 mb-1">1RM Back squat</p>
-              <p class="font-mono font-bold text-2xl text-ink-900">70<span class="text-sm font-sans text-ink-400 ml-1">kg</span></p>
-              <p class="text-xs text-success font-medium mt-1">+10 kg en 3 meses</p>
-            </div>
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">08 jun 09:00</span>
+            <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">CrossFit <span class="text-ink-400 font-normal">· Vale Fuentes</span></span>
+            <span class="fj-badge fj-badge-success">Presente</span>
           </div>
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Marcas personales</p>
-          <div class="space-y-2">
-            <div class="flex items-center gap-3 p-3 rounded-lg bg-ink-50 border border-ink-100">
-              <span class="text-sm font-semibold text-ink-900 flex-1">Fran (21-15-9)</span>
-              <span class="font-mono text-sm font-bold text-brand-600">4:32</span>
-              <span class="text-xs text-ink-400">24 may 2026</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 rounded-lg bg-ink-50 border border-ink-100">
-              <span class="text-sm font-semibold text-ink-900 flex-1">Deadlift 1RM</span>
-              <span class="font-mono text-sm font-bold text-brand-600">90 kg</span>
-              <span class="text-xs text-ink-400">10 may 2026</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 rounded-lg bg-ink-50 border border-ink-100">
-              <span class="text-sm font-semibold text-ink-900 flex-1">Clean & jerk 1RM</span>
-              <span class="font-mono text-sm font-bold text-brand-600">52 kg</span>
-              <span class="text-xs text-ink-400">2 abr 2026</span>
-            </div>
-          </div>
-        </div>
 
-        <!-- Tab: Gamificación -->
-        <div id="tab-gamificacion" class="tab-content p-6">
-          <div class="grid grid-cols-2 gap-6">
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-4">Nivel y XP</p>
-              <div class="bg-ink-50 rounded-xl p-5 border border-ink-100 mb-4">
-                <div class="flex items-center gap-3 mb-4">
-                  <div class="w-10 h-10 rounded-xl flex items-center justify-center text-sm font-bold" style="background:#AEB7C420;color:#7c8696;">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#AEB7C4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-                  </div>
-                  <div>
-                    <p class="text-sm font-semibold text-ink-900">Nivel Plata</p>
-                    <p class="text-xs text-ink-400">Rango 2 · 4 logros desbloqueados</p>
-                  </div>
-                </div>
-                <div class="space-y-1.5 mb-2">
-                  <div class="flex items-center justify-between">
-                    <span class="text-xs text-ink-500">Progreso a Oro</span>
-                    <span class="font-mono text-xs font-semibold text-ink-700">1.240 / 2.000 XP</span>
-                  </div>
-                  <div class="h-2 bg-ink-200 rounded-full overflow-hidden">
-                    <div class="h-full bg-brand-500 rounded-full" style="width:62%"></div>
-                  </div>
-                </div>
-                <p class="text-xs text-ink-400">760 XP para subir a Oro</p>
-              </div>
-              <!-- Racha -->
-              <div class="flex items-center gap-3 p-4 rounded-xl border border-brand-100 bg-brand-50">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-                <div>
-                  <p class="text-xs text-ink-500 font-medium">Racha actual</p>
-                  <p class="font-mono font-bold text-xl text-brand-600">8 días</p>
-                </div>
-                <div class="ml-auto text-right">
-                  <p class="text-xs text-ink-400">Mejor racha</p>
-                  <p class="font-mono font-bold text-sm text-ink-700">22 días</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-4">Logros desbloqueados</p>
-              <div class="space-y-2">
-                <div class="flex items-center gap-3 p-3 rounded-lg bg-ink-50 border border-ink-100">
-                  <div class="w-9 h-9 rounded-lg bg-success/10 flex items-center justify-center shrink-0">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-ink-900">Primera semana</p>
-                    <p class="text-xs text-ink-400">7 clases en una semana</p>
-                  </div>
-                  <span class="font-mono text-xs font-semibold text-success">+50 XP</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 rounded-lg bg-ink-50 border border-ink-100">
-                  <div class="w-9 h-9 rounded-lg bg-brand-500/10 flex items-center justify-center shrink-0">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-ink-900">Racha de fuego</p>
-                    <p class="text-xs text-ink-400">20 días consecutivos</p>
-                  </div>
-                  <span class="font-mono text-xs font-semibold text-brand-600">+100 XP</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 rounded-lg bg-ink-50 border border-ink-100">
-                  <div class="w-9 h-9 rounded-lg bg-info/10 flex items-center justify-center shrink-0">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-                  </div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-ink-900">50 sesiones</p>
-                    <p class="text-xs text-ink-400">Completó 50 clases en Forja</p>
-                  </div>
-                  <span class="font-mono text-xs font-semibold text-info">+200 XP</span>
-                </div>
-                <div class="flex items-center gap-3 p-3 rounded-lg bg-ink-50 border border-ink-100">
-                  <div class="w-9 h-9 rounded-lg" style="background:#ECC04A20;"><div class="w-full h-full flex items-center justify-center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ECC04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div></div>
-                  <div class="flex-1 min-w-0">
-                    <p class="text-sm font-semibold text-ink-900">Top 10 mensual</p>
-                    <p class="text-xs text-ink-400">Ranking top 10 en mayo</p>
-                  </div>
-                  <span class="font-mono text-xs font-semibold" style="color:#a8842a">+150 XP</span>
-                </div>
-              </div>
-            </div>
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">07 jun 07:00</span>
+            <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">CrossFit <span class="text-ink-400 font-normal">· Nacho Tapia</span></span>
+            <span class="fj-badge fj-badge-success">Presente</span>
           </div>
+
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">06 jun 09:00</span>
+            <span class="fj-dot" style="background:var(--m-gimnasia)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">Gimnasia <span class="text-ink-400 font-normal">· Nacho Tapia</span></span>
+            <span class="fj-badge fj-badge-success">Presente</span>
+          </div>
+
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">05 jun 12:00</span>
+            <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">CrossFit <span class="text-ink-400 font-normal">· Vale Fuentes</span></span>
+            <span class="fj-badge fj-badge-neutral">Ausente</span>
+          </div>
+
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">04 jun 07:00</span>
+            <span class="fj-dot" style="background:var(--m-haltero)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">Haltero <span class="text-ink-400 font-normal">· Nacho Tapia</span></span>
+            <span class="fj-badge fj-badge-success">Presente</span>
+          </div>
+
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">03 jun 17:00</span>
+            <span class="fj-dot" style="background:var(--m-endurance)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">Endurance <span class="text-ink-400 font-normal">· Vale Fuentes</span></span>
+            <span class="fj-badge fj-badge-success">Presente</span>
+          </div>
+
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">02 jun 09:00</span>
+            <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">CrossFit <span class="text-ink-400 font-normal">· Nacho Tapia</span></span>
+            <span class="fj-badge fj-badge-success">Presente</span>
+          </div>
+
+          <div class="fj-row fj-row-static">
+            <span class="font-mono text-sm text-ink-500 w-28 shrink-0">01 jun 07:00</span>
+            <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+            <span class="text-sm font-medium text-ink-900 flex-1">CrossFit <span class="text-ink-400 font-normal">· Vale Fuentes</span></span>
+            <span class="fj-badge fj-badge-success">Presente</span>
+          </div>
+
         </div>
 
       </div>
+    </div>
 
-    </main>
   </div>
 </div>
-
-<script>
-function setTab(tab) {
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el => {
-    el.classList.remove('active');
-    el.classList.add('text-ink-500');
-    el.classList.remove('text-brand-600');
-  });
-  document.getElementById('tab-' + tab).classList.add('active');
-  const btn = document.getElementById('tab-btn-' + tab);
-  btn.classList.add('active');
-  btn.classList.remove('text-ink-500');
-}
-</script>
-
 </body>
 </html>

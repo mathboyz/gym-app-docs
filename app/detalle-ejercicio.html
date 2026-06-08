@@ -4,214 +4,178 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Thruster</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: {
-        display: ['"Space Grotesk"','sans-serif'],
-        sans: ['Inter','sans-serif'],
-        mono: ['"JetBrains Mono"','monospace'],
-      },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: {
-        sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)',
-        glow:'0 6px 20px rgba(251,82,21,.35)',
-      },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} ::-webkit-scrollbar{width:0;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
 </head>
-<body class="bg-ink-50 font-sans text-ink-900">
+<body>
+<div class="app-frame">
 
-<div class="max-w-[420px] mx-auto min-h-screen bg-white flex flex-col">
-
-  <!-- Status bar -->
-  <div class="flex justify-between items-center px-5 pt-4 text-[12px] font-mono text-ink-400">
-    <span>9:41</span>
-    <div class="flex gap-1 items-center">
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="4.5" y="4" width="3" height="8" rx="1"/><rect x="9" y="1.5" width="3" height="10.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg>
-      <span>5G</span><span>100%</span>
-    </div>
-  </div>
-
-  <!-- Top nav -->
-  <div class="flex items-center gap-3 px-5 pt-3 pb-2">
-    <a href="ver-clase.html" class="w-9 h-9 rounded-full bg-ink-50 border border-ink-200 flex items-center justify-center cursor-pointer hover:bg-ink-100 transition-colors" aria-label="Volver">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  <!-- App bar con back -->
+  <header class="app-bar">
+    <a href="ver-clase.html" class="fj-icon-btn" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
     </a>
+    <div class="flex-1 min-w-0">
+      <p class="a-eyebrow">WOD · Cindy</p>
+      <p class="app-bar-title">Thruster</p>
+    </div>
+    <span class="fj-badge fj-badge-neutral">Barbell</span>
+  </header>
+
+  <main class="app-screen space-y-5">
+
+    <!-- Video placeholder -->
+    <div class="rounded-2xl overflow-hidden relative" style="aspect-ratio:16/9;background:var(--fj-ink-100)">
+      <!-- Simulated thumbnail gradient -->
+      <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(251,82,21,.12) 0%,rgba(0,0,0,.25) 100%)"></div>
+      <!-- Play button centrado -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center gap-2.5">
+        <button class="w-16 h-16 rounded-full grid place-items-center" style="background:rgba(251,82,21,.9);box-shadow:0 8px 24px rgba(251,82,21,.45)" aria-label="Reproducir video">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </button>
+        <p class="text-sm font-semibold text-white" style="text-shadow:0 1px 4px rgba(0,0,0,.4)">Ver técnica completa</p>
+      </div>
+      <!-- Badge duración -->
+      <div class="absolute bottom-3 right-3">
+        <span class="font-mono font-bold text-xs px-2 py-1 rounded-lg" style="background:rgba(0,0,0,.55);color:#fff;backdrop-filter:blur(4px)">1:42</span>
+      </div>
+    </div>
+
+    <!-- Músculos trabajados -->
     <div>
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">WOD · Fran</p>
-      <h1 class="font-display font-bold text-xl text-ink-900">Thruster</h1>
-    </div>
-    <div class="ml-auto">
-      <span class="text-xs font-semibold text-brand-600 bg-brand-50 rounded-full px-3 py-1 border border-brand-200">Barbell</span>
-    </div>
-  </div>
-
-  <!-- Scrollable -->
-  <div class="flex-1 overflow-y-auto pb-36 space-y-5">
-
-    <!-- Video / imagen placeholder -->
-    <div class="mx-5 mt-3 rounded-xl bg-ink-100 border border-ink-200 overflow-hidden relative" style="aspect-ratio:16/9">
-      <div class="absolute inset-0 flex flex-col items-center justify-center gap-2">
-        <div class="w-14 h-14 rounded-full bg-white/80 border border-ink-200 flex items-center justify-center shadow-sm">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="#FB5215"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-        </div>
-        <p class="text-xs font-medium text-ink-500">Ver video técnica</p>
-      </div>
-      <!-- Thumbnail simulado -->
-      <div class="absolute inset-0 flex items-end p-3">
-        <span class="bg-white/90 text-ink-900 text-xs font-mono font-bold px-2 py-0.5 rounded-md">1:24</span>
-      </div>
-    </div>
-
-    <!-- Músculos -->
-    <div class="px-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Músculos trabajados</p>
+      <p class="a-eyebrow mb-2.5">Músculos trabajados</p>
       <div class="flex flex-wrap gap-2">
-        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">Cuádriceps</span>
-        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">Deltoides</span>
-        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-brand-50 text-brand-700 border border-brand-200">Glúteos</span>
-        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-ink-50 text-ink-600 border border-ink-200">Tríceps</span>
-        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-ink-50 text-ink-600 border border-ink-200">Core</span>
-        <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold bg-ink-50 text-ink-600 border border-ink-200">Isquiotibiales</span>
+        <span class="fj-badge fj-badge-brand" style="height:28px;padding:0 12px;font-size:12px">Cuádriceps</span>
+        <span class="fj-badge fj-badge-brand" style="height:28px;padding:0 12px;font-size:12px">Deltoides</span>
+        <span class="fj-badge fj-badge-brand" style="height:28px;padding:0 12px;font-size:12px">Glúteos</span>
+        <span class="fj-badge fj-badge-neutral" style="height:28px;padding:0 12px;font-size:12px">Tríceps</span>
+        <span class="fj-badge fj-badge-neutral" style="height:28px;padding:0 12px;font-size:12px">Core</span>
+        <span class="fj-badge fj-badge-neutral" style="height:28px;padding:0 12px;font-size:12px">Isquiotibiales</span>
+        <span class="fj-badge fj-badge-neutral" style="height:28px;padding:0 12px;font-size:12px">Pantorrillas</span>
       </div>
     </div>
 
-    <!-- Técnica -->
-    <div class="px-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Técnica</p>
-      <div class="bg-white rounded-xl border border-ink-200 divide-y divide-ink-100">
-        <div class="flex gap-3 px-4 py-3.5">
-          <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">1</span>
-          <div>
-            <p class="font-semibold text-ink-900 text-sm">Posición de rack</p>
-            <p class="text-sm text-ink-500 mt-0.5">Barra en hombros, codos adelante y arriba, agarre ancho. Pies al ancho de cadera.</p>
+    <!-- Técnica paso a paso -->
+    <div>
+      <p class="a-eyebrow mb-2.5">Técnica</p>
+      <div class="acard" style="overflow:hidden">
+
+        <!-- Paso 1 -->
+        <div class="arow px-4 items-start">
+          <span class="w-7 h-7 rounded-full grid place-items-center shrink-0 mt-0.5 font-mono font-bold text-sm text-white" style="background:var(--fj-brand)">1</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-ink-900">Posición de rack</p>
+            <p class="text-sm text-ink-500 mt-0.5 leading-relaxed">Barra en hombros, codos adelante y arriba. Agarre ancho, pies al ancho de cadera.</p>
           </div>
         </div>
-        <div class="flex gap-3 px-4 py-3.5">
-          <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">2</span>
-          <div>
-            <p class="font-semibold text-ink-900 text-sm">Squat</p>
-            <p class="text-sm text-ink-500 mt-0.5">Baja hasta que el pliegue de la cadera quede bajo las rodillas. Espalda recta, peso en talones.</p>
+
+        <!-- Paso 2 -->
+        <div class="arow px-4 items-start">
+          <span class="w-7 h-7 rounded-full grid place-items-center shrink-0 mt-0.5 font-mono font-bold text-sm text-white" style="background:var(--fj-brand)">2</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-ink-900">Squat profundo</p>
+            <p class="text-sm text-ink-500 mt-0.5 leading-relaxed">Baja hasta que el pliegue de cadera quede bajo las rodillas. Espalda neutra, peso en talones.</p>
           </div>
         </div>
-        <div class="flex gap-3 px-4 py-3.5">
-          <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">3</span>
-          <div>
-            <p class="font-semibold text-ink-900 text-sm">Drive y press</p>
-            <p class="text-sm text-ink-500 mt-0.5">Usa el impulso de la extensión de cadera para proyectar la barra. Presiona hasta brazos extendidos sobre la cabeza.</p>
+
+        <!-- Paso 3 -->
+        <div class="arow px-4 items-start">
+          <span class="w-7 h-7 rounded-full grid place-items-center shrink-0 mt-0.5 font-mono font-bold text-sm text-white" style="background:var(--fj-brand)">3</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-ink-900">Drive y press</p>
+            <p class="text-sm text-ink-500 mt-0.5 leading-relaxed">Usa el impulso de la extensión de cadera para proyectar la barra. Presiona hasta brazos extendidos sobre la cabeza.</p>
           </div>
         </div>
-        <div class="flex gap-3 px-4 py-3.5">
-          <span class="w-6 h-6 rounded-full bg-brand-500 text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">4</span>
-          <div>
-            <p class="font-semibold text-ink-900 text-sm">Vuelta al rack</p>
-            <p class="text-sm text-ink-500 mt-0.5">Dobla los codos rápido al bajar la barra, recibe en posición de rack y fluye al siguiente rep.</p>
+
+        <!-- Paso 4 -->
+        <div class="arow px-4 items-start">
+          <span class="w-7 h-7 rounded-full grid place-items-center shrink-0 mt-0.5 font-mono font-bold text-sm text-white" style="background:var(--fj-brand)">4</span>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-ink-900">Vuelta al rack</p>
+            <p class="text-sm text-ink-500 mt-0.5 leading-relaxed">Dobla los codos rápido al bajar la barra. Recibe en posición de rack y fluye al siguiente rep sin pausa.</p>
           </div>
         </div>
+
       </div>
     </div>
 
     <!-- Mi PR -->
-    <div class="px-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Mi récord personal</p>
-      <div class="bg-ink-50 rounded-xl border border-ink-200 px-4 py-4 flex items-center justify-between">
-        <div>
-          <p class="text-sm text-ink-500">1RM estimado</p>
-          <div class="flex items-baseline gap-1 mt-1">
-            <span class="font-mono font-bold text-3xl text-ink-900">63</span>
-            <span class="font-mono text-base text-ink-400">kg</span>
+    <div>
+      <p class="a-eyebrow mb-2.5">Mi récord personal</p>
+      <div class="acard acard-pad" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.22)">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <p class="a-muted text-xs mb-1">1RM estimado</p>
+            <div class="flex items-baseline gap-1">
+              <span class="font-mono font-bold text-ink-900 leading-none" style="font-size:44px">63</span>
+              <span class="font-mono text-xl text-ink-400 font-medium">kg</span>
+            </div>
+            <p class="text-xs text-ink-500 mt-1.5">Hoy entrenas con <span class="font-bold text-ink-700">43 kg</span> · <span class="font-mono">68%</span> 1RM</p>
           </div>
-          <p class="text-xs text-ink-400 mt-0.5">Hoy entrenás con <span class="font-semibold text-ink-700">43 kg</span> · 68% 1RM</p>
-        </div>
-        <div class="flex flex-col items-end gap-2">
-          <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold" style="background:#ECC04A20;color:#a8842a">
-            <span class="w-2 h-2 rounded-full" style="background:#ECC04A"></span>Nivel Oro
-          </span>
-          <p class="text-xs text-ink-400">Logrado el 3 may</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Regresiones / variaciones -->
-    <div class="px-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Variaciones y regresiones</p>
-      <div class="bg-white rounded-xl border border-ink-200 divide-y divide-ink-100">
-        <div class="flex items-center gap-3 px-4 py-3">
-          <div class="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center shrink-0">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <div class="flex flex-col items-end gap-2.5 shrink-0">
+            <!-- Badge tier Oro -->
+            <div class="flex items-center gap-1.5 rounded-full px-3 py-1.5" style="background:rgba(236,192,74,.15);border:1px solid rgba(236,192,74,.35)">
+              <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:#ECC04A"></span>
+              <span class="text-xs font-bold" style="color:var(--tier-gold)">Tier Oro</span>
+            </div>
+            <p class="text-xs text-ink-400">Logrado el 3 may</p>
           </div>
-          <div class="flex-1">
-            <p class="font-semibold text-ink-900 text-sm">DB Thruster</p>
-            <p class="text-xs text-ink-400">Más fácil · Con mancuernas</p>
-          </div>
-          <span class="text-xs font-medium text-success bg-success/10 rounded-full px-2 py-0.5">Scaled</span>
-        </div>
-        <div class="flex items-center gap-3 px-4 py-3">
-          <div class="w-8 h-8 rounded-lg bg-ink-50 flex items-center justify-center shrink-0">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-          </div>
-          <div class="flex-1">
-            <p class="font-semibold text-ink-900 text-sm">Front Squat + Press</p>
-            <p class="text-xs text-ink-400">Ejercicio de origen separado</p>
-          </div>
-          <span class="text-xs font-medium text-ink-500 bg-ink-100 rounded-full px-2 py-0.5">Técnica</span>
-        </div>
-        <div class="flex items-center gap-3 px-4 py-3">
-          <div class="w-8 h-8 rounded-lg bg-brand-50 flex items-center justify-center shrink-0">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-          </div>
-          <div class="flex-1">
-            <p class="font-semibold text-ink-900 text-sm">Thruster pesado</p>
-            <p class="text-xs text-ink-400">Más difícil · +10% del peso Rx</p>
-          </div>
-          <span class="text-xs font-medium text-brand-600 bg-brand-50 rounded-full px-2 py-0.5 border border-brand-200">Rx+</span>
         </div>
       </div>
     </div>
 
-  </div><!-- /scrollable -->
+    <!-- Variaciones -->
+    <div>
+      <p class="a-eyebrow mb-2.5">Variaciones</p>
+      <div class="acard" style="overflow:hidden">
 
-  <!-- Bottom tab bar -->
-  <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] bg-white border-t border-ink-200 flex items-center justify-around px-2 py-2 pb-5 z-20">
-    <a href="hoy.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Hoy</span>
-    </a>
-    <a href="reservar.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Reservar</span>
-    </a>
-    <a href="ranking.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer -mt-5">
-      <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center shadow-glow">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <!-- Escalado -->
+        <div class="arow px-4">
+          <div class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--fj-success)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">DB Thruster</p>
+            <p class="a-muted text-xs mt-0.5">Con mancuernas, más accesible</p>
+          </div>
+          <span class="fj-badge fj-badge-success" style="font-size:10px;height:20px;white-space:nowrap">Scaled</span>
+        </div>
+
+        <!-- Técnica -->
+        <div class="arow px-4">
+          <div class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:var(--fj-ink-100)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-500)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Front Squat + Press</p>
+            <p class="a-muted text-xs mt-0.5">Ejercicio separado para aprender el patrón</p>
+          </div>
+          <span class="fj-badge fj-badge-neutral" style="font-size:10px;height:20px">Técnica</span>
+        </div>
+
+        <!-- Rx+ -->
+        <div class="arow px-4">
+          <div class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:rgba(251,82,21,.10)">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/><path d="M22 12v5"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold text-ink-900">Thruster pesado</p>
+            <p class="a-muted text-xs mt-0.5">+10% sobre el peso Rx</p>
+          </div>
+          <span class="fj-badge fj-badge-brand" style="font-size:10px;height:20px">Rx+</span>
+        </div>
+
       </div>
-      <span class="text-[10px] font-medium text-ink-400">Ranking</span>
-    </a>
-    <a href="red-social.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Social</span>
-    </a>
-    <a href="perfil.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Perfil</span>
-    </a>
-  </nav>
+    </div>
 
+  </main>
 </div>
 </body>
 </html>

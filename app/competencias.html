@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Competencias</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+<style>
+  /* ── Inscripción drawer ─────────────────────────────── */
+  .enroll-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: flex-end;
+  }
+  .enroll-sheet.open { display: flex; }
+  .enroll-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+  }
+  .enroll-panel {
+    position: relative;
+    width: 100%;
+    max-width: 430px;
+    margin: 0 auto;
+    border-radius: 20px 20px 0 0;
+    background: var(--fj-surface);
+    border: 1px solid var(--fj-ink-100);
+    border-bottom: none;
+    padding: 24px 20px 32px;
+    z-index: 1;
+    animation: slideUp .22s ease;
+  }
+  @keyframes slideUp {
+    from { transform: translateY(60px); opacity:0; }
+    to   { transform: translateY(0);    opacity:1; }
+  }
+  /* radio-card divisiones */
+  .div-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    border: 2px solid var(--fj-ink-150, var(--fj-ink-100));
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .div-card:has(input:checked) {
+    border-color: var(--fj-brand);
+    background: rgba(251,82,21,.07);
+  }
+  .div-card input[type=radio] { accent-color: var(--fj-brand); margin-top: 2px; }
+
+  /* step de confirmación */
+  .step { display: none; }
+  .step.active { display: block; }
+</style>
+</head>
+<body>
+<div class="app-frame">
+
+  <!-- ── App bar: pantalla de detalle (sin data-app-tab) ── -->
+  <header class="app-bar">
+    <a href="hoy.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1">
+      <p class="a-eyebrow">Forja Box · Providencia</p>
+      <p class="app-bar-title">Competencias</p>
+    </div>
+  </header>
+
+  <main class="app-screen space-y-5">
+
+    <!-- ═══════════════════════════════════════════════
+         HERO — Competencia en curso donde estoy inscrito
+    ════════════════════════════════════════════════ -->
+    <div class="a-hero overflow-hidden">
+      <div class="p-5">
+
+        <!-- Estado + div -->
+        <div class="flex items-center gap-2 flex-wrap mb-3">
+          <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold" style="background:rgba(24,169,87,.18);color:#5ee49b">
+            <span class="w-1.5 h-1.5 rounded-full inline-block animate-pulse" style="background:#5ee49b"></span>
+            En curso
+          </span>
+          <span class="fj-badge" style="background:rgba(251,82,21,.2);color:#FF9E78">Tu división: Rx</span>
+        </div>
+
+        <!-- Nombre + fechas -->
+        <p class="font-display font-bold text-2xl leading-tight" style="color:#fff">Liga de Verano</p>
+        <p class="text-sm mt-1" style="color:#9BA3AF">CrossFit · 3 jun – 29 jun 2026</p>
+
+        <!-- Mi posición -->
+        <div class="mt-4 rounded-xl p-3 flex items-center gap-4" style="background:rgba(255,255,255,.08)">
+          <!-- Posición y pts -->
+          <div class="flex-1">
+            <p class="a-eyebrow" style="color:#9BA3AF;font-size:10px">Mi posición</p>
+            <p class="font-mono font-bold text-2xl leading-none mt-1" style="color:#fff">#3 <span class="text-sm font-medium" style="color:#9BA3AF">de 24</span></p>
+            <p class="font-mono text-sm mt-0.5" style="color:var(--fj-brand)">318 pts</p>
+          </div>
+          <!-- Barra comparativa lider -->
+          <div class="flex-1">
+            <div class="flex justify-between items-center mb-1">
+              <span style="font-size:10px;color:#9BA3AF">vs. líder (342)</span>
+              <span style="font-size:10px;color:#9BA3AF">93%</span>
+            </div>
+            <div class="h-2 rounded-full" style="background:rgba(255,255,255,.12)">
+              <div class="h-2 rounded-full" style="width:93%;background:linear-gradient(90deg,var(--fj-brand),#FF9E78)"></div>
+            </div>
+            <p style="font-size:10px;color:#9BA3AF;margin-top:4px">+24 pts para el 2° lugar</p>
+          </div>
+        </div>
+
+        <!-- Premio -->
+        <div class="flex items-center gap-2 mt-3">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#ECC04A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg>
+          <span style="font-size:11px;color:#ECC04A;font-weight:600">Premio $150.000 al ganador de cada categoría</span>
+        </div>
+
+        <!-- Botones -->
+        <div class="grid grid-cols-2 gap-3 mt-4">
+          <a href="ranking.html" class="a-btn a-btn-primary">Ver leaderboard</a>
+          <button class="a-btn a-btn-ghost" style="border-color:rgba(255,255,255,.18);color:#fff">Ver detalle</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         FILTROS
+    ════════════════════════════════════════════════ -->
+    <div class="fj-pills" id="comp-pills">
+      <button class="fj-pill" aria-selected="true"  onclick="filterComps('abiertas')">Abiertas</button>
+      <button class="fj-pill" aria-selected="false" onclick="filterComps('en-curso')">En curso</button>
+      <button class="fj-pill" aria-selected="false" onclick="filterComps('cerradas')">Cerradas</button>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         LISTA DE COMPETENCIAS
+    ════════════════════════════════════════════════ -->
+    <div class="space-y-3" id="comp-list">
+
+      <!-- ── 1. Throwdown Forja ── abierta ── -->
+      <div class="acard acard-pad space-y-3" data-status="abiertas">
+        <!-- Cabecera -->
+        <div class="flex items-start gap-3">
+          <span class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(62,123,250,.12)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg>
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <p class="text-sm font-bold" style="color:var(--fj-ink-900)">Throwdown Forja</p>
+              <span class="fj-badge fj-badge-info">Inscripción abierta</span>
+            </div>
+            <p class="a-muted text-xs">Torneo · CrossFit · 15–16 jul 2026</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono font-bold text-sm" style="color:var(--fj-ink-900)">$300.000</p>
+            <p class="a-muted" style="font-size:10px">premio</p>
+          </div>
+        </div>
+
+        <!-- Tags + cupos -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="fj-tag-rx">Rx</span>
+          <span class="fj-tag-rx" style="background:rgba(62,123,250,.1);color:#3E7BFA">Scaled</span>
+          <span class="fj-tag-rx" style="background:rgba(236,192,74,.12);color:#a8842a">Masters +40</span>
+          <span class="ml-auto flex items-center gap-2">
+            <p class="a-muted" style="font-size:10px">Cupos</p>
+            <div class="a-prog" style="width:56px"><div style="width:17%"></div></div>
+            <p class="font-mono text-xs font-semibold" style="color:var(--fj-ink-700)">8/48</p>
+          </span>
+        </div>
+
+        <button class="a-btn a-btn-primary" onclick="openEnroll('Throwdown Forja')">Inscribirme</button>
+      </div>
+
+      <!-- ── 2. Benchmark Mensual ── abierta / recurrente ── -->
+      <div class="acard acard-pad space-y-3" data-status="abiertas">
+        <div class="flex items-start gap-3">
+          <span class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(251,82,21,.1)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <p class="text-sm font-bold" style="color:var(--fj-ink-900)">Benchmark Mensual</p>
+              <span class="fj-badge fj-badge-neutral">Recurrente</span>
+              <span class="fj-badge fj-badge-info">Abierto</span>
+            </div>
+            <p class="a-muted text-xs">Benchmark · Viernes 27 jun · Todos los planes</p>
+          </div>
+        </div>
+
+        <div class="rounded-xl px-3 py-2.5" style="background:var(--fj-ink-100)">
+          <p class="a-muted text-xs">WODs este mes: <span class="font-semibold" style="color:var(--fj-ink-700)">Fran · Grace · Jackie</span></p>
+          <p class="a-muted text-xs mt-0.5">Tu PR en Fran: <span class="font-mono font-semibold" style="color:var(--fj-brand)">3:24</span> — ¡a por el podio!</p>
+        </div>
+
+        <button class="a-btn a-btn-primary" onclick="openEnroll('Benchmark Mensual')">Inscribirme</button>
+      </div>
+
+      <!-- ── 3. Open Box Primavera ── abierta / halterofilia ── -->
+      <div class="acard acard-pad space-y-3" data-status="abiertas">
+        <div class="flex items-start gap-3">
+          <span class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(124,58,237,.1)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <p class="text-sm font-bold" style="color:var(--fj-ink-900)">Open Box Primavera</p>
+              <span class="fj-badge fj-badge-info">Inscripción abierta</span>
+            </div>
+            <p class="a-muted text-xs">Liga · Halterofilia · 10–31 ago 2026</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono font-bold text-sm" style="color:var(--fj-ink-900)">$200.000</p>
+            <p class="a-muted" style="font-size:10px">premio</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-2 flex-wrap">
+          <span class="fj-tag-rx" style="background:rgba(124,58,237,.1);color:#7C3AED">Snatch</span>
+          <span class="fj-tag-rx" style="background:rgba(124,58,237,.1);color:#7C3AED">Clean &amp; Jerk</span>
+          <span class="ml-auto flex items-center gap-2">
+            <div class="a-prog" style="width:56px"><div style="width:12.5%"></div></div>
+            <p class="font-mono text-xs font-semibold" style="color:var(--fj-ink-700)">3/24</p>
+          </span>
+        </div>
+
+        <button class="a-btn a-btn-primary" onclick="openEnroll('Open Box Primavera')">Inscribirme</button>
+      </div>
+
+      <!-- ── 4. Copa Invierno 2025 ── cerrada (participé) ── -->
+      <div class="acard acard-pad space-y-3" data-status="cerradas">
+        <!-- Header con opacidad -->
+        <div class="flex items-start gap-3" style="opacity:.75">
+          <span class="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style="background:var(--fj-ink-100)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg>
+          </span>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap mb-1">
+              <p class="text-sm font-bold" style="color:var(--fj-ink-700)">Copa Invierno 2025</p>
+              <span class="fj-badge fj-badge-neutral">Cerrada</span>
+            </div>
+            <p class="a-muted text-xs">Torneo · CrossFit · 1–31 jul 2025 · 32/32 atletas</p>
+          </div>
+        </div>
+
+        <!-- Mi resultado en esa comp -->
+        <div class="rounded-xl px-3 py-2.5 flex items-center gap-3" style="background:rgba(236,192,74,.08);border:1px solid rgba(236,192,74,.2)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#ECC04A"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <div class="flex-1">
+            <p class="text-xs font-semibold" style="color:var(--fj-ink-800)">Participaste · División Rx</p>
+            <p class="a-muted text-xs">Posición final <span class="font-mono font-bold" style="color:var(--tier-gold)">#2 de 32</span> · 287 pts</p>
+          </div>
+          <span class="fj-badge" style="background:rgba(236,192,74,.18);color:#a8842a">Subcampeón</span>
+        </div>
+
+        <button class="a-btn a-btn-ghost">Ver resultados</button>
+      </div>
+
+    </div><!-- /comp-list -->
+
+  </main>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════
+     SHEET DE INSCRIPCIÓN
+════════════════════════════════════════════════ -->
+<div class="enroll-sheet" id="enroll-sheet">
+  <div class="enroll-backdrop" onclick="closeEnroll()"></div>
+  <div class="enroll-panel">
+
+    <!-- Handle -->
+    <div class="w-10 h-1 rounded-full mx-auto mb-5" style="background:var(--fj-ink-200)"></div>
+
+    <!-- ── Step 1: Elegir división ── -->
+    <div class="step active" id="step-1">
+      <div class="flex items-start justify-between mb-4">
+        <div>
+          <p class="a-eyebrow">Inscripción</p>
+          <p class="font-display font-bold text-lg" style="color:var(--fj-ink-900)" id="sheet-comp-name">Throwdown Forja</p>
+        </div>
+        <button onclick="closeEnroll()" class="fj-icon-btn" aria-label="Cerrar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <p class="text-sm font-semibold mb-3" style="color:var(--fj-ink-800)">Elige tu división</p>
+
+      <div class="space-y-2" id="div-options">
+
+        <!-- Rx -->
+        <label class="div-card">
+          <input type="radio" name="division" value="rx" checked>
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="fj-tag-rx">Rx</span>
+              <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Rx</span>
+            </div>
+            <p class="a-muted text-xs">Pesos y movimientos Rx. Para atletas con experiencia y buenos PRs.</p>
+          </div>
+        </label>
+
+        <!-- Scaled -->
+        <label class="div-card">
+          <input type="radio" name="division" value="scaled">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="fj-tag-rx" style="background:rgba(62,123,250,.1);color:#3E7BFA">Scaled</span>
+              <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Scaled</span>
+            </div>
+            <p class="a-muted text-xs">Movimientos adaptados. Ideal si estás en desarrollo o prefieres no Rxear.</p>
+          </div>
+        </label>
+
+        <!-- Masters -->
+        <label class="div-card">
+          <input type="radio" name="division" value="masters">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="fj-tag-rx" style="background:rgba(236,192,74,.12);color:#a8842a">Masters</span>
+              <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Masters +40</span>
+            </div>
+            <p class="a-muted text-xs">Para atletas de 40 años o más. Pesos y tiempos ajustados.</p>
+          </div>
+        </label>
+
+      </div>
+
+      <button class="a-btn a-btn-primary mt-4" onclick="goStep2()">Continuar</button>
+    </div>
+
+    <!-- ── Step 2: Confirmar ── -->
+    <div class="step" id="step-2">
+      <div class="flex items-center gap-2 mb-4">
+        <button onclick="goStep1()" class="fj-icon-btn" aria-label="Atrás" style="margin-left:-4px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div>
+          <p class="a-eyebrow">Confirmar inscripción</p>
+          <p class="font-display font-bold text-lg" style="color:var(--fj-ink-900)" id="sheet-comp-name-2">Throwdown Forja</p>
+        </div>
+      </div>
+
+      <!-- Resumen -->
+      <div class="rounded-xl p-4 space-y-3 mb-4" style="background:var(--fj-ink-100)">
+        <div class="flex justify-between items-center">
+          <p class="a-muted text-xs">Competencia</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)" id="confirm-name">Throwdown Forja</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="a-muted text-xs">División</p>
+          <span id="confirm-div" class="fj-tag-rx">Rx</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="a-muted text-xs">Atleta</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Matías Rojas</p>
+        </div>
+        <div class="flex justify-between items-center">
+          <p class="a-muted text-xs">Box</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Forja Box, Providencia</p>
+        </div>
+      </div>
+
+      <p class="a-muted text-xs mb-4">Al confirmar, el coach del box recibirá tu inscripción. Podrás cancelar hasta 48 h antes.</p>
+
+      <button class="a-btn a-btn-primary" id="confirm-btn" onclick="confirmEnroll()">Confirmar inscripción</button>
+    </div>
+
+    <!-- ── Step 3: Éxito ── -->
+    <div class="step" id="step-3">
+      <div class="flex flex-col items-center text-center gap-3 py-4">
+        <div class="w-16 h-16 rounded-full grid place-items-center" style="background:rgba(24,169,87,.14)">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <p class="font-display font-bold text-xl" style="color:var(--fj-ink-900)">¡Inscrito!</p>
+          <p class="a-muted text-sm mt-1">Te anotamos en <span id="success-comp" class="font-semibold" style="color:var(--fj-ink-800)">Throwdown Forja</span></p>
+          <div class="flex items-center justify-center gap-2 mt-2">
+            <span id="success-div" class="fj-tag-rx">Rx</span>
+            <span class="fj-badge fj-badge-success">+50 XP</span>
+          </div>
+        </div>
+        <p class="a-muted text-xs px-4">El coach confirmará tu inscripción. Te avisaremos con los detalles de la competencia.</p>
+        <button class="a-btn a-btn-primary mt-2" onclick="closeEnroll()">Perfecto, gracias</button>
+        <button class="a-btn a-btn-ghost" onclick="closeEnroll();location.href='ranking.html'">Ver leaderboard</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+  /* ── Pills: filtro de competencias ── */
+  function filterComps(filter) {
+    const pills = document.querySelectorAll('#comp-pills .fj-pill');
+    pills.forEach(p => p.setAttribute('aria-selected', 'false'));
+    event.target.setAttribute('aria-selected', 'true');
+
+    document.querySelectorAll('#comp-list [data-status]').forEach(card => {
+      card.style.display = (card.dataset.status === filter) ? '' : 'none';
+    });
+  }
+
+  /* ── Sheet de inscripción ── */
+  let currentComp = '';
+
+  function openEnroll(compName) {
+    currentComp = compName;
+    document.getElementById('sheet-comp-name').textContent = compName;
+    document.getElementById('sheet-comp-name-2').textContent = compName;
+    document.getElementById('confirm-name').textContent = compName;
+    document.getElementById('success-comp').textContent = compName;
+    // reset steps
+    goStep1();
+    document.getElementById('enroll-sheet').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeEnroll() {
+    document.getElementById('enroll-sheet').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function goStep1() {
+    setStep('step-1');
+  }
+
+  function goStep2() {
+    const sel = document.querySelector('input[name=division]:checked');
+    const labels = { rx: 'Rx', scaled: 'Scaled', masters: 'Masters +40' };
+    const colors = {
+      rx:      { bg: 'rgba(251,82,21,.1)',  color: 'var(--fj-brand)' },
+      scaled:  { bg: 'rgba(62,123,250,.1)', color: '#3E7BFA' },
+      masters: { bg: 'rgba(236,192,74,.12)', color: '#a8842a' }
+    };
+    const divEl = document.getElementById('confirm-div');
+    const sc = colors[sel.value];
+    divEl.textContent = labels[sel.value];
+    divEl.style.background = sc.bg;
+    divEl.style.color = sc.color;
+
+    const successDivEl = document.getElementById('success-div');
+    successDivEl.textContent = labels[sel.value];
+    successDivEl.style.background = sc.bg;
+    successDivEl.style.color = sc.color;
+
+    setStep('step-2');
+  }
+
+  function confirmEnroll() {
+    setStep('step-3');
+  }
+
+  function setStep(id) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+  }
+</script>
+
+</body>
+</html>

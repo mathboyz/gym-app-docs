@@ -4,224 +4,221 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Competencias</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
-<div class="flex min-h-screen">
+<body data-page="competencias" data-title="Competencias" data-eyebrow="Forja Box · Providencia"
+      data-cta-label="Nueva competencia" data-cta-href="constructor-competencia.html">
+<div data-fj-content>
+  <div class="fj-pad fj-maxw space-y-5">
 
-  <!-- SIDEBAR -->
-  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col fixed inset-y-0">
-    <div class="px-5 h-16 flex items-center gap-2.5 border-b border-ink-200">
-      <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg></span>
-      <span class="font-display font-bold text-lg">Forja<span class="text-brand-500">.</span></span>
-    </div>
-    <nav class="flex-1 px-3 py-4 space-y-0.5 text-sm">
-      <a href="dashboard.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Dashboard</a>
-      <a href="clientes.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Clientes</a>
-      <a href="calendario.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Calendario</a>
-      <a href="tipo-clases.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M10 20H4v-6M20 4l-8 8M4 20l5-5"/></svg>Clases</a>
-      <a href="constructor-rutina.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>Rutinas</a>
-      <a href="planes.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>Planes</a>
-      <a href="pagos.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Pagos</a>
-      <a href="metricas.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>Métricas</a>
-      <a href="competencias.html" class="flex items-center gap-3 px-3 h-10 rounded-lg bg-brand-500/10 text-brand-600 font-semibold"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>Competencias</a>
-      <a href="configuracion.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Configuración</a>
-    </nav>
-    <div class="px-4 py-4 border-t border-ink-200 flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-brand-100 grid place-items-center font-semibold text-xs text-brand-700">VF</div>
-      <div class="leading-tight"><p class="text-sm font-semibold">Vale Fuentes</p><p class="text-xs text-ink-400">Forja Box · Providencia</p></div>
-    </div>
-  </aside>
+    <!-- Hero: competencia en curso (adaptable a tema: light en claro, dark en oscuro) -->
+    <div class="fj-comp-hero">
+      <div class="p-6 grid grid-cols-3 gap-6">
 
-  <!-- MAIN -->
-  <main class="flex-1 ml-60">
-    <!-- Topbar -->
-    <div class="h-16 px-8 flex items-center justify-between border-b border-ink-200 bg-white sticky top-0 z-10">
-      <div>
-        <h1 class="font-display font-bold text-xl">Competencias</h1>
-        <p class="text-xs text-ink-400 font-mono">Sáb 07 jun 2026</p>
-      </div>
-      <div class="flex items-center gap-3">
-        <a href="nueva-competencia.html" class="flex items-center gap-2 h-9 px-4 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-          Nueva competencia
-        </a>
-        <div class="w-9 h-9 rounded-full bg-ink-100 grid place-items-center font-semibold text-xs text-ink-600">VF</div>
-      </div>
-    </div>
-
-    <div class="px-8 py-7 space-y-6">
-
-      <!-- Card destacada: competencia en curso -->
-      <div class="bg-white border-2 border-brand-500/30 rounded-xl p-6 relative overflow-hidden">
-        <!-- Acento color top -->
-        <div class="absolute top-0 left-0 right-0 h-1 bg-brand-500 rounded-t-xl"></div>
-        <div class="flex items-start justify-between">
-          <div>
-            <div class="flex items-center gap-2 mb-2">
-              <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold bg-success/10 text-green-700">
-                <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-                En curso
-              </span>
-              <span class="text-xs text-ink-400">Liga · CrossFit</span>
-            </div>
-            <h2 class="font-display font-bold text-2xl">Liga de Verano</h2>
-            <p class="text-sm text-ink-500 mt-1">3 jun – 29 jun 2026 · Forja Box, Providencia</p>
-            <div class="flex flex-wrap gap-2 mt-3">
-              <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-ink-100 text-ink-600">Rx</span>
-              <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-ink-100 text-ink-600">Scaled</span>
-              <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-ink-100 text-ink-600">Masters +40</span>
-              <span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-brand-100 text-brand-700">Premio: $150.000</span>
-            </div>
+        <!-- Info -->
+        <div class="col-span-2 min-w-0">
+          <div class="flex items-center flex-wrap gap-2 mb-3">
+            <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold" style="background:rgba(24,169,87,.14);color:var(--tx-green)">
+              <span class="w-1.5 h-1.5 rounded-full inline-block animate-pulse" style="background:#18A957"></span> En curso
+            </span>
+            <span class="fj-eyebrow">Liga · CrossFit</span>
           </div>
-          <div class="text-right">
-            <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Inscritos</p>
-            <p class="font-mono font-bold text-4xl text-brand-600 mt-0.5">24</p>
-            <p class="text-xs text-ink-400 mt-0.5">de 32 cupos</p>
+          <h2 class="font-display font-bold text-3xl tracking-tight">Liga de Verano</h2>
+          <p class="text-sm mt-1.5 ch-sub">3 jun – 29 jun 2026 · Forja Box, Providencia</p>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            <span class="ch-tag font-mono font-bold text-[11px] px-2 h-6 inline-flex items-center rounded-md">Rx</span>
+            <span class="ch-tag font-mono font-bold text-[11px] px-2 h-6 inline-flex items-center rounded-md">Scaled</span>
+            <span class="ch-tag font-mono font-bold text-[11px] px-2 h-6 inline-flex items-center rounded-md">Masters +40</span>
+            <span class="text-xs font-semibold px-2.5 h-6 inline-flex items-center rounded-md" style="background:rgba(251,82,21,.14);color:var(--fj-brand-700)">Premio $150.000</span>
           </div>
         </div>
 
-        <!-- Leaderboard mini -->
-        <div class="mt-5 border-t border-ink-100 pt-4">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Leaderboard actual · Rx</p>
-          <div class="space-y-2">
-            <div class="flex items-center gap-3">
-              <span class="w-6 h-6 rounded-full grid place-items-center text-xs font-bold" style="background:#ECC04A20;color:#a8842a">1</span>
-              <div class="w-6 h-6 rounded-full bg-ink-100 grid place-items-center text-[10px] font-semibold text-ink-600">MR</div>
-              <span class="flex-1 text-sm font-medium">Matías Rojas</span>
-              <span class="font-mono font-bold text-sm">342 pts</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="w-6 h-6 rounded-full grid place-items-center text-xs font-bold" style="background:#AEB7C420;color:#7c8696">2</span>
-              <div class="w-6 h-6 rounded-full bg-brand-100 grid place-items-center text-[10px] font-semibold text-brand-700">CS</div>
-              <span class="flex-1 text-sm font-medium">Camila Soto</span>
-              <span class="font-mono font-bold text-sm">318 pts</span>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="w-6 h-6 rounded-full grid place-items-center text-xs font-bold" style="background:#C77B3C20;color:#C77B3C">3</span>
-              <div class="w-6 h-6 rounded-full bg-info/10 grid place-items-center text-[10px] font-semibold text-info">IV</div>
-              <span class="flex-1 text-sm font-medium">Ignacio Vera</span>
-              <span class="font-mono font-bold text-sm">295 pts</span>
-            </div>
-            <div class="flex items-center gap-3 opacity-60">
-              <span class="w-6 h-6 rounded-full bg-ink-100 grid place-items-center text-xs font-bold text-ink-500">4</span>
-              <div class="w-6 h-6 rounded-full bg-ink-100 grid place-items-center text-[10px] font-semibold text-ink-600">JN</div>
-              <span class="flex-1 text-sm font-medium">Javiera Núñez</span>
-              <span class="font-mono font-bold text-sm">271 pts</span>
-            </div>
-          </div>
-          <button class="mt-3 text-sm font-semibold text-brand-600 hover:text-brand-700 transition-colors">Ver leaderboard completo</button>
+        <!-- Inscritos -->
+        <div class="text-right">
+          <p class="fj-eyebrow">Inscritos</p>
+          <p class="font-mono font-bold leading-none mt-1" style="font-size:52px;color:var(--fj-brand)">24</p>
+          <p class="text-xs mt-1.5 ch-muted">de <span class="font-semibold ch-sub">32</span> cupos</p>
+          <div class="h-1.5 rounded-full mt-2.5 ml-auto" style="width:120px;background:var(--fj-ink-100)"><div class="h-1.5 rounded-full" style="width:75%;background:var(--fj-brand)"></div></div>
+          <a href="constructor-competencia.html" class="fj-btn fj-btn-primary fj-btn-sm mt-4">Gestionar →</a>
         </div>
       </div>
 
-      <!-- Lista de otras competencias -->
-      <div>
-        <div class="flex items-center justify-between mb-4">
-          <h2 class="font-display font-semibold text-lg">Todas las competencias</h2>
-          <div class="flex items-center gap-2">
-            <div class="flex items-center gap-1 bg-ink-100 rounded-full p-1">
-              <button class="px-3 h-7 rounded-full bg-white text-xs font-semibold text-ink-900 shadow-sm">Todas</button>
-              <button class="px-3 h-7 rounded-full text-xs font-semibold text-ink-500 hover:text-ink-900 transition-colors">Activas</button>
-              <button class="px-3 h-7 rounded-full text-xs font-semibold text-ink-500 hover:text-ink-900 transition-colors">Cerradas</button>
-            </div>
-          </div>
+      <!-- Leaderboard -->
+      <div class="px-6 pb-6">
+        <div class="flex items-center justify-between mb-1 pt-4 border-t ch-divide">
+          <p class="fj-eyebrow mt-3">Leaderboard · Categoría Rx</p>
+          <a href="competencia-leaderboard.html" class="text-xs font-semibold mt-3" style="color:var(--fj-brand-600)">Ver leaderboard completo →</a>
         </div>
-        <div class="space-y-3">
-
-          <!-- Competencia: Throwdown Forja -->
-          <div class="bg-white border border-ink-200 rounded-xl p-5 flex items-center gap-5">
-            <div class="w-10 h-10 rounded-xl bg-info/10 grid place-items-center shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <span class="font-semibold text-sm">Throwdown Forja</span>
-                <span class="rounded-full px-2 py-0.5 text-xs font-semibold bg-info/10 text-info">Inscripción abierta</span>
-                <span class="text-xs text-ink-400">Torneo · CrossFit</span>
-              </div>
-              <p class="text-xs text-ink-400">15 jul – 16 jul 2026 · Forja Box, Providencia</p>
-              <div class="flex flex-wrap gap-1.5 mt-2">
-                <span class="rounded-full px-2 py-0.5 text-xs font-medium bg-ink-100 text-ink-600">Rx</span>
-                <span class="rounded-full px-2 py-0.5 text-xs font-medium bg-ink-100 text-ink-600">Scaled</span>
-                <span class="rounded-full px-2 py-0.5 text-xs font-medium bg-brand-100 text-brand-700">Premio: $300.000</span>
-              </div>
-            </div>
-            <div class="text-right shrink-0">
-              <p class="font-mono font-bold text-xl">8</p>
-              <p class="text-xs text-ink-400">de 48 cupos</p>
-            </div>
-            <button class="h-8 px-3 rounded-full border border-ink-200 text-xs font-semibold text-ink-600 hover:bg-ink-50 transition-colors shrink-0">Gestionar</button>
+        <div>
+          <div class="flex items-center gap-3 py-2 border-b ch-divide">
+            <span class="w-7 h-7 rounded-full grid place-items-center text-xs font-bold shrink-0 font-mono ch-gold" style="background:rgba(236,192,74,.2)">1</span>
+            <div class="w-7 h-7 rounded-full ch-av grid place-items-center text-[10px] font-bold shrink-0">MR</div>
+            <span class="flex-1 text-sm font-semibold">Matías Rojas</span>
+            <span class="font-mono font-bold text-sm">342 <span class="ch-muted" style="font-weight:500">pts</span></span>
           </div>
-
-          <!-- Competencia: Benchmark mensual -->
-          <div class="bg-white border border-ink-200 rounded-xl p-5 flex items-center gap-5">
-            <div class="w-10 h-10 rounded-xl bg-brand-50 grid place-items-center shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <span class="font-semibold text-sm">Benchmark mensual</span>
-                <span class="rounded-full px-2 py-0.5 text-xs font-semibold bg-ink-100 text-ink-500">Recurrente</span>
-                <span class="text-xs text-ink-400">Benchmark · Todos</span>
-              </div>
-              <p class="text-xs text-ink-400">Último viernes de cada mes · Todos los planes</p>
-              <div class="flex flex-wrap gap-1.5 mt-2">
-                <span class="rounded-full px-2 py-0.5 text-xs font-medium bg-ink-100 text-ink-600">Abierto</span>
-                <span class="rounded-full px-2 py-0.5 text-xs font-medium bg-ink-100 text-ink-600">Sin cupo máximo</span>
-              </div>
-            </div>
-            <div class="text-right shrink-0">
-              <p class="font-mono font-bold text-xl">—</p>
-              <p class="text-xs text-ink-400">abierto</p>
-            </div>
-            <button class="h-8 px-3 rounded-full border border-ink-200 text-xs font-semibold text-ink-600 hover:bg-ink-50 transition-colors shrink-0">Gestionar</button>
+          <div class="flex items-center gap-3 py-2 border-b ch-divide">
+            <span class="w-7 h-7 rounded-full grid place-items-center text-xs font-bold shrink-0 font-mono ch-silver" style="background:rgba(174,183,196,.22)">2</span>
+            <div class="w-7 h-7 rounded-full grid place-items-center text-[10px] font-bold shrink-0" style="background:rgba(251,82,21,.16);color:var(--fj-brand-700)">CS</div>
+            <span class="flex-1 text-sm font-semibold">Camila Soto</span>
+            <span class="font-mono font-bold text-sm">318 <span class="ch-muted" style="font-weight:500">pts</span></span>
           </div>
-
-          <!-- Competencia: Copa Invierno (cerrada) -->
-          <div class="bg-white border border-ink-200 rounded-xl p-5 flex items-center gap-5 opacity-60">
-            <div class="w-10 h-10 rounded-xl bg-ink-100 grid place-items-center shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
-            </div>
-            <div class="flex-1">
-              <div class="flex items-center gap-2 mb-1">
-                <span class="font-semibold text-sm">Copa Invierno 2025</span>
-                <span class="rounded-full px-2 py-0.5 text-xs font-semibold bg-ink-100 text-ink-400">Finalizada</span>
-              </div>
-              <p class="text-xs text-ink-400">Jun – Jul 2025 · 32 participantes</p>
-            </div>
-            <div class="text-right shrink-0">
-              <p class="font-mono font-bold text-xl">32</p>
-              <p class="text-xs text-ink-400">participaron</p>
-            </div>
-            <button class="h-8 px-3 rounded-full border border-ink-200 text-xs font-semibold text-ink-500 hover:bg-ink-50 transition-colors shrink-0">Ver resultados</button>
+          <div class="flex items-center gap-3 py-2 border-b ch-divide">
+            <span class="w-7 h-7 rounded-full grid place-items-center text-xs font-bold shrink-0 font-mono ch-bronze" style="background:rgba(199,123,60,.22)">3</span>
+            <div class="w-7 h-7 rounded-full grid place-items-center text-[10px] font-bold shrink-0" style="background:rgba(62,123,250,.16);color:var(--tx-blue)">IV</div>
+            <span class="flex-1 text-sm font-semibold">Ignacio Vera</span>
+            <span class="font-mono font-bold text-sm">295 <span class="ch-muted" style="font-weight:500">pts</span></span>
           </div>
-
+          <div class="flex items-center gap-3 py-2" style="opacity:.6">
+            <span class="w-7 h-7 rounded-full ch-av grid place-items-center text-xs font-bold shrink-0 font-mono">4</span>
+            <div class="w-7 h-7 rounded-full ch-av grid place-items-center text-[10px] font-bold shrink-0">JN</div>
+            <span class="flex-1 text-sm font-semibold">Javiera Núñez</span>
+            <span class="font-mono font-bold text-sm">271 <span class="ch-muted" style="font-weight:500">pts</span></span>
+          </div>
         </div>
       </div>
-
     </div>
-  </main>
+
+    <!-- Sección: Todas las competencias -->
+    <div class="space-y-3">
+      <div class="flex items-center justify-between">
+        <h2 class="fj-section-h">Todas las competencias</h2>
+        <div class="fj-pills">
+          <button class="fj-pill" aria-selected="true">Todas</button>
+          <button class="fj-pill" aria-selected="false">Activas</button>
+          <button class="fj-pill" aria-selected="false">Cerradas</button>
+        </div>
+      </div>
+
+      <!-- Lista -->
+      <div class="fj-list">
+        <div class="fj-list-head">
+          <span class="flex-1 text-xs font-semibold text-ink-500 uppercase tracking-wider">Competencia</span>
+          <span class="w-32 text-xs font-semibold text-ink-500 uppercase tracking-wider hidden md:block">Tipo · Modalidad</span>
+          <span class="w-36 text-xs font-semibold text-ink-500 uppercase tracking-wider hidden lg:block">Fechas</span>
+          <span class="w-20 text-xs font-semibold text-ink-500 uppercase tracking-wider text-right">Inscritos</span>
+          <span class="w-24"></span>
+        </div>
+
+        <!-- Throwdown Forja — Inscripción abierta -->
+        <div class="fj-row-static fj-row">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <span class="w-9 h-9 rounded-xl bg-info/10 grid place-items-center shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="flex items-center flex-wrap gap-2">
+                <span class="text-sm font-bold text-ink-900">Throwdown Forja</span>
+                <span class="fj-badge fj-badge-info">Inscripción abierta</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">Forja Box, Providencia · Premio $300.000</p>
+            </div>
+          </div>
+          <span class="w-32 text-xs text-ink-500 hidden md:block">Torneo · CrossFit</span>
+          <span class="w-36 fj-mono text-xs text-ink-400 hidden lg:block">15–16 jul 2026</span>
+          <span class="w-20 text-right fj-mono font-bold text-sm text-ink-900">8<span class="text-ink-400 font-normal">/48</span></span>
+          <span class="w-24 flex justify-end">
+            <a href="constructor-competencia.html" class="fj-btn fj-btn-ghost fj-btn-sm">Gestionar</a>
+          </span>
+        </div>
+
+        <!-- Benchmark mensual — Recurrente -->
+        <div class="fj-row-static fj-row">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <span class="w-9 h-9 rounded-xl bg-brand-50 grid place-items-center shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="flex items-center flex-wrap gap-2">
+                <span class="text-sm font-bold text-ink-900">Benchmark mensual</span>
+                <span class="fj-badge fj-badge-neutral">Recurrente</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">Último viernes de cada mes · Todos los planes</p>
+            </div>
+          </div>
+          <span class="w-32 text-xs text-ink-500 hidden md:block">Benchmark · Todos</span>
+          <span class="w-36 fj-mono text-xs text-ink-400 hidden lg:block">Mensual</span>
+          <span class="w-20 text-right fj-mono font-bold text-sm text-ink-400">—</span>
+          <span class="w-24 flex justify-end">
+            <a href="constructor-competencia.html" class="fj-btn fj-btn-ghost fj-btn-sm">Gestionar</a>
+          </span>
+        </div>
+
+        <!-- Open Box Primavera — Inscripción abierta -->
+        <div class="fj-row-static fj-row">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <span class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:var(--m-haltero)20;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="flex items-center flex-wrap gap-2">
+                <span class="text-sm font-bold text-ink-900">Open Box Primavera</span>
+                <span class="fj-badge fj-badge-info">Inscripción abierta</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">Forja Box, Providencia · Premio $200.000</p>
+            </div>
+          </div>
+          <span class="w-32 text-xs text-ink-500 hidden md:block">Liga · Halterofilia</span>
+          <span class="w-36 fj-mono text-xs text-ink-400 hidden lg:block">10–31 ago 2026</span>
+          <span class="w-20 text-right fj-mono font-bold text-sm text-ink-900">3<span class="text-ink-400 font-normal">/24</span></span>
+          <span class="w-24 flex justify-end">
+            <a href="constructor-competencia.html" class="fj-btn fj-btn-ghost fj-btn-sm">Gestionar</a>
+          </span>
+        </div>
+
+        <!-- Copa Invierno — Cerrada -->
+        <div class="fj-row-static fj-row opacity-55">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <span class="w-9 h-9 rounded-xl bg-ink-100 grid place-items-center shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="flex items-center flex-wrap gap-2">
+                <span class="text-sm font-bold text-ink-700">Copa Invierno 2025</span>
+                <span class="fj-badge fj-badge-neutral">Cerrada</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">Jun – Jul 2025 · Forja Box, Providencia</p>
+            </div>
+          </div>
+          <span class="w-32 text-xs text-ink-500 hidden md:block">Torneo · CrossFit</span>
+          <span class="w-36 fj-mono text-xs text-ink-400 hidden lg:block">1–31 jul 2025</span>
+          <span class="w-20 text-right fj-mono font-bold text-sm text-ink-700">32<span class="text-ink-400 font-normal">/32</span></span>
+          <span class="w-24 flex justify-end">
+            <a href="competencia-leaderboard.html" class="fj-btn fj-btn-ghost fj-btn-sm">Ver resultados</a>
+          </span>
+        </div>
+
+        <!-- Challenge Endurance — Cerrada -->
+        <div class="fj-row-static fj-row opacity-55">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <span class="w-9 h-9 rounded-xl bg-ink-100 grid place-items-center shrink-0">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </span>
+            <div class="min-w-0">
+              <div class="flex items-center flex-wrap gap-2">
+                <span class="text-sm font-bold text-ink-700">Challenge 5K Endurance</span>
+                <span class="fj-badge fj-badge-neutral">Cerrada</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">May 2025 · Sin cupo máximo</p>
+            </div>
+          </div>
+          <span class="w-32 text-xs text-ink-500 hidden md:block">Benchmark · Endurance</span>
+          <span class="w-36 fj-mono text-xs text-ink-400 hidden lg:block">5–30 may 2025</span>
+          <span class="w-20 text-right fj-mono font-bold text-sm text-ink-700">41</span>
+          <span class="w-24 flex justify-end">
+            <a href="competencia-leaderboard.html" class="fj-btn fj-btn-ghost fj-btn-sm">Ver resultados</a>
+          </span>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 </body>
 </html>

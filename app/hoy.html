@@ -4,243 +4,135 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Hoy</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: {
-        display: ['"Space Grotesk"','sans-serif'],
-        sans: ['Inter','sans-serif'],
-        mono: ['"JetBrains Mono"','monospace'],
-      },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: {
-        sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)',
-        glow:'0 6px 20px rgba(251,82,21,.35)',
-      },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} ::-webkit-scrollbar{width:0;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
 </head>
-<body class="bg-ink-50 font-sans text-ink-900">
+<body data-app-tab="hoy">
+<div class="app-frame">
 
-<div class="max-w-[420px] mx-auto min-h-screen bg-white flex flex-col">
-
-  <!-- Status bar -->
-  <div class="flex justify-between items-center px-5 pt-4 text-[12px] font-mono text-ink-400">
-    <span>9:41</span>
-    <div class="flex gap-1 items-center">
-      <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor"><rect x="0" y="6" width="3" height="6" rx="1"/><rect x="4.5" y="4" width="3" height="8" rx="1"/><rect x="9" y="1.5" width="3" height="10.5" rx="1"/><rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/></svg>
-      <span>5G</span>
-      <span>100%</span>
+  <!-- App bar -->
+  <header class="app-bar">
+    <div class="flex-1 min-w-0">
+      <p class="a-eyebrow">Sábado 7 jun</p>
+      <p class="a-h" style="font-size:22px">Hola, Vale 👋</p>
     </div>
-  </div>
-
-  <!-- Header -->
-  <header class="flex items-center justify-between px-5 pt-4 pb-3">
-    <div>
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Sábado 7 jun</p>
-      <h1 class="font-display font-bold text-2xl text-ink-900 mt-0.5">Hola, Matías</h1>
-    </div>
-    <div class="relative">
-      <div class="w-11 h-11 rounded-full bg-brand-100 flex items-center justify-center overflow-hidden border-2 border-brand-200">
-        <span class="font-display font-bold text-brand-600 text-lg">M</span>
-      </div>
-      <span class="absolute -bottom-0.5 -right-0.5 w-4 h-4 rounded-full bg-white flex items-center justify-center">
-        <span class="w-2.5 h-2.5 rounded-full" style="background:#ECC04A"></span>
-      </span>
-    </div>
+    <button class="fj-icon-btn" aria-label="Notificaciones" style="position:relative" onclick="location.href='notificaciones.html'">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="fj-notif-dot">2</span>
+    </button>
+    <div class="a-av w-10 h-10 text-sm">VF</div>
   </header>
 
-  <!-- Scrollable content -->
-  <div class="flex-1 overflow-y-auto px-5 pb-28 space-y-5">
+  <main class="app-screen space-y-4">
 
-    <!-- Racha + XP -->
-    <div class="bg-ink-50 rounded-xl border border-ink-200 px-4 py-3 flex items-center gap-4">
-      <div class="flex items-center gap-2">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-        <span class="font-mono font-bold text-xl text-ink-900">7</span>
-        <span class="text-sm font-medium text-ink-500">días de racha</span>
+    <!-- Racha + Nivel/XP -->
+    <div class="grid grid-cols-5 gap-3">
+      <div class="acard acard-pad col-span-2 flex flex-col justify-between">
+        <p class="a-eyebrow">Racha</p>
+        <div class="flex items-end gap-1.5 mt-2">
+          <span class="font-mono font-bold text-4xl text-ink-900 leading-none">14</span>
+          <span class="text-2xl mb-0.5">🔥</span>
+        </div>
+        <p class="a-muted text-xs mt-1">días seguidos</p>
       </div>
-      <div class="flex-1 h-px bg-ink-200"></div>
-      <div class="flex flex-col items-end gap-1 min-w-[100px]">
-        <div class="flex items-center gap-1">
-          <span class="text-xs font-semibold uppercase tracking-wider text-ink-400">Nivel</span>
-          <span class="font-mono font-bold text-sm text-ink-900">12</span>
-          <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-semibold" style="background:#ECC04A20;color:#a8842a">Oro</span>
+      <div class="acard acard-pad col-span-3">
+        <div class="flex items-center justify-between">
+          <p class="a-eyebrow">Nivel</p>
+          <span class="fj-badge fj-badge-brand">Nivel 12</span>
         </div>
-        <div class="w-full bg-ink-200 rounded-full h-1.5">
-          <div class="bg-brand-500 h-1.5 rounded-full" style="width:62%"></div>
-        </div>
-        <span class="text-[11px] font-mono text-ink-400">1.240 / 2.000 XP</span>
+        <p class="font-mono font-bold text-2xl text-ink-900 mt-2 leading-none">2.840 <span class="text-sm text-ink-400 font-medium">XP</span></p>
+        <div class="a-prog mt-3"><div style="width:64%"></div></div>
+        <p class="a-muted text-xs mt-1.5">360 XP para Nivel 13</p>
       </div>
     </div>
 
-    <!-- Próxima clase -->
-    <div>
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Próxima clase</p>
-      <div class="bg-white rounded-xl border border-ink-200 overflow-hidden">
-        <div class="bg-brand-500 px-4 py-2.5 flex items-center justify-between">
-          <span class="font-display font-bold text-white text-base">CrossFit</span>
-          <span class="font-mono font-bold text-white text-base">19:00</span>
+    <!-- Próxima clase (hero) -->
+    <div class="a-hero">
+      <div class="p-5">
+        <div class="flex items-center justify-between mb-3">
+          <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold" style="background:rgba(24,169,87,.18);color:#5ee49b"><span class="w-1.5 h-1.5 rounded-full" style="background:#5ee49b"></span> Tu próxima clase</span>
+          <span class="fj-mono text-sm" style="color:#B6BCC8">en 1 h 20 min</span>
         </div>
-        <div class="px-4 py-4 space-y-3">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center border border-brand-200">
-              <span class="font-display font-bold text-brand-600 text-sm">VF</span>
-            </div>
-            <div>
-              <p class="font-semibold text-ink-900 text-sm">Vale Fuentes</p>
-              <p class="text-xs text-ink-400">Coach · 60 min</p>
-            </div>
-            <div class="ml-auto flex items-center gap-1 text-xs text-ink-500">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-              <span class="font-mono font-medium">8<span class="text-ink-300">/12</span></span>
-            </div>
+        <div class="flex items-end justify-between gap-3">
+          <div>
+            <p class="font-display font-bold text-2xl">CrossFit</p>
+            <p class="text-sm mt-1" style="color:#B6BCC8">09:00 · Coach Vale Fuentes</p>
           </div>
-          <div class="h-px bg-ink-100"></div>
-          <div class="flex items-center gap-2">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            <p class="text-sm text-ink-500">WOD · <span class="font-semibold text-ink-700">Fran</span> · 21-15-9</p>
-          </div>
-          <a href="ver-clase.html" class="block w-full text-center bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-full py-2.5 text-sm transition-colors cursor-pointer">Ver clase</a>
+          <span class="font-mono text-sm" style="color:#B6BCC8">11/12</span>
         </div>
+        <div class="flex items-center gap-2 mt-3">
+          <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+          <span class="text-sm font-semibold">"15 min · Cindy"</span>
+        </div>
+        <a href="ver-clase.html" class="a-btn a-btn-primary mt-4">Ver la clase</a>
       </div>
     </div>
 
     <!-- Misión del día -->
-    <div>
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Misión del día</p>
-      <div class="bg-white rounded-xl border border-ink-200 px-4 py-4 space-y-3">
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-brand-50 flex items-center justify-center border border-brand-200">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <div class="flex-1">
-            <p class="text-sm font-medium text-ink-900">Asistir a una clase hoy</p>
-            <p class="text-xs text-ink-400">+200 XP al completar</p>
-          </div>
-          <span class="text-xs font-semibold text-success bg-success/10 rounded-full px-2.5 py-1">Pendiente</span>
+    <div class="acard acard-pad">
+      <div class="flex items-center justify-between mb-1">
+        <p class="a-h text-base">Misiones de hoy</p>
+        <span class="fj-badge fj-badge-success">+150 XP</span>
+      </div>
+      <div>
+        <div class="arow">
+          <span class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.14)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="flex-1"><p class="text-sm font-semibold text-ink-900">Reserva una clase</p><p class="a-muted text-xs">Completada</p></div>
+          <span class="fj-mono text-xs text-success font-bold">+50</span>
         </div>
-        <div class="h-px bg-ink-100"></div>
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-ink-50 flex items-center justify-center border border-ink-200">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="flex-1">
-            <p class="text-sm font-medium text-ink-900">Anotar tu resultado del WOD</p>
-            <p class="text-xs text-ink-400">+100 XP al completar</p>
-          </div>
-          <span class="text-xs font-semibold text-ink-400 bg-ink-100 rounded-full px-2.5 py-1">Sin hacer</span>
+        <div class="arow" style="cursor:pointer" onclick="location.href='anotar-resultado.html'">
+          <span class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:var(--fj-ink-100)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/></svg></span>
+          <div class="flex-1"><p class="text-sm font-semibold text-ink-900">Anota tu resultado del WOD</p><p class="a-muted text-xs">Pendiente</p></div>
+          <span class="fj-mono text-xs text-ink-400 font-bold">+100</span>
         </div>
-        <div class="h-px bg-ink-100"></div>
-        <div class="flex items-center gap-3">
-          <div class="w-8 h-8 rounded-lg bg-ink-50 flex items-center justify-center border border-ink-200">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          </div>
-          <div class="flex-1">
-            <p class="text-sm font-medium text-ink-900">Motivar a un compañero</p>
-            <p class="text-xs text-ink-400">+50 XP al completar</p>
-          </div>
-          <span class="text-xs font-semibold text-ink-400 bg-ink-100 rounded-full px-2.5 py-1">Sin hacer</span>
+        <div class="arow" style="opacity:.5">
+          <span class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:var(--fj-ink-100)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+          <div class="flex-1"><p class="text-sm font-semibold text-ink-900">Comparte en la comunidad</p><p class="a-muted text-xs">Se desbloquea al terminar la clase</p></div>
         </div>
       </div>
     </div>
 
     <!-- Accesos rápidos -->
-    <div>
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Accesos rápidos</p>
-      <div class="grid grid-cols-3 gap-3">
-        <a href="reservar.html" class="bg-white rounded-xl border border-ink-200 flex flex-col items-center gap-2 py-4 cursor-pointer hover:border-brand-300 transition-colors">
-          <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
-          <span class="text-xs font-semibold text-ink-700 text-center">Reservar</span>
-        </a>
-        <a href="ranking.html" class="bg-white rounded-xl border border-ink-200 flex flex-col items-center gap-2 py-4 cursor-pointer hover:border-brand-300 transition-colors">
-          <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          </div>
-          <span class="text-xs font-semibold text-ink-700 text-center">Ranking</span>
-        </a>
-        <a href="red-social.html" class="bg-white rounded-xl border border-ink-200 flex flex-col items-center gap-2 py-4 cursor-pointer hover:border-brand-300 transition-colors">
-          <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </div>
-          <span class="text-xs font-semibold text-ink-700 text-center">Social</span>
-        </a>
-      </div>
+    <div class="grid grid-cols-3 gap-3">
+      <a href="duelos.html" class="acard acard-pad text-center">
+        <span class="w-10 h-10 rounded-xl grid place-items-center mx-auto" style="background:rgba(251,82,21,.12);color:var(--fj-brand-700)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 9.5-5 5"/><path d="M18 6 6 18"/><path d="m21 3-3 3-3-3 3-3z"/><path d="m3 21 3-3 3 3-3 3z"/></svg></span>
+        <p class="text-xs font-semibold text-ink-800 mt-2">Duelos</p>
+      </a>
+      <a href="desafios.html" class="acard acard-pad text-center">
+        <span class="w-10 h-10 rounded-xl grid place-items-center mx-auto" style="background:rgba(62,123,250,.12);color:var(--tx-blue)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></span>
+        <p class="text-xs font-semibold text-ink-800 mt-2">Desafíos</p>
+      </a>
+      <a href="ranking.html" class="acard acard-pad text-center">
+        <span class="w-10 h-10 rounded-xl grid place-items-center mx-auto" style="background:rgba(236,192,74,.16);color:var(--tier-gold)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg></span>
+        <p class="text-xs font-semibold text-ink-800 mt-2">Ranking</p>
+      </a>
     </div>
 
     <!-- Feed del gym -->
     <div>
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-2">Del gym</p>
-      <div class="bg-white rounded-xl border border-ink-200 px-4 py-4 space-y-3">
-        <div class="flex items-start gap-3">
-          <div class="w-2 h-2 rounded-full bg-brand-500 mt-2 shrink-0"></div>
-          <div>
-            <p class="text-sm font-semibold text-ink-900">Campeonato interno — julio</p>
-            <p class="text-sm text-ink-500 mt-0.5">Inscripciones abiertas hasta el 15 jun. Categorías: Rx, Scaled, Masters.</p>
-            <p class="text-xs text-ink-300 mt-1">Hace 2 horas</p>
-          </div>
+      <p class="a-eyebrow mb-2 px-1">De tu comunidad</p>
+      <div class="acard">
+        <div class="acard-pad arow !py-3" style="border-bottom:1px solid var(--fj-ink-100)">
+          <div class="a-ring"><div class="a-av w-9 h-9 text-xs" style="background:linear-gradient(135deg,#6AA8FF,#3E7BFA)">MR</div></div>
+          <div class="flex-1 min-w-0"><p class="text-sm text-ink-800"><b>Matías Rojas</b> rompió su PR de Clean</p><p class="a-muted text-xs">100 kg · hace 20 min</p></div>
+          <span class="text-lg">🔥</span>
         </div>
-        <div class="h-px bg-ink-100"></div>
-        <div class="flex items-start gap-3">
-          <div class="w-2 h-2 rounded-full bg-ink-300 mt-2 shrink-0"></div>
-          <div>
-            <p class="text-sm font-semibold text-ink-900">Clase de movilidad nueva</p>
-            <p class="text-sm text-ink-500 mt-0.5">Todos los lunes a las 08:00 con coach Rodri. Gratis para plan Full.</p>
-            <p class="text-xs text-ink-300 mt-1">Ayer</p>
-          </div>
+        <div class="acard-pad arow !py-3">
+          <div class="a-ring"><div class="a-av w-9 h-9 text-xs" style="background:linear-gradient(135deg,#61D2C4,#18A957)">JN</div></div>
+          <div class="flex-1 min-w-0"><p class="text-sm text-ink-800"><b>Javiera Núñez</b> completó 50 clases</p><p class="a-muted text-xs">Logro desbloqueado · hace 1 h</p></div>
+          <span class="text-lg">🏅</span>
         </div>
       </div>
     </div>
 
-  </div><!-- /scrollable -->
-
-  <!-- Bottom tab bar -->
-  <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] bg-white border-t border-ink-200 flex items-center justify-around px-2 py-2 pb-5 z-20">
-    <!-- Hoy (activo) -->
-    <a href="hoy.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-      <span class="text-[10px] font-semibold text-brand-500">Hoy</span>
-    </a>
-    <!-- Reservar -->
-    <a href="reservar.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Reservar</span>
-    </a>
-    <!-- Ranking (centro destacado) -->
-    <a href="ranking.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer -mt-5">
-      <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center shadow-glow">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      </div>
-      <span class="text-[10px] font-medium text-ink-400">Ranking</span>
-    </a>
-    <!-- Social -->
-    <a href="red-social.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Social</span>
-    </a>
-    <!-- Perfil -->
-    <a href="perfil.html" class="flex flex-col items-center gap-1 min-w-[44px] min-h-[44px] justify-center cursor-pointer">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span class="text-[10px] font-medium text-ink-400">Perfil</span>
-    </a>
-  </nav>
-
-</div><!-- /container -->
+  </main>
+</div>
 </body>
 </html>

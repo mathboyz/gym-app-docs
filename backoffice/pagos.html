@@ -4,387 +4,507 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Pagos</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
-<div class="flex min-h-screen">
+<body data-page="pagos" data-title="Pagos" data-eyebrow="Forja Box · Providencia">
+<div data-fj-content>
+<div class="fj-pad fj-maxw space-y-5">
 
-  <!-- SIDEBAR -->
-  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col fixed inset-y-0">
-    <div class="px-5 h-16 flex items-center gap-2.5 border-b border-ink-200">
-      <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-      </span>
-      <span class="font-display font-bold text-lg">Forja<span class="text-brand-500">.</span></span>
-    </div>
-    <nav class="flex-1 px-3 py-4 space-y-0.5 text-sm">
-      <a href="dashboard.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
-        Dashboard
-      </a>
-      <a href="clientes.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Clientes
-      </a>
-      <a href="calendario.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
-        Calendario
-      </a>
-      <a href="tipo-clases.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 4h6v6M10 20H4v-6M20 4l-8 8M4 20l5-5"/></svg>
-        Clases
-      </a>
-      <a href="constructor-rutina.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-        Rutinas
-      </a>
-      <a href="planes.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-        Planes
-      </a>
-      <a href="pagos.html" class="flex items-center gap-3 px-3 h-10 rounded-lg bg-brand-500/10 text-brand-600 font-semibold">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        Pagos
-      </a>
-      <a href="metricas.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-        Métricas
-      </a>
-      <a href="competencias.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22M18 2H6v7a6 6 0 0 0 12 0V2z"/></svg>
-        Competencias
-      </a>
-      <a href="configuracion.html" class="flex items-center gap-3 px-3 h-10 rounded-lg text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors font-medium">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        Configuración
-      </a>
-    </nav>
-    <div class="px-4 py-4 border-t border-ink-200 flex items-center gap-3">
-      <div class="w-8 h-8 rounded-full bg-brand-100 grid place-items-center font-semibold text-xs text-brand-700">VF</div>
-      <div class="leading-tight"><p class="text-sm font-semibold">Vale Fuentes</p><p class="text-xs text-ink-400">Forja Box · Providencia</p></div>
-    </div>
-  </aside>
-
-  <!-- MAIN -->
-  <main class="flex-1 ml-60">
-    <!-- Topbar -->
-    <div class="h-16 px-8 flex items-center justify-between border-b border-ink-200 bg-white sticky top-0 z-10">
-      <div>
-        <h1 class="font-display font-bold text-xl">Pagos</h1>
-        <p class="text-xs text-ink-400 font-mono">Sáb 07 jun 2026</p>
+  <!-- KPIs -->
+  <div class="grid grid-cols-4 gap-4">
+    <div class="fj-panel p-5">
+      <div class="flex items-start justify-between mb-4">
+        <p class="fj-eyebrow">Ingresos jun</p>
+        <span class="w-8 h-8 rounded-lg bg-success/10 flex items-center justify-center shrink-0">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </span>
       </div>
-      <div class="flex items-center gap-3">
-        <button class="flex items-center gap-2 h-9 px-4 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
-          Registrar pago
+      <p class="font-mono font-bold text-[32px] leading-none text-ink-900">$2.840.000</p>
+      <p class="text-xs text-ink-500 mt-2"><span class="text-success font-semibold">+13%</span> vs mayo</p>
+    </div>
+    <div class="fj-panel p-5">
+      <div class="flex items-start justify-between mb-4">
+        <p class="fj-eyebrow">Por cobrar</p>
+        <span class="w-8 h-8 rounded-lg bg-warning/10 flex items-center justify-center shrink-0">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E8A317" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        </span>
+      </div>
+      <p class="font-mono font-bold text-[32px] leading-none text-warning">$340.000</p>
+      <p class="text-xs text-ink-500 mt-2">4 socios pendientes</p>
+    </div>
+    <div class="fj-panel p-5">
+      <div class="flex items-start justify-between mb-4">
+        <p class="fj-eyebrow">Morosos</p>
+        <span class="w-8 h-8 rounded-lg bg-danger/10 flex items-center justify-center shrink-0">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#E5484D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+      </div>
+      <p class="font-mono font-bold text-[32px] leading-none text-danger">$180.000</p>
+      <p class="text-xs text-ink-500 mt-2">2 socios en mora</p>
+    </div>
+    <div class="fj-panel p-5">
+      <div class="flex items-start justify-between mb-4">
+        <p class="fj-eyebrow">Comprobantes</p>
+        <span class="w-8 h-8 rounded-lg bg-brand-500/10 flex items-center justify-center shrink-0">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FB5215" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </span>
+      </div>
+      <p class="font-mono font-bold text-[32px] leading-none text-brand-600">3</p>
+      <p class="text-xs text-ink-500 mt-2">transferencias por revisar</p>
+    </div>
+  </div>
+
+  <!-- Comprobantes por aprobar -->
+  <div class="fj-list">
+    <div class="fj-list-head">
+      <div class="flex-1 flex items-center justify-between">
+        <div>
+          <p class="fj-eyebrow">Transferencias bancarias</p>
+          <h3 class="fj-section-h mt-0.5">Comprobantes por aprobar</h3>
+        </div>
+        <span class="fj-badge fj-badge-brand">3 pendientes</span>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="fj-table">
+        <thead>
+          <tr>
+            <th>Comprobante</th>
+            <th>Socio</th>
+            <th>Plan</th>
+            <th class="text-right">Monto</th>
+            <th>Método</th>
+            <th>Recibido</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="#" class="flex items-center gap-2 text-sm group" aria-label="Ver comprobante_transfer.jpg">
+                <span class="w-7 h-7 rounded-lg bg-ink-100 flex items-center justify-center shrink-0">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </span>
+                <span class="font-mono text-xs text-ink-600 group-hover:text-brand-600 transition-colors">comprobante_transfer.jpg</span>
+                <span class="text-xs text-brand-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Ver →</span>
+              </a>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-brand-100 grid place-items-center text-xs font-semibold text-brand-700 shrink-0">CS</div>
+                <span class="text-sm font-medium text-ink-900">Camila Soto</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Plan Elite</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$79.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">hace 2h</td>
+            <td>
+              <div class="flex items-center gap-1.5">
+                <button class="fj-btn fj-btn-sm fj-btn-success" aria-label="Aprobar comprobante Camila Soto">Aprobar</button>
+                <button class="fj-btn fj-btn-sm fj-btn-danger" aria-label="Rechazar comprobante Camila Soto">Rechazar</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#" class="flex items-center gap-2 text-sm group" aria-label="Ver transfer_0607.png">
+                <span class="w-7 h-7 rounded-lg bg-ink-100 flex items-center justify-center shrink-0">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </span>
+                <span class="font-mono text-xs text-ink-600 group-hover:text-brand-600 transition-colors">transfer_0607.png</span>
+                <span class="text-xs text-brand-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Ver →</span>
+              </a>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600 shrink-0">PD</div>
+                <span class="text-sm font-medium text-ink-900">Pancho Díaz</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Halterofilia</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$65.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">hace 5h</td>
+            <td>
+              <div class="flex items-center gap-1.5">
+                <button class="fj-btn fj-btn-sm fj-btn-success" aria-label="Aprobar comprobante Pancho Díaz">Aprobar</button>
+                <button class="fj-btn fj-btn-sm fj-btn-danger" aria-label="Rechazar comprobante Pancho Díaz">Rechazar</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#" class="flex items-center gap-2 text-sm group" aria-label="Ver pago_junio.jpg">
+                <span class="w-7 h-7 rounded-lg bg-ink-100 flex items-center justify-center shrink-0">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </span>
+                <span class="font-mono text-xs text-ink-600 group-hover:text-brand-600 transition-colors">pago_junio.jpg</span>
+                <span class="text-xs text-brand-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Ver →</span>
+              </a>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600 shrink-0">IV</div>
+                <span class="text-sm font-medium text-ink-900">Ignacio Vera</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Elite + Haltero</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$95.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">hace 18h</td>
+            <td>
+              <div class="flex items-center gap-1.5">
+                <button class="fj-btn fj-btn-sm fj-btn-success" aria-label="Aprobar comprobante Ignacio Vera">Aprobar</button>
+                <button class="fj-btn fj-btn-sm fj-btn-danger" aria-label="Rechazar comprobante Ignacio Vera">Rechazar</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#" class="flex items-center gap-2 text-sm group" aria-label="Ver comprobante_rosales.jpg">
+                <span class="w-7 h-7 rounded-lg bg-ink-100 flex items-center justify-center shrink-0">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </span>
+                <span class="font-mono text-xs text-ink-600 group-hover:text-brand-600 transition-colors">comprobante_rosales.jpg</span>
+                <span class="text-xs text-brand-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Ver →</span>
+              </a>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-info/10 grid place-items-center text-xs font-semibold text-info shrink-0">TR</div>
+                <span class="text-sm font-medium text-ink-900">Tamara Rosales</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">3x Semana</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$59.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">hace 23h</td>
+            <td>
+              <div class="flex items-center gap-1.5">
+                <button class="fj-btn fj-btn-sm fj-btn-success" aria-label="Aprobar comprobante Tamara Rosales">Aprobar</button>
+                <button class="fj-btn fj-btn-sm fj-btn-danger" aria-label="Rechazar comprobante Tamara Rosales">Rechazar</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <a href="#" class="flex items-center gap-2 text-sm group" aria-label="Ver pago_mbr.pdf">
+                <span class="w-7 h-7 rounded-lg bg-ink-100 flex items-center justify-center shrink-0">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                </span>
+                <span class="font-mono text-xs text-ink-600 group-hover:text-brand-600 transition-colors">pago_mbr.pdf</span>
+                <span class="text-xs text-brand-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">Ver →</span>
+              </a>
+            </td>
+            <td>
+              <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-full bg-success/10 grid place-items-center text-xs font-semibold text-success shrink-0">FM</div>
+                <span class="text-sm font-medium text-ink-900">Felipe Mardones</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Full</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$89.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">ayer</td>
+            <td>
+              <div class="flex items-center gap-1.5">
+                <button class="fj-btn fj-btn-sm fj-btn-success" aria-label="Aprobar comprobante Felipe Mardones">Aprobar</button>
+                <button class="fj-btn fj-btn-sm fj-btn-danger" aria-label="Rechazar comprobante Felipe Mardones">Rechazar</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Historial de pagos -->
+  <div class="fj-list">
+    <div class="fj-list-head">
+      <div class="flex-1 flex items-center justify-between flex-wrap gap-3">
+        <div>
+          <p class="fj-eyebrow">Junio 2026</p>
+          <h3 class="fj-section-h mt-0.5">Historial de pagos</h3>
+        </div>
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="fj-pills">
+            <button class="fj-pill" aria-selected="true">Todos</button>
+            <button class="fj-pill" aria-selected="false">Pagados</button>
+            <button class="fj-pill" aria-selected="false">Pendientes</button>
+            <button class="fj-pill" aria-selected="false">Rechazados</button>
+          </div>
+          <div class="relative">
+            <input type="search" placeholder="Buscar socio…" aria-label="Buscar socio en historial de pagos"
+              class="h-8 pl-8 pr-3 rounded-lg border border-ink-200 bg-white text-sm text-ink-700 placeholder-ink-400 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/15 transition-all w-48">
+            <svg class="absolute left-2.5 top-1/2 -translate-y-1/2 text-ink-400 pointer-events-none" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <button class="fj-btn fj-btn-ghost fj-btn-sm flex items-center gap-1.5" aria-label="Exportar historial de pagos">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exportar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="fj-table">
+        <thead>
+          <tr>
+            <th>Socio</th>
+            <th>Plan</th>
+            <th class="text-right">Monto</th>
+            <th>Método</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-brand-100 grid place-items-center text-xs font-semibold text-brand-700 shrink-0">JN</div>
+                <span class="text-sm font-medium text-ink-900">Javiera Núñez</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Plan CrossFit</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$55.000</td>
+            <td><span class="fj-badge fj-badge-success">MercadoPago</span></td>
+            <td class="font-mono text-xs text-ink-400">05 jun 2026</td>
+            <td><span class="fj-badge fj-badge-success">Pagado</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Javiera Núñez">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600 shrink-0">RV</div>
+                <span class="text-sm font-medium text-ink-900">Roberto Valdivia</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Ilimitado</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$99.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">04 jun 2026</td>
+            <td><span class="fj-badge fj-badge-success">Pagado</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Roberto Valdivia">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-success/10 grid place-items-center text-xs font-semibold text-success shrink-0">AM</div>
+                <span class="text-sm font-medium text-ink-900">Antonia Muñoz</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Estudiante</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$39.000</td>
+            <td><span class="fj-badge fj-badge-info">Efectivo</span></td>
+            <td class="font-mono text-xs text-ink-400">03 jun 2026</td>
+            <td><span class="fj-badge fj-badge-success">Pagado</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Antonia Muñoz">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-danger/10 grid place-items-center text-xs font-semibold text-danger shrink-0">MR</div>
+                <span class="text-sm font-medium text-ink-900">Matías Rojas</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Plan CrossFit</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$55.000</td>
+            <td><span class="fj-badge fj-badge-success">MercadoPago</span></td>
+            <td class="font-mono text-xs text-ink-400">01 may 2026</td>
+            <td><span class="fj-badge fj-badge-danger">Moroso</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Matías Rojas">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600 shrink-0">CS</div>
+                <span class="text-sm font-medium text-ink-900">Camila Soto</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Plan Elite</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$79.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">07 jun 2026</td>
+            <td><span class="fj-badge fj-badge-warning">Pendiente</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Camila Soto">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-brand-100 grid place-items-center text-xs font-semibold text-brand-700 shrink-0">SC</div>
+                <span class="text-sm font-medium text-ink-900">Sebastián Contreras</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Full</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$89.000</td>
+            <td><span class="fj-badge fj-badge-success">MercadoPago</span></td>
+            <td class="font-mono text-xs text-ink-400">02 jun 2026</td>
+            <td><span class="fj-badge fj-badge-success">Pagado</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Sebastián Contreras">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-info/10 grid place-items-center text-xs font-semibold text-info shrink-0">LH</div>
+                <span class="text-sm font-medium text-ink-900">Lucía Herrera</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">3x Semana</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$59.000</td>
+            <td><span class="fj-badge fj-badge-info">Efectivo</span></td>
+            <td class="font-mono text-xs text-ink-400">01 jun 2026</td>
+            <td><span class="fj-badge fj-badge-success">Pagado</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Lucía Herrera">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600 shrink-0">NP</div>
+                <span class="text-sm font-medium text-ink-900">Nicolás Pizarro</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Pack 10 clases</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$69.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">06 jun 2026</td>
+            <td><span class="fj-badge fj-badge-warning">Pendiente</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Nicolás Pizarro">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-warning/10 grid place-items-center text-xs font-semibold text-warning shrink-0">GA</div>
+                <span class="text-sm font-medium text-ink-900">Gloria Araya</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Estudiante</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$39.000</td>
+            <td><span class="fj-badge fj-badge-success">MercadoPago</span></td>
+            <td class="font-mono text-xs text-ink-400">05 jun 2026</td>
+            <td><span class="fj-badge fj-badge-success">Pagado</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Gloria Araya">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600 shrink-0">BF</div>
+                <span class="text-sm font-medium text-ink-900">Benjamín Figueroa</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Ilimitado</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$99.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">04 jun 2026</td>
+            <td><span class="fj-badge fj-badge-warning">Pendiente</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Benjamín Figueroa">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-danger/10 grid place-items-center text-xs font-semibold text-danger shrink-0">HO</div>
+                <span class="text-sm font-medium text-ink-900">Héctor Olivares</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">Full</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$89.000</td>
+            <td><span class="fj-badge fj-badge-neutral">Transferencia</span></td>
+            <td class="font-mono text-xs text-ink-400">31 may 2026</td>
+            <td><span class="fj-badge fj-badge-danger">Moroso</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Héctor Olivares">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div class="flex items-center gap-2.5">
+                <div class="w-7 h-7 rounded-full bg-brand-100 grid place-items-center text-xs font-semibold text-brand-700 shrink-0">VS</div>
+                <span class="text-sm font-medium text-ink-900">Valeria Saavedra</span>
+              </div>
+            </td>
+            <td class="text-sm text-ink-500">3x Semana</td>
+            <td class="text-right font-mono font-bold text-sm text-ink-900">$59.000</td>
+            <td><span class="fj-badge fj-badge-success">MercadoPago</span></td>
+            <td class="font-mono text-xs text-ink-400">03 jun 2026</td>
+            <td><span class="fj-badge fj-badge-success">Pagado</span></td>
+            <td>
+              <button class="fj-icon-btn" aria-label="Opciones Valeria Saavedra">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Paginación -->
+    <div class="px-5 py-3 border-t border-ink-100 flex items-center justify-between text-sm text-ink-400">
+      <span class="font-mono text-xs">Mostrando 12 de 48 pagos</span>
+      <div class="flex items-center gap-1">
+        <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center hover:bg-ink-50 transition-colors" aria-label="Página anterior">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
         </button>
-        <button class="w-9 h-9 grid place-items-center rounded-full border border-ink-200 bg-white text-ink-500 hover:bg-ink-50 transition-colors">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        <button class="w-8 h-8 rounded-lg bg-brand-500 text-white grid place-items-center text-xs font-bold" aria-current="page">1</button>
+        <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center text-xs hover:bg-ink-50 transition-colors">2</button>
+        <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center text-xs hover:bg-ink-50 transition-colors">3</button>
+        <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center text-xs hover:bg-ink-50 transition-colors">4</button>
+        <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center hover:bg-ink-50 transition-colors" aria-label="Página siguiente">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
         </button>
-        <div class="w-9 h-9 rounded-full bg-ink-100 grid place-items-center font-semibold text-xs text-ink-600">VF</div>
       </div>
     </div>
+  </div>
 
-    <div class="px-8 py-7 space-y-7">
-
-      <!-- KPIs -->
-      <div class="grid grid-cols-4 gap-4">
-        <div class="bg-white border border-ink-200 rounded-xl p-5">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Ingresos jun</p>
-          <p class="font-mono font-bold text-[28px] mt-2 leading-tight">$2.840.000</p>
-          <p class="text-xs text-ink-400 mt-1.5">vs $2.510.000 mayo</p>
-          <span class="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-success">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 15-6-6-6 6"/></svg>+13%
-          </span>
-        </div>
-        <div class="bg-white border border-ink-200 rounded-xl p-5">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Por cobrar</p>
-          <p class="font-mono font-bold text-[28px] mt-2 leading-tight text-warning">$340.000</p>
-          <p class="text-xs text-ink-400 mt-1.5">4 socios pendientes</p>
-          <span class="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-warning">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-            Este mes
-          </span>
-        </div>
-        <div class="bg-white border border-ink-200 rounded-xl p-5">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Morosos</p>
-          <p class="font-mono font-bold text-[28px] mt-2 leading-tight text-danger">$180.000</p>
-          <p class="text-xs text-ink-400 mt-1.5">2 socios en mora</p>
-          <span class="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-danger">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m18 9-6 6-6-6"/></svg>+1 este mes
-          </span>
-        </div>
-        <div class="bg-white border border-ink-200 rounded-xl p-5">
-          <p class="text-xs font-semibold uppercase tracking-[.08em] text-ink-400">Comprobantes</p>
-          <p class="font-mono font-bold text-[28px] mt-2 leading-tight text-brand-600">3</p>
-          <p class="text-xs text-ink-400 mt-1.5">transferencias por revisar</p>
-          <span class="inline-flex items-center gap-1 mt-2 text-xs font-semibold text-brand-600">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
-            Requieren acción
-          </span>
-        </div>
-      </div>
-
-      <!-- Comprobantes por aprobar -->
-      <section>
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="font-display font-semibold text-lg">Comprobantes por aprobar</h2>
-            <p class="text-sm text-ink-400 mt-0.5">Transferencias bancarias que esperan verificación</p>
-          </div>
-          <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold bg-brand-100 text-brand-700">3 pendientes</span>
-        </div>
-        <div class="grid grid-cols-3 gap-4">
-          <!-- Comprobante 1 -->
-          <div class="bg-white border border-ink-200 rounded-xl overflow-hidden">
-            <div class="h-36 bg-ink-50 border-b border-ink-200 relative flex items-center justify-center">
-              <div class="flex flex-col items-center gap-2">
-                <div class="w-14 h-14 rounded-xl bg-white border border-ink-200 flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h4"/></svg>
-                </div>
-                <span class="text-xs text-ink-400">comprobante_transfer.jpg</span>
-              </div>
-              <button class="absolute top-2.5 right-2.5 text-xs font-semibold text-brand-600 bg-white border border-ink-200 rounded-full px-2.5 py-1 hover:bg-brand-50 transition-colors">Ver</button>
-            </div>
-            <div class="p-4">
-              <div class="flex items-start justify-between mb-3">
-                <div>
-                  <p class="font-semibold text-sm">Camila Soto</p>
-                  <p class="text-xs text-ink-400 mt-0.5">Plan Elite · junio 2026</p>
-                </div>
-                <p class="font-mono font-bold text-base">$79.000</p>
-              </div>
-              <div class="flex items-center gap-2 mb-4">
-                <span class="rounded-full px-2 py-0.5 text-xs font-semibold bg-warning/10 text-yellow-700">Transferencia</span>
-                <span class="text-xs text-ink-400">hace 2 h</span>
-              </div>
-              <div class="flex gap-2">
-                <button class="flex-1 h-9 rounded-full bg-success/10 text-success text-sm font-semibold hover:bg-success/20 transition-colors">Aprobar</button>
-                <button class="flex-1 h-9 rounded-full bg-danger/10 text-danger text-sm font-semibold hover:bg-danger/20 transition-colors">Rechazar</button>
-              </div>
-            </div>
-          </div>
-          <!-- Comprobante 2 -->
-          <div class="bg-white border border-ink-200 rounded-xl overflow-hidden">
-            <div class="h-36 bg-ink-50 border-b border-ink-200 relative flex items-center justify-center">
-              <div class="flex flex-col items-center gap-2">
-                <div class="w-14 h-14 rounded-xl bg-white border border-ink-200 flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h4"/></svg>
-                </div>
-                <span class="text-xs text-ink-400">transfer_0607.png</span>
-              </div>
-              <button class="absolute top-2.5 right-2.5 text-xs font-semibold text-brand-600 bg-white border border-ink-200 rounded-full px-2.5 py-1 hover:bg-brand-50 transition-colors">Ver</button>
-            </div>
-            <div class="p-4">
-              <div class="flex items-start justify-between mb-3">
-                <div>
-                  <p class="font-semibold text-sm">Pancho Díaz</p>
-                  <p class="text-xs text-ink-400 mt-0.5">Halterofilia · junio 2026</p>
-                </div>
-                <p class="font-mono font-bold text-base">$65.000</p>
-              </div>
-              <div class="flex items-center gap-2 mb-4">
-                <span class="rounded-full px-2 py-0.5 text-xs font-semibold bg-warning/10 text-yellow-700">Transferencia</span>
-                <span class="text-xs text-ink-400">hace 5 h</span>
-              </div>
-              <div class="flex gap-2">
-                <button class="flex-1 h-9 rounded-full bg-success/10 text-success text-sm font-semibold hover:bg-success/20 transition-colors">Aprobar</button>
-                <button class="flex-1 h-9 rounded-full bg-danger/10 text-danger text-sm font-semibold hover:bg-danger/20 transition-colors">Rechazar</button>
-              </div>
-            </div>
-          </div>
-          <!-- Comprobante 3 -->
-          <div class="bg-white border border-ink-200 rounded-xl overflow-hidden">
-            <div class="h-36 bg-ink-50 border-b border-ink-200 relative flex items-center justify-center">
-              <div class="flex flex-col items-center gap-2">
-                <div class="w-14 h-14 rounded-xl bg-white border border-ink-200 flex items-center justify-center">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h6M7 16h4"/></svg>
-                </div>
-                <span class="text-xs text-ink-400">pago_junio.jpg</span>
-              </div>
-              <button class="absolute top-2.5 right-2.5 text-xs font-semibold text-brand-600 bg-white border border-ink-200 rounded-full px-2.5 py-1 hover:bg-brand-50 transition-colors">Ver</button>
-            </div>
-            <div class="p-4">
-              <div class="flex items-start justify-between mb-3">
-                <div>
-                  <p class="font-semibold text-sm">Ignacio Vera</p>
-                  <p class="text-xs text-ink-400 mt-0.5">Elite + Haltero · junio 2026</p>
-                </div>
-                <p class="font-mono font-bold text-base">$95.000</p>
-              </div>
-              <div class="flex items-center gap-2 mb-4">
-                <span class="rounded-full px-2 py-0.5 text-xs font-semibold bg-warning/10 text-yellow-700">Transferencia</span>
-                <span class="text-xs text-ink-400">ayer</span>
-              </div>
-              <div class="flex gap-2">
-                <button class="flex-1 h-9 rounded-full bg-success/10 text-success text-sm font-semibold hover:bg-success/20 transition-colors">Aprobar</button>
-                <button class="flex-1 h-9 rounded-full bg-danger/10 text-danger text-sm font-semibold hover:bg-danger/20 transition-colors">Rechazar</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Tabla de pagos -->
-      <section>
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h2 class="font-display font-semibold text-lg">Historial de pagos</h2>
-            <p class="text-sm text-ink-400 mt-0.5">Junio 2026</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <div class="relative">
-              <select class="h-9 rounded-full border border-ink-200 bg-white pl-4 pr-8 text-sm text-ink-700 outline-none focus:border-brand-500 appearance-none cursor-pointer">
-                <option>Todos los estados</option>
-                <option>Pagado</option>
-                <option>Pendiente</option>
-                <option>Moroso</option>
-              </select>
-            </div>
-            <button class="h-9 px-4 rounded-full border border-ink-200 bg-white text-sm text-ink-700 hover:bg-ink-50 transition-colors flex items-center gap-2">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-              Exportar
-            </button>
-          </div>
-        </div>
-        <div class="bg-white border border-ink-200 rounded-xl overflow-hidden">
-          <table class="w-full">
-            <thead>
-              <tr class="border-b border-ink-200">
-                <th class="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Cliente</th>
-                <th class="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Plan</th>
-                <th class="text-right px-5 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Monto</th>
-                <th class="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Método</th>
-                <th class="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Estado</th>
-                <th class="text-left px-5 py-3 text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Fecha</th>
-                <th class="px-5 py-3"></th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-ink-100">
-              <tr class="hover:bg-ink-50 transition-colors">
-                <td class="px-5 py-3.5">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-full bg-brand-100 grid place-items-center text-xs font-semibold text-brand-700">CS</div>
-                    <span class="text-sm font-medium">Camila Soto</span>
-                  </div>
-                </td>
-                <td class="px-5 py-3.5 text-sm text-ink-500">Plan Elite</td>
-                <td class="px-5 py-3.5 text-right font-mono font-bold text-sm">$79.000</td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-ink-100 text-ink-600">Transferencia</span></td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-warning/10 text-yellow-700">Pendiente</span></td>
-                <td class="px-5 py-3.5 text-sm text-ink-400">07 jun 2026</td>
-                <td class="px-5 py-3.5"><button class="text-ink-300 hover:text-ink-600 transition-colors">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>
-                </button></td>
-              </tr>
-              <tr class="hover:bg-ink-50 transition-colors">
-                <td class="px-5 py-3.5">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600">PD</div>
-                    <span class="text-sm font-medium">Pancho Díaz</span>
-                  </div>
-                </td>
-                <td class="px-5 py-3.5 text-sm text-ink-500">Halterofilia</td>
-                <td class="px-5 py-3.5 text-right font-mono font-bold text-sm">$65.000</td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-ink-100 text-ink-600">Transferencia</span></td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-warning/10 text-yellow-700">Pendiente</span></td>
-                <td class="px-5 py-3.5 text-sm text-ink-400">07 jun 2026</td>
-                <td class="px-5 py-3.5"><button class="text-ink-300 hover:text-ink-600 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-              </tr>
-              <tr class="hover:bg-ink-50 transition-colors">
-                <td class="px-5 py-3.5">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-full bg-info/10 grid place-items-center text-xs font-semibold text-info">JN</div>
-                    <span class="text-sm font-medium">Javiera Núñez</span>
-                  </div>
-                </td>
-                <td class="px-5 py-3.5 text-sm text-ink-500">Plan CrossFit</td>
-                <td class="px-5 py-3.5 text-right font-mono font-bold text-sm">$55.000</td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-success/10 text-green-700">MercadoPago</span></td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-success/10 text-green-700">Pagado</span></td>
-                <td class="px-5 py-3.5 text-sm text-ink-400">05 jun 2026</td>
-                <td class="px-5 py-3.5"><button class="text-ink-300 hover:text-ink-600 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-              </tr>
-              <tr class="hover:bg-ink-50 transition-colors">
-                <td class="px-5 py-3.5">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-full bg-ink-100 grid place-items-center text-xs font-semibold text-ink-600">IV</div>
-                    <span class="text-sm font-medium">Ignacio Vera</span>
-                  </div>
-                </td>
-                <td class="px-5 py-3.5 text-sm text-ink-500">Elite + Haltero</td>
-                <td class="px-5 py-3.5 text-right font-mono font-bold text-sm">$95.000</td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-ink-100 text-ink-600">Transferencia</span></td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-warning/10 text-yellow-700">Pendiente</span></td>
-                <td class="px-5 py-3.5 text-sm text-ink-400">06 jun 2026</td>
-                <td class="px-5 py-3.5"><button class="text-ink-300 hover:text-ink-600 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-              </tr>
-              <tr class="hover:bg-ink-50 transition-colors">
-                <td class="px-5 py-3.5">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-full bg-danger/10 grid place-items-center text-xs font-semibold text-danger">MR</div>
-                    <span class="text-sm font-medium">Matías Rojas</span>
-                  </div>
-                </td>
-                <td class="px-5 py-3.5 text-sm text-ink-500">Plan CrossFit</td>
-                <td class="px-5 py-3.5 text-right font-mono font-bold text-sm">$55.000</td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-success/10 text-green-700">MercadoPago</span></td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-danger/10 text-danger">Moroso</span></td>
-                <td class="px-5 py-3.5 text-sm text-ink-400">01 may 2026</td>
-                <td class="px-5 py-3.5"><button class="text-ink-300 hover:text-ink-600 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-              </tr>
-              <tr class="hover:bg-ink-50 transition-colors">
-                <td class="px-5 py-3.5">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-full bg-brand-100 grid place-items-center text-xs font-semibold text-brand-700">CS</div>
-                    <span class="text-sm font-medium">Camila Soto</span>
-                  </div>
-                </td>
-                <td class="px-5 py-3.5 text-sm text-ink-500">Plan Elite</td>
-                <td class="px-5 py-3.5 text-right font-mono font-bold text-sm">$79.000</td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-success/10 text-green-700">MercadoPago</span></td>
-                <td class="px-5 py-3.5"><span class="rounded-full px-2.5 py-1 text-xs font-semibold bg-success/10 text-green-700">Pagado</span></td>
-                <td class="px-5 py-3.5 text-sm text-ink-400">04 may 2026</td>
-                <td class="px-5 py-3.5"><button class="text-ink-300 hover:text-ink-600 transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></button></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="px-5 py-3 border-t border-ink-100 flex items-center justify-between text-sm text-ink-400">
-            <span>Mostrando 6 de 48 pagos</span>
-            <div class="flex items-center gap-1">
-              <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center hover:bg-ink-50 transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
-              <button class="w-8 h-8 rounded-lg bg-brand-500 text-white grid place-items-center text-xs font-bold">1</button>
-              <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center text-xs hover:bg-ink-50 transition-colors">2</button>
-              <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center text-xs hover:bg-ink-50 transition-colors">3</button>
-              <button class="w-8 h-8 rounded-lg border border-ink-200 grid place-items-center hover:bg-ink-50 transition-colors"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-    </div>
-  </main>
+</div>
 </div>
 </body>
 </html>

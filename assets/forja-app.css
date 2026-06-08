@@ -1,0 +1,103 @@
+/* ===========================================================================
+   Forja APP (móvil) — sistema sobre forja.css (tokens + dark + badges + fmt).
+   Frame de teléfono, app bar, bottom tab bar (con FAB central), componentes
+   mobile. Light + dark con el mismo [data-theme="dark"].
+   Regla dura: NUNCA bordes/bandas de color de un solo lado.
+   =========================================================================== */
+
+body{background:var(--fj-ink-100);}
+[data-theme="dark"] body{background:#0A0C0F;}
+
+/* frame del teléfono */
+.app-frame{max-width:430px;margin-inline:auto;min-height:100vh;background:var(--fj-ink-50);
+  position:relative;display:flex;flex-direction:column;box-shadow:0 0 60px rgba(0,0,0,.12);}
+[data-theme="dark"] .app-frame{box-shadow:0 0 60px rgba(0,0,0,.5);}
+
+/* app bar superior */
+.app-bar{position:sticky;top:0;z-index:20;background:var(--fj-glass);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--fj-ink-200);padding:14px 18px;display:flex;align-items:center;gap:12px;}
+.app-bar-title{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:20px;color:var(--fj-ink-900);line-height:1.1;}
+
+/* área scrollable de contenido (deja espacio para la tab bar) */
+.app-screen{flex:1;padding:16px 18px calc(96px + env(safe-area-inset-bottom,0));}
+.app-screen::-webkit-scrollbar{width:0;}
+
+/* --------------------------------------------------------------------------- BOTTOM TAB BAR */
+.app-tabbar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:430px;z-index:40;
+  background:var(--fj-glass);backdrop-filter:blur(14px);border-top:1px solid var(--fj-ink-200);
+  display:flex;align-items:flex-end;justify-content:space-around;padding:8px 8px calc(8px + env(safe-area-inset-bottom,0));}
+.app-tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;color:var(--fj-ink-400);
+  font-size:10px;font-weight:600;cursor:pointer;transition:color .12s;}
+.app-tab svg{width:22px;height:22px;}
+.app-tab[aria-current="page"]{color:var(--fj-brand);}
+.app-tab-fab{position:relative;}
+.app-tab-fab .app-fab{width:52px;height:52px;border-radius:99px;background:var(--fj-brand);color:#fff;
+  display:grid;place-items:center;margin-top:-22px;box-shadow:0 8px 20px rgba(251,82,21,.45);border:4px solid var(--fj-ink-50);}
+.app-tab-fab .app-fab svg{width:24px;height:24px;}
+[data-theme="dark"] .app-tab-fab .app-fab{border-color:#0A0C0F;}
+
+/* --------------------------------------------------------------------------- COMPONENTES MOBILE */
+.acard{background:var(--fj-surface);border:1px solid var(--fj-ink-200);border-radius:18px;}
+.acard-pad{padding:16px;}
+.a-eyebrow{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--fj-ink-400);}
+.a-h{font-family:"Space Grotesk",sans-serif;font-weight:700;color:var(--fj-ink-900);}
+.a-sub{color:var(--fj-ink-500);}
+.a-muted{color:var(--fj-ink-400);}
+
+/* fila de lista mobile */
+.arow{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid var(--fj-ink-100);}
+.arow:last-child{border-bottom:0;}
+
+/* tiles de stats */
+.atile{background:var(--fj-surface);border:1px solid var(--fj-ink-200);border-radius:16px;padding:14px;text-align:center;}
+.atile-num{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:24px;color:var(--fj-ink-900);line-height:1;}
+.atile-lbl{font-size:11px;color:var(--fj-ink-400);margin-top:5px;}
+
+/* avatar gradiente con anillo */
+.a-av{border-radius:99px;display:grid;place-items:center;font-weight:700;color:#fff;
+  background:linear-gradient(135deg,#FF7340,#FB5215);flex-shrink:0;}
+.a-ring{padding:2px;border-radius:99px;background:linear-gradient(135deg,#FF7340,#FB5215);}
+.a-ring.seen{background:var(--fj-ink-200);}
+.a-ring > *{border:2px solid var(--fj-surface);}
+/* badge de nivel sobre el avatar (gold sólido, alto contraste en ambos temas) */
+.a-lvl{position:absolute;bottom:-3px;right:-3px;min-width:22px;height:22px;padding:0 5px;border-radius:99px;
+  display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
+  background:#ECC04A;color:#3A2D05;border:2px solid var(--fj-surface);z-index:3;line-height:1;
+  box-shadow:0 1px 4px rgba(0,0,0,.25);}
+
+/* barra de progreso (XP, cupos) */
+.a-prog{height:8px;border-radius:99px;background:var(--fj-ink-100);overflow:hidden;}
+.a-prog > div{height:100%;border-radius:99px;background:var(--fj-brand);}
+
+/* botones full-width mobile (reusa .fj-btn pero con ancho) */
+.a-btn{height:48px;border-radius:14px;font-size:15px;font-weight:700;width:100%;display:inline-flex;
+  align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:.12s;}
+.a-btn-primary{background:var(--fj-brand);color:#fff;}
+.a-btn-primary:active{background:var(--fj-brand-600);}
+.a-btn-ghost{background:var(--fj-surface);border:1px solid var(--fj-ink-200);color:var(--fj-ink-800);}
+
+/* hero de sesión / WOD (oscuro siempre, identidad — sin banda de un lado) */
+.a-hero{background:#14171D;border-radius:20px;color:#fff;overflow:hidden;}
+[data-theme="dark"] .a-hero{background:#1C2026;border:1px solid #2C313A;}
+/* el hero es oscuro SIEMPRE → elementos basados en tokens van forzados a claro */
+.a-hero .fj-tag-rx{border-color:rgba(255,255,255,.28);color:rgba(255,255,255,.82);}
+.a-hero .a-muted,.a-hero .a-sub{color:rgba(255,255,255,.6);}
+.a-hero .fj-badge-neutral{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);}
+
+/* segment / tabs internos */
+.a-seg{display:flex;background:var(--fj-ink-100);border-radius:99px;padding:4px;gap:4px;}
+.a-seg > *{flex:1;text-align:center;padding:8px;border-radius:99px;font-size:13px;font-weight:600;color:var(--fj-ink-500);cursor:pointer;}
+.a-seg > [aria-selected="true"]{background:var(--fj-surface);color:var(--fj-ink-900);box-shadow:0 1px 3px rgba(0,0,0,.08);}
+
+/* --------------------------------------------------------------------------- AUTH (login/activar/recuperar) — sin tab bar */
+.auth-wrap{flex:1;display:flex;flex-direction:column;padding:32px 26px calc(26px + env(safe-area-inset-bottom,0));min-height:100vh;}
+.auth-logo{width:60px;height:60px;border-radius:18px;background:var(--fj-brand);display:grid;place-items:center;color:#fff;box-shadow:0 8px 22px rgba(251,82,21,.4);}
+.auth-tenant{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 6px;border-radius:99px;background:var(--fj-surface);border:1px solid var(--fj-ink-200);}
+.auth-foot{margin-top:auto;text-align:center;padding-top:24px;}
+.fj-input.auth-input{height:50px;font-size:15px;}
+
+/* toggle switch */
+.a-switch{width:44px;height:26px;border-radius:99px;background:var(--fj-ink-200);position:relative;cursor:pointer;transition:background .15s;flex-shrink:0;}
+.a-switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:99px;background:#fff;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+.a-switch[aria-checked="true"]{background:var(--fj-brand);}
+.a-switch[aria-checked="true"]::after{left:21px;}

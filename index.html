@@ -4,64 +4,95 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Mockups</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = { theme: { extend: {
-  colors: { brand:{50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E'}, ink:{950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9'} },
-  fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-  borderRadius:{md:'12px',lg:'16px',xl:'20px','2xl':'24px'} } } }
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="assets/forja.css">
+<style>
+  .scr{display:block;border:1px solid var(--fj-ink-200);background:var(--fj-surface);border-radius:14px;padding:16px;transition:border-color .12s,box-shadow .12s;}
+  .scr:hover{border-color:var(--fj-brand);box-shadow:0 6px 18px rgba(0,0,0,.10);}
+  .scr p{margin:0}
+  .grid-scr{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;}
+</style>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
-<header class="border-b border-ink-200 bg-white">
-  <div class="max-w-5xl mx-auto px-6 h-16 flex items-center gap-3">
-    <span class="grid place-items-center w-9 h-9 rounded-lg bg-brand-500 text-white">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
+<body style="background:var(--fj-ink-50)">
+<header style="border-bottom:1px solid var(--fj-ink-200);background:var(--fj-surface)">
+  <div style="max-width:1080px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:12px">
+    <span class="fj-logo-mark">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
     </span>
-    <span class="font-display font-bold text-xl">Forja<span class="text-brand-500">.</span></span>
-    <span class="ml-1 text-xs font-semibold uppercase tracking-wider text-ink-400">Mockups</span>
+    <span class="font-display font-bold text-xl">Forja<span style="color:var(--fj-brand)">.</span></span>
+    <span class="fj-eyebrow ml-1">Mockups</span>
+    <button onclick="const d=document.documentElement;d.hasAttribute('data-theme')?d.removeAttribute('data-theme'):d.setAttribute('data-theme','dark')" class="fj-icon-btn ml-auto" aria-label="Tema">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
   </div>
 </header>
-<main class="max-w-5xl mx-auto px-6 py-12 space-y-12">
+
+<main style="max-width:1080px;margin:0 auto;padding:40px 24px" class="space-y-10">
   <section>
-    <h1 class="font-display font-bold text-3xl">Mockups · Forja</h1>
-    <p class="text-ink-500 mt-2">Sistema de gestión de gimnasios. App del atleta (dark) + Backoffice (light). Marca placeholder, brandeable por gym.</p>
-    <a href="design-system/styleguide.html" class="inline-flex items-center gap-2 mt-4 rounded-full bg-ink-900 text-white text-sm font-semibold px-5 h-10 hover:bg-ink-800 transition">Ver design system →</a>
+    <h1 class="font-display font-bold text-3xl">Forja · prototipo</h1>
+    <p class="text-ink-500 mt-2" style="max-width:640px">Plataforma de gestión de gimnasios crossfit. <b>App del atleta</b> + <b>Backoffice del gym</b>, ambos con tema claro/oscuro. La app vive dentro de un <b>tenant</b> (cada gimnasio = un Box, branded; onboarding liderado por el gym). Marca de ejemplo: Forja Box Providencia.</p>
+    <a href="design-system/styleguide.html" class="fj-btn fj-btn-ghost mt-4" style="display:inline-flex;width:auto">Ver design system →</a>
   </section>
 
   <section>
-    <div class="flex items-center gap-2 mb-4"><span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span><h2 class="font-display font-semibold text-xl">App del atleta <span class="text-ink-400 font-sans font-normal text-base">· dark · mobile</span></h2></div>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-      <a href="app/hoy.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Hoy</p><p class="text-sm text-ink-500 mt-0.5">Home: próxima clase, racha, XP</p></a>
-      <a href="app/ver-clase.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Ver clase</p><p class="text-sm text-ink-500 mt-0.5">Rutina por categorías (Fran)</p></a>
-      <a href="app/reservar.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Reservar</p><p class="text-sm text-ink-500 mt-0.5">Calendario + cupos</p></a>
-      <a href="app/perfil.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Perfil</p><p class="text-sm text-ink-500 mt-0.5">Estilo Instagram fitness</p></a>
-      <a href="app/red-social.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Red social</p><p class="text-sm text-ink-500 mt-0.5">Feed de la tribu</p></a>
-      <a href="app/ranking.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Ranking / Gamificación</p><p class="text-sm text-ink-500 mt-0.5">Nivel, XP, leaderboard, logros</p></a>
-      <a href="app/desafios.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Desafíos</p><p class="text-sm text-ink-500 mt-0.5">Cumple + valida el coach</p></a>
-      <a href="app/duelos.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Duelos</p><p class="text-sm text-ink-500 mt-0.5">Versus 1v1 / 2v2</p></a>
-      <a href="app/multi-gimnasio.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Multi-gimnasio</p><p class="text-sm text-ink-500 mt-0.5">Cambiar de sede</p></a>
+    <div class="flex items-center gap-2 mb-4"><span class="w-2.5 h-2.5 rounded-full" style="background:var(--fj-brand)"></span><h2 class="font-display font-semibold text-xl">Acceso <span class="text-ink-400 font-normal text-base">· tenant · gym-led</span></h2></div>
+    <div class="grid-scr">
+      <a href="app/login.html" class="scr"><p class="font-semibold">Login</p><p class="text-sm text-ink-500 mt-0.5">Entrada, branded al gym</p></a>
+      <a href="app/activar-cuenta.html" class="scr"><p class="font-semibold">Activar cuenta</p><p class="text-sm text-ink-500 mt-0.5">Onboarding del gym + plan</p></a>
+      <a href="app/recuperar-contrasena.html" class="scr"><p class="font-semibold">Recuperar contraseña</p><p class="text-sm text-ink-500 mt-0.5">Enviar enlace</p></a>
+      <a href="app/nueva-contrasena.html" class="scr"><p class="font-semibold">Nueva contraseña</p><p class="text-sm text-ink-500 mt-0.5">Reset</p></a>
     </div>
   </section>
 
   <section>
-    <div class="flex items-center gap-2 mb-4"><span class="w-2.5 h-2.5 rounded-full bg-info"></span><h2 class="font-display font-semibold text-xl">Backoffice <span class="text-ink-400 font-sans font-normal text-base">· light · desktop</span></h2></div>
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-      <a href="backoffice/dashboard.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Dashboard</p><p class="text-sm text-ink-500 mt-0.5">KPIs + clases de hoy</p></a>
-      <a href="backoffice/clientes.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Clientes</p><p class="text-sm text-ink-500 mt-0.5">Tabla + estados</p></a>
-      <a href="backoffice/cliente-perfil.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Cliente · Perfil 360</p><p class="text-sm text-ink-500 mt-0.5">Plan, asistencia, pagos</p></a>
-      <a href="backoffice/calendario.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Calendario</p><p class="text-sm text-ink-500 mt-0.5">Grilla semanal de clases</p></a>
-      <a href="backoffice/tipo-clases.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Tipo de clases</p><p class="text-sm text-ink-500 mt-0.5">Catálogo + categorías</p></a>
-      <a href="backoffice/constructor-rutina.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Constructor de rutina</p><p class="text-sm text-ink-500 mt-0.5">Bloques + formatos</p></a>
-      <a href="backoffice/planes.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Planes</p><p class="text-sm text-ink-500 mt-0.5">Catálogo de membresías</p></a>
-      <a href="backoffice/pagos.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Pagos</p><p class="text-sm text-ink-500 mt-0.5">Comprobantes + tabla</p></a>
-      <a href="backoffice/metricas.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Métricas</p><p class="text-sm text-ink-500 mt-0.5">Analytics + gráficos</p></a>
-      <a href="backoffice/competencias.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Competencias</p><p class="text-sm text-ink-500 mt-0.5">Torneos, ligas, heats</p></a>
-      <a href="backoffice/configuracion.html" class="rounded-xl border border-ink-200 bg-white p-5 hover:border-brand-500 hover:shadow-md transition"><p class="font-semibold">Configuración</p><p class="text-sm text-ink-500 mt-0.5">Profes + branding del gym</p></a>
+    <div class="flex items-center gap-2 mb-4"><span class="w-2.5 h-2.5 rounded-full" style="background:var(--fj-brand)"></span><h2 class="font-display font-semibold text-xl">App del atleta <span class="text-ink-400 font-normal text-base">· mobile · claro/oscuro</span></h2></div>
+    <div class="grid-scr">
+      <a href="app/hoy.html" class="scr"><p class="font-semibold">Hoy</p><p class="text-sm text-ink-500 mt-0.5">Home: próxima clase, racha, XP</p></a>
+      <a href="app/ver-clase.html" class="scr"><p class="font-semibold">Ver clase</p><p class="text-sm text-ink-500 mt-0.5">Rutina por categorías + WOD</p></a>
+      <a href="app/anotar-resultado.html" class="scr"><p class="font-semibold">Anotar resultado</p><p class="text-sm text-ink-500 mt-0.5">Registrar el WOD → XP/leaderboard</p></a>
+      <a href="app/reservar.html" class="scr"><p class="font-semibold">Reservar</p><p class="text-sm text-ink-500 mt-0.5">Calendario + cupos</p></a>
+      <a href="app/perfil.html" class="scr"><p class="font-semibold">Perfil</p><p class="text-sm text-ink-500 mt-0.5">Vitrina: posts, logros, stats</p></a>
+      <a href="app/red-social.html" class="scr"><p class="font-semibold">Comunidad</p><p class="text-sm text-ink-500 mt-0.5">Feed del box</p></a>
+      <a href="app/ranking.html" class="scr"><p class="font-semibold">Ranking</p><p class="text-sm text-ink-500 mt-0.5">Nivel, XP, leaderboard, logros</p></a>
+      <a href="app/desafios.html" class="scr"><p class="font-semibold">Desafíos</p><p class="text-sm text-ink-500 mt-0.5">Cumple + valida el coach</p></a>
+      <a href="app/duelos.html" class="scr"><p class="font-semibold">Duelos</p><p class="text-sm text-ink-500 mt-0.5">Versus 1v1 / duplas</p></a>
+      <a href="app/crear-duelo.html" class="scr"><p class="font-semibold">Crear duelo</p><p class="text-sm text-ink-500 mt-0.5">Lanzar reto a otro atleta</p></a>
+      <a href="app/notificaciones.html" class="scr"><p class="font-semibold">Notificaciones</p><p class="text-sm text-ink-500 mt-0.5">Bandeja del atleta</p></a>
+      <a href="app/crear-post.html" class="scr"><p class="font-semibold">Crear publicación</p><p class="text-sm text-ink-500 mt-0.5">Composer + PR</p></a>
+      <a href="app/detalle-ejercicio.html" class="scr"><p class="font-semibold">Detalle de ejercicio</p><p class="text-sm text-ink-500 mt-0.5">Técnica, músculos, PR</p></a>
+      <a href="app/competencias.html" class="scr"><p class="font-semibold">Competencias</p><p class="text-sm text-ink-500 mt-0.5">Explorar + inscribirse</p></a>
+      <a href="app/mi-plan.html" class="scr"><p class="font-semibold">Mi plan</p><p class="text-sm text-ink-500 mt-0.5">Pagar, renovar, congelar</p></a>
+      <a href="app/multi-gimnasio.html" class="scr"><p class="font-semibold">Mis sedes</p><p class="text-sm text-ink-500 mt-0.5">Multi-gimnasio</p></a>
+      <a href="app/editar-perfil.html" class="scr"><p class="font-semibold">Editar perfil</p><p class="text-sm text-ink-500 mt-0.5">Foto, bio, datos</p></a>
+      <a href="app/ajustes.html" class="scr"><p class="font-semibold">Ajustes</p><p class="text-sm text-ink-500 mt-0.5">Cuenta, tema, privacidad</p></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="flex items-center gap-2 mb-4"><span class="w-2.5 h-2.5 rounded-full" style="background:var(--fj-info)"></span><h2 class="font-display font-semibold text-xl">Backoffice del gym <span class="text-ink-400 font-normal text-base">· desktop · claro/oscuro</span></h2></div>
+    <div class="grid-scr">
+      <a href="backoffice/dashboard.html" class="scr"><p class="font-semibold">Dashboard</p><p class="text-sm text-ink-500 mt-0.5">Qué atender hoy</p></a>
+      <a href="backoffice/clientes.html" class="scr"><p class="font-semibold">Clientes</p><p class="text-sm text-ink-500 mt-0.5">Tabla + acciones rápidas</p></a>
+      <a href="backoffice/cliente-perfil.html" class="scr"><p class="font-semibold">Cliente · Perfil</p><p class="text-sm text-ink-500 mt-0.5">Plan, asistencia, historial</p></a>
+      <a href="backoffice/editar-cliente.html" class="scr"><p class="font-semibold">Editar / Nuevo cliente</p><p class="text-sm text-ink-500 mt-0.5">Formulario + barra flotante</p></a>
+      <a href="backoffice/calendario.html" class="scr"><p class="font-semibold">Calendario (hub)</p><p class="text-sm text-ink-500 mt-0.5">Inmersivo + drawers</p></a>
+      <a href="backoffice/detalle-sesion.html" class="scr"><p class="font-semibold">Detalle de sesión</p><p class="text-sm text-ink-500 mt-0.5">Rutina + asistencia</p></a>
+      <a href="backoffice/tipo-clases.html" class="scr"><p class="font-semibold">Tipos de clase</p><p class="text-sm text-ink-500 mt-0.5">Modalidades + plantillas</p></a>
+      <a href="backoffice/rutinas.html" class="scr"><p class="font-semibold">Rutinas</p><p class="text-sm text-ink-500 mt-0.5">Plantillas por modalidad</p></a>
+      <a href="backoffice/constructor-rutina.html" class="scr"><p class="font-semibold">Constructor de rutina</p><p class="text-sm text-ink-500 mt-0.5">Inmersivo, drag & drop</p></a>
+      <a href="backoffice/ejercicios.html" class="scr"><p class="font-semibold">Ejercicios</p><p class="text-sm text-ink-500 mt-0.5">Biblioteca de movimientos</p></a>
+      <a href="backoffice/planes.html" class="scr"><p class="font-semibold">Planes</p><p class="text-sm text-ink-500 mt-0.5">Catálogo de membresías</p></a>
+      <a href="backoffice/pagos.html" class="scr"><p class="font-semibold">Pagos</p><p class="text-sm text-ink-500 mt-0.5">Comprobantes + historial</p></a>
+      <a href="backoffice/metricas.html" class="scr"><p class="font-semibold">Métricas</p><p class="text-sm text-ink-500 mt-0.5">Heatmap + KPIs</p></a>
+      <a href="backoffice/competencias.html" class="scr"><p class="font-semibold">Competencias</p><p class="text-sm text-ink-500 mt-0.5">Hero + listado</p></a>
+      <a href="backoffice/constructor-competencia.html" class="scr"><p class="font-semibold">Constructor de competencia</p><p class="text-sm text-ink-500 mt-0.5">Divisiones + pruebas (inmersivo)</p></a>
+      <a href="backoffice/competencia-leaderboard.html" class="scr"><p class="font-semibold">Leaderboard de competencia</p><p class="text-sm text-ink-500 mt-0.5">Standings por división</p></a>
+      <a href="backoffice/configuracion.html" class="scr"><p class="font-semibold">Configuración</p><p class="text-sm text-ink-500 mt-0.5">Profes, branding, pagos</p></a>
     </div>
   </section>
 </main>

@@ -3,263 +3,213 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forja · Cambiar sede</title>
+<title>Forja · Mis sedes</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans min-h-screen">
+<body>
+<div class="app-frame">
 
-<div class="max-w-[420px] mx-auto bg-white min-h-screen flex flex-col relative">
-
-  <!-- Top bar -->
-  <header class="bg-white border-b border-ink-200 px-4 pt-10 pb-3">
-    <div class="flex items-center gap-3">
-      <a href="perfil.html" class="w-9 h-9 rounded-full border border-ink-200 flex items-center justify-center text-ink-500 hover:bg-ink-50 transition-colors cursor-pointer">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      </a>
-      <div>
-        <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Tu cuenta</p>
-        <h1 class="font-display font-bold text-xl text-ink-900">Cambiar sede</h1>
-      </div>
+  <!-- App bar con back -->
+  <header class="app-bar">
+    <a href="ajustes.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1">
+      <p class="a-eyebrow">gimnasio</p>
+      <p class="app-bar-title">Mis sedes</p>
     </div>
   </header>
 
-  <!-- Scroll -->
-  <div class="flex-1 overflow-y-auto pb-24">
+  <main class="app-screen space-y-4">
 
-    <!-- Atleta -->
-    <div class="mx-4 mt-4 flex items-center gap-3 rounded-xl border border-ink-200 bg-white p-4">
-      <div class="relative flex-shrink-0">
-        <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center">
-          <span class="font-display font-bold text-lg text-brand-600">MR</span>
+    <!-- Card del atleta -->
+    <div class="acard acard-pad">
+      <div class="flex items-center gap-3">
+        <div class="a-av w-12 h-12 text-sm flex-shrink-0">VF</div>
+        <div class="flex-1 min-w-0">
+          <p class="a-h text-base">Vale Fuentes</p>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <span class="fj-badge fj-badge-warning" style="background:rgba(236,192,74,.18);color:var(--tier-gold)">
+              <span class="fj-dot" style="background:#ECC04A"></span>Oro
+            </span>
+            <span class="a-muted text-xs">· Nivel 12</span>
+          </div>
         </div>
-        <span class="absolute -bottom-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center text-[9px] font-bold border-2 border-white" style="background:#ECC04A20;color:#a8842a;">12</span>
-      </div>
-      <div>
-        <p class="font-semibold text-ink-900 text-sm">Matias Rojas</p>
-        <div class="flex items-center gap-1.5 mt-0.5">
-          <span class="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-semibold" style="background:#ECC04A20;color:#a8842a">
-            <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
-            Oro
-          </span>
-          <span class="text-[10px] text-ink-400">· Nivel 12</span>
+        <div class="text-right flex-shrink-0">
+          <p class="a-muted text-[11px]">Activo en</p>
+          <p class="text-xs font-semibold text-ink-800 leading-tight">Forja Box<br>Providencia</p>
         </div>
-      </div>
-      <div class="ml-auto text-right">
-        <p class="text-[11px] text-ink-400">Activo en</p>
-        <p class="text-xs font-semibold text-ink-800 leading-tight">Forja Box<br>Providencia</p>
       </div>
     </div>
 
-    <!-- Aviso multi-sede -->
-    <div class="mx-4 mt-3 flex items-start gap-3 rounded-xl bg-info/5 border border-info/20 p-3">
-      <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <p class="text-xs text-ink-600 leading-relaxed">Tu ranking, logros y XP se mantienen en todas las sedes. Al cambiar de sede, tus reservas tambien cambian de box.</p>
+    <!-- Callout info -->
+    <div class="acard acard-pad" style="background:rgba(62,123,250,.07);border:1px solid rgba(62,123,250,.2)">
+      <div class="flex items-start gap-2.5">
+        <svg class="mt-0.5 flex-shrink-0" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <p class="text-xs text-ink-600 leading-relaxed">Tu ranking, logros y XP se mantienen entre todas tus sedes. Al cambiar, tus próximas reservas se crean en la sede activa.</p>
+      </div>
     </div>
 
     <!-- Sede activa -->
-    <div class="mx-4 mt-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Sede activa</p>
-
-      <div class="rounded-xl border-2 border-brand-300 bg-white overflow-hidden">
-        <!-- Header sede activa -->
-        <div class="flex items-center gap-2 px-4 py-2 bg-brand-50 border-b border-brand-100">
-          <div class="w-2 h-2 rounded-full bg-brand-500"></div>
-          <span class="text-[11px] font-semibold text-brand-600">Sede activa</span>
+    <div>
+      <p class="a-eyebrow px-1 mb-2">Sede activa</p>
+      <div class="acard" style="border:2px solid rgba(251,82,21,.4)">
+        <!-- Badge sede activa -->
+        <div class="flex items-center gap-2 px-4 py-2" style="border-bottom:1px solid rgba(251,82,21,.15);background:rgba(251,82,21,.06)">
+          <span class="fj-dot" style="background:var(--fj-brand)"></span>
+          <span class="text-[11px] font-semibold" style="color:var(--fj-brand)">Sede activa</span>
         </div>
 
-        <div class="p-4">
-          <!-- Mapa placeholder -->
-          <div class="h-28 rounded-lg bg-ink-100 border border-ink-200 flex items-center justify-center mb-4 overflow-hidden relative">
-            <!-- Grid simulando mapa -->
-            <div class="absolute inset-0 opacity-20">
-              <div class="grid grid-cols-8 grid-rows-5 h-full w-full">
-                <div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div>
-                <div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div>
-                <div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div>
-                <div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div>
-                <div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div><div class="border border-ink-300"></div><div class="border border-ink-300 bg-ink-200"></div><div class="border border-ink-300"></div>
+        <div class="acard-pad space-y-3">
+          <!-- Mapa placeholder con grid sutil -->
+          <div class="h-28 rounded-xl overflow-hidden relative" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-100)">
+            <!-- Grid calles simulado -->
+            <div class="absolute inset-0" style="opacity:.18">
+              <div style="display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(5,1fr);height:100%;width:100%">
+                <div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div>
+                <div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div>
+                <div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div>
+                <div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div>
+                <div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300)"></div><div style="border:1px solid var(--fj-ink-300);background:var(--fj-ink-200)"></div><div style="border:1px solid var(--fj-ink-300)"></div>
               </div>
             </div>
             <!-- Pin -->
-            <div class="relative z-10 flex flex-col items-center">
-              <div class="w-9 h-9 rounded-full bg-brand-500 flex items-center justify-center shadow-glow">
+            <div class="absolute inset-0 flex flex-col items-center justify-center z-10">
+              <div class="w-9 h-9 rounded-full flex items-center justify-center shadow-lg" style="background:var(--fj-brand)">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
               </div>
-              <div class="mt-1 px-2 py-0.5 rounded-full bg-white shadow-sm border border-ink-200">
+              <div class="mt-1.5 px-2 py-0.5 rounded-full shadow-sm" style="background:var(--fj-surface);border:1px solid var(--fj-ink-100)">
                 <p class="text-[10px] font-semibold text-ink-800">Forja Box</p>
               </div>
             </div>
           </div>
 
-          <div class="flex items-start gap-3">
-            <div class="flex-1">
-              <h3 class="font-display font-bold text-lg text-ink-900">Forja Box Providencia</h3>
-              <p class="text-xs text-ink-500 mt-0.5">Av. Providencia 2115, Piso 2</p>
-              <div class="flex items-center gap-1.5 mt-1.5">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="text-[11px] text-ink-400">L-V 06:00–21:00 · S 08:00–14:00</span>
-              </div>
+          <!-- Nombre, dirección, horarios -->
+          <div>
+            <p class="font-display font-bold text-lg text-ink-900">Forja Box Providencia</p>
+            <p class="a-muted text-xs mt-0.5">Av. Providencia 2115, Piso 2</p>
+            <div class="flex items-center gap-1.5 mt-1">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-400"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span class="a-muted text-xs">L-V 06:00–21:00 · S 08:00–14:00</span>
             </div>
           </div>
 
-          <!-- Plan activo -->
-          <div class="mt-3 rounded-lg border border-ink-100 bg-ink-50 p-3">
-            <div class="flex items-center justify-between">
+          <!-- Plan actual -->
+          <div class="rounded-xl p-3" style="background:var(--fj-ink-50,rgba(0,0,0,.04));border:1px solid var(--fj-ink-100)">
+            <div class="flex items-start justify-between gap-2">
               <div>
-                <p class="text-[10px] text-ink-400">Tu plan</p>
-                <p class="text-sm font-semibold text-ink-900">Elite · Clases ilimitadas</p>
-                <p class="text-[11px] text-ink-400 mt-0.5">Incluye: WODs · Open Gym · Funcional</p>
+                <p class="a-muted text-[10px]">Tu plan</p>
+                <p class="text-sm font-semibold text-ink-900 mt-0.5">Elite · Clases ilimitadas</p>
+                <p class="a-muted text-xs mt-0.5">WODs · Open Gym · Funcional</p>
               </div>
-              <div class="text-right">
-                <p class="text-[10px] text-ink-400">Proximo cobro</p>
-                <p class="font-mono font-semibold text-sm text-ink-800">$79.990</p>
-                <p class="text-[10px] text-ink-400">1 jul 2026</p>
+              <div class="text-right flex-shrink-0">
+                <p class="a-muted text-[10px]">Próximo cobro</p>
+                <p class="font-mono font-bold text-sm text-ink-900 mt-0.5">$79.990</p>
+                <p class="a-muted text-[10px]">1 jul 2026</p>
               </div>
             </div>
           </div>
 
-          <!-- Stats de esta sede -->
-          <div class="mt-3 grid grid-cols-3 gap-2">
-            <div class="rounded-lg bg-ink-50 border border-ink-100 p-2.5 text-center">
-              <p class="font-mono font-bold text-xl text-ink-900">47</p>
-              <p class="text-[10px] text-ink-400">clases este mes</p>
+          <!-- 3 atiles -->
+          <div class="grid grid-cols-3 gap-2">
+            <div class="atile">
+              <span class="atile-num font-mono">47</span>
+              <span class="atile-lbl">clases/mes</span>
             </div>
-            <div class="rounded-lg bg-ink-50 border border-ink-100 p-2.5 text-center">
-              <p class="font-mono font-bold text-xl text-ink-900">7</p>
-              <p class="text-[10px] text-ink-400">racha actual</p>
+            <div class="atile">
+              <span class="atile-num font-mono">14🔥</span>
+              <span class="atile-lbl">racha</span>
             </div>
-            <div class="rounded-lg bg-ink-50 border border-ink-100 p-2.5 text-center">
-              <p class="font-mono font-bold text-xl text-brand-500">#3</p>
-              <p class="text-[10px] text-ink-400">en ranking</p>
+            <div class="atile">
+              <span class="atile-num font-mono" style="color:var(--fj-brand)">#3</span>
+              <span class="atile-lbl">ranking</span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Otras sedes -->
-    <div class="mx-4 mt-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Tus otras sedes</p>
-
-      <div class="rounded-xl border border-ink-200 bg-white overflow-hidden">
-        <div class="p-4">
-          <div class="flex items-start gap-3">
-            <div class="w-12 h-12 rounded-xl bg-ink-50 border border-ink-100 flex items-center justify-center flex-shrink-0">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-            </div>
-            <div class="flex-1 min-w-0">
-              <h3 class="font-semibold text-ink-900 text-sm">Forja Box Nunoa</h3>
-              <p class="text-xs text-ink-400 mt-0.5">Av. Irarrázaval 3471</p>
-              <div class="flex items-center gap-1.5 mt-1">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <span class="text-[11px] text-ink-400">L-V 06:30–21:00 · S 08:00–13:00</span>
-              </div>
+    <!-- Otra sede -->
+    <div>
+      <p class="a-eyebrow px-1 mb-2">Tus otras sedes</p>
+      <div class="acard acard-pad space-y-3">
+        <!-- Header sede -->
+        <div class="flex items-start gap-3">
+          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:var(--fj-ink-100);border:1px solid var(--fj-ink-100)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-500"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="font-display font-bold text-base text-ink-900">Forja Box Las Condes</p>
+            <p class="a-muted text-xs mt-0.5">Av. Apoquindo 6415, Local 3</p>
+            <div class="flex items-center gap-1.5 mt-1">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-ink-400"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span class="a-muted text-xs">L-V 06:30–21:30 · S 08:00–13:00</span>
             </div>
           </div>
-
-          <!-- Plan en esta sede -->
-          <div class="mt-3 rounded-lg border border-ink-100 bg-ink-50 p-3">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-[10px] text-ink-400">Tu plan aqui</p>
-                <p class="text-sm font-semibold text-ink-700">Pro · 12 clases/mes</p>
-                <p class="text-[11px] text-ink-400 mt-0.5">Incluye: WODs · Open Gym</p>
-              </div>
-              <div class="text-right">
-                <p class="text-[10px] text-ink-400">Mensual</p>
-                <p class="font-mono font-semibold text-sm text-ink-700">$59.990</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Stats en esa sede -->
-          <div class="mt-3 grid grid-cols-3 gap-2">
-            <div class="rounded-lg bg-ink-50 border border-ink-100 p-2.5 text-center">
-              <p class="font-mono font-bold text-xl text-ink-700">8</p>
-              <p class="text-[10px] text-ink-400">clases este mes</p>
-            </div>
-            <div class="rounded-lg bg-ink-50 border border-ink-100 p-2.5 text-center">
-              <p class="font-mono font-bold text-xl text-ink-700">4</p>
-              <p class="text-[10px] text-ink-400">cupos restantes</p>
-            </div>
-            <div class="rounded-lg bg-ink-50 border border-ink-100 p-2.5 text-center">
-              <p class="font-mono font-bold text-xl text-ink-500">#7</p>
-              <p class="text-[10px] text-ink-400">ranking local</p>
-            </div>
-          </div>
-
-          <!-- CTA cambiar -->
-          <button class="mt-4 w-full h-11 rounded-full bg-ink-900 text-white text-sm font-semibold hover:bg-ink-800 transition-colors cursor-pointer">
-            Cambiar a Forja Box Nunoa
-          </button>
-          <p class="text-[11px] text-ink-400 text-center mt-2">Tus reservas actuales se mantendran en Providencia.</p>
         </div>
+
+        <!-- Plan en esta sede -->
+        <div class="rounded-xl p-3" style="background:var(--fj-ink-50,rgba(0,0,0,.04));border:1px solid var(--fj-ink-100)">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <p class="a-muted text-[10px]">Tu plan aquí</p>
+              <p class="text-sm font-semibold text-ink-700 mt-0.5">Elite · Clases ilimitadas</p>
+              <p class="a-muted text-xs mt-0.5">WODs · Open Gym · Funcional</p>
+            </div>
+            <div class="text-right flex-shrink-0">
+              <p class="a-muted text-[10px]">Mensual</p>
+              <p class="font-mono font-bold text-sm text-ink-700 mt-0.5">$79.990</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 atiles -->
+        <div class="grid grid-cols-3 gap-2">
+          <div class="atile">
+            <span class="atile-num font-mono">8</span>
+            <span class="atile-lbl">clases/mes</span>
+          </div>
+          <div class="atile">
+            <span class="atile-num font-mono">3🔥</span>
+            <span class="atile-lbl">racha</span>
+          </div>
+          <div class="atile">
+            <span class="atile-num font-mono text-ink-500">#7</span>
+            <span class="atile-lbl">ranking</span>
+          </div>
+        </div>
+
+        <!-- CTA cambiar sede -->
+        <button class="a-btn a-btn-ghost" onclick="cambiarSede(this)">
+          Cambiar a esta sede
+        </button>
+        <p class="a-muted text-[11px] text-center" style="margin-top:-4px">Tus reservas en Providencia se mantienen activas.</p>
       </div>
     </div>
 
-    <!-- Agregar sede -->
-    <div class="mx-4 mt-3 mb-2">
-      <button class="w-full h-11 rounded-full border border-dashed border-ink-300 text-ink-500 text-sm font-semibold hover:border-brand-300 hover:text-brand-500 hover:bg-brand-50 transition-colors flex items-center justify-center gap-2 cursor-pointer">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Agregar otra sede
-      </button>
-    </div>
+    <!-- Agregar sede (dashed) -->
+    <button class="a-btn a-btn-ghost flex items-center justify-center gap-2" style="border-style:dashed">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Agregar sede
+    </button>
 
-  </div><!-- /scroll -->
-
-  <!-- Bottom tab bar -->
-  <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] z-20 bg-white border-t border-ink-200">
-    <div class="flex items-center justify-around h-16 px-2">
-
-      <a href="hoy.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Hoy</span>
-      </a>
-
-      <a href="reservar.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Reservar</span>
-      </a>
-
-      <a href="ranking.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Ranking</span>
-      </a>
-
-      <a href="red-social.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Social</span>
-      </a>
-
-      <!-- Perfil ACTIVO (venimos desde perfil) -->
-      <a href="perfil.html" class="flex flex-col items-center gap-0.5 w-14 cursor-pointer">
-        <svg class="w-6 h-6 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span class="text-[10px] font-semibold text-brand-500">Perfil</span>
-      </a>
-    </div>
-  </nav>
-
+  </main>
 </div>
+
+<script>
+function cambiarSede(btn) {
+  btn.textContent = '✓ Cambiado a Las Condes';
+  btn.setAttribute('disabled', 'true');
+  btn.style.opacity = '.6';
+}
+</script>
 </body>
 </html>

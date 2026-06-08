@@ -4,359 +4,149 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Tipos de clase</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
+<body data-page="clases" data-title="Tipos de clase" data-eyebrow="Forja Box · 4 modalidades"
+      data-cta-label="Nuevo tipo" data-cta-href="nuevo-tipo-clase.html">
+<div data-fj-content>
+  <div class="fj-pad fj-maxw space-y-5">
 
-<div class="flex h-screen overflow-hidden">
-
-  <!-- Sidebar -->
-  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col">
-    <div class="h-16 flex items-center gap-2.5 px-5 border-b border-ink-200">
-      <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white shadow-glow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-      </span>
-      <span class="font-display font-bold text-lg tracking-tight">Forja<span class="text-brand-500">.</span></span>
+    <!-- Filtros -->
+    <div class="fj-pills">
+      <button class="fj-pill" aria-selected="true">Todos</button>
+      <button class="fj-pill" aria-selected="false">Activos</button>
+      <button class="fj-pill" aria-selected="false">Inactivos</button>
     </div>
-    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
-      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        Dashboard
-      </a>
-      <a href="clientes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Clientes
-      </a>
-      <a href="calendario.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Calendario
-      </a>
-      <a href="tipo-clases.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold bg-brand-500/10 text-brand-600 cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        Clases
-      </a>
-      <a href="constructor-rutina.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        Rutinas
-      </a>
-      <a href="planes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-        Planes
-      </a>
-      <a href="pagos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        Pagos
-      </a>
-      <a href="metricas.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Métricas
-      </a>
-      <a href="competencias.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-        Competencias
-      </a>
-      <a href="configuracion.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        Configuración
-      </a>
-    </nav>
-    <div class="px-3 py-4 border-t border-ink-200">
-      <div class="flex items-center gap-3 px-3 py-2">
-        <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 font-semibold text-xs shrink-0">VF</div>
-        <div class="min-w-0">
-          <p class="text-sm font-semibold text-ink-900 truncate">Vale Fuentes</p>
-          <p class="text-xs text-ink-400 truncate">Administrador</p>
-        </div>
+
+    <!-- Lista de modalidades -->
+    <div class="fj-list">
+      <div class="fj-list-head">
+        <span class="flex-1 text-xs font-semibold text-ink-500 uppercase tracking-wider">Modalidad</span>
+        <span class="w-40 text-xs font-semibold text-ink-500 uppercase tracking-wider hidden md:block">Categorías</span>
+        <span class="w-20 text-xs font-semibold text-ink-500 uppercase tracking-wider text-right">Cupos</span>
+        <span class="w-24 text-xs font-semibold text-ink-500 uppercase tracking-wider text-right hidden lg:block">Frecuencia</span>
+        <span class="w-24 text-xs font-semibold text-ink-500 uppercase tracking-wider text-center">Estado</span>
+        <span class="w-8"></span>
       </div>
+
+      <!-- CrossFit — Activo -->
+      <a href="nuevo-tipo-clase.html" class="fj-row">
+        <span class="flex items-center gap-3 flex-1 min-w-0">
+          <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+          <span class="min-w-0">
+            <span class="block text-sm font-bold text-ink-900">CrossFit</span>
+            <span class="block text-xs text-ink-400 truncate">Entrenamiento funcional de alta intensidad</span>
+          </span>
+        </span>
+        <span class="w-40 flex flex-wrap gap-1 hidden md:flex">
+          <span class="fj-badge fj-badge-neutral">Warm-up</span>
+          <span class="fj-badge fj-badge-neutral">Skill</span>
+          <span class="fj-badge fj-badge-neutral">WOD</span>
+        </span>
+        <span class="w-20 text-right font-mono font-bold text-sm text-ink-900">20 <span class="font-normal text-ink-400 text-xs">+3</span></span>
+        <span class="w-24 text-right text-sm text-ink-500 hidden lg:block font-mono">8 cls/sem</span>
+        <span class="w-24 flex justify-center">
+          <button class="relative w-10 h-6 rounded-full bg-brand-500 shrink-0 cursor-pointer" aria-label="Desactivar CrossFit" onclick="event.preventDefault()">
+            <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-transform"></span>
+          </button>
+        </span>
+        <span class="w-8 flex justify-end">
+          <button class="fj-icon-btn" aria-label="Editar CrossFit" onclick="event.preventDefault(); window.location='nuevo-tipo-clase.html'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </span>
+      </a>
+
+      <!-- Gimnasia — Activo -->
+      <a href="nuevo-tipo-clase.html" class="fj-row">
+        <span class="flex items-center gap-3 flex-1 min-w-0">
+          <span class="fj-dot" style="background:var(--m-gimnasia)"></span>
+          <span class="min-w-0">
+            <span class="block text-sm font-bold text-ink-900">Gimnasia</span>
+            <span class="block text-xs text-ink-400 truncate">Movimientos corporales y movilidad avanzada</span>
+          </span>
+        </span>
+        <span class="w-40 flex flex-wrap gap-1 hidden md:flex">
+          <span class="fj-badge fj-badge-neutral">Warm-up</span>
+          <span class="fj-badge fj-badge-neutral">Skill</span>
+        </span>
+        <span class="w-20 text-right font-mono font-bold text-sm text-ink-900">15 <span class="font-normal text-ink-400 text-xs">+2</span></span>
+        <span class="w-24 text-right text-sm text-ink-500 hidden lg:block font-mono">3 cls/sem</span>
+        <span class="w-24 flex justify-center">
+          <button class="relative w-10 h-6 rounded-full bg-brand-500 shrink-0 cursor-pointer" aria-label="Desactivar Gimnasia" onclick="event.preventDefault()">
+            <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></span>
+          </button>
+        </span>
+        <span class="w-8 flex justify-end">
+          <button class="fj-icon-btn" aria-label="Editar Gimnasia" onclick="event.preventDefault(); window.location='nuevo-tipo-clase.html'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </span>
+      </a>
+
+      <!-- Halterofilia — Activo -->
+      <a href="nuevo-tipo-clase.html" class="fj-row">
+        <span class="flex items-center gap-3 flex-1 min-w-0">
+          <span class="fj-dot" style="background:var(--m-haltero)"></span>
+          <span class="min-w-0">
+            <span class="block text-sm font-bold text-ink-900">Halterofilia</span>
+            <span class="block text-xs text-ink-400 truncate">Snatch, Clean &amp; Jerk y levantamientos olímpicos</span>
+          </span>
+        </span>
+        <span class="w-40 flex flex-wrap gap-1 hidden md:flex">
+          <span class="fj-badge fj-badge-neutral">Warm-up</span>
+          <span class="fj-badge fj-badge-neutral">Skill</span>
+          <span class="fj-badge fj-badge-neutral">WOD</span>
+        </span>
+        <span class="w-20 text-right font-mono font-bold text-sm text-ink-900">12 <span class="font-normal text-ink-400 text-xs">+2</span></span>
+        <span class="w-24 text-right text-sm text-ink-500 hidden lg:block font-mono">2 cls/sem</span>
+        <span class="w-24 flex justify-center">
+          <button class="relative w-10 h-6 rounded-full bg-brand-500 shrink-0 cursor-pointer" aria-label="Desactivar Halterofilia" onclick="event.preventDefault()">
+            <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></span>
+          </button>
+        </span>
+        <span class="w-8 flex justify-end">
+          <button class="fj-icon-btn" aria-label="Editar Halterofilia" onclick="event.preventDefault(); window.location='nuevo-tipo-clase.html'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </span>
+      </a>
+
+      <!-- Endurance — INACTIVO (atenuado) -->
+      <a href="nuevo-tipo-clase.html" class="fj-row opacity-50">
+        <span class="flex items-center gap-3 flex-1 min-w-0">
+          <span class="fj-dot" style="background:var(--m-endurance)"></span>
+          <span class="min-w-0">
+            <span class="block text-sm font-bold text-ink-900">Endurance</span>
+            <span class="block text-xs text-ink-400 truncate">Running, remo y capacidad aeróbica</span>
+          </span>
+        </span>
+        <span class="w-40 flex flex-wrap gap-1 hidden md:flex">
+          <span class="fj-badge fj-badge-neutral">Warm-up</span>
+          <span class="fj-badge fj-badge-neutral">WOD</span>
+        </span>
+        <span class="w-20 text-right font-mono font-bold text-sm text-ink-900">25 <span class="font-normal text-ink-400 text-xs">+5</span></span>
+        <span class="w-24 text-right text-sm text-ink-500 hidden lg:block font-mono">—</span>
+        <span class="w-24 flex justify-center">
+          <span class="fj-badge fj-badge-neutral">Inactivo</span>
+        </span>
+        <span class="w-8 flex justify-end">
+          <button class="fj-icon-btn" aria-label="Editar Endurance" onclick="event.preventDefault(); window.location='nuevo-tipo-clase.html'">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          </button>
+        </span>
+      </a>
+
     </div>
-  </aside>
 
-  <!-- Main -->
-  <div class="flex-1 flex flex-col overflow-hidden">
-
-    <!-- Topbar -->
-    <header class="h-16 bg-white border-b border-ink-200 flex items-center justify-between px-6 shrink-0">
-      <div>
-        <h1 class="font-display font-bold text-xl text-ink-900">Tipos de clase</h1>
-        <p class="text-xs text-ink-400 mt-0.5">Forja Box · 4 modalidades</p>
-      </div>
-      <a href="nuevo-tipo-clase.html" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-glow cursor-pointer">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Nuevo tipo
-      </a>
-    </header>
-
-    <!-- Content -->
-    <main class="flex-1 overflow-y-auto p-6">
-
-      <!-- Filtros -->
-      <div class="flex items-center gap-2 mb-6">
-        <button class="text-xs font-semibold px-3.5 py-1.5 rounded-full bg-ink-900 text-white cursor-pointer">Todos</button>
-        <button class="text-xs font-semibold px-3.5 py-1.5 rounded-full border border-ink-200 text-ink-600 hover:bg-white transition-colors cursor-pointer">Activos</button>
-        <button class="text-xs font-semibold px-3.5 py-1.5 rounded-full border border-ink-200 text-ink-600 hover:bg-white transition-colors cursor-pointer">Inactivos</button>
-      </div>
-
-      <!-- Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-        <!-- CrossFit (brand) -->
-        <div class="bg-white border border-ink-200 rounded-xl overflow-hidden hover:border-ink-300 transition-colors cursor-pointer">
-          <div class="h-1 bg-brand-500"></div>
-          <div class="p-5">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center shrink-0">
-                  <svg class="w-5 h-5 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-                </div>
-                <div class="min-w-0">
-                  <h3 class="font-display font-semibold text-base text-ink-900">CrossFit</h3>
-                  <p class="text-xs text-ink-400 mt-0.5 truncate">Entrenamiento funcional de alta intensidad</p>
-                </div>
-              </div>
-              <!-- Toggle ON -->
-              <button class="relative w-10 h-6 rounded-full bg-brand-500 shrink-0 cursor-pointer" aria-label="Desactivar CrossFit">
-                <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></span>
-              </button>
-            </div>
-
-            <!-- Cupos -->
-            <div class="mt-4 flex items-center gap-5">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">20</span> cupos</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-warning shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">+3</span> sobrecupo</span>
-              </div>
-            </div>
-
-            <!-- Categorías -->
-            <div class="mt-4">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Categorías</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">Warm-up</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">Skill</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">WOD</span>
-              </div>
-            </div>
-
-            <!-- Planes -->
-            <div class="mt-3">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Planes</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-50 text-brand-600 border border-brand-100">3x Semana</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-50 text-brand-600 border border-brand-100">Full</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-50 text-brand-600 border border-brand-100">Ilimitado</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-brand-50 text-brand-600 border border-brand-100">Pack 10</span>
-              </div>
-            </div>
-
-            <div class="mt-4 pt-4 border-t border-ink-100 flex items-center justify-between">
-              <span class="flex items-center gap-1.5 text-xs text-ink-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-                Activo · 8 clases esta semana
-              </span>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Gimnasia (info) -->
-        <div class="bg-white border border-ink-200 rounded-xl overflow-hidden hover:border-ink-300 transition-colors cursor-pointer">
-          <div class="h-1 bg-info"></div>
-          <div class="p-5">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                  <svg class="w-5 h-5 text-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><path d="m9 20 3-6 3 6"/><path d="m6 8 6 4 6-4"/><path d="M12 4v5"/></svg>
-                </div>
-                <div class="min-w-0">
-                  <h3 class="font-display font-semibold text-base text-ink-900">Gimnasia</h3>
-                  <p class="text-xs text-ink-400 mt-0.5 truncate">Movimientos corporales y movilidad avanzada</p>
-                </div>
-              </div>
-              <button class="relative w-10 h-6 rounded-full bg-brand-500 shrink-0 cursor-pointer" aria-label="Desactivar Gimnasia">
-                <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></span>
-              </button>
-            </div>
-
-            <div class="mt-4 flex items-center gap-5">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">15</span> cupos</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-warning shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">+2</span> sobrecupo</span>
-              </div>
-            </div>
-
-            <div class="mt-4">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Categorías</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">Warm-up</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">Skill</span>
-              </div>
-            </div>
-
-            <div class="mt-3">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Planes</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-info border border-blue-100">Full</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-blue-50 text-info border border-blue-100">Ilimitado</span>
-              </div>
-            </div>
-
-            <div class="mt-4 pt-4 border-t border-ink-100 flex items-center justify-between">
-              <span class="flex items-center gap-1.5 text-xs text-ink-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-                Activo · 3 clases esta semana
-              </span>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Halterofilia (violeta) -->
-        <div class="bg-white border border-ink-200 rounded-xl overflow-hidden hover:border-ink-300 transition-colors cursor-pointer">
-          <div class="h-1" style="background:#7C3AED;"></div>
-          <div class="p-5">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style="background:#F5F3FF;">
-                  <svg class="w-5 h-5" style="color:#7C3AED;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4v16"/><path d="M18 4v16"/><path d="M2 7h4"/><path d="M18 7h4"/><path d="M2 17h4"/><path d="M18 17h4"/><path d="M6 10h12"/><path d="M6 14h12"/></svg>
-                </div>
-                <div class="min-w-0">
-                  <h3 class="font-display font-semibold text-base text-ink-900">Halterofilia</h3>
-                  <p class="text-xs text-ink-400 mt-0.5 truncate">Snatch, Clean &amp; Jerk y levantamientos olímpicos</p>
-                </div>
-              </div>
-              <button class="relative w-10 h-6 rounded-full bg-brand-500 shrink-0 cursor-pointer" aria-label="Desactivar Halterofilia">
-                <span class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></span>
-              </button>
-            </div>
-
-            <div class="mt-4 flex items-center gap-5">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">12</span> cupos</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-warning shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">+2</span> sobrecupo</span>
-              </div>
-            </div>
-
-            <div class="mt-4">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Categorías</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">Warm-up</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">Skill</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">WOD</span>
-              </div>
-            </div>
-
-            <div class="mt-3">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Planes</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full border border-purple-100 bg-purple-50" style="color:#7C3AED;">Ilimitado</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full border border-purple-100 bg-purple-50" style="color:#7C3AED;">Pack 10</span>
-              </div>
-            </div>
-
-            <div class="mt-4 pt-4 border-t border-ink-100 flex items-center justify-between">
-              <span class="flex items-center gap-1.5 text-xs text-ink-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-                Activo · 2 clases esta semana
-              </span>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Endurance (success) -->
-        <div class="bg-white border border-ink-200 rounded-xl overflow-hidden hover:border-ink-300 transition-colors cursor-pointer opacity-60">
-          <div class="h-1 bg-success"></div>
-          <div class="p-5">
-            <div class="flex items-start justify-between gap-3">
-              <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 rounded-lg bg-green-50 flex items-center justify-center shrink-0">
-                  <svg class="w-5 h-5 text-success" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                </div>
-                <div class="min-w-0">
-                  <h3 class="font-display font-semibold text-base text-ink-900">Endurance</h3>
-                  <p class="text-xs text-ink-400 mt-0.5 truncate">Running, remo y capacidad aeróbica</p>
-                </div>
-              </div>
-              <!-- Toggle OFF -->
-              <button class="relative w-10 h-6 rounded-full bg-ink-200 shrink-0 cursor-pointer" aria-label="Activar Endurance">
-                <span class="absolute left-1 top-1 w-4 h-4 bg-white rounded-full shadow-sm"></span>
-              </button>
-            </div>
-
-            <div class="mt-4 flex items-center gap-5">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">25</span> cupos</span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-300 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                <span class="text-xs text-ink-600"><span class="font-mono font-bold text-ink-900">+5</span> sobrecupo</span>
-              </div>
-            </div>
-
-            <div class="mt-4">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Categorías</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">Warm-up</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-ink-100 text-ink-700">WOD</span>
-              </div>
-            </div>
-
-            <div class="mt-3">
-              <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-2">Planes</p>
-              <div class="flex flex-wrap gap-1.5">
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-green-50 text-success border border-green-100">Full</span>
-                <span class="text-xs font-semibold px-2.5 py-1 rounded-full bg-green-50 text-success border border-green-100">Ilimitado</span>
-              </div>
-            </div>
-
-            <div class="mt-4 pt-4 border-t border-ink-100 flex items-center justify-between">
-              <span class="flex items-center gap-1.5 text-xs text-ink-400">
-                <span class="w-1.5 h-1.5 rounded-full bg-ink-300 inline-block"></span>
-                Inactivo
-              </span>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </main>
   </div>
 </div>
-
 </body>
 </html>

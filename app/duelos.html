@@ -4,333 +4,270 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Duelos</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans min-h-screen">
+<body>
+<div class="app-frame">
 
-<div class="max-w-[420px] mx-auto bg-white min-h-screen flex flex-col relative">
-
-  <!-- Top bar -->
-  <header class="sticky top-0 z-10 bg-white border-b border-ink-200 px-4 pt-10 pb-3">
-    <div class="flex items-center justify-between">
-      <div>
-        <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400">Versus</p>
-        <h1 class="font-display font-bold text-xl text-ink-900 mt-0.5">Duelos</h1>
-      </div>
-      <button class="h-9 px-4 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors flex items-center gap-1.5 cursor-pointer">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Crear duelo
-      </button>
+  <!-- App bar: pantalla de detalle (sin data-app-tab) -->
+  <header class="app-bar">
+    <a href="hoy.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1">
+      <p class="a-eyebrow">Versus</p>
+      <p class="app-bar-title">Duelos</p>
     </div>
+    <button onclick="location.href='crear-duelo.html'" class="a-btn a-btn-primary" style="width:auto;height:36px;padding:0 14px;font-size:13px;border-radius:999px;display:inline-flex;align-items:center;gap:6px">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Crear duelo
+    </button>
   </header>
 
-  <!-- Scroll -->
-  <div class="flex-1 overflow-y-auto pb-24">
+  <main class="app-screen space-y-5">
 
-    <!-- ALERTA: te retaron -->
-    <div class="mx-4 mt-4 rounded-xl border-2 border-brand-300 bg-brand-50 overflow-hidden">
-      <!-- Banda urgente -->
-      <div class="flex items-center gap-2 px-4 py-2 bg-brand-500">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="white"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        <span class="text-[11px] font-bold text-white uppercase tracking-wider">Te retaron</span>
-        <span class="ml-auto text-[11px] text-white/80">Vence en 23:41:00</span>
+    <!-- ── ALERTA: TE RETARON ── -->
+    <div class="acard overflow-hidden" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.3)">
+      <!-- Banda cuenta regresiva -->
+      <div class="flex items-center gap-2 px-4 py-2" style="background:rgba(251,82,21,.14);border-bottom:1px solid rgba(251,82,21,.2)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span class="a-eyebrow" style="color:var(--fj-brand)">Te retaron</span>
+        <span class="ml-auto">
+          <span class="fj-badge fj-badge-brand">Vence en 23:41:00</span>
+        </span>
       </div>
 
-      <div class="p-4">
-        <!-- VS card -->
+      <div class="acard-pad space-y-3">
+        <!-- Card VS -->
         <div class="flex items-center gap-3">
-          <!-- Retador -->
+          <!-- Retador izquierda -->
           <div class="flex-1 flex flex-col items-center gap-1.5">
-            <div class="w-12 h-12 rounded-full bg-ink-100 flex items-center justify-center">
-              <span class="font-display font-bold text-base text-ink-600">PD</span>
-            </div>
-            <p class="text-xs font-semibold text-ink-800 text-center">Pancho Diaz</p>
-            <span class="text-[10px] rounded-full px-2 py-0.5 font-semibold" style="background:#ECC04A20;color:#a8842a">Nivel 13</span>
+            <div class="a-av w-12 h-12 text-sm" style="background:linear-gradient(135deg,#B6BCC8,#5A6172)">PD</div>
+            <p class="text-xs font-semibold text-center" style="color:var(--fj-ink-800)">Pancho Díaz</p>
+            <span class="fj-badge fj-badge-neutral" style="font-size:10px">Nivel 13</span>
           </div>
 
-          <!-- VS -->
+          <!-- VS central -->
           <div class="flex flex-col items-center gap-1">
-            <div class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center">
-              <span class="font-display font-bold text-sm text-brand-600">VS</span>
-            </div>
-            <p class="text-[10px] font-semibold text-ink-400">1v1</p>
+            <div class="w-10 h-10 rounded-full grid place-items-center font-display font-bold text-sm" style="background:rgba(251,82,21,.15);color:var(--fj-brand)">VS</div>
+            <p class="a-muted" style="font-size:10px">1v1</p>
           </div>
 
-          <!-- Yo -->
+          <!-- Yo derecha -->
           <div class="flex-1 flex flex-col items-center gap-1.5">
-            <div class="w-12 h-12 rounded-full bg-brand-100 border-2 border-brand-300 flex items-center justify-center">
-              <span class="font-display font-bold text-base text-brand-600">MR</span>
-            </div>
-            <p class="text-xs font-semibold text-brand-700 text-center">Matias (tu)</p>
-            <span class="text-[10px] rounded-full px-2 py-0.5 font-semibold" style="background:#ECC04A20;color:#a8842a">Nivel 12</span>
+            <div class="a-av w-12 h-12 text-sm" style="background:linear-gradient(135deg,#FF9E78,#FB5215);box-shadow:0 0 0 3px rgba(251,82,21,.3)">MR</div>
+            <p class="text-xs font-semibold text-center" style="color:var(--fj-brand)">Matías (tú)</p>
+            <span class="fj-badge fj-badge-brand" style="font-size:10px">Nivel 12</span>
           </div>
         </div>
 
-        <!-- WOD del duelo -->
-        <div class="mt-3 rounded-lg bg-white border border-brand-100 p-3">
-          <div class="flex items-center justify-between">
+        <!-- WOD en juego -->
+        <div class="rounded-xl p-3 space-y-2" style="background:var(--fj-surface);border:1px solid var(--fj-ink-100)">
+          <div class="flex items-start justify-between gap-2">
             <div>
-              <p class="text-[10px] text-ink-400">WOD del duelo</p>
-              <p class="font-display font-bold text-lg text-ink-900">Fran</p>
-              <p class="text-xs text-ink-500">21-15-9 · Thruster + Pull-up · Rx</p>
+              <p class="a-eyebrow" style="font-size:10px">WOD del duelo</p>
+              <p class="font-display font-bold text-lg" style="color:var(--fj-ink-900)">Fran</p>
+              <p class="a-muted text-xs">21-15-9 · Thruster + Pull-up · Rx</p>
             </div>
             <div class="text-right">
-              <p class="text-[10px] text-ink-400">Logro en juego</p>
-              <p class="text-xs font-semibold text-brand-600">Rey de Fran</p>
-              <p class="text-[10px] text-ink-400">+ 180 ptos</p>
+              <p class="a-eyebrow" style="font-size:10px">Logro robable</p>
+              <p class="text-xs font-semibold" style="color:var(--fj-brand)">Rey de Fran</p>
+              <p class="a-muted" style="font-size:10px">+ 180 puntos</p>
             </div>
           </div>
-          <div class="mt-2 flex items-center gap-2">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5A6172" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            <p class="text-[11px] text-ink-500">Juez: <span class="font-semibold text-ink-700">Nacho Tapia</span></p>
-            <span class="ml-auto text-[11px] text-ink-400">Manana 07:00</span>
+          <div class="flex items-center gap-2">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p class="a-muted text-xs">Juez: <span class="font-semibold" style="color:var(--fj-ink-800)">Nacho Tapia</span></p>
+            <span class="ml-auto a-muted text-xs">Mañana 07:00</span>
           </div>
         </div>
 
-        <div class="mt-3 grid grid-cols-2 gap-2">
-          <button class="h-10 rounded-full border border-ink-200 text-ink-600 text-sm font-semibold hover:bg-ink-50 transition-colors cursor-pointer">
-            Rechazar
-          </button>
-          <button class="h-10 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors cursor-pointer">
-            Aceptar reto
-          </button>
+        <!-- Botones -->
+        <div class="grid grid-cols-2 gap-2">
+          <button class="a-btn a-btn-ghost">Rechazar</button>
+          <button class="a-btn a-btn-primary" onclick="location.href='crear-duelo.html'">Aceptar reto</button>
         </div>
       </div>
     </div>
 
-    <!-- Duelos abiertos -->
-    <div class="mx-4 mt-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Duelos abiertos · Sumate</p>
+    <!-- ── DUELOS ABIERTOS ── -->
+    <div>
+      <p class="a-eyebrow mb-3">Duelos abiertos · Súmate</p>
 
       <!-- Duelo 2v2 -->
-      <div class="rounded-xl border border-ink-200 bg-white p-4 mb-3">
+      <div class="acard acard-pad space-y-3 mb-3">
         <div class="flex items-start justify-between gap-2">
           <div class="flex-1">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-[10px] font-bold rounded-full px-2 py-0.5 bg-info/10 text-info">2v2</span>
-              <span class="text-[10px] rounded-full px-2 py-0.5 bg-ink-100 text-ink-500 font-medium">WOD: Cindy</span>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="fj-badge fj-badge-info">2v2</span>
+              <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+              <span class="a-muted text-xs">Cindy · 20 min</span>
             </div>
-            <h3 class="font-semibold text-ink-900 text-sm">Duo por equipos</h3>
-            <p class="text-xs text-ink-400 mt-0.5">Mas rondas en 20 min · Rx</p>
+            <p class="a-h text-sm">Dúo por equipos</p>
+            <p class="a-muted text-xs mt-0.5">Más rondas ganan · Rx</p>
           </div>
           <div class="text-right flex-shrink-0">
-            <p class="text-[10px] text-ink-400">Cupos</p>
-            <p class="font-mono font-bold text-base text-ink-900">1/2</p>
-            <p class="text-[10px] text-ink-400">falta 1 rival</p>
+            <p class="a-eyebrow" style="font-size:10px">Cupos</p>
+            <div class="a-prog mt-1" style="width:56px"><div style="width:50%"></div></div>
+            <p class="a-muted mt-1" style="font-size:10px">1 / 2 lleno</p>
           </div>
         </div>
 
-        <!-- Participantes actuales -->
-        <div class="mt-3 rounded-lg bg-ink-50 border border-ink-100 px-3 py-2">
-          <p class="text-[10px] text-ink-400 mb-1.5">Equipo 1 (completo)</p>
-          <div class="flex items-center gap-2">
-            <div class="w-7 h-7 rounded-full bg-ink-200 flex items-center justify-center">
-              <span class="text-[10px] font-bold text-ink-600">CS</span>
+        <!-- Participantes -->
+        <div class="rounded-xl px-3 py-2.5 space-y-2" style="background:var(--fj-ink-100)">
+          <div>
+            <p class="a-eyebrow mb-1.5" style="font-size:10px">Equipo 1 (completo)</p>
+            <div class="flex items-center gap-2">
+              <div class="a-av w-7 h-7" style="font-size:10px;background:linear-gradient(135deg,#61D2C4,#18A957)">CS</div>
+              <span class="text-xs font-semibold" style="color:var(--fj-ink-800)">Camila Soto</span>
+              <span class="a-muted text-xs">+</span>
+              <div class="a-av w-7 h-7" style="font-size:10px;background:linear-gradient(135deg,#B6BCC8,#5A6172)">KV</div>
+              <span class="text-xs font-semibold" style="color:var(--fj-ink-800)">Karin Vera</span>
             </div>
-            <span class="text-xs font-semibold text-ink-700">Camila Soto</span>
-            <span class="text-[10px] text-ink-400">+</span>
-            <div class="w-7 h-7 rounded-full bg-ink-200 flex items-center justify-center">
-              <span class="text-[10px] font-bold text-ink-600">KV</span>
-            </div>
-            <span class="text-xs font-semibold text-ink-700">Karin Vera</span>
           </div>
-          <p class="text-[10px] text-ink-400 mt-2 mb-1.5">Equipo 2 (buscando pareja)</p>
-          <div class="flex items-center gap-2">
-            <div class="w-7 h-7 rounded-full bg-ink-200 flex items-center justify-center">
-              <span class="text-[10px] font-bold text-ink-600">BM</span>
+          <div>
+            <p class="a-eyebrow mb-1.5" style="font-size:10px">Equipo 2 (busca pareja)</p>
+            <div class="flex items-center gap-2">
+              <div class="a-av w-7 h-7" style="font-size:10px;background:linear-gradient(135deg,#6AA8FF,#3E7BFA)">BM</div>
+              <span class="text-xs font-semibold" style="color:var(--fj-ink-800)">Bastián Mora</span>
+              <span class="a-muted text-xs">+</span>
+              <div class="w-7 h-7 rounded-full grid place-items-center" style="border:2px dashed var(--fj-ink-300)">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </div>
+              <span class="a-muted text-xs">1 cupo libre</span>
             </div>
-            <span class="text-xs font-semibold text-ink-700">Bastian Mora</span>
-            <span class="text-[10px] text-ink-400">+</span>
-            <div class="w-7 h-7 rounded-full border-2 border-dashed border-ink-300 flex items-center justify-center">
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B6BCC8" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </div>
-            <span class="text-xs text-ink-400">1 cupo libre</span>
           </div>
         </div>
 
-        <div class="mt-3 flex items-center gap-2">
-          <div class="flex items-center gap-1.5 text-[11px] text-ink-400">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Sabado 09:00
-          </div>
-          <div class="flex items-center gap-1.5 text-[11px] text-ink-400 ml-3">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="flex items-center gap-2">
+          <span class="a-muted text-xs flex items-center gap-1">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Sábado 09:00
+          </span>
+          <span class="a-muted text-xs flex items-center gap-1">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             Vale Fuentes
-          </div>
-          <button class="ml-auto h-8 px-4 rounded-full bg-brand-500 text-white text-xs font-semibold hover:bg-brand-600 transition-colors cursor-pointer">
-            Sumarme
-          </button>
+          </span>
+          <button class="ml-auto a-btn a-btn-primary" style="width:auto;height:32px;padding:0 14px;font-size:12px;border-radius:999px" onclick="location.href='crear-duelo.html'">Sumarme</button>
         </div>
       </div>
 
       <!-- Duelo 1v1 -->
-      <div class="rounded-xl border border-ink-200 bg-white p-4">
+      <div class="acard acard-pad space-y-3">
         <div class="flex items-start justify-between gap-2">
           <div class="flex-1">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-[10px] font-bold rounded-full px-2 py-0.5" style="background:#ECC04A20;color:#a8842a">1v1</span>
-              <span class="text-[10px] rounded-full px-2 py-0.5 bg-ink-100 text-ink-500 font-medium">WOD: Helen</span>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span class="fj-badge fj-badge-neutral">1v1</span>
+              <span class="fj-fmt fj-fmt-fortime">For Time</span>
+              <span class="a-muted text-xs">Helen</span>
             </div>
-            <h3 class="font-semibold text-ink-900 text-sm">Duelo individual</h3>
-            <p class="text-xs text-ink-400 mt-0.5">Mejor tiempo · Rx · Logro en juego</p>
+            <p class="a-h text-sm">Duelo individual</p>
+            <p class="a-muted text-xs mt-0.5">Mejor tiempo · Rx · Logro en juego</p>
           </div>
           <div class="text-right flex-shrink-0">
-            <p class="text-[10px] text-ink-400">Cupos</p>
-            <p class="font-mono font-bold text-base text-ink-900">1/2</p>
-            <p class="text-[10px] text-ink-400">buscando rival</p>
+            <p class="a-eyebrow" style="font-size:10px">Cupos</p>
+            <div class="a-prog mt-1" style="width:56px"><div style="width:50%"></div></div>
+            <p class="a-muted mt-1" style="font-size:10px">buscando rival</p>
           </div>
         </div>
 
-        <div class="mt-3 rounded-lg bg-ink-50 border border-ink-100 px-3 py-2 flex items-center gap-2">
-          <div class="w-7 h-7 rounded-full bg-ink-200 flex items-center justify-center">
-            <span class="text-[10px] font-bold text-ink-600">PD</span>
+        <div class="rounded-xl px-3 py-2.5 flex items-center gap-2" style="background:var(--fj-ink-100)">
+          <div class="a-av w-7 h-7" style="font-size:10px;background:linear-gradient(135deg,#B6BCC8,#5A6172)">PD</div>
+          <span class="text-xs font-semibold" style="color:var(--fj-ink-800)">Pancho Díaz</span>
+          <span class="a-muted text-xs">vs.</span>
+          <div class="w-7 h-7 rounded-full grid place-items-center" style="border:2px dashed var(--fj-ink-300)">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
           </div>
-          <span class="text-xs font-semibold text-ink-700">Pancho Diaz</span>
-          <span class="text-[10px] text-ink-400">vs.</span>
-          <div class="w-7 h-7 rounded-full border-2 border-dashed border-ink-300 flex items-center justify-center">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#B6BCC8" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </div>
-          <span class="text-xs text-ink-400">Buscando rival</span>
+          <span class="a-muted text-xs">Buscando rival</span>
         </div>
 
-        <div class="mt-3 flex items-center gap-2">
-          <div class="flex items-center gap-1.5 text-[11px] text-ink-400">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <div class="flex items-center gap-2">
+          <span class="a-muted text-xs flex items-center gap-1">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             Jueves 06:30
-          </div>
-          <button class="ml-auto h-8 px-4 rounded-full border border-brand-200 text-brand-600 text-xs font-semibold hover:bg-brand-50 transition-colors cursor-pointer">
-            Retarlo
-          </button>
+          </span>
+          <button class="ml-auto a-btn a-btn-ghost" style="width:auto;height:32px;padding:0 14px;font-size:12px;border-radius:999px" onclick="location.href='crear-duelo.html'">Retar</button>
         </div>
       </div>
     </div>
 
-    <!-- Logro robable por duelo -->
-    <div class="mx-4 mt-4 rounded-xl border border-brand-200 bg-brand-50 p-4">
-      <div class="flex items-center gap-2 mb-2">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#FB5215"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        <p class="text-[11px] font-bold text-brand-700 uppercase tracking-wider">Logro robable por duelo</p>
+    <!-- ── LOGRO ROBABLE ── -->
+    <div class="acard acard-pad space-y-3" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.25)">
+      <div class="flex items-center gap-2">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <p class="a-eyebrow" style="color:var(--fj-brand)">Logro robable por duelo</p>
       </div>
       <div class="flex items-start gap-3">
-        <div class="w-10 h-10 rounded-full bg-white border border-brand-100 flex items-center justify-center flex-shrink-0">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#FB5215"><path d="M17 6H7L5 12H19L17 6Z M12 22C9 22 6 20 5 17H19C18 20 15 22 12 22Z M4 3H20V5H4V3Z"/></svg>
-        </div>
-        <div>
-          <p class="text-sm font-semibold text-ink-900">Rey de Fran</p>
-          <p class="text-xs text-ink-500 mt-0.5">Actualmente de <span class="font-semibold text-ink-700">Camila Soto</span> (PR: <span class="font-mono font-semibold">2:58</span>). Gana un duelo de Fran contra ella para robarselo.</p>
+        <span class="w-11 h-11 rounded-full grid place-items-center flex-shrink-0" style="background:rgba(251,82,21,.12)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
+        </span>
+        <div class="flex-1">
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Rey de Fran</p>
+          <p class="a-muted text-xs mt-0.5">Actualmente de <span class="font-semibold" style="color:var(--fj-ink-800)">Camila Soto</span> (PR: <span class="font-mono font-semibold">2:58</span>). Gana un duelo de Fran contra ella para robárselo.</p>
         </div>
       </div>
-      <button class="mt-3 w-full h-10 rounded-full bg-brand-500 text-white text-sm font-semibold hover:bg-brand-600 transition-colors cursor-pointer">
-        Retar a Camila en Fran
-      </button>
+      <button class="a-btn a-btn-primary" onclick="location.href='crear-duelo.html'">Retar a Camila en Fran</button>
     </div>
 
-    <!-- Historial -->
-    <div class="mx-4 mt-5">
-      <p class="text-[11px] font-semibold uppercase tracking-[.08em] text-ink-400 mb-3">Historial</p>
+    <!-- ── HISTORIAL ── -->
+    <div>
+      <p class="a-eyebrow mb-3">Historial</p>
 
       <!-- Victoria -->
-      <div class="rounded-xl border border-success/30 bg-white p-3 mb-2 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+      <div class="arow">
+        <span class="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(24,169,87,.12)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="#18A957"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-        </div>
+        </span>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-ink-900">Cindy · vs. Bastian Mora</p>
-          <p class="text-xs text-ink-400">Hace 3 dias · Juez: Nacho Tapia</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Cindy · vs. Bastián Mora</p>
+          <p class="a-muted text-xs">Hace 3 días · Juez: Nacho Tapia</p>
         </div>
         <div class="text-right flex-shrink-0">
-          <p class="text-xs font-bold text-success">Victoria</p>
-          <p class="font-mono text-xs text-ink-500">+120 pts</p>
+          <span class="fj-badge fj-badge-success">Victoria</span>
+          <p class="font-mono text-xs mt-1" style="color:var(--fj-ink-500)">+120 pts</p>
         </div>
       </div>
 
       <!-- Derrota -->
-      <div class="rounded-xl border border-ink-200 bg-white p-3 mb-2 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-ink-100 flex items-center justify-center flex-shrink-0">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </div>
+      <div class="arow">
+        <span class="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0" style="background:var(--fj-ink-100)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </span>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-ink-900">Fran · vs. Camila Soto</p>
-          <p class="text-xs text-ink-400">Hace 1 semana · Juez: Vale Fuentes</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Fran · vs. Camila Soto</p>
+          <p class="a-muted text-xs">Hace 1 semana · Juez: Vale Fuentes</p>
         </div>
         <div class="text-right flex-shrink-0">
-          <p class="text-xs font-semibold text-ink-500">Derrota</p>
-          <p class="font-mono text-xs text-ink-400">0 pts</p>
+          <span class="fj-badge fj-badge-neutral">Derrota</span>
+          <p class="font-mono text-xs mt-1" style="color:var(--fj-ink-400)">0 pts</p>
         </div>
       </div>
 
       <!-- Victoria con logro robado -->
-      <div class="rounded-xl border border-success/30 bg-white p-3 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+      <div class="arow">
+        <span class="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(24,169,87,.12)">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="#18A957"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-        </div>
+        </span>
         <div class="flex-1 min-w-0">
-          <p class="text-sm font-semibold text-ink-900">Helen · vs. Karin Vera</p>
-          <p class="text-xs text-ink-400">Hace 2 semanas · Juez: Nacho Tapia</p>
+          <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Helen · vs. Karin Vera</p>
+          <p class="a-muted text-xs">Hace 2 semanas · Juez: Nacho Tapia</p>
         </div>
         <div class="text-right flex-shrink-0">
-          <p class="text-xs font-bold text-success">Victoria</p>
-          <p class="text-[10px] text-brand-600 font-semibold">Logro robado</p>
+          <span class="fj-badge fj-badge-success">Victoria</span>
+          <p class="text-xs font-semibold mt-1" style="color:var(--fj-brand);font-size:10px">Logro robado 🔥</p>
         </div>
       </div>
     </div>
 
-    <div class="h-4"></div>
-
-  </div><!-- /scroll -->
-
-  <!-- Bottom tab bar -->
-  <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[420px] z-20 bg-white border-t border-ink-200">
-    <div class="flex items-center justify-around h-16 px-2">
-
-      <a href="hoy.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Hoy</span>
-      </a>
-
-      <a href="reservar.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Reservar</span>
-      </a>
-
-      <a href="ranking.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Ranking</span>
-      </a>
-
-      <a href="red-social.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Social</span>
-      </a>
-
-      <a href="perfil.html" class="flex flex-col items-center gap-0.5 w-14 group cursor-pointer">
-        <svg class="w-6 h-6 text-ink-400 group-hover:text-ink-700 transition-colors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span class="text-[10px] font-medium text-ink-400 group-hover:text-ink-700">Perfil</span>
-      </a>
-    </div>
-  </nav>
-
+  </main>
 </div>
 </body>
 </html>

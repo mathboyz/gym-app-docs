@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Ejercicios</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+</head>
+<body data-page="ejercicios" data-title="Ejercicios" data-eyebrow="Biblioteca · Forja Box"
+      data-cta-label="Nuevo ejercicio" data-cta-href="#">
+<div data-fj-content>
+  <div class="fj-pad fj-maxw space-y-4">
+
+    <!-- Barra filtros + búsqueda -->
+    <div class="flex items-center justify-between gap-4 flex-wrap">
+      <div class="fj-pills">
+        <button class="fj-pill" aria-selected="true" data-filter="">Todos</button>
+        <button class="fj-pill" aria-selected="false" data-filter="halterofilia">Halterofilia</button>
+        <button class="fj-pill" aria-selected="false" data-filter="gimnastico">Gimnástico</button>
+        <button class="fj-pill" aria-selected="false" data-filter="cardio">Cardio</button>
+        <button class="fj-pill" aria-selected="false" data-filter="accesorio">Accesorio</button>
+      </div>
+      <div class="relative">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-ink-400 pointer-events-none" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="search-input" type="search" placeholder="Buscar ejercicio…" aria-label="Buscar ejercicio"
+          class="fj-input pl-8 h-8 text-sm w-56" style="max-width:220px">
+      </div>
+    </div>
+
+    <!-- Tabla ejercicios -->
+    <div class="fj-list">
+      <table class="fj-table">
+        <thead>
+          <tr>
+            <th style="min-width:220px">Ejercicio</th>
+            <th style="width:140px">Categoría</th>
+            <th style="width:72px" class="text-center">Video</th>
+            <th style="width:110px" class="text-right">Usado en</th>
+            <th style="width:44px"></th>
+          </tr>
+        </thead>
+        <tbody id="ejercicios-tbody">
+
+          <!-- ============================================================ -->
+          <!-- HALTEROFILIA (7) -->
+          <!-- ============================================================ -->
+
+          <!-- Thruster -->
+          <tr class="ejercicio-row" data-cat="halterofilia" data-nombre="thruster">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Thruster</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cuádriceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Hombros</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Tríceps</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(139,92,246,0.12);color:var(--m-haltero);border:none">
+                <span class="fj-dot" style="background:var(--m-haltero);width:6px;height:6px;flex-shrink:0"></span>
+                Halterofilia
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">18 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Thruster">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Clean & Jerk -->
+          <tr class="ejercicio-row" data-cat="halterofilia" data-nombre="clean jerk">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Clean &amp; Jerk</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Trapecio</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Glúteos</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Hombros</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(139,92,246,0.12);color:var(--m-haltero);border:none">
+                <span class="fj-dot" style="background:var(--m-haltero);width:6px;height:6px;flex-shrink:0"></span>
+                Halterofilia
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">14 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Clean &amp; Jerk">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Snatch -->
+          <tr class="ejercicio-row" data-cat="halterofilia" data-nombre="snatch">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Snatch</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Espalda baja</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Isquiotibiales</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Deltoides</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(139,92,246,0.12);color:var(--m-haltero);border:none">
+                <span class="fj-dot" style="background:var(--m-haltero);width:6px;height:6px;flex-shrink:0"></span>
+                Halterofilia
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">11 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Snatch">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Deadlift -->
+          <tr class="ejercicio-row" data-cat="halterofilia" data-nombre="deadlift peso muerto">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Deadlift</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Erector espinal</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Isquiotibiales</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Glúteos</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(139,92,246,0.12);color:var(--m-haltero);border:none">
+                <span class="fj-dot" style="background:var(--m-haltero);width:6px;height:6px;flex-shrink:0"></span>
+                Halterofilia
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">22 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Deadlift">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Front Squat -->
+          <tr class="ejercicio-row" data-cat="halterofilia" data-nombre="front squat sentadilla frontal">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Front Squat</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cuádriceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Core</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Glúteos</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(139,92,246,0.12);color:var(--m-haltero);border:none">
+                <span class="fj-dot" style="background:var(--m-haltero);width:6px;height:6px;flex-shrink:0"></span>
+                Halterofilia
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-ink-300" title="Sin video" aria-label="Sin video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M15.536 15.536A5 5 0 0 1 6.464 8.464"/><path d="M2 12s3.636-7 10-7a9.9 9.9 0 0 1 2.536.33M12 17c-3.14 0-5.636-1.54-7.41-3.5"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">9 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Front Squat">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Overhead Press -->
+          <tr class="ejercicio-row" data-cat="halterofilia" data-nombre="overhead press press de hombros">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Overhead Press</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Deltoides</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Tríceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Core</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(139,92,246,0.12);color:var(--m-haltero);border:none">
+                <span class="fj-dot" style="background:var(--m-haltero);width:6px;height:6px;flex-shrink:0"></span>
+                Halterofilia
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">16 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Overhead Press">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Power Clean -->
+          <tr class="ejercicio-row" data-cat="halterofilia" data-nombre="power clean">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Power Clean</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Trapecio</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Isquiotibiales</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Pantorrillas</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(139,92,246,0.12);color:var(--m-haltero);border:none">
+                <span class="fj-dot" style="background:var(--m-haltero);width:6px;height:6px;flex-shrink:0"></span>
+                Halterofilia
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">12 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Power Clean">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- ============================================================ -->
+          <!-- GIMNÁSTICO (7) -->
+          <!-- ============================================================ -->
+
+          <!-- Pull-up -->
+          <tr class="ejercicio-row" data-cat="gimnastico" data-nombre="pull-up dominada">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Pull-up</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Dorsal ancho</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Bíceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Romboides</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(59,130,246,0.12);color:var(--m-gimnasia);border:none">
+                <span class="fj-dot" style="background:var(--m-gimnasia);width:6px;height:6px;flex-shrink:0"></span>
+                Gimnástico
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">25 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Pull-up">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Toes to Bar -->
+          <tr class="ejercicio-row" data-cat="gimnastico" data-nombre="toes to bar ttb">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Toes to Bar</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Core</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Hip flexores</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Dorsal</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(59,130,246,0.12);color:var(--m-gimnasia);border:none">
+                <span class="fj-dot" style="background:var(--m-gimnasia);width:6px;height:6px;flex-shrink:0"></span>
+                Gimnástico
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">19 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Toes to Bar">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Muscle-up -->
+          <tr class="ejercicio-row" data-cat="gimnastico" data-nombre="muscle-up muscle up">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Muscle-up</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Dorsal</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Tríceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Pectoral</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(59,130,246,0.12);color:var(--m-gimnasia);border:none">
+                <span class="fj-dot" style="background:var(--m-gimnasia);width:6px;height:6px;flex-shrink:0"></span>
+                Gimnástico
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-ink-300" title="Sin video" aria-label="Sin video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M15.536 15.536A5 5 0 0 1 6.464 8.464"/><path d="M2 12s3.636-7 10-7a9.9 9.9 0 0 1 2.536.33M12 17c-3.14 0-5.636-1.54-7.41-3.5"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">8 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Muscle-up">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Handstand Push-up -->
+          <tr class="ejercicio-row" data-cat="gimnastico" data-nombre="handstand push-up hspu parada de manos">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Handstand Push-up</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Deltoides</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Tríceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Core</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(59,130,246,0.12);color:var(--m-gimnasia);border:none">
+                <span class="fj-dot" style="background:var(--m-gimnasia);width:6px;height:6px;flex-shrink:0"></span>
+                Gimnástico
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">10 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Handstand Push-up">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Box Jump -->
+          <tr class="ejercicio-row" data-cat="gimnastico" data-nombre="box jump salto al cajón">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Box Jump</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cuádriceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Pantorrillas</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Glúteos</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(59,130,246,0.12);color:var(--m-gimnasia);border:none">
+                <span class="fj-dot" style="background:var(--m-gimnasia);width:6px;height:6px;flex-shrink:0"></span>
+                Gimnástico
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">21 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Box Jump">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Burpee -->
+          <tr class="ejercicio-row" data-cat="gimnastico" data-nombre="burpee">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Burpee</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Full body</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Pectoral</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Core</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(59,130,246,0.12);color:var(--m-gimnasia);border:none">
+                <span class="fj-dot" style="background:var(--m-gimnasia);width:6px;height:6px;flex-shrink:0"></span>
+                Gimnástico
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">30 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Burpee">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Wall Ball -->
+          <tr class="ejercicio-row" data-cat="gimnastico" data-nombre="wall ball">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Wall Ball</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cuádriceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Deltoides</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Core</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(59,130,246,0.12);color:var(--m-gimnasia);border:none">
+                <span class="fj-dot" style="background:var(--m-gimnasia);width:6px;height:6px;flex-shrink:0"></span>
+                Gimnástico
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">17 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Wall Ball">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- ============================================================ -->
+          <!-- CARDIO (4) -->
+          <!-- ============================================================ -->
+
+          <!-- Row (Remo) -->
+          <tr class="ejercicio-row" data-cat="cardio" data-nombre="row remo rowing">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Row</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Espalda alta</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cuádriceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Glúteos</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(34,197,94,0.12);color:var(--m-endurance);border:none">
+                <span class="fj-dot" style="background:var(--m-endurance);width:6px;height:6px;flex-shrink:0"></span>
+                Cardio
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">24 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Row">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Run -->
+          <tr class="ejercicio-row" data-cat="cardio" data-nombre="run correr running">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Run</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cuádriceps</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Pantorrillas</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cardiovascular</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(34,197,94,0.12);color:var(--m-endurance);border:none">
+                <span class="fj-dot" style="background:var(--m-endurance);width:6px;height:6px;flex-shrink:0"></span>
+                Cardio
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-ink-300" title="Sin video" aria-label="Sin video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M15.536 15.536A5 5 0 0 1 6.464 8.464"/><path d="M2 12s3.636-7 10-7a9.9 9.9 0 0 1 2.536.33M12 17c-3.14 0-5.636-1.54-7.41-3.5"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">28 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Run">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Assault Bike -->
+          <tr class="ejercicio-row" data-cat="cardio" data-nombre="assault bike echo bike bike">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Assault Bike</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Full body</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cardiovascular</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Hombros</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(34,197,94,0.12);color:var(--m-endurance);border:none">
+                <span class="fj-dot" style="background:var(--m-endurance);width:6px;height:6px;flex-shrink:0"></span>
+                Cardio
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">15 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Assault Bike">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- Double Unders -->
+          <tr class="ejercicio-row" data-cat="cardio" data-nombre="double unders dobles salto cuerda du">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">Double Unders</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Pantorrillas</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Coordinación</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Cardiovascular</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge" style="background:rgba(34,197,94,0.12);color:var(--m-endurance);border:none">
+                <span class="fj-dot" style="background:var(--m-endurance);width:6px;height:6px;flex-shrink:0"></span>
+                Cardio
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-success" title="Tiene video" aria-label="Tiene video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">20 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar Double Unders">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+          <!-- ============================================================ -->
+          <!-- ACCESORIO (1 extra para llegar a 19) -->
+          <!-- ============================================================ -->
+
+          <!-- GHD Sit-up -->
+          <tr class="ejercicio-row" data-cat="accesorio" data-nombre="ghd sit-up abdominal ghd">
+            <td>
+              <div>
+                <p class="text-sm font-bold text-ink-900">GHD Sit-up</p>
+                <div class="flex flex-wrap gap-1 mt-1">
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Core</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Hip flexores</span>
+                  <span class="fj-badge fj-badge-neutral" style="font-size:10px;padding:1px 6px">Espalda baja</span>
+                </div>
+              </div>
+            </td>
+            <td>
+              <span class="fj-badge fj-badge-neutral">
+                <span class="fj-dot" style="background:var(--fj-ink-400);width:6px;height:6px;flex-shrink:0"></span>
+                Accesorio
+              </span>
+            </td>
+            <td class="text-center">
+              <span class="inline-flex items-center justify-center text-ink-300" title="Sin video" aria-label="Sin video">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M15.536 15.536A5 5 0 0 1 6.464 8.464"/><path d="M2 12s3.636-7 10-7a9.9 9.9 0 0 1 2.536.33M12 17c-3.14 0-5.636-1.54-7.41-3.5"/></svg>
+              </span>
+            </td>
+            <td class="text-right"><span class="font-mono text-sm text-ink-700">6 rutinas</span></td>
+            <td>
+              <div class="flex justify-end">
+                <button class="fj-icon-btn" aria-label="Editar GHD Sit-up">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- Pie con conteo -->
+      <div class="px-5 py-3 flex items-center justify-between" style="border-top:1px solid rgba(var(--fj-ink-200-rgb,156,163,175),0.25)">
+        <p class="text-xs text-ink-400">
+          <span id="total-count" class="font-mono font-semibold text-ink-700">19</span>
+          ejercicios
+        </p>
+        <p class="text-xs text-ink-400 hidden" id="filtered-label">Filtrando por categoría</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Pills filter
+document.querySelectorAll('.fj-pill').forEach(function(pill) {
+  pill.addEventListener('click', function() {
+    document.querySelectorAll('.fj-pill').forEach(function(p) { p.setAttribute('aria-selected', 'false'); });
+    pill.setAttribute('aria-selected', 'true');
+    applyFilters();
+  });
+});
+
+document.getElementById('search-input').addEventListener('input', applyFilters);
+
+function applyFilters() {
+  var activeFilter = document.querySelector('.fj-pill[aria-selected="true"]').dataset.filter;
+  var searchVal = document.getElementById('search-input').value.toLowerCase().trim();
+  var rows = document.querySelectorAll('.ejercicio-row');
+  var visible = 0;
+
+  rows.forEach(function(row) {
+    var catMatch = !activeFilter || row.dataset.cat === activeFilter;
+    var nameMatch = !searchVal || row.dataset.nombre.indexOf(searchVal) !== -1;
+    if (catMatch && nameMatch) {
+      row.style.display = '';
+      visible++;
+    } else {
+      row.style.display = 'none';
+    }
+  });
+
+  document.getElementById('total-count').textContent = visible;
+  var filtLabel = document.getElementById('filtered-label');
+  filtLabel.classList.toggle('hidden', !activeFilter && !searchVal);
+}
+</script>
+</body>
+</html>

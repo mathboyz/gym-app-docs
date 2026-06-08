@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Leaderboard</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+<style>
+  /* Podio */
+  .lb-podio{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:end;}
+  .lb-podio-col{display:flex;flex-direction:column;align-items:center;border:1px solid var(--fj-ink-200);border-radius:16px;padding:20px 12px 18px;background:var(--fj-surface);position:relative;}
+  .lb-podio-col.pos-1{padding-top:28px;}
+  .lb-podio-col.pos-2{padding-top:18px;}
+  .lb-podio-col.pos-3{padding-top:14px;}
+  .lb-podio-medal{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:15px;margin-bottom:10px;border:2px solid transparent;}
+  .lb-podio-medal.gold{color:var(--tier-gold);background:rgba(var(--tier-gold-rgb,180,138,30),.12);border-color:var(--tier-gold);}
+  .lb-podio-medal.silver{color:var(--tier-silver);background:rgba(var(--tier-silver-rgb,124,134,150),.12);border-color:var(--tier-silver);}
+  .lb-podio-medal.bronze{color:var(--tier-bronze);background:rgba(var(--tier-bronze-rgb,181,112,58),.12);border-color:var(--tier-bronze);}
+  .lb-podio-av{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:16px;font-weight:700;margin-bottom:10px;flex-shrink:0;}
+  .lb-podio-av.gold{background:rgba(var(--tier-gold-rgb,180,138,30),.16);color:var(--tier-gold);}
+  .lb-podio-av.silver{background:rgba(var(--tier-silver-rgb,124,134,150),.14);color:var(--tier-silver);}
+  .lb-podio-av.bronze{background:rgba(var(--tier-bronze-rgb,181,112,58),.14);color:var(--tier-bronze);}
+  .lb-podio-name{font-weight:700;font-size:14px;color:var(--fj-ink-900);text-align:center;line-height:1.2;margin-bottom:4px;}
+  .lb-podio-pts{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:22px;color:var(--fj-ink-900);}
+  .lb-podio-pts span{font-size:12px;font-weight:500;color:var(--fj-ink-400);}
+  .lb-podio-col.pos-1 .lb-podio-pts{font-size:28px;}
+  .lb-podio-crown{position:absolute;top:-14px;left:50%;transform:translateX(-50%);font-size:22px;line-height:1;}
+  /* Tabla standings */
+  .lb-rank-badge{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-weight:700;font-size:13px;flex-shrink:0;}
+  .lb-rank-gold{color:var(--tier-gold);background:rgba(var(--tier-gold-rgb,180,138,30),.12);}
+  .lb-rank-silver{color:var(--tier-silver);background:rgba(var(--tier-silver-rgb,124,134,150),.11);}
+  .lb-rank-bronze{color:var(--tier-bronze);background:rgba(var(--tier-bronze-rgb,181,112,58),.11);}
+  .lb-rank-default{color:var(--fj-ink-500);background:var(--fj-ink-100);}
+  /* Fila líder destacada sutil */
+  .lb-leader-row{background:rgba(var(--tier-gold-rgb,180,138,30),.05);}
+  [data-theme="dark"] .lb-leader-row{background:rgba(236,192,74,.07);}
+  .lb-leader-row:hover{background:rgba(var(--tier-gold-rgb,180,138,30),.09);}
+  [data-theme="dark"] .lb-leader-row:hover{background:rgba(236,192,74,.12);}
+  /* Avatar atleta en tabla */
+  .lb-av-sm{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;}
+  /* Nota update info */
+  .lb-update-note{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:var(--fj-ink-50);font-size:12px;color:var(--fj-ink-500);}
+  [data-theme="dark"] .lb-update-note{background:rgba(255,255,255,.04);}
+  /* Stat pill en header */
+  .lb-stat{display:flex;flex-direction:column;align-items:flex-end;}
+  .lb-stat-val{font-family:"JetBrains Mono",monospace;font-weight:700;font-size:20px;color:var(--fj-ink-900);line-height:1;}
+  .lb-stat-label{font-size:11px;color:var(--fj-ink-400);margin-top:2px;}
+</style>
+</head>
+<body data-page="competencias" data-title="Liga de Verano" data-eyebrow="Competencias · Leaderboard">
+<div data-fj-content>
+  <div class="fj-pad fj-maxw space-y-5">
+
+    <!-- Header de contexto -->
+    <div class="fj-panel p-5">
+      <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <!-- Info principal -->
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center flex-wrap gap-2 mb-2.5">
+            <a href="competencias.html" class="fj-btn fj-btn-ghost fj-btn-sm" aria-label="Volver a competencias">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:5px"><polyline points="15 18 9 12 15 6"/></svg>
+              Volver
+            </a>
+            <span class="fj-eyebrow">Competencias · Liga</span>
+          </div>
+          <div class="flex items-center flex-wrap gap-3 mb-2">
+            <h1 class="font-display font-bold text-2xl tracking-tight" style="color:var(--fj-ink-900)">Liga de Verano</h1>
+            <span class="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold" style="background:rgba(24,169,87,.12);color:var(--tx-green,#0F7A3F)">
+              <span class="w-1.5 h-1.5 rounded-full inline-block animate-pulse" style="background:#18A957"></span>
+              En curso
+            </span>
+          </div>
+          <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm" style="color:var(--fj-ink-500)">
+            <span class="font-mono text-xs">3 jun – 29 jun 2026</span>
+            <span>Forja Box, Providencia</span>
+            <span class="font-semibold text-xs px-2.5 h-6 inline-flex items-center rounded-md" style="background:rgba(251,82,21,.12);color:var(--fj-brand-700)">Premio $150.000</span>
+          </div>
+        </div>
+
+        <!-- Stats + acción -->
+        <div class="flex items-center gap-5 flex-shrink-0">
+          <div class="lb-stat">
+            <span class="lb-stat-val">24</span>
+            <span class="lb-stat-label">Inscritos</span>
+          </div>
+          <div class="lb-stat">
+            <span class="lb-stat-val">3</span>
+            <span class="lb-stat-label">Pruebas</span>
+          </div>
+          <div class="lb-stat">
+            <span class="lb-stat-val">3</span>
+            <span class="lb-stat-label">Divisiones</span>
+          </div>
+          <a href="constructor-competencia.html" class="fj-btn fj-btn-primary fj-btn-sm">Gestionar →</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selector de división -->
+    <div class="flex items-center justify-between gap-4 flex-wrap">
+      <div class="fj-pills" id="division-pills">
+        <button class="fj-pill" aria-selected="true" data-div="rx">Rx</button>
+        <button class="fj-pill" aria-selected="false" data-div="scaled">Scaled</button>
+        <button class="fj-pill" aria-selected="false" data-div="masters">Masters +40</button>
+      </div>
+      <div class="lb-update-note">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Actualizado al registrar resultados por coaches · Último: <strong class="text-ink-700 ml-0.5">hace 22 min</strong>
+      </div>
+    </div>
+
+    <!-- Podio top-3 -->
+    <div id="podio-rx">
+      <p class="fj-eyebrow mb-3">Podio · División Rx</p>
+      <div class="lb-podio">
+
+        <!-- 2do lugar (izq) -->
+        <div class="lb-podio-col pos-2">
+          <div class="lb-podio-medal silver">2</div>
+          <div class="lb-podio-av silver">CS</div>
+          <p class="lb-podio-name">Camila Soto</p>
+          <p class="lb-podio-pts" style="color:var(--tier-silver)">318 <span>pts</span></p>
+        </div>
+
+        <!-- 1er lugar (centro, más alto) -->
+        <div class="lb-podio-col pos-1" style="border-color:var(--tier-gold);">
+          <span class="lb-podio-crown">🏆</span>
+          <div class="lb-podio-medal gold">1</div>
+          <div class="lb-podio-av gold" style="width:60px;height:60px;font-size:18px;">MR</div>
+          <p class="lb-podio-name">Matías Rojas</p>
+          <p class="lb-podio-pts" style="color:var(--tier-gold)">342 <span>pts</span></p>
+        </div>
+
+        <!-- 3er lugar (der) -->
+        <div class="lb-podio-col pos-3">
+          <div class="lb-podio-medal bronze">3</div>
+          <div class="lb-podio-av bronze">IV</div>
+          <p class="lb-podio-name">Ignacio Vera</p>
+          <p class="lb-podio-pts" style="color:var(--tier-bronze)">295 <span>pts</span></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tabla de standings -->
+    <div>
+      <div class="flex items-center justify-between mb-3">
+        <h2 class="fj-section-h">Standings · División Rx</h2>
+        <p class="text-xs" style="color:var(--fj-ink-400)">10 atletas clasificados</p>
+      </div>
+      <div class="fj-list">
+        <table class="fj-table">
+          <thead>
+            <tr>
+              <th style="width:52px">Pos</th>
+              <th>Atleta</th>
+              <th class="text-center" style="width:100px">
+                <span class="fj-fmt fj-fmt-fortime" style="padding:3px 8px;border-radius:6px;">WOD 1</span>
+                <div class="text-ink-400 font-normal normal-case tracking-normal mt-0.5" style="font-family:inherit;font-size:10px;letter-spacing:0">For Time</div>
+              </th>
+              <th class="text-center" style="width:100px">
+                <span class="fj-fmt fj-fmt-amrap" style="padding:3px 8px;border-radius:6px;">WOD 2</span>
+                <div class="text-ink-400 font-normal normal-case tracking-normal mt-0.5" style="font-family:inherit;font-size:10px;letter-spacing:0">AMRAP 12</div>
+              </th>
+              <th class="text-center" style="width:100px">
+                <span class="fj-fmt fj-fmt-emom" style="padding:3px 8px;border-radius:6px;">WOD 3</span>
+                <div class="text-ink-400 font-normal normal-case tracking-normal mt-0.5" style="font-family:inherit;font-size:10px;letter-spacing:0">EMOM 15</div>
+              </th>
+              <th class="text-right" style="width:90px">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- #1 Matías Rojas — líder destacado -->
+            <tr class="lb-leader-row">
+              <td>
+                <div class="lb-rank-badge lb-rank-gold">1</div>
+              </td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(180,138,30,.16);color:var(--tier-gold)">MR</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Matías Rojas</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">6:42</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#1 · 120 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">14 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#1 · 120 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">12/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#2 · 102 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-base" style="color:var(--tier-gold)">342</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #2 Camila Soto -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-silver">2</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(251,82,21,.14);color:var(--fj-brand-700)">CS</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Camila Soto</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">7:15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#3 · 96 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">13 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#2 · 110 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">14/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#1 · 112 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-base" style="color:var(--tier-silver)">318</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #3 Ignacio Vera -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-bronze">3</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(62,123,250,.14);color:#2350B0">IV</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Ignacio Vera</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">6:58</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#2 · 110 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">11 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#4 · 90 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">11/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#3 · 95 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-base" style="color:var(--tier-bronze)">295</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #4 Javiera Núñez -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-default">4</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:var(--fj-ink-100);color:var(--fj-ink-600)">JN</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Javiera Núñez</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">7:44</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#5 · 80 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">12 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#3 · 100 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">13/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#2 · 91 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">271</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #5 Felipe Araya -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-default">5</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(232,163,23,.14);color:#9A6A09">FA</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Felipe Araya</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">7:30</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#4 · 88 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">10 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#6 · 75 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">10/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#5 · 82 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">245</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #6 Nicolás Espinoza -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-default">6</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(24,169,87,.12);color:#0F7A3F">NE</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Nicolás Espinoza</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">8:02</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#6 · 72 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">11 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#5 · 80 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">9/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#6 · 78 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">230</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #7 Andrea Flores -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-default">7</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(251,82,21,.10);color:var(--fj-brand-700)">AF</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Andrea Flores</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">8:35</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#7 · 64 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">9 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#8 · 62 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">10/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#4 · 84 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">210</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #8 Sebastián Mora -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-default">8</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(124,58,237,.12);color:#6D28D9">SM</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Sebastián Mora</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">8:50</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#8 · 60 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">9 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#7 · 70 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">8/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#8 · 68 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">198</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #9 Valentina Torres -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-default">9</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(62,123,250,.10);color:#2350B0">VT</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Valentina Torres</p>
+                    <span class="fj-tag-rx">Rx</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">9:12</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#9 · 52 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">8 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#9 · 55 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">7/15</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#9 · 60 pts</div>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-800)">167</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+            <!-- #10 Diego Contreras -->
+            <tr>
+              <td><div class="lb-rank-badge lb-rank-default">10</div></td>
+              <td>
+                <div class="flex items-center gap-3">
+                  <div class="lb-av-sm" style="background:rgba(229,72,77,.10);color:#C0282D">DC</div>
+                  <div>
+                    <p class="font-semibold text-sm" style="color:var(--fj-ink-900)">Diego Contreras</p>
+                    <span class="fj-badge fj-badge-warning" style="height:18px;font-size:10px;padding:0 7px">Pendiente WOD 3</span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">9:48</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#10 · 44 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-sm" style="color:var(--fj-ink-700)">7 reps</span>
+                <div class="font-mono text-xs mt-0.5" style="color:var(--fj-ink-400)">#10 · 48 pts</div>
+              </td>
+              <td class="text-center">
+                <span class="font-mono text-xs" style="color:var(--fj-ink-300)">—</span>
+              </td>
+              <td class="text-right">
+                <span class="font-mono font-bold text-sm" style="color:var(--fj-ink-500)">92*</span>
+                <span class="font-mono text-xs ml-1" style="color:var(--fj-ink-400)">pts</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <!-- Pie de tabla -->
+        <div class="px-5 py-3 border-t" style="border-color:var(--fj-ink-100)">
+          <p class="text-xs" style="color:var(--fj-ink-400)">
+            Mostrando 10 de 10 atletas en división Rx. Los puntos se asignan por posición en cada WOD: 1° = 120 pts, decremental de 10. * = resultado parcial.
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Pills de división
+document.querySelectorAll('#division-pills .fj-pill').forEach(pill => {
+  pill.addEventListener('click', () => {
+    document.querySelectorAll('#division-pills .fj-pill').forEach(p => p.setAttribute('aria-selected', 'false'));
+    pill.setAttribute('aria-selected', 'true');
+    // En mockup solo Rx tiene datos; las otras muestran empty state conceptual
+    const div = pill.dataset.div;
+    const podio = document.getElementById('podio-rx');
+    if (div !== 'rx') {
+      podio.style.opacity = '0.35';
+      podio.style.pointerEvents = 'none';
+    } else {
+      podio.style.opacity = '';
+      podio.style.pointerEvents = '';
+    }
+  });
+});
+</script>
+</body>
+</html>

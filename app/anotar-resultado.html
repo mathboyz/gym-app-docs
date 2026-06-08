@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Anotar resultado</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+<style>
+  /* Stepper grande */
+  .fj-stepper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  .fj-stepper-btn {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    color: var(--fj-ink-700);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, transform .1s;
+    flex-shrink: 0;
+  }
+  .fj-stepper-btn:active { transform: scale(.93); }
+  .fj-stepper-btn:hover {
+    background: var(--fj-ink-100);
+    border-color: var(--fj-ink-300);
+  }
+  .fj-stepper-val {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 52px;
+    line-height: 1;
+    color: var(--fj-ink-900);
+    min-width: 88px;
+    text-align: center;
+  }
+
+  /* Input número reps extra */
+  .fj-input-num {
+    width: 100%;
+    background: var(--fj-ink-100);
+    border: 1.5px solid var(--fj-ink-200);
+    border-radius: 14px;
+    padding: 13px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--fj-ink-900);
+    text-align: center;
+    outline: none;
+    transition: border-color .15s, background .15s;
+  }
+  .fj-input-num:focus {
+    border-color: var(--fj-brand);
+    background: rgba(251,82,21,.06);
+  }
+  .fj-input-num::placeholder {
+    color: var(--fj-ink-300);
+    font-weight: 500;
+  }
+
+  /* RPE Pills */
+  .fj-rpe-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+  }
+  .fj-rpe-pill {
+    height: 44px;
+    border-radius: 12px;
+    border: 1.5px solid var(--fj-ink-200);
+    background: var(--fj-surface);
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--fj-ink-600);
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s, transform .1s;
+    display: grid;
+    place-items: center;
+  }
+  .fj-rpe-pill:active { transform: scale(.93); }
+  .fj-rpe-pill[aria-selected="true"] {
+    background: rgba(251,82,21,.14);
+    border-color: var(--fj-brand);
+    color: var(--fj-brand);
+  }
+  /* tint gradual por intensidad */
+  .fj-rpe-pill[data-rpe="8"][aria-selected="true"],
+  .fj-rpe-pill[data-rpe="9"][aria-selected="true"] {
+    background: rgba(251,82,21,.20);
+    border-color: var(--fj-brand);
+    color: var(--fj-brand);
+  }
+  .fj-rpe-pill[data-rpe="10"][aria-selected="true"] {
+    background: var(--fj-brand);
+    border-color: var(--fj-brand);
+    color: #fff;
+  }
+
+  /* Textarea */
+  .fj-textarea {
+    width: 100%;
+    background: var(--fj-ink-100);
+    border: 1.5px solid var(--fj-ink-200);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--fj-ink-900);
+    resize: none;
+    outline: none;
+    min-height: 90px;
+    transition: border-color .15s, background .15s;
+    line-height: 1.55;
+  }
+  .fj-textarea:focus {
+    border-color: var(--fj-brand);
+    background: rgba(251,82,21,.06);
+  }
+  .fj-textarea::placeholder { color: var(--fj-ink-400); }
+
+  /* XP preview chip */
+  .fj-xp-preview {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(251,82,21,.12);
+    border: 1px solid rgba(251,82,21,.25);
+    border-radius: 999px;
+    padding: 5px 12px 5px 8px;
+  }
+  .fj-xp-dot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--fj-brand);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+  }
+
+  /* Footer fijo */
+  .fj-footer-fixed {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 12px 16px 20px;
+    background: var(--fj-surface);
+    border-top: 1px solid var(--fj-ink-100);
+    z-index: 10;
+  }
+
+  /* Segment override para esta pantalla */
+  .a-seg-label {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Hint de formato alternativo */
+  .fj-fmt-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    background: var(--fj-ink-100);
+    border: 1px solid var(--fj-ink-200);
+  }
+</style>
+</head>
+<body>
+<div class="app-frame">
+
+  <!-- App bar con back -->
+  <header class="app-bar">
+    <a href="ver-clase.html" class="fj-icon-btn" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1 min-w-0">
+      <p class="a-eyebrow">Sábado 7 jun · 09:00</p>
+      <p class="app-bar-title">Anotar resultado</p>
+    </div>
+    <!-- XP chip compacto en la barra -->
+    <span class="fj-xp-preview">
+      <span class="fj-xp-dot">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </span>
+      <span class="font-mono text-xs font-bold" style="color:var(--fj-brand)">+100 XP</span>
+    </span>
+  </header>
+
+  <main class="app-screen space-y-4" style="padding-bottom:0">
+
+    <!-- 1. Contexto del WOD -->
+    <div class="a-hero">
+      <div class="p-5">
+        <!-- Cabecera -->
+        <div class="flex items-start justify-between gap-3 mb-4">
+          <div>
+            <p class="font-display font-bold text-3xl text-white leading-none">Cindy</p>
+            <p class="text-sm mt-1.5" style="color:#B6BCC8">Benchmark WOD · CrossFit</p>
+          </div>
+          <div class="flex flex-col items-end gap-2">
+            <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+            <span class="font-mono text-sm font-bold" style="color:#B6BCC8">20 min</span>
+          </div>
+        </div>
+
+        <!-- Divisor -->
+        <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:14px"></div>
+
+        <!-- Movimientos compactos -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.07)">
+            <span class="font-mono font-bold text-base text-white leading-none">5</span>
+            <span class="text-sm font-semibold text-white">Pull-up</span>
+            <span class="fj-tag-rx" style="height:17px;font-size:9px">Rx</span>
+          </div>
+          <span style="color:rgba(255,255,255,.25)">·</span>
+          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.07)">
+            <span class="font-mono font-bold text-base text-white leading-none">10</span>
+            <span class="text-sm font-semibold text-white">Push-up</span>
+            <span class="fj-tag-rx" style="height:17px;font-size:9px">Rx</span>
+          </div>
+          <span style="color:rgba(255,255,255,.25)">·</span>
+          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.07)">
+            <span class="font-mono font-bold text-base text-white leading-none">15</span>
+            <span class="text-sm font-semibold text-white">Air squat</span>
+            <span class="fj-tag-rx" style="height:17px;font-size:9px">Rx</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Escala -->
+    <div class="acard acard-pad">
+      <p class="a-eyebrow mb-2.5">Escala</p>
+      <div class="a-seg" role="tablist" id="seg-escala">
+        <button role="tab" aria-selected="true" class="a-seg-label" onclick="selectSeg('seg-escala',this)">Rx</button>
+        <button role="tab" aria-selected="false" class="a-seg-label" onclick="selectSeg('seg-escala',this)">Scaled</button>
+      </div>
+      <!-- Nota escala activa -->
+      <p class="a-muted text-xs mt-3" id="escala-hint" style="display:flex;align-items:center;gap:6px">
+        <span class="fj-tag-rx" style="font-size:10px;height:18px">Rx</span>
+        Realizaste el WOD con los movimientos y cargas prescritas.
+      </p>
+    </div>
+
+    <!-- 3. Tu resultado -->
+    <div class="acard acard-pad">
+      <div class="flex items-center justify-between mb-4">
+        <p class="a-h text-base">Tu resultado</p>
+        <span class="fj-fmt fj-fmt-amrap" style="font-size:10px;height:22px">AMRAP</span>
+      </div>
+
+      <!-- Rondas completas — stepper grande -->
+      <div class="mb-5">
+        <p class="a-eyebrow mb-3">Rondas completas</p>
+        <div class="fj-stepper">
+          <button class="fj-stepper-btn" onclick="stepperChange('rondas', -1)" aria-label="Menos">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div id="rondas-val" class="fj-stepper-val">14</div>
+          <button class="fj-stepper-btn" onclick="stepperChange('rondas', 1)" aria-label="Más">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+        </div>
+        <p class="a-muted text-xs text-center mt-2">= 14 rds × 30 reps</p>
+      </div>
+
+      <!-- Reps extra -->
+      <div class="mb-1">
+        <p class="a-eyebrow mb-2">Reps extra <span class="text-ink-400 font-normal normal-case">(ronda incompleta)</span></p>
+        <input
+          type="number"
+          inputmode="numeric"
+          class="fj-input-num"
+          id="reps-extra"
+          placeholder="0"
+          min="0"
+          max="29"
+          value="7"
+          oninput="updateTotal()"
+        />
+      </div>
+
+      <!-- Total calculado -->
+      <div class="flex items-center justify-between mt-4 px-1">
+        <p class="text-sm font-semibold text-ink-600">Score total</p>
+        <p class="font-mono font-bold text-xl" style="color:var(--fj-brand)" id="score-total">14 rds + 7 reps</p>
+      </div>
+
+      <!-- Hint formato for time (comentado en código) -->
+      <!--
+        Si el WOD fuera For Time, el resultado sería un input de tiempo mm:ss.
+        <div class="fj-fmt-hint">
+          <span class="fj-fmt fj-fmt-fortime" style="font-size:10px;height:22px">For Time</span>
+          <input type="text" class="fj-input" placeholder="mm:ss" inputmode="numeric" />
+        </div>
+      -->
+    </div>
+
+    <!-- 4. RPE — cómo te sentiste -->
+    <div class="acard acard-pad">
+      <div class="flex items-start justify-between gap-2 mb-1">
+        <div>
+          <p class="a-h text-base">¿Cómo te sentiste?</p>
+          <p class="a-muted text-xs mt-0.5">Esfuerzo percibido — RPE opcional</p>
+        </div>
+        <span id="rpe-lbl" class="font-mono text-xs font-bold px-2.5 py-1 rounded-full" style="background:rgba(251,82,21,.12);color:var(--fj-brand);white-space:nowrap">RPE 8</span>
+      </div>
+
+      <!-- Etiquetas extremos -->
+      <div class="flex justify-between mb-2 mt-3">
+        <span class="a-muted text-xs">Fácil</span>
+        <span class="a-muted text-xs">Al límite</span>
+      </div>
+
+      <!-- Grid 5+5 -->
+      <div class="fj-rpe-grid" id="rpe-grid">
+        <button class="fj-rpe-pill" data-rpe="1" aria-selected="false" onclick="selectRpe(1)">1</button>
+        <button class="fj-rpe-pill" data-rpe="2" aria-selected="false" onclick="selectRpe(2)">2</button>
+        <button class="fj-rpe-pill" data-rpe="3" aria-selected="false" onclick="selectRpe(3)">3</button>
+        <button class="fj-rpe-pill" data-rpe="4" aria-selected="false" onclick="selectRpe(4)">4</button>
+        <button class="fj-rpe-pill" data-rpe="5" aria-selected="false" onclick="selectRpe(5)">5</button>
+        <button class="fj-rpe-pill" data-rpe="6" aria-selected="false" onclick="selectRpe(6)">6</button>
+        <button class="fj-rpe-pill" data-rpe="7" aria-selected="false" onclick="selectRpe(7)">7</button>
+        <button class="fj-rpe-pill" data-rpe="8" aria-selected="true"  onclick="selectRpe(8)">8</button>
+        <button class="fj-rpe-pill" data-rpe="9" aria-selected="false" onclick="selectRpe(9)">9</button>
+        <button class="fj-rpe-pill" data-rpe="10" aria-selected="false" onclick="selectRpe(10)">10</button>
+      </div>
+
+      <!-- Descripción contextual RPE -->
+      <p class="a-muted text-xs mt-3 text-center" id="rpe-desc">Muy difícil · Mantienes a duras penas el ritmo</p>
+    </div>
+
+    <!-- 5. Nota libre -->
+    <div class="acard acard-pad">
+      <div class="flex items-center justify-between mb-3">
+        <p class="a-h text-base">Nota</p>
+        <span class="a-muted text-xs">Opcional</span>
+      </div>
+      <textarea
+        class="fj-textarea"
+        id="nota-wod"
+        placeholder="¿Cómo te fue? ¿Escalaste algo? ¿Algún PR de rounds?"
+        maxlength="280"
+        oninput="updateCharCount(this)"
+      >Mantuve buen ritmo los primeros 10 min. Los pull-ups me costaron al final, bajé a kipping partido. Igual logré superar mi score anterior (12 rds).</textarea>
+      <div class="flex justify-end mt-1.5">
+        <span class="a-muted text-xs" id="char-count">159/280</span>
+      </div>
+    </div>
+
+    <!-- 6. Info leaderboard + XP -->
+    <div class="acard acard-pad" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.22)">
+      <div class="flex gap-3 items-start">
+        <div class="w-9 h-9 rounded-xl grid place-items-center shrink-0" style="background:rgba(251,82,21,.15)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm font-bold" style="color:var(--fj-brand)">Entra al leaderboard</p>
+          <p class="text-sm text-ink-700 mt-0.5">Tu resultado queda visible para la clase y suma <span class="font-bold" style="color:var(--fj-brand)">+100 XP</span> a tu perfil.</p>
+        </div>
+      </div>
+
+      <!-- Preview posición estimada -->
+      <div style="height:1px;background:rgba(251,82,21,.18);margin:12px 0"></div>
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="a-eyebrow mb-0.5">Posición estimada</p>
+          <p class="text-sm font-semibold text-ink-800">Con 14 rds + 7 reps quedarías</p>
+        </div>
+        <div class="text-right">
+          <p class="font-mono font-bold text-2xl leading-none" style="color:var(--tier-silver)">#2</p>
+          <p class="a-muted text-xs mt-0.5">de 9 atletas</p>
+        </div>
+      </div>
+
+      <!-- Mini podio de contexto -->
+      <div class="mt-3 space-y-1.5">
+        <div class="flex items-center gap-2.5 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05);border:1px solid rgba(251,82,21,.12)">
+          <span class="font-mono font-bold text-xs w-4 text-center shrink-0" style="color:#ECC04A">1</span>
+          <div class="a-av w-7 h-7 text-xs shrink-0" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">PD</div>
+          <p class="flex-1 text-xs font-semibold text-ink-800">Pancho Díaz</p>
+          <span class="font-mono text-xs font-bold text-ink-600">17 rds + 12</span>
+        </div>
+        <div class="flex items-center gap-2.5 rounded-xl px-3 py-2" style="background:rgba(251,82,21,.10);border:1px solid rgba(251,82,21,.28)">
+          <span class="font-mono font-bold text-xs w-4 text-center shrink-0" style="color:var(--tier-silver)">#</span>
+          <div class="a-av w-7 h-7 text-xs shrink-0">MR</div>
+          <p class="flex-1 text-xs font-semibold" style="color:var(--fj-brand)">Matías Rojas <span class="font-normal text-ink-400">(tú)</span></p>
+          <span class="font-mono text-xs font-bold" style="color:var(--fj-brand)">14 rds + 7</span>
+        </div>
+        <div class="flex items-center gap-2.5 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.05);border:1px solid rgba(251,82,21,.12)">
+          <span class="font-mono font-bold text-xs w-4 text-center shrink-0" style="color:var(--tier-bronze)">3</span>
+          <div class="a-av w-7 h-7 text-xs shrink-0" style="background:linear-gradient(135deg,#61D2C4,#18A957)">JN</div>
+          <p class="flex-1 text-xs font-semibold text-ink-800">Javiera Núñez</p>
+          <span class="font-mono text-xs font-bold text-ink-600">14 rds + 3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer fijo con CTA -->
+    <div class="fj-footer-fixed">
+      <!-- XP + nivel preview -->
+      <div class="flex items-center justify-between mb-3 px-1">
+        <div class="flex items-center gap-2">
+          <div class="a-prog flex-1" style="width:120px"><div id="xp-bar" style="width:64%"></div></div>
+          <span class="a-muted text-xs">Nivel 12</span>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <span class="a-muted text-xs">2.840</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          <span class="font-mono text-xs font-bold" style="color:var(--fj-brand)">2.940 XP</span>
+        </div>
+      </div>
+      <button class="a-btn a-btn-primary" onclick="guardarResultado()" style="gap:10px">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Guardar resultado
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<script>
+/* Stepper rondas */
+var rondas = 14;
+function stepperChange(id, delta) {
+  if (id === 'rondas') {
+    rondas = Math.max(0, rondas + delta);
+    document.getElementById('rondas-val').textContent = rondas;
+    updateTotal();
+  }
+}
+
+function updateTotal() {
+  var extra = parseInt(document.getElementById('reps-extra').value, 10) || 0;
+  extra = Math.min(extra, 29); // max 29 reps (30 = ronda completa)
+  var el = document.getElementById('score-total');
+  if (extra > 0) {
+    el.textContent = rondas + ' rds + ' + extra + ' reps';
+  } else {
+    el.textContent = rondas + ' rds';
+  }
+  // Actualizar hint debajo del stepper
+  var total = rondas * 30;
+  var hint = document.querySelector('.a-muted.text-xs.text-center');
+  if (hint) hint.textContent = '= ' + rondas + ' rds × 30 reps';
+}
+
+/* RPE */
+var rpeDescriptions = {
+  1:  'Muy ligero · Podrías hablar sin problemas',
+  2:  'Ligero · Cómodo y sostenible',
+  3:  'Moderado · Algo de esfuerzo',
+  4:  'Moderado + · Un poco más exigente',
+  5:  'Difícil · Conversación corta solo',
+  6:  'Difícil + · Respiración más forzada',
+  7:  'Muy difícil · Te costó mantener el ritmo',
+  8:  'Muy difícil · Mantienes a duras penas el ritmo',
+  9:  'Máximo casi · Un par de reps más y ya no más',
+  10: '¡Todo! · No quedó nada en el tanque'
+};
+
+function selectRpe(val) {
+  document.querySelectorAll('.fj-rpe-pill').forEach(function(p) {
+    p.setAttribute('aria-selected', p.dataset.rpe == val ? 'true' : 'false');
+  });
+  document.getElementById('rpe-lbl').textContent = 'RPE ' + val;
+  document.getElementById('rpe-desc').textContent = rpeDescriptions[val] || '';
+}
+
+/* Escala seg */
+function selectSeg(id, btn) {
+  var seg = document.getElementById(id);
+  seg.querySelectorAll('[role="tab"]').forEach(function(b) {
+    b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+  });
+  var isRx = btn.textContent.trim() === 'Rx';
+  var hint = document.getElementById('escala-hint');
+  if (hint) {
+    if (isRx) {
+      hint.innerHTML = '<span class="fj-tag-rx" style="font-size:10px;height:18px">Rx</span> Realizaste el WOD con los movimientos y cargas prescritas.';
+    } else {
+      hint.innerHTML = '<span class="fj-badge fj-badge-neutral" style="font-size:10px;height:18px">Scaled</span> Modificaste algún movimiento o carga. Igual cuenta y suma XP.';
+    }
+  }
+}
+
+/* Char count textarea */
+function updateCharCount(el) {
+  var count = el.value.length;
+  document.getElementById('char-count').textContent = count + '/280';
+}
+
+/* Guardar */
+function guardarResultado() {
+  var btn = document.querySelector('.a-btn-primary');
+  btn.disabled = true;
+  btn.style.opacity = '.7';
+  btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Guardando…';
+  setTimeout(function() {
+    window.location.href = 'ver-clase.html';
+  }, 900);
+}
+
+/* Init char count */
+updateCharCount(document.getElementById('nota-wod'));
+</script>
+</body>
+</html>

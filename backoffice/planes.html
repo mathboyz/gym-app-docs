@@ -4,300 +4,246 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Forja · Planes</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
 <script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        brand: { 50:'#FFF3EE',100:'#FFE2D6',200:'#FFC4AD',300:'#FF9E78',400:'#FF7340',500:'#FB5215',600:'#E0410A',700:'#B83309',800:'#92290B',900:'#76240E' },
-        ink: { 950:'#0C0D10',900:'#131519',850:'#181B20',800:'#1F232B',700:'#2B303A',600:'#3A4150',500:'#5A6172',400:'#8A91A1',300:'#B6BCC8',200:'#D7DBE2',100:'#EAECF1',50:'#F6F7F9' },
-        success:'#18A957', warning:'#E8A317', danger:'#E5484D', info:'#3E7BFA',
-        tier: { bronce:'#C77B3C', plata:'#AEB7C4', oro:'#ECC04A', platino:'#61D2C4', diamante:'#6AA8FF' },
-      },
-      fontFamily: { display:['"Space Grotesk"','sans-serif'], sans:['Inter','sans-serif'], mono:['"JetBrains Mono"','monospace'] },
-      borderRadius: { md:'12px', lg:'16px', xl:'20px', '2xl':'24px' },
-      boxShadow: { sm:'0 1px 3px rgba(0,0,0,.08)', md:'0 6px 18px rgba(0,0,0,.12)', lg:'0 16px 40px rgba(0,0,0,.20)', glow:'0 6px 20px rgba(251,82,21,.35)' },
-    }
-  }
-}
-</script>
-<style> body{-webkit-font-smoothing:antialiased;} *{font-style:normal !important;} </style>
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
 </head>
-<body class="bg-ink-50 text-ink-900 font-sans">
+<body data-page="planes" data-title="Planes" data-eyebrow="Forja Box · Providencia"
+      data-cta-label="Nuevo plan" data-cta-href="nuevo-plan.html">
+<div data-fj-content>
+<div class="fj-pad fj-maxw space-y-5">
 
-<div class="flex h-screen overflow-hidden">
-
-  <!-- Sidebar -->
-  <aside class="w-60 shrink-0 bg-white border-r border-ink-200 flex flex-col">
-    <div class="h-16 flex items-center gap-2.5 px-5 border-b border-ink-200">
-      <span class="grid place-items-center w-8 h-8 rounded-lg bg-brand-500 text-white shadow-glow">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1 3-1 5-2 6 1 0 4-1 5 2 2 4-2 8-3 8 2-4-1-5-2-5 .5 2-1 3-2 3-2 0-3-2-3-4 0-3 4-5 4-7 0-1-1-2-2-3 4 0 8 1 8 6"/></svg>
-      </span>
-      <span class="font-display font-bold text-lg tracking-tight">Forja<span class="text-brand-500">.</span></span>
-    </div>
-    <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto">
-      <a href="dashboard.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        Dashboard
-      </a>
-      <a href="clientes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Clientes
-      </a>
-      <a href="calendario.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        Calendario
-      </a>
-      <a href="tipo-clases.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        Clases
-      </a>
-      <a href="constructor-rutina.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
-        Rutinas
-      </a>
-      <a href="planes.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold bg-brand-500/10 text-brand-600 cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-        Planes
-      </a>
-      <a href="pagos.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        Pagos
-      </a>
-      <a href="metricas.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Métricas
-      </a>
-      <a href="competencias.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg>
-        Competencias
-      </a>
-      <a href="configuracion.html" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-ink-600 hover:bg-ink-50 hover:text-ink-900 transition-colors cursor-pointer">
-        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        Configuración
-      </a>
-    </nav>
-    <div class="px-3 py-4 border-t border-ink-200">
-      <div class="flex items-center gap-3 px-3 py-2">
-        <div class="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 font-semibold text-xs shrink-0">VF</div>
-        <div class="min-w-0">
-          <p class="text-sm font-semibold text-ink-900 truncate">Vale Fuentes</p>
-          <p class="text-xs text-ink-400 truncate">Administrador</p>
+  <!-- Lista de planes -->
+  <div class="fj-list">
+    <div class="fj-list-head">
+      <div class="flex-1 flex items-center justify-between">
+        <div>
+          <p class="fj-eyebrow">Configuración</p>
+          <h3 class="fj-section-h mt-0.5">Planes de membresía</h3>
         </div>
+        <span class="fj-badge fj-badge-neutral">6 planes · 87 socios activos</span>
       </div>
     </div>
-  </aside>
 
-  <!-- Main -->
-  <div class="flex-1 flex flex-col overflow-hidden">
-
-    <!-- Topbar -->
-    <header class="h-16 bg-white border-b border-ink-200 flex items-center justify-between px-6 shrink-0">
-      <div>
-        <h1 class="font-display font-bold text-xl text-ink-900">Planes de membresía</h1>
-        <p class="text-xs text-ink-400 mt-0.5">Forja Box · 4 planes activos · 87 clientes</p>
+    <!-- Fila: Full -->
+    <div class="fj-row-static fj-row">
+      <div class="flex-1 min-w-0 flex items-center gap-4">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <p class="text-sm font-semibold text-ink-900">Full</p>
+            <span class="fj-badge fj-badge-success">Activo</span>
+          </div>
+          <p class="text-xs text-ink-400 mt-0.5">Acceso completo lun–sáb, clases ilimitadas</p>
+        </div>
+        <div class="shrink-0 w-40 hidden sm:block">
+          <div class="flex flex-wrap gap-1">
+            <span class="fj-badge fj-badge-neutral text-[10px]">CrossFit</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Gimnasia</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Endurance</span>
+          </div>
+        </div>
+        <div class="shrink-0 w-28 text-right hidden md:block">
+          <p class="font-mono font-bold text-sm text-ink-900">$89.000</p>
+          <p class="text-xs text-ink-400">/mes</p>
+        </div>
+        <div class="shrink-0 w-20 text-right hidden lg:block">
+          <p class="font-mono font-bold text-sm text-ink-900">34</p>
+          <p class="text-xs text-ink-400">socios</p>
+        </div>
       </div>
-      <a href="nuevo-plan.html" class="inline-flex items-center gap-2 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors shadow-glow cursor-pointer">
-        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Nuevo plan
+      <a href="nuevo-plan.html" class="fj-icon-btn ml-3 shrink-0" aria-label="Editar plan Full">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
       </a>
-    </header>
+    </div>
 
-    <!-- Content -->
-    <main class="flex-1 overflow-y-auto p-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-
-        <!-- Plan 3x Semana -->
-        <div class="bg-white border border-ink-200 rounded-xl p-5 flex flex-col hover:border-ink-300 transition-colors cursor-pointer">
-          <div class="flex items-start justify-between gap-2 mb-4">
-            <div class="w-9 h-9 rounded-lg bg-ink-50 border border-ink-200 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-ink-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-            </div>
-            <span class="flex items-center gap-1 text-xs font-semibold text-success">
-              <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-              Activo
-            </span>
+    <!-- Fila: Ilimitado -->
+    <div class="fj-row-static fj-row">
+      <div class="flex-1 min-w-0 flex items-center gap-4">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <p class="text-sm font-semibold text-ink-900">Ilimitado</p>
+            <span class="fj-badge fj-badge-success">Activo</span>
           </div>
-
-          <h3 class="font-display font-semibold text-base text-ink-900 mb-1">3x Semana</h3>
-          <p class="text-xs text-ink-400 mb-4">Acceso 3 días a la semana, horario libre</p>
-
-          <div class="mt-auto">
-            <div class="flex items-baseline gap-1 mb-1">
-              <span class="font-mono font-bold text-2xl text-ink-900">$32.000</span>
-              <span class="text-xs text-ink-400">/mes</span>
-            </div>
-            <p class="text-xs font-mono text-ink-400 mb-4">12 clases por mes</p>
-
-            <!-- Tipos incluidos -->
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 border border-brand-100">CrossFit</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-50 text-success border border-green-100">Endurance</span>
-            </div>
-
-            <!-- Clientes -->
-            <div class="flex items-center justify-between pt-4 border-t border-ink-100">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-sm font-mono font-bold text-ink-900">34</span>
-                <span class="text-xs text-ink-400">clientes</span>
-              </div>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
+          <p class="text-xs text-ink-400 mt-0.5">Todas las clases, todos los días, sin restricción</p>
+        </div>
+        <div class="shrink-0 w-40 hidden sm:block">
+          <div class="flex flex-wrap gap-1">
+            <span class="fj-badge fj-badge-neutral text-[10px]">CrossFit</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Gimnasia</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Halterofilia</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Endurance</span>
           </div>
         </div>
-
-        <!-- Plan Full (destacado) -->
-        <div class="bg-white border-2 border-brand-300 rounded-xl p-5 flex flex-col relative hover:border-brand-400 transition-colors cursor-pointer">
-          <span class="absolute -top-3 left-1/2 -translate-x-1/2 text-xs font-semibold px-3 py-1 rounded-full bg-brand-500 text-white shadow-glow">Más popular</span>
-
-          <div class="flex items-start justify-between gap-2 mb-4">
-            <div class="w-9 h-9 rounded-lg bg-brand-50 border border-brand-200 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-brand-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <span class="flex items-center gap-1 text-xs font-semibold text-success">
-              <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-              Activo
-            </span>
-          </div>
-
-          <h3 class="font-display font-semibold text-base text-ink-900 mb-1">Full</h3>
-          <p class="text-xs text-ink-400 mb-4">Acceso completo de lunes a sábado</p>
-
-          <div class="mt-auto">
-            <div class="flex items-baseline gap-1 mb-1">
-              <span class="font-mono font-bold text-2xl text-ink-900">$45.000</span>
-              <span class="text-xs text-ink-400">/mes</span>
-            </div>
-            <p class="text-xs font-mono text-ink-400 mb-4">Clases ilimitadas</p>
-
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 border border-brand-100">CrossFit</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-info border border-blue-100">Gimnasia</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-50 text-success border border-green-100">Endurance</span>
-            </div>
-
-            <div class="flex items-center justify-between pt-4 border-t border-ink-100">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-sm font-mono font-bold text-ink-900">29</span>
-                <span class="text-xs text-ink-400">clientes</span>
-              </div>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
-          </div>
+        <div class="shrink-0 w-28 text-right hidden md:block">
+          <p class="font-mono font-bold text-sm text-ink-900">$99.000</p>
+          <p class="text-xs text-ink-400">/mes</p>
         </div>
-
-        <!-- Plan Ilimitado -->
-        <div class="bg-white border border-ink-200 rounded-xl p-5 flex flex-col hover:border-ink-300 transition-colors cursor-pointer">
-          <div class="flex items-start justify-between gap-2 mb-4">
-            <div class="w-9 h-9 rounded-lg bg-purple-50 border border-purple-100 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5" style="color:#7C3AED;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            </div>
-            <span class="flex items-center gap-1 text-xs font-semibold text-success">
-              <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-              Activo
-            </span>
-          </div>
-
-          <h3 class="font-display font-semibold text-base text-ink-900 mb-1">Ilimitado</h3>
-          <p class="text-xs text-ink-400 mb-4">Todas las clases, todos los días</p>
-
-          <div class="mt-auto">
-            <div class="flex items-baseline gap-1 mb-1">
-              <span class="font-mono font-bold text-2xl text-ink-900">$55.000</span>
-              <span class="text-xs text-ink-400">/mes</span>
-            </div>
-            <p class="text-xs font-mono text-ink-400 mb-4">Sin límite de clases</p>
-
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 border border-brand-100">CrossFit</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-50 text-info border border-blue-100">Gimnasia</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-purple-50 border border-purple-100" style="color:#7C3AED;">Halterofilia</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-green-50 text-success border border-green-100">Endurance</span>
-            </div>
-
-            <div class="flex items-center justify-between pt-4 border-t border-ink-100">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-sm font-mono font-bold text-ink-900">18</span>
-                <span class="text-xs text-ink-400">clientes</span>
-              </div>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pack 10 clases -->
-        <div class="bg-white border border-ink-200 rounded-xl p-5 flex flex-col hover:border-ink-300 transition-colors cursor-pointer">
-          <div class="flex items-start justify-between gap-2 mb-4">
-            <div class="w-9 h-9 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12V22H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
-            </div>
-            <span class="flex items-center gap-1 text-xs font-semibold text-success">
-              <span class="w-1.5 h-1.5 rounded-full bg-success inline-block"></span>
-              Activo
-            </span>
-          </div>
-
-          <h3 class="font-display font-semibold text-base text-ink-900 mb-1">Pack 10</h3>
-          <p class="text-xs text-ink-400 mb-4">Boleto de 10 clases sin vencimiento</p>
-
-          <div class="mt-auto">
-            <div class="flex items-baseline gap-1 mb-1">
-              <span class="font-mono font-bold text-2xl text-ink-900">$60.000</span>
-              <span class="text-xs text-ink-400">total</span>
-            </div>
-            <p class="text-xs font-mono text-ink-400 mb-4">10 clases · $6.000 c/u</p>
-
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 border border-brand-100">CrossFit</span>
-              <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-purple-50 border border-purple-100" style="color:#7C3AED;">Halterofilia</span>
-            </div>
-
-            <div class="flex items-center justify-between pt-4 border-t border-ink-100">
-              <div class="flex items-center gap-1.5">
-                <svg class="w-4 h-4 text-ink-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                <span class="text-sm font-mono font-bold text-ink-900">6</span>
-                <span class="text-xs text-ink-400">clientes activos</span>
-              </div>
-              <button class="text-xs font-semibold text-brand-500 hover:text-brand-600 transition-colors cursor-pointer">Editar</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Resumen stats -->
-      <div class="mt-6 bg-white border border-ink-200 rounded-xl p-5">
-        <h2 class="font-display font-semibold text-base text-ink-900 mb-4">Resumen de facturación mensual</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-1">MRR estimado</p>
-            <p class="font-mono font-bold text-2xl text-ink-900">$3.585.000</p>
-          </div>
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-1">Clientes activos</p>
-            <p class="font-mono font-bold text-2xl text-ink-900">87</p>
-          </div>
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-1">Ticket promedio</p>
-            <p class="font-mono font-bold text-2xl text-ink-900">$41.207</p>
-          </div>
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-wider text-ink-400 mb-1">Churn este mes</p>
-            <p class="font-mono font-bold text-2xl text-danger">3</p>
-          </div>
+        <div class="shrink-0 w-20 text-right hidden lg:block">
+          <p class="font-mono font-bold text-sm text-ink-900">18</p>
+          <p class="text-xs text-ink-400">socios</p>
         </div>
       </div>
+      <a href="nuevo-plan.html" class="fj-icon-btn ml-3 shrink-0" aria-label="Editar plan Ilimitado">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </a>
+    </div>
 
-    </main>
+    <!-- Fila: 3x Semana -->
+    <div class="fj-row-static fj-row">
+      <div class="flex-1 min-w-0 flex items-center gap-4">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <p class="text-sm font-semibold text-ink-900">3x Semana</p>
+            <span class="fj-badge fj-badge-success">Activo</span>
+          </div>
+          <p class="text-xs text-ink-400 mt-0.5">Acceso 3 días a la semana, horario libre</p>
+        </div>
+        <div class="shrink-0 w-40 hidden sm:block">
+          <div class="flex flex-wrap gap-1">
+            <span class="fj-badge fj-badge-neutral text-[10px]">CrossFit</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Endurance</span>
+          </div>
+        </div>
+        <div class="shrink-0 w-28 text-right hidden md:block">
+          <p class="font-mono font-bold text-sm text-ink-900">$59.000</p>
+          <p class="text-xs text-ink-400">/mes</p>
+        </div>
+        <div class="shrink-0 w-20 text-right hidden lg:block">
+          <p class="font-mono font-bold text-sm text-ink-900">22</p>
+          <p class="text-xs text-ink-400">socios</p>
+        </div>
+      </div>
+      <a href="nuevo-plan.html" class="fj-icon-btn ml-3 shrink-0" aria-label="Editar plan 3x Semana">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </a>
+    </div>
+
+    <!-- Fila: Pack 10 clases -->
+    <div class="fj-row-static fj-row">
+      <div class="flex-1 min-w-0 flex items-center gap-4">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <p class="text-sm font-semibold text-ink-900">Pack 10 clases</p>
+            <span class="fj-badge fj-badge-success">Activo</span>
+          </div>
+          <p class="text-xs text-ink-400 mt-0.5">Boleto de 10 clases sin vencimiento</p>
+        </div>
+        <div class="shrink-0 w-40 hidden sm:block">
+          <div class="flex flex-wrap gap-1">
+            <span class="fj-badge fj-badge-neutral text-[10px]">CrossFit</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Halterofilia</span>
+          </div>
+        </div>
+        <div class="shrink-0 w-28 text-right hidden md:block">
+          <p class="font-mono font-bold text-sm text-ink-900">$69.000</p>
+          <p class="text-xs text-ink-400">total</p>
+        </div>
+        <div class="shrink-0 w-20 text-right hidden lg:block">
+          <p class="font-mono font-bold text-sm text-ink-900">6</p>
+          <p class="text-xs text-ink-400">socios</p>
+        </div>
+      </div>
+      <a href="nuevo-plan.html" class="fj-icon-btn ml-3 shrink-0" aria-label="Editar plan Pack 10 clases">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </a>
+    </div>
+
+    <!-- Fila: Estudiante -->
+    <div class="fj-row-static fj-row">
+      <div class="flex-1 min-w-0 flex items-center gap-4">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <p class="text-sm font-semibold text-ink-900">Estudiante</p>
+            <span class="fj-badge fj-badge-success">Activo</span>
+          </div>
+          <p class="text-xs text-ink-400 mt-0.5">Descuento con credencial vigente, 3x semana</p>
+        </div>
+        <div class="shrink-0 w-40 hidden sm:block">
+          <div class="flex flex-wrap gap-1">
+            <span class="fj-badge fj-badge-neutral text-[10px]">CrossFit</span>
+          </div>
+        </div>
+        <div class="shrink-0 w-28 text-right hidden md:block">
+          <p class="font-mono font-bold text-sm text-ink-900">$39.000</p>
+          <p class="text-xs text-ink-400">/mes</p>
+        </div>
+        <div class="shrink-0 w-20 text-right hidden lg:block">
+          <p class="font-mono font-bold text-sm text-ink-900">5</p>
+          <p class="text-xs text-ink-400">socios</p>
+        </div>
+      </div>
+      <a href="nuevo-plan.html" class="fj-icon-btn ml-3 shrink-0" aria-label="Editar plan Estudiante">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </a>
+    </div>
+
+    <!-- Fila: Elite (inactivo) -->
+    <div class="fj-row-static fj-row opacity-60">
+      <div class="flex-1 min-w-0 flex items-center gap-4">
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap">
+            <p class="text-sm font-semibold text-ink-900">Elite</p>
+            <span class="fj-badge fj-badge-neutral">Inactivo</span>
+          </div>
+          <p class="text-xs text-ink-400 mt-0.5">Plan premium descontinuado, solo socios actuales</p>
+        </div>
+        <div class="shrink-0 w-40 hidden sm:block">
+          <div class="flex flex-wrap gap-1">
+            <span class="fj-badge fj-badge-neutral text-[10px]">CrossFit</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Gimnasia</span>
+            <span class="fj-badge fj-badge-neutral text-[10px]">Halterofilia</span>
+          </div>
+        </div>
+        <div class="shrink-0 w-28 text-right hidden md:block">
+          <p class="font-mono font-bold text-sm text-ink-900">$79.000</p>
+          <p class="text-xs text-ink-400">/mes</p>
+        </div>
+        <div class="shrink-0 w-20 text-right hidden lg:block">
+          <p class="font-mono font-bold text-sm text-ink-900">2</p>
+          <p class="text-xs text-ink-400">socios</p>
+        </div>
+      </div>
+      <a href="nuevo-plan.html" class="fj-icon-btn ml-3 shrink-0" aria-label="Editar plan Elite">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </a>
+    </div>
+
   </div>
-</div>
 
+  <!-- Resumen facturación -->
+  <div class="fj-panel p-5">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <p class="fj-eyebrow">Proyección</p>
+        <h3 class="fj-section-h mt-0.5">Resumen facturación mensual</h3>
+      </div>
+    </div>
+    <div class="grid grid-cols-4 gap-6">
+      <div>
+        <p class="fj-eyebrow mb-1">MRR estimado</p>
+        <p class="font-mono font-bold text-2xl text-ink-900">$3.585.000</p>
+      </div>
+      <div>
+        <p class="fj-eyebrow mb-1">Socios activos</p>
+        <p class="font-mono font-bold text-2xl text-ink-900">87</p>
+      </div>
+      <div>
+        <p class="fj-eyebrow mb-1">Ticket promedio</p>
+        <p class="font-mono font-bold text-2xl text-ink-900">$41.207</p>
+      </div>
+      <div>
+        <p class="fj-eyebrow mb-1">Churn este mes</p>
+        <p class="font-mono font-bold text-2xl text-danger">3</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
 </body>
 </html>
