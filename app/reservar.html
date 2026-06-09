@@ -13,6 +13,12 @@
 <link rel="stylesheet" href="../assets/forja.css">
 <link rel="stylesheet" href="../assets/forja-app.css">
 <script src="../assets/forja-app.js"></script>
+<style>
+  /* Formato del WOD en la lista de reserva: discreto, no protagonista.
+     La categoría/formato vive dentro de la clase; aquí solo es una pista. */
+  .rsv-fmt{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+    letter-spacing:.03em;text-transform:uppercase;color:var(--fj-ink-400);}
+</style>
 </head>
 <body data-app-tab="reservar">
 <div class="app-frame">
@@ -91,7 +97,7 @@
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-2 mb-0.5 flex-wrap">
             <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
-            <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+            <span class="rsv-fmt">AMRAP</span>
           </div>
           <p class="a-muted text-xs">Coach Vale Fuentes</p>
           <div class="flex items-center gap-1 mt-1">
@@ -132,7 +138,7 @@
           <div class="flex items-center gap-2 mb-0.5 flex-wrap">
             <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
             <span class="fj-dot" style="background:var(--fj-brand)"></span>
-            <span class="fj-fmt fj-fmt-fortime">For Time</span>
+            <span class="rsv-fmt">For Time</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="a-muted text-xs">Coach Rodri Moya</span>
@@ -180,7 +186,7 @@
           <div class="flex items-center gap-2 mb-0.5 flex-wrap">
             <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
             <span class="fj-dot" style="background:#E8A317"></span>
-            <span class="fj-fmt fj-fmt-emom">EMOM</span>
+            <span class="rsv-fmt">EMOM</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="a-muted text-xs">Coach Vale Fuentes</span>
@@ -226,7 +232,7 @@
           <div class="flex items-center gap-2 mb-0.5 flex-wrap">
             <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
             <span class="fj-dot" style="background:var(--fj-brand)"></span>
-            <span class="fj-fmt fj-fmt-tabata">Tabata</span>
+            <span class="rsv-fmt">Tabata</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="a-muted text-xs">Coach Vale Fuentes</span>
@@ -250,7 +256,7 @@
           <div class="flex items-center gap-2 mb-0.5 flex-wrap">
             <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Funcional</span>
             <span class="fj-dot" style="background:var(--fj-brand)"></span>
-            <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+            <span class="rsv-fmt">AMRAP</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="a-muted text-xs">Coach Rodri Moya</span>
