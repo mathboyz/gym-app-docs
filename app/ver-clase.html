@@ -17,6 +17,14 @@
   /* Footer fijo de reserva — separación por sombra, sin borde de un solo lado */
   .fj-footer-fixed{position:sticky;bottom:0;left:0;right:0;padding:12px 16px 20px;
     background:var(--fj-surface);box-shadow:0 -10px 22px -10px rgba(0,0,0,.14);z-index:10;}
+  /* Check "listo" por ejercicio */
+  .ex-check{width:26px;height:26px;border-radius:50%;border:2px solid var(--fj-ink-200);
+    background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    cursor:pointer;transition:.15s;color:transparent;margin-left:4px;}
+  .ex-check.on{background:var(--fj-success);border-color:var(--fj-success);color:#fff;}
+  .a-hero .ex-check{border-color:rgba(255,255,255,.3);}
+  .ex-done .text-ink-900,.ex-done .text-white{text-decoration:line-through;opacity:.5;}
+  .ex-done{opacity:.78;}
 </style>
 </head>
 <body>
@@ -31,7 +39,6 @@
       <p class="a-eyebrow">Sábado 7 jun</p>
       <p class="app-bar-title">CrossFit · 09:00</p>
     </div>
-    <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
   </header>
 
   <main class="app-screen space-y-4">
@@ -128,6 +135,7 @@
             <p class="text-sm font-semibold text-ink-900">Cuerda doble bajo</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">3 × 30 rep</span>
+          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
         </div>
         <div class="arow px-4">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
@@ -137,6 +145,7 @@
             <p class="text-sm font-semibold text-ink-900">Hip hinge + movilidad cadera</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">2 × 10 c/l</span>
+          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
         </div>
         <div class="arow px-4">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
@@ -146,6 +155,7 @@
             <p class="text-sm font-semibold text-ink-900">Kip swing en barra</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">3 × 10 rep</span>
+          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
         </div>
         <div class="arow px-4">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
@@ -155,6 +165,7 @@
             <p class="text-sm font-semibold text-ink-900">Air squat + apertura de cadera</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">2 × 15 rep</span>
+          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
         </div>
       </div>
     </div>
@@ -174,7 +185,7 @@
             <p class="text-sm font-semibold text-ink-900">Thruster técnico</p>
             <p class="a-muted text-xs mt-0.5">5 × 3 reps · progresivo</p>
           </div>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <button class="ex-check" aria-label="Marcar hecho" onclick="event.preventDefault();event.stopPropagation();this.closest('a').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
         </a>
         <a href="detalle-ejercicio.html" class="arow px-4" style="text-decoration:none">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(62,123,250,.10)">
@@ -184,7 +195,7 @@
             <p class="text-sm font-semibold text-ink-900">Pull-up kipping</p>
             <p class="a-muted text-xs mt-0.5">Práctica de activación</p>
           </div>
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-300)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <button class="ex-check" aria-label="Marcar hecho" onclick="event.preventDefault();event.stopPropagation();this.closest('a').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
         </a>
       </div>
     </div>
@@ -258,9 +269,24 @@
       </div>
     </div>
 
-    <!-- Mini leaderboard -->
+    <!-- Mini leaderboard — se abre al registrar resultado -->
     <div>
-      <p class="a-eyebrow mb-2.5">Leaderboard de la clase</p>
+      <div class="flex items-center justify-between mb-2.5">
+        <p class="a-eyebrow">Leaderboard de la clase</p>
+        <button class="a-muted" style="font-size:10px;text-transform:uppercase;letter-spacing:.04em;background:none;border:none;cursor:pointer;text-decoration:underline" onclick="document.getElementById('lb-locked').style.display='none';document.getElementById('lb-real').style.display=''">demo: ya registré</button>
+      </div>
+
+      <!-- Bloqueado hasta registrar resultado -->
+      <div id="lb-locked" class="acard acard-pad" style="text-align:center;padding:28px 20px">
+        <span class="w-11 h-11 rounded-2xl grid place-items-center mx-auto mb-2.5" style="background:var(--fj-ink-100)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </span>
+        <p class="text-sm font-semibold text-ink-900">Registra tu resultado para ver el leaderboard</p>
+        <p class="a-muted text-xs mt-1.5" style="max-width:280px;margin:0 auto">El ranking de la clase se abre cuando anotas tu marca — así nadie ve los tiempos antes de cerrar el WOD.</p>
+      </div>
+
+      <!-- Leaderboard real (visible tras registrar) -->
+      <div id="lb-real" style="display:none">
       <div class="acard" style="overflow:hidden">
 
         <!-- #1 Oro -->
@@ -295,6 +321,7 @@
           <span class="text-xs text-ink-400">Sin resultado</span>
         </div>
       </div>
+      </div><!-- /#lb-real -->
     </div>
 
     </div><!-- /#wod-content -->
