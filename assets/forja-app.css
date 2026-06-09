@@ -76,13 +76,18 @@ body{background:var(--fj-ink-100);}
 .a-btn-primary:active{background:var(--fj-brand-600);}
 .a-btn-ghost{background:var(--fj-surface);border:1px solid var(--fj-ink-200);color:var(--fj-ink-800);}
 
-/* hero de sesión / WOD (oscuro siempre, identidad — sin banda de un lado) */
-.a-hero{background:#14171D;border-radius:20px;color:#fff;overflow:hidden;}
-[data-theme="dark"] .a-hero{background:#1C2026;border:1px solid #2C313A;}
-/* el hero es oscuro SIEMPRE → elementos basados en tokens van forzados a claro */
-.a-hero .fj-tag-rx{border-color:rgba(255,255,255,.28);color:rgba(255,255,255,.82);}
-.a-hero .a-muted,.a-hero .a-sub{color:rgba(255,255,255,.6);}
-.a-hero .fj-badge-neutral{background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);}
+/* hero de sesión / WOD — sigue el tema (card clara en claro, oscura en dark).
+   Variables "on-hero" para tints/líneas que flipean con el tema. */
+.a-hero{
+  background:var(--fj-surface);border:1px solid var(--fj-ink-200);border-radius:20px;
+  color:var(--fj-ink-900);overflow:hidden;
+  --hero-tint:rgba(0,0,0,.04); --hero-line:var(--fj-ink-200); --hero-dim:var(--fj-ink-300);
+}
+[data-theme="dark"] .a-hero{
+  background:#1C2026;border-color:#2C313A;
+  --hero-tint:rgba(255,255,255,.07); --hero-line:rgba(255,255,255,.1); --hero-dim:rgba(255,255,255,.3);
+}
+.a-hero .text-white{color:var(--fj-ink-900);}
 
 /* segment / tabs internos */
 .a-seg{display:flex;background:var(--fj-ink-100);border-radius:99px;padding:4px;gap:4px;}

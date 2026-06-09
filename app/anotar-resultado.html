@@ -214,32 +214,32 @@
         <div class="flex items-start justify-between gap-3 mb-4">
           <div>
             <p class="font-display font-bold text-3xl text-white leading-none">Cindy</p>
-            <p class="text-sm mt-1.5" style="color:#B6BCC8">Benchmark WOD · CrossFit</p>
+            <p class="text-sm mt-1.5" style="color:var(--fj-ink-400)">Benchmark WOD · CrossFit</p>
           </div>
           <div class="flex flex-col items-end gap-2">
             <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
-            <span class="font-mono text-sm font-bold" style="color:#B6BCC8">20 min</span>
+            <span class="font-mono text-sm font-bold" style="color:var(--fj-ink-400)">20 min</span>
           </div>
         </div>
 
         <!-- Divisor -->
-        <div style="height:1px;background:rgba(255,255,255,.1);margin-bottom:14px"></div>
+        <div style="height:1px;background:var(--hero-line);margin-bottom:14px"></div>
 
         <!-- Movimientos compactos -->
         <div class="flex items-center gap-2 flex-wrap">
-          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.07)">
+          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:var(--hero-tint)">
             <span class="font-mono font-bold text-base text-white leading-none">5</span>
             <span class="text-sm font-semibold text-white">Pull-up</span>
             <span class="fj-tag-rx" style="height:17px;font-size:9px">Rx</span>
           </div>
-          <span style="color:rgba(255,255,255,.25)">·</span>
-          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.07)">
+          <span style="color:var(--hero-dim)">·</span>
+          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:var(--hero-tint)">
             <span class="font-mono font-bold text-base text-white leading-none">10</span>
             <span class="text-sm font-semibold text-white">Push-up</span>
             <span class="fj-tag-rx" style="height:17px;font-size:9px">Rx</span>
           </div>
-          <span style="color:rgba(255,255,255,.25)">·</span>
-          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(255,255,255,.07)">
+          <span style="color:var(--hero-dim)">·</span>
+          <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:var(--hero-tint)">
             <span class="font-mono font-bold text-base text-white leading-none">15</span>
             <span class="text-sm font-semibold text-white">Air squat</span>
             <span class="fj-tag-rx" style="height:17px;font-size:9px">Rx</span>
@@ -248,72 +248,83 @@
       </div>
     </div>
 
-    <!-- 2. Escala -->
-    <div class="acard acard-pad">
-      <p class="a-eyebrow mb-2.5">Escala</p>
-      <div class="a-seg" role="tablist" id="seg-escala">
-        <button role="tab" aria-selected="true" class="a-seg-label" onclick="selectSeg('seg-escala',this)">Rx</button>
-        <button role="tab" aria-selected="false" class="a-seg-label" onclick="selectSeg('seg-escala',this)">Scaled</button>
-      </div>
-      <!-- Nota escala activa -->
-      <p class="a-muted text-xs mt-3" id="escala-hint" style="display:flex;align-items:center;gap:6px">
-        <span class="fj-tag-rx" style="font-size:10px;height:18px">Rx</span>
-        Realizaste el WOD con los movimientos y cargas prescritas.
-      </p>
-    </div>
-
-    <!-- 3. Tu resultado -->
+    <!-- 2. Tu resultado — adaptado al formato del WOD -->
     <div class="acard acard-pad">
       <div class="flex items-center justify-between mb-4">
         <p class="a-h text-base">Tu resultado</p>
-        <span class="fj-fmt fj-fmt-amrap" style="font-size:10px;height:22px">AMRAP</span>
+        <span id="fmt-badge" class="fj-fmt fj-fmt-amrap" style="font-size:10px;height:22px">AMRAP</span>
       </div>
 
-      <!-- Rondas completas — stepper grande -->
-      <div class="mb-5">
-        <p class="a-eyebrow mb-3">Rondas completas</p>
-        <div class="fj-stepper">
-          <button class="fj-stepper-btn" onclick="stepperChange('rondas', -1)" aria-label="Menos">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </button>
-          <div id="rondas-val" class="fj-stepper-val">14</div>
-          <button class="fj-stepper-btn" onclick="stepperChange('rondas', 1)" aria-label="Más">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          </button>
+      <!-- ░░ Vista AMRAP: rondas + reps (cuántas alcanzaste en el tiempo) ░░ -->
+      <div id="view-amrap">
+        <div class="mb-5">
+          <p class="a-eyebrow mb-3">Rondas completas</p>
+          <div class="fj-stepper">
+            <button class="fj-stepper-btn" onclick="stepperChange('rondas', -1)" aria-label="Menos">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div id="rondas-val" class="fj-stepper-val">14</div>
+            <button class="fj-stepper-btn" onclick="stepperChange('rondas', 1)" aria-label="Más">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+          <p class="a-muted text-xs text-center mt-2" id="rondas-hint">= 14 rds × 30 reps</p>
         </div>
-        <p class="a-muted text-xs text-center mt-2">= 14 rds × 30 reps</p>
+        <div class="mb-1">
+          <p class="a-eyebrow mb-2">Reps extra <span class="text-ink-400 font-normal normal-case">(ronda incompleta)</span></p>
+          <input type="number" inputmode="numeric" class="fj-input-num" id="reps-extra" placeholder="0" min="0" max="29" value="7" oninput="updateTotal()"/>
+        </div>
       </div>
 
-      <!-- Reps extra -->
-      <div class="mb-1">
-        <p class="a-eyebrow mb-2">Reps extra <span class="text-ink-400 font-normal normal-case">(ronda incompleta)</span></p>
-        <input
-          type="number"
-          inputmode="numeric"
-          class="fj-input-num"
-          id="reps-extra"
-          placeholder="0"
-          min="0"
-          max="29"
-          value="7"
-          oninput="updateTotal()"
-        />
+      <!-- ░░ Vista For Time: ¿terminaste dentro del tiempo? ░░ -->
+      <div id="view-fortime" style="display:none">
+        <p class="a-eyebrow mb-2.5">¿Completaste el WOD dentro del tiempo?</p>
+        <div class="a-seg" role="tablist" id="seg-done">
+          <button role="tab" aria-selected="true" class="a-seg-label" onclick="setDone(true,this)">Sí, lo terminé</button>
+          <button role="tab" aria-selected="false" class="a-seg-label" onclick="setDone(false,this)">No alcancé</button>
+        </div>
+
+        <!-- terminó → tiempo final -->
+        <div id="ft-time" class="mt-4">
+          <p class="a-eyebrow mb-2">¿En cuánto lo cerraste?</p>
+          <input type="text" inputmode="numeric" class="fj-input-num" id="time-input" placeholder="mm:ss" value="12:34" oninput="updateTotal()"/>
+          <p class="a-muted text-xs mt-2" style="display:flex;align-items:center;gap:6px">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Terminaste todas las rondas — se registra qué tan rápido.
+          </p>
+        </div>
+
+        <!-- no alcanzó → rondas + reps logradas (cap) -->
+        <div id="ft-rounds" class="mt-4" style="display:none">
+          <p class="a-eyebrow mb-2">¿Hasta dónde llegaste? <span class="text-ink-400 font-normal normal-case">(rondas + reps al cierre)</span></p>
+          <div class="fj-stepper">
+            <button class="fj-stepper-btn" onclick="stepperChange('rondas', -1)" aria-label="Menos">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div id="rondas-val-ft" class="fj-stepper-val">5</div>
+            <button class="fj-stepper-btn" onclick="stepperChange('rondas', 1)" aria-label="Más">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+          <input type="number" inputmode="numeric" class="fj-input-num mt-3" id="reps-extra-ft" placeholder="reps extra" min="0" value="3" oninput="updateTotal()"/>
+          <p class="a-muted text-xs mt-2">No terminaste en el tiempo cap — se registra cuánto avanzaste.</p>
+        </div>
       </div>
 
-      <!-- Total calculado -->
+      <!-- Total calculado (común) -->
       <div class="flex items-center justify-between mt-4 px-1">
         <p class="text-sm font-semibold text-ink-600">Score total</p>
         <p class="font-mono font-bold text-xl" style="color:var(--fj-brand)" id="score-total">14 rds + 7 reps</p>
       </div>
 
-      <!-- Hint formato for time (comentado en código) -->
-      <!--
-        Si el WOD fuera For Time, el resultado sería un input de tiempo mm:ss.
-        <div class="fj-fmt-hint">
-          <span class="fj-fmt fj-fmt-fortime" style="font-size:10px;height:22px">For Time</span>
-          <input type="text" class="fj-input" placeholder="mm:ss" inputmode="numeric" />
+      <!-- Switch de formato (solo demo, para ver ambas vistas) -->
+      <div class="mt-4 pt-3" style="border-top:1px solid var(--fj-ink-100);display:flex;align-items:center;gap:8px;justify-content:center">
+        <span class="a-muted text-[10px] uppercase tracking-wide">Demo · formato del WOD</span>
+        <div class="a-seg" role="tablist" id="seg-fmt" style="flex:0 0 auto;width:auto">
+          <button role="tab" aria-selected="true" class="a-seg-label" style="padding:4px 12px" onclick="setFormat('amrap',this)">AMRAP</button>
+          <button role="tab" aria-selected="false" class="a-seg-label" style="padding:4px 12px" onclick="setFormat('fortime',this)">For Time</button>
         </div>
-      -->
+      </div>
     </div>
 
     <!-- 4. RPE — cómo te sentiste -->
@@ -440,29 +451,57 @@
 </div>
 
 <script>
-/* Stepper rondas */
+/* Estado del resultado — depende del formato del WOD */
+var format = 'amrap';   // 'amrap' | 'fortime'
+var done = true;        // solo for time: ¿terminó dentro del cap?
 var rondas = 14;
+
 function stepperChange(id, delta) {
   if (id === 'rondas') {
     rondas = Math.max(0, rondas + delta);
     document.getElementById('rondas-val').textContent = rondas;
+    var ft = document.getElementById('rondas-val-ft');
+    if (ft) ft.textContent = rondas;
     updateTotal();
   }
 }
 
+function setFormat(fmt, btn) {
+  format = fmt;
+  document.querySelectorAll('#seg-fmt [role="tab"]').forEach(function(b){ b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+  document.getElementById('view-amrap').style.display    = (fmt === 'amrap')   ? '' : 'none';
+  document.getElementById('view-fortime').style.display  = (fmt === 'fortime') ? '' : 'none';
+  var badge = document.getElementById('fmt-badge');
+  badge.className = 'fj-fmt ' + (fmt === 'amrap' ? 'fj-fmt-amrap' : 'fj-fmt-fortime');
+  badge.style.cssText = 'font-size:10px;height:22px';
+  badge.textContent = (fmt === 'amrap') ? 'AMRAP' : 'For Time';
+  updateTotal();
+}
+
+function setDone(d, btn) {
+  done = d;
+  document.querySelectorAll('#seg-done [role="tab"]').forEach(function(b){ b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+  document.getElementById('ft-time').style.display   = d ? '' : 'none';
+  document.getElementById('ft-rounds').style.display = d ? 'none' : '';
+  updateTotal();
+}
+
 function updateTotal() {
-  var extra = parseInt(document.getElementById('reps-extra').value, 10) || 0;
-  extra = Math.min(extra, 29); // max 29 reps (30 = ronda completa)
   var el = document.getElementById('score-total');
-  if (extra > 0) {
-    el.textContent = rondas + ' rds + ' + extra + ' reps';
+  if (format === 'amrap') {
+    var extra = Math.min(parseInt(document.getElementById('reps-extra').value, 10) || 0, 29);
+    el.textContent = extra > 0 ? (rondas + ' rds + ' + extra + ' reps') : (rondas + ' rds');
+    var hint = document.getElementById('rondas-hint');
+    if (hint) hint.textContent = '= ' + rondas + ' rds × 30 reps';
+  } else if (done) {
+    // terminó → el resultado es el TIEMPO
+    var t = (document.getElementById('time-input').value || '').trim();
+    el.textContent = t ? (t + ' ⏱') : '—';
   } else {
-    el.textContent = rondas + ' rds';
+    // no alcanzó → rondas + reps logradas al cap
+    var ex = Math.max(parseInt(document.getElementById('reps-extra-ft').value, 10) || 0, 0);
+    el.textContent = ex > 0 ? (rondas + ' rds + ' + ex + ' reps') : (rondas + ' rds');
   }
-  // Actualizar hint debajo del stepper
-  var total = rondas * 30;
-  var hint = document.querySelector('.a-muted.text-xs.text-center');
-  if (hint) hint.textContent = '= ' + rondas + ' rds × 30 reps';
 }
 
 /* RPE */
@@ -487,23 +526,6 @@ function selectRpe(val) {
   document.getElementById('rpe-desc').textContent = rpeDescriptions[val] || '';
 }
 
-/* Escala seg */
-function selectSeg(id, btn) {
-  var seg = document.getElementById(id);
-  seg.querySelectorAll('[role="tab"]').forEach(function(b) {
-    b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
-  });
-  var isRx = btn.textContent.trim() === 'Rx';
-  var hint = document.getElementById('escala-hint');
-  if (hint) {
-    if (isRx) {
-      hint.innerHTML = '<span class="fj-tag-rx" style="font-size:10px;height:18px">Rx</span> Realizaste el WOD con los movimientos y cargas prescritas.';
-    } else {
-      hint.innerHTML = '<span class="fj-badge fj-badge-neutral" style="font-size:10px;height:18px">Scaled</span> Modificaste algún movimiento o carga. Igual cuenta y suma XP.';
-    }
-  }
-}
-
 /* Char count textarea */
 function updateCharCount(el) {
   var count = el.value.length;
@@ -521,8 +543,9 @@ function guardarResultado() {
   }, 900);
 }
 
-/* Init char count */
+/* Init */
 updateCharCount(document.getElementById('nota-wod'));
+document.getElementById('rondas-val-ft').textContent = rondas;
 </script>
 </body>
 </html>
