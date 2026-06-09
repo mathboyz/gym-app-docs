@@ -13,6 +13,14 @@
 <link rel="stylesheet" href="../assets/forja.css">
 <link rel="stylesheet" href="../assets/forja-app.css">
 <script src="../assets/forja-app.js"></script>
+<style>
+  /* Barra de peso fija abajo — siempre visible. Separación por sombra (sin borde de un lado). */
+  .weight-bar{position:sticky;bottom:0;left:0;right:0;margin:0 -16px -16px;padding:12px 16px 18px;
+    background:var(--fj-surface);box-shadow:0 -10px 24px -10px rgba(0,0,0,.16);z-index:10;}
+  .wb-step{width:34px;height:34px;border-radius:10px;border:1px solid var(--fj-ink-200);background:var(--fj-surface);
+    display:flex;align-items:center;justify-content:center;color:var(--fj-ink-600);cursor:pointer;flex-shrink:0;}
+  .wb-step:active{background:var(--fj-ink-100);}
+</style>
 </head>
 <body>
 <div class="app-frame">
@@ -109,18 +117,17 @@
     <!-- Mi PR -->
     <div>
       <p class="a-eyebrow mb-2.5">Mi récord personal</p>
-      <div class="acard acard-pad" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.22)">
-        <div class="flex items-center justify-between gap-4">
+      <div class="acard" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.22);padding:20px">
+        <div class="flex items-start justify-between gap-4 mb-4">
           <div>
-            <p class="a-muted text-xs mb-1">1RM estimado</p>
-            <div class="flex items-baseline gap-1">
-              <span class="font-mono font-bold text-ink-900 leading-none" style="font-size:44px">63</span>
+            <p class="a-muted text-xs mb-2">1RM estimado</p>
+            <div class="flex items-baseline gap-1.5">
+              <span class="font-mono font-bold text-ink-900 leading-none" style="font-size:46px">63</span>
               <span class="font-mono text-xl text-ink-400 font-medium">kg</span>
             </div>
-            <p class="text-xs text-ink-500 mt-1.5">Hoy entrenas con <span class="font-bold text-ink-700">43 kg</span> · <span class="font-mono">68%</span> 1RM</p>
+            <p class="text-xs text-ink-400 mt-1.5 font-mono">≈ 139 lb</p>
           </div>
-          <div class="flex flex-col items-end gap-2.5 shrink-0">
-            <!-- Badge tier Oro -->
+          <div class="flex flex-col items-end gap-2 shrink-0">
             <div class="flex items-center gap-1.5 rounded-full px-3 py-1.5" style="background:rgba(236,192,74,.15);border:1px solid rgba(236,192,74,.35)">
               <span class="w-2.5 h-2.5 rounded-full shrink-0" style="background:#ECC04A"></span>
               <span class="text-xs font-bold" style="color:var(--tier-gold)">Tier Oro</span>
@@ -128,6 +135,9 @@
             <p class="text-xs text-ink-400">Logrado el 3 may</p>
           </div>
         </div>
+        <!-- separador suave -->
+        <div style="height:1px;background:rgba(251,82,21,.18);margin-bottom:14px"></div>
+        <p class="text-sm text-ink-600">Hoy entrenas con <span class="font-bold text-ink-900">43 kg</span> <span class="text-ink-400 font-mono text-xs">(95 lb)</span> · <span class="font-mono">68%</span> de tu 1RM</p>
       </div>
     </div>
 
@@ -175,7 +185,55 @@
       </div>
     </div>
 
+    <!-- Barra de peso fija: editable, conversión kg/lb, guardar + marcar listo -->
+    <div class="weight-bar">
+      <div class="flex items-center gap-3">
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-1.5 mb-1.5">
+            <p class="a-eyebrow" style="margin:0">Tu peso de trabajo</p>
+            <span class="a-muted text-[10px]">· anterior <span class="font-mono font-semibold">40 kg</span></span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <button class="wb-step" onclick="wbChange(-2.5)" aria-label="Bajar 2.5 kg">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+            <div class="flex items-baseline gap-1">
+              <span id="wb-val" class="font-mono font-bold text-ink-900 leading-none" style="font-size:28px">43</span>
+              <span class="font-mono text-ink-400 text-sm" id="wb-unit">kg</span>
+              <span id="wb-conv" class="font-mono text-ink-400 text-xs ml-1.5">≈ 95 lb</span>
+            </div>
+            <button class="wb-step" onclick="wbChange(2.5)" aria-label="Subir 2.5 kg">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+        <button class="a-btn a-btn-primary" id="wb-done" onclick="guardarHecho()" style="width:auto;padding:0 16px;height:48px;flex-shrink:0;gap:6px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Guardar y listo
+        </button>
+      </div>
+    </div>
+
   </main>
 </div>
+<script>
+  var wKg = 43; // peso de trabajo en kg (fuente de verdad)
+  var unit = 'kg'; // preferencia (vendría del backoffice); 'kg' | 'lb'
+  function fmtLb(kg){ return Math.round(kg * 2.20462); }
+  function renderWeight(){
+    var val = document.getElementById('wb-val'), u = document.getElementById('wb-unit'), conv = document.getElementById('wb-conv');
+    if (unit === 'kg'){ val.textContent = wKg; u.textContent = 'kg'; conv.textContent = '≈ ' + fmtLb(wKg) + ' lb'; }
+    else { val.textContent = fmtLb(wKg); u.textContent = 'lb'; conv.textContent = '≈ ' + wKg + ' kg'; }
+  }
+  function wbChange(d){ wKg = Math.max(0, Math.round((wKg + d) * 2) / 2); renderWeight(); }
+  function guardarHecho(){
+    var b = document.getElementById('wb-done');
+    b.style.background = 'var(--fj-success)';
+    b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Hecho';
+    b.disabled = true;
+    window.ForjaApp && ForjaApp.toast('Guardado: ' + (unit==='kg'? wKg+' kg' : fmtLb(wKg)+' lb') + ' · ejercicio listo ✓');
+  }
+  renderWeight();
+</script>
 </body>
 </html>
