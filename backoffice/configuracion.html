@@ -90,6 +90,9 @@
         <button class="cfg-nav-item" data-tab="pagos" aria-current="false">
           <span class="cfg-nav-dot"></span>Métodos de pago
         </button>
+        <button class="cfg-nav-item" data-tab="gamificacion" aria-current="false">
+          <span class="cfg-nav-dot"></span>Puntos & niveles
+        </button>
       </div>
 
       <!-- Content area -->
@@ -477,6 +480,107 @@
               </div>
 
             </div>
+          </div>
+        </div>
+
+        <!-- PANEL: Gamificación · Puntos & niveles -->
+        <div class="cfg-panel" data-panel="gamificacion">
+          <div class="fj-panel p-6">
+            <p class="fj-eyebrow mb-1">Gamificación</p>
+            <h2 class="fj-section-h mb-1">Puntos & niveles</h2>
+            <p class="text-sm text-ink-400 mb-5">Define la economía del box: cuántos puntos se ofrecen, qué XP da cada acción y los umbrales de cada tier. Esto acota lo que un atleta puede poner en juego en duelos y competencias.</p>
+
+            <!-- Puntos a ofrecer -->
+            <div class="mb-6">
+              <h3 class="text-sm font-semibold text-ink-900 mb-1">Puntos a ofrecer</h3>
+              <p class="text-xs text-ink-400 mb-3">Valores disponibles al crear un duelo o competencia. El atleta solo puede elegir entre estos.</p>
+              <div class="flex flex-wrap gap-2 mb-3" id="pts-chips">
+                <button type="button" class="fj-pill" aria-selected="true" onclick="this.setAttribute('aria-selected',this.getAttribute('aria-selected')==='true'?'false':'true')">50</button>
+                <button type="button" class="fj-pill" aria-selected="true" onclick="this.setAttribute('aria-selected',this.getAttribute('aria-selected')==='true'?'false':'true')">100</button>
+                <button type="button" class="fj-pill" aria-selected="true" onclick="this.setAttribute('aria-selected',this.getAttribute('aria-selected')==='true'?'false':'true')">150</button>
+                <button type="button" class="fj-pill" aria-selected="true" onclick="this.setAttribute('aria-selected',this.getAttribute('aria-selected')==='true'?'false':'true')">250</button>
+                <button type="button" class="fj-pill" aria-selected="false" onclick="this.setAttribute('aria-selected',this.getAttribute('aria-selected')==='true'?'false':'true')">500</button>
+                <button type="button" class="fj-pill" aria-selected="false" onclick="this.setAttribute('aria-selected',this.getAttribute('aria-selected')==='true'?'false':'true')">1000</button>
+              </div>
+              <p class="text-xs text-ink-400">Toca para activar/desactivar cada valor. <span class="font-mono text-ink-600">Resaltado = disponible</span>.</p>
+            </div>
+
+            <!-- Tope de apuesta en duelos -->
+            <div class="mb-6 grid grid-cols-2 gap-4 fj-form-w">
+              <div>
+                <label class="fj-label">Apuesta mínima en duelos</label>
+                <input class="fj-input fj-mono" value="50" inputmode="numeric">
+              </div>
+              <div>
+                <label class="fj-label">Apuesta máxima en duelos</label>
+                <input class="fj-input fj-mono" value="250" inputmode="numeric">
+              </div>
+            </div>
+
+            <!-- XP por actividad -->
+            <div class="mb-6">
+              <h3 class="text-sm font-semibold text-ink-900 mb-3">XP por actividad</h3>
+              <div class="fj-list">
+                <div class="fj-row-static">
+                  <span class="flex-1 text-sm text-ink-700">Reservar y asistir a una clase</span>
+                  <input class="fj-input fj-mono" value="50" style="width:90px;text-align:right" inputmode="numeric">
+                  <span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+                <div class="fj-row-static">
+                  <span class="flex-1 text-sm text-ink-700">Anotar resultado de WOD</span>
+                  <input class="fj-input fj-mono" value="100" style="width:90px;text-align:right" inputmode="numeric">
+                  <span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+                <div class="fj-row-static">
+                  <span class="flex-1 text-sm text-ink-700">Ganar un duelo</span>
+                  <input class="fj-input fj-mono" value="200" style="width:90px;text-align:right" inputmode="numeric">
+                  <span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+                <div class="fj-row-static">
+                  <span class="flex-1 text-sm text-ink-700">Racha de 7 días seguidos</span>
+                  <input class="fj-input fj-mono" value="150" style="width:90px;text-align:right" inputmode="numeric">
+                  <span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Umbrales de tier -->
+            <div>
+              <h3 class="text-sm font-semibold text-ink-900 mb-3">Umbrales de tier</h3>
+              <div class="fj-list">
+                <div class="fj-row-static">
+                  <span class="fj-dot" style="background:var(--tier-bronze)"></span>
+                  <span class="flex-1 text-sm font-semibold text-ink-800">Bronce</span>
+                  <span class="text-xs text-ink-400 mr-2">desde</span>
+                  <input class="fj-input fj-mono" value="0" style="width:100px;text-align:right" inputmode="numeric"><span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+                <div class="fj-row-static">
+                  <span class="fj-dot" style="background:var(--tier-silver)"></span>
+                  <span class="flex-1 text-sm font-semibold text-ink-800">Plata</span>
+                  <span class="text-xs text-ink-400 mr-2">desde</span>
+                  <input class="fj-input fj-mono" value="1.000" style="width:100px;text-align:right" inputmode="numeric"><span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+                <div class="fj-row-static">
+                  <span class="fj-dot" style="background:var(--tier-gold)"></span>
+                  <span class="flex-1 text-sm font-semibold text-ink-800">Oro</span>
+                  <span class="text-xs text-ink-400 mr-2">desde</span>
+                  <input class="fj-input fj-mono" value="2.000" style="width:100px;text-align:right" inputmode="numeric"><span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+                <div class="fj-row-static">
+                  <span class="fj-dot" style="background:var(--tx-teal)"></span>
+                  <span class="flex-1 text-sm font-semibold text-ink-800">Platino</span>
+                  <span class="text-xs text-ink-400 mr-2">desde</span>
+                  <input class="fj-input fj-mono" value="3.500" style="width:100px;text-align:right" inputmode="numeric"><span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+                <div class="fj-row-static">
+                  <span class="fj-dot" style="background:var(--tx-purple)"></span>
+                  <span class="flex-1 text-sm font-semibold text-ink-800">Diamante</span>
+                  <span class="text-xs text-ink-400 mr-2">desde</span>
+                  <input class="fj-input fj-mono" value="5.500" style="width:100px;text-align:right" inputmode="numeric"><span class="text-xs text-ink-400 ml-2">XP</span>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
 
