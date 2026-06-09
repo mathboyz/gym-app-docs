@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="../assets/forja.css">
 <link rel="stylesheet" href="../assets/forja-app.css">
 <script src="../assets/forja-app.js"></script>
+<style>
+  /* Footer fijo de reserva — separación por sombra, sin borde de un solo lado */
+  .fj-footer-fixed{position:sticky;bottom:0;left:0;right:0;padding:12px 16px 20px;
+    background:var(--fj-surface);box-shadow:0 -10px 22px -10px rgba(0,0,0,.14);z-index:10;}
+</style>
 </head>
 <body>
 <div class="app-frame">
@@ -48,6 +53,52 @@
         </div>
       </div>
     </div>
+
+    <!-- Quiénes van -->
+    <div class="acard acard-pad">
+      <div class="flex items-center justify-between mb-3">
+        <p class="a-eyebrow">Quiénes van</p>
+        <span class="a-muted text-xs">11 reservados · <span style="color:var(--fj-success);font-weight:600">1 cupo</span></span>
+      </div>
+      <div class="flex items-center">
+        <div style="display:flex">
+          <div class="a-av w-9 h-9 text-xs" style="background:linear-gradient(135deg,#FF9E78,#FB5215);box-shadow:0 0 0 2px var(--fj-surface)">PD</div>
+          <div class="a-av w-9 h-9 text-xs" style="background:linear-gradient(135deg,#93C5FD,#3B82F6);box-shadow:0 0 0 2px var(--fj-surface);margin-left:-8px">CS</div>
+          <div class="a-av w-9 h-9 text-xs" style="background:linear-gradient(135deg,#6EE7B7,#059669);box-shadow:0 0 0 2px var(--fj-surface);margin-left:-8px">JN</div>
+          <div class="a-av w-9 h-9 text-xs" style="background:linear-gradient(135deg,#C4B5FD,#7C3AED);box-shadow:0 0 0 2px var(--fj-surface);margin-left:-8px">KV</div>
+          <div class="a-av w-9 h-9 text-xs" style="background:linear-gradient(135deg,var(--fj-ink-300),var(--fj-ink-500));box-shadow:0 0 0 2px var(--fj-surface);margin-left:-8px">LM</div>
+          <div class="a-av w-9 h-9 text-xs" style="background:var(--fj-ink-100);color:var(--fj-ink-500);box-shadow:0 0 0 2px var(--fj-surface);margin-left:-8px">+6</div>
+        </div>
+        <div class="a-av w-9 h-9 text-xs" style="background:rgba(251,82,21,.12);color:var(--fj-brand);margin-left:10px;border:1.5px dashed var(--fj-brand)" title="Tú">MR</div>
+      </div>
+    </div>
+
+    <!-- Visibilidad del WOD (config del box) — demo toggle -->
+    <div class="acard acard-pad" style="padding-top:12px;padding-bottom:12px">
+      <div class="flex items-center gap-2">
+        <span class="a-muted text-[10px] uppercase tracking-wide flex-1">Demo · visibilidad del WOD que define el box</span>
+        <div class="a-seg" role="tablist" id="seg-vis" style="flex:0 0 auto;width:auto">
+          <button role="tab" aria-selected="true" class="a-seg-label" style="padding:4px 10px;font-size:11px" onclick="setVis('open',this)">Visible hoy</button>
+          <button role="tab" aria-selected="false" class="a-seg-label" style="padding:4px 10px;font-size:11px" onclick="setVis('locked',this)">Oculto hasta el día</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- WOD oculto (cuando el box no permite verlo antes del día) -->
+    <div id="wod-locked" class="acard acard-pad" style="display:none;text-align:center;padding:32px 20px">
+      <span class="w-12 h-12 rounded-2xl grid place-items-center mx-auto mb-3" style="background:var(--fj-ink-100)">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </span>
+      <p class="text-sm font-semibold text-ink-900">El WOD se revela el día de la clase</p>
+      <p class="a-muted text-xs mt-1.5" style="max-width:280px;margin-left:auto;margin-right:auto">Forja Box revela el entrenamiento dentro de las 24 h previas. Igual puedes reservar tu cupo ahora.</p>
+      <p class="a-muted text-xs mt-3" style="display:inline-flex;align-items:center;gap:6px">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Se revela en 14 h
+      </p>
+    </div>
+
+    <!-- Contenido del WOD (visible el mismo día) -->
+    <div id="wod-content" class="space-y-4">
 
     <!-- Nota del coach -->
     <div class="acard acard-pad" style="background:rgba(251,82,21,.07);border-color:rgba(251,82,21,.22)">
@@ -246,7 +297,42 @@
       </div>
     </div>
 
+    </div><!-- /#wod-content -->
+
+    <!-- Footer fijo: reservar / confirmar cupo -->
+    <div class="fj-footer-fixed" id="rsv-footer" style="margin:0 -16px -16px">
+      <button class="a-btn a-btn-primary" id="rsv-btn" onclick="reservar()" style="gap:8px">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Reservar mi cupo
+      </button>
+    </div>
+
   </main>
 </div>
+<script>
+  function setVis(state, btn) {
+    document.querySelectorAll('#seg-vis [role="tab"]').forEach(function(b){ b.setAttribute('aria-selected', b === btn ? 'true' : 'false'); });
+    document.getElementById('wod-content').style.display = state === 'open' ? '' : 'none';
+    document.getElementById('wod-locked').style.display  = state === 'open' ? 'none' : '';
+  }
+  // Estado de reserva: reservar → confirmar → confirmada
+  var rsvState = 0;
+  function reservar() {
+    var btn = document.getElementById('rsv-btn');
+    if (rsvState === 0) {
+      rsvState = 1;
+      btn.className = 'a-btn a-btn-ghost';
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Confirmar asistencia';
+      window.ForjaApp && ForjaApp.toast('Cupo reservado ✓ Confirma el día de la clase');
+    } else if (rsvState === 1) {
+      rsvState = 2;
+      btn.className = 'a-btn a-btn-primary';
+      btn.style.background = 'var(--fj-success)';
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Asistencia confirmada';
+      btn.disabled = true;
+      window.ForjaApp && ForjaApp.toast('¡Listo! Te esperamos 💪');
+    }
+  }
+</script>
 </body>
 </html>

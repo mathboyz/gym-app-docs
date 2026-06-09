@@ -71,9 +71,25 @@
           <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
           <span class="text-sm font-semibold">"15 min · Cindy"</span>
         </div>
-        <a href="ver-clase.html" class="a-btn a-btn-primary mt-4">Ver la clase</a>
+        <!-- Reservada → confirma tu asistencia -->
+        <div class="flex items-center gap-1.5 mt-4 mb-2.5" style="color:var(--tx-green)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          <span class="text-xs font-semibold">Reservada · confirma tu asistencia</span>
+        </div>
+        <div class="flex gap-2">
+          <button class="a-btn a-btn-primary" id="hoy-confirm" onclick="confirmarHoy(this)" style="flex:1">Confirmar asistencia</button>
+          <a href="ver-clase.html" class="a-btn a-btn-ghost" style="flex:0 0 auto;width:auto;padding:0 16px">Ver la clase</a>
+        </div>
       </div>
     </div>
+    <script>
+      function confirmarHoy(btn){
+        btn.style.background='var(--fj-success)';
+        btn.textContent='Asistencia confirmada ✓';
+        btn.disabled=true;
+        window.ForjaApp && ForjaApp.toast('¡Confirmada! Te esperamos a las 09:00 💪');
+      }
+    </script>
 
     <!-- Misión del día -->
     <div class="acard acard-pad">
