@@ -91,7 +91,7 @@ body{background:var(--fj-ink-100);}
 
 /* segment / tabs internos */
 .a-seg{display:flex;background:var(--fj-ink-100);border-radius:99px;padding:4px;gap:4px;}
-.a-seg > *{flex:1;text-align:center;padding:8px;border-radius:99px;font-size:13px;font-weight:600;color:var(--fj-ink-500);cursor:pointer;}
+.a-seg > *{flex:1;text-align:center;padding:8px 6px;border-radius:99px;font-size:13px;font-weight:600;color:var(--fj-ink-500);cursor:pointer;white-space:nowrap;}
 .a-seg > [aria-selected="true"]{background:var(--fj-surface);color:var(--fj-ink-900);box-shadow:0 1px 3px rgba(0,0,0,.08);}
 
 /* --------------------------------------------------------------------------- AUTH (login/activar/recuperar) — sin tab bar */
