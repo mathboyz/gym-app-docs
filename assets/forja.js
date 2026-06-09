@@ -250,6 +250,60 @@
     }
   };
 
-  window.Forja = { initChrome, SaveBar, Drawer, DnD, svg };
+  /* ---- Toast + feedback genérico para acciones de mockup ------------------- */
+  function toast(msg) {
+    let w = document.querySelector('.fj-toast-wrap');
+    if (!w) { w = document.createElement('div'); w.className = 'fj-toast-wrap'; document.body.appendChild(w); }
+    const t = document.createElement('div'); t.className = 'fj-toast'; t.textContent = msg; w.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateY(8px)'; setTimeout(() => t.remove(), 260); }, 2200);
+  }
+  const SKIP = '[data-fj-collapse],[data-fj-theme],[data-fj-notif],[data-fj-mark],[data-fj-close],[data-fj-save],[data-fj-discard],[data-on],.fj-pill,.cfg-nav-item,.rail-item,[data-tab],[data-sec],[data-range],[data-mod],[data-vis]';
+  function feedbackMsg(l) {
+    if (/^aprobar/i.test(l)) return 'Comprobante aprobado ✓';
+    if (/^rechazar/i.test(l)) return 'Comprobante rechazado';
+    if (/exportar/i.test(l)) return 'Exportando CSV…';
+    if (/subir|pegar|galer|video|c[áa]mara|cambiar foto/i.test(l)) return 'Archivo cargado (demo)';
+    if (/generar/i.test(l)) return 'Código generado';
+    if (/publicar/i.test(l)) return 'Publicado ✓';
+    if (/marcar asistencia/i.test(l)) return 'Asistencia marcada ✓';
+    if (/^editar/i.test(l)) return 'Editando… (demo)';
+    if (/^(eliminar|quitar|borrar)/i.test(l)) return 'Eliminado (demo)';
+    if (/^duplicar/i.test(l)) return 'Duplicado (demo)';
+    if (/opciones/i.test(l)) return 'Menú de opciones (demo)';
+    if (/^(\+|agregar|nueva|nuevo|añadir)/i.test(l)) return 'Agregado (demo)';
+    if (/filtr/i.test(l)) return 'Filtros aplicados (demo)';
+    if (/vista previa|previsualizar/i.test(l)) return 'Vista previa (demo)';
+    if (/^p[áa]gina/i.test(l) || /^\d+$/.test(l)) return 'Página ' + (l.replace(/\D/g, '') || '') + ' (demo)';
+    if (/dar de baja|cancelar/i.test(l)) return 'Hecho (demo)';
+    return 'Acción simulada (demo)';
+  }
+  document.addEventListener('click', e => {
+    const el = e.target.closest('a, button'); if (!el) return;
+    // swatches / toggles agrupados por aria-pressed (color, ícono…)
+    if (el.hasAttribute('aria-pressed') && !el.getAttribute('onclick')) {
+      const grp = el.parentElement;
+      grp && grp.querySelectorAll('[aria-pressed]').forEach(x => {
+        const on = x === el;
+        x.setAttribute('aria-pressed', on ? 'true' : 'false');
+        // el estado activo está hardcodeado en clases Tailwind; lo forzamos con !important
+        x.style.setProperty('border-color', on ? 'var(--fj-brand)' : 'var(--fj-ink-200)', 'important');
+        x.style.setProperty('background', on ? 'rgba(251,82,21,.10)' : 'transparent', 'important');
+      });
+      return;
+    }
+    if (el.getAttribute('onclick')) return;            // cableado inline
+    if (el.closest('a[href]:not([href="#"])')) return; // navegación real
+    if (el.closest('[onclick]')) return;               // dentro de fila/contenedor clickeable
+    if (el.closest('.fj-drawer')) return;              // botones de drawer (data-fj-close)
+    if (el.matches(SKIP)) return;                      // chrome/controles conocidos
+    if (el.matches('.fj-btn-primary') && el.closest('.fj-topbar')) return;
+    const href = el.getAttribute('href');
+    if (el.tagName === 'A' && href === '#') e.preventDefault();
+    const label = (el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s+/g, ' ');
+    if (/^(aprobar|rechazar)/i.test(label)) { const r = el.closest('tr'); if (r) { r.style.transition = 'opacity .3s'; r.style.opacity = '.35'; } }
+    toast(feedbackMsg(label));
+  });
+
+  window.Forja = { initChrome, SaveBar, Drawer, DnD, svg, toast };
   document.addEventListener('DOMContentLoaded', initChrome);
 })();

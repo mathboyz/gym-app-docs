@@ -34,6 +34,64 @@
       // sólo manejar switches SIN onclick propio (evita doble-toggle)
       if (sw && !sw.hasAttribute('onclick')) sw.setAttribute('aria-checked', sw.getAttribute('aria-checked') === 'true' ? 'false' : 'true');
     });
+
+    // selectores tipo chip (día, etc.) con estado hardcodeado inline → forzar visual
+    document.addEventListener('click', e => {
+      const pick = e.target.closest('[data-pick]');
+      if (!pick || pick.hasAttribute('onclick')) return;
+      const grp = pick.parentElement;
+      grp && grp.querySelectorAll('[data-pick]').forEach(x => {
+        const on = x === pick;
+        x.setAttribute('aria-selected', on ? 'true' : 'false');
+        x.style.setProperty('border', on ? '2px solid var(--fj-brand)' : '1px solid var(--fj-ink-200)', 'important');
+        x.style.setProperty('background', on ? 'rgba(251,82,21,.12)' : 'var(--fj-ink-100)', 'important');
+        x.querySelectorAll('span').forEach((s, i) => s.style.setProperty('color', on ? 'var(--fj-brand)' : (i === 0 ? 'var(--fj-ink-400)' : 'var(--fj-ink-700)'), 'important'));
+      });
+    });
+
+    // segments / pills / selectores sin handler propio → seleccionar en el grupo
+    document.addEventListener('click', e => {
+      const seg = e.target.closest('.a-seg > *, .fj-pill, [aria-selected]');
+      if (!seg || seg.hasAttribute('onclick') || seg.hasAttribute('data-pick')) return;
+      if (seg.closest('a[href]:not([href="#"])')) return;
+      const grp = seg.closest('.a-seg, .fj-pills') || seg.parentElement;
+      if (grp) grp.querySelectorAll('[aria-selected]').forEach(x => x.setAttribute('aria-selected', x === seg ? 'true' : 'false'));
+    });
+
+    // feedback genérico: cualquier botón/enlace-stub sin destino real → toast
+    function appMsg(l) {
+      if (/enviar|guardar resultado|inscrib|confirmar|^lanzar|registrar/i.test(l)) return '¡Listo! 🙌';
+      if (/reservar/i.test(l)) return 'Clase reservada ✓';
+      if (/aceptar|^retar|sumarme/i.test(l)) return 'Reto enviado ⚡';
+      if (/like|me gusta/i.test(l)) return '❤️';
+      if (/coment/i.test(l)) return 'Comentario enviado (demo)';
+      if (/compartir/i.test(l)) return 'Compartido (demo)';
+      if (/seguir/i.test(l)) return 'Siguiendo ✓';
+      if (/reproducir|^video/i.test(l)) return 'Reproduciendo… (demo)';
+      if (/galer|c[áa]mara|foto|adjuntar|subir/i.test(l)) return 'Archivo seleccionado (demo)';
+      if (/filtr/i.test(l)) return 'Filtros aplicados (demo)';
+      if (/m[áa]s opciones|opciones/i.test(l)) return 'Opciones (demo)';
+      if (/agregar|^\+|añadir|nueva|nuevo/i.test(l)) return 'Agregado (demo)';
+      if (/cancelar/i.test(l)) return 'Cancelado (demo)';
+      return 'Hecho (demo)';
+    }
+    document.addEventListener('click', e => {
+      const el = e.target.closest('a, button'); if (!el) return;
+      if (el.getAttribute('onclick')) return;
+      if (el.closest('a[href]:not([href="#"])')) return;
+      if (el.closest('[onclick]')) return;
+      if (el.matches('.a-switch,.a-seg > *,.fj-pill,.app-tab,[data-fj-close],[aria-selected],[data-pick]')) return;
+      const href = el.getAttribute('href');
+      if (el.tagName === 'A' && href === '#') e.preventDefault();
+      const label = (el.getAttribute('aria-label') || el.textContent || '').trim().replace(/\s+/g, ' ');
+      ForjaApp.toast(appMsg(label));
+    });
+  }
+  function toast(msg) {
+    let w = document.querySelector('.fj-toast-wrap');
+    if (!w) { w = document.createElement('div'); w.className = 'fj-toast-wrap'; document.body.appendChild(w); }
+    const t = document.createElement('div'); t.className = 'fj-toast'; t.textContent = msg; w.appendChild(t);
+    setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateY(8px)'; setTimeout(() => t.remove(), 260); }, 2000);
   }
 
   // toggle de tema reutilizable (para ajustes)
@@ -45,7 +103,8 @@
       try { localStorage.setItem('fj-theme', dark ? 'light' : 'dark'); } catch (e) {}
       return !dark;
     },
-    isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
+    isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; },
+    toast
   };
 
   document.addEventListener('DOMContentLoaded', init);

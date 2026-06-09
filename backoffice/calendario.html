@@ -216,7 +216,7 @@ function openSession(c){
       <div>
         <button onclick="this.nextElementSibling.hidden=!this.nextElementSibling.hidden" style="width:100%;display:flex;align-items:center;justify-content:space-between;padding:6px 0">
           <span class="fj-eyebrow">Inscritos · ${en}</span>
-          <span style="display:flex;align-items:center;gap:8px"><span class="fj-badge fj-badge-success" onclick="event.stopPropagation()">Marcar asistencia</span>
+          <span style="display:flex;align-items:center;gap:8px"><span class="fj-badge fj-badge-success" style="cursor:pointer" onclick="event.stopPropagation();window.Forja&&Forja.toast('Asistencia marcada ✓')">Marcar asistencia</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span>
         </button>
         <div class="seg" hidden>${rosterHtml}</div>

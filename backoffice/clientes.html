@@ -49,7 +49,7 @@
         <tbody id="clients-tbody">
 
           <!-- Camila Soto — Al día / Full -->
-          <tr class="client-row" data-estado="al-dia" data-nombre="camila soto vargas" data-rut="12.345.678-9" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="al-dia" data-nombre="camila soto vargas" data-rut="12.345.678-9" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 text-sm font-bold shrink-0">CS</div>
@@ -63,7 +63,7 @@
             <td><span class="fj-badge fj-badge-success">Al día</span></td>
             <td><span class="font-mono text-sm text-ink-700">12 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">hoy 09:30</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -73,7 +73,7 @@
           </tr>
 
           <!-- Javiera Núñez — Al día / Ilimitado -->
-          <tr class="client-row" data-estado="al-dia" data-nombre="javiera núñez parra" data-rut="15.432.100-k" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="al-dia" data-nombre="javiera núñez parra" data-rut="15.432.100-k" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-info/10 flex items-center justify-center text-info text-sm font-bold shrink-0">JN</div>
@@ -87,7 +87,7 @@
             <td><span class="fj-badge fj-badge-success">Al día</span></td>
             <td><span class="font-mono text-sm text-ink-700">18 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">hoy 07:00</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -97,7 +97,7 @@
           </tr>
 
           <!-- Sebastián Mora — Al día / 3x -->
-          <tr class="client-row" data-estado="al-dia" data-nombre="sebastián mora lagos" data-rut="17.654.321-3" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="al-dia" data-nombre="sebastián mora lagos" data-rut="17.654.321-3" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-success/10 flex items-center justify-center text-success text-sm font-bold shrink-0">SM</div>
@@ -111,7 +111,7 @@
             <td><span class="fj-badge fj-badge-success">Al día</span></td>
             <td><span class="font-mono text-sm text-ink-700">9 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">ayer 18:30</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -121,7 +121,7 @@
           </tr>
 
           <!-- Matías Rojas — Al día / Full -->
-          <tr class="client-row" data-estado="al-dia" data-nombre="matías rojas castro" data-rut="18.765.432-1" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="al-dia" data-nombre="matías rojas castro" data-rut="18.765.432-1" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 text-sm font-bold shrink-0">MR</div>
@@ -135,7 +135,7 @@
             <td><span class="fj-badge fj-badge-success">Al día</span></td>
             <td><span class="font-mono text-sm text-ink-700">11 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">ayer 07:00</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -145,7 +145,7 @@
           </tr>
 
           <!-- Valentina Torres — Al día / Ilimitado -->
-          <tr class="client-row" data-estado="al-dia" data-nombre="valentina torres ibáñez" data-rut="16.234.567-8" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="al-dia" data-nombre="valentina torres ibáñez" data-rut="16.234.567-8" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-info/10 flex items-center justify-center text-info text-sm font-bold shrink-0">VT</div>
@@ -159,7 +159,7 @@
             <td><span class="fj-badge fj-badge-success">Al día</span></td>
             <td><span class="font-mono text-sm text-ink-700">15 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">hoy 12:00</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -169,7 +169,7 @@
           </tr>
 
           <!-- Felipe Araya — Por vencer / 3x -->
-          <tr class="client-row" data-estado="por-vencer" data-nombre="felipe araya muñoz" data-rut="13.876.543-2" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="por-vencer" data-nombre="felipe araya muñoz" data-rut="13.876.543-2" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-warning/10 flex items-center justify-center text-warning text-sm font-bold shrink-0">FA</div>
@@ -183,7 +183,7 @@
             <td><span class="fj-badge fj-badge-warning">Por vencer</span></td>
             <td><span class="font-mono text-sm text-ink-700">7 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">12 jun</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -193,7 +193,7 @@
           </tr>
 
           <!-- Pancho Díaz — Por vencer / Full -->
-          <tr class="client-row" data-estado="por-vencer" data-nombre="pancho díaz medina" data-rut="9.876.543-2" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="por-vencer" data-nombre="pancho díaz medina" data-rut="9.876.543-2" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-ink-100 flex items-center justify-center text-ink-600 text-sm font-bold shrink-0">PD</div>
@@ -207,7 +207,7 @@
             <td><span class="fj-badge fj-badge-warning">Por vencer</span></td>
             <td><span class="font-mono text-sm text-ink-700">8 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">11 jun</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -217,7 +217,7 @@
           </tr>
 
           <!-- Rosa Henríquez — Por vencer / Pack 10 -->
-          <tr class="client-row" data-estado="por-vencer" data-nombre="rosa henríquez pérez" data-rut="14.321.987-6" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="por-vencer" data-nombre="rosa henríquez pérez" data-rut="14.321.987-6" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-ink-100 flex items-center justify-center text-ink-600 text-sm font-bold shrink-0">RH</div>
@@ -231,7 +231,7 @@
             <td><span class="fj-badge fj-badge-warning">Por vencer</span></td>
             <td><span class="font-mono text-sm text-ink-700">4 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">10 jun</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -241,7 +241,7 @@
           </tr>
 
           <!-- Ignacio Vera — Moroso / Pack 10 -->
-          <tr class="client-row" data-estado="moroso" data-nombre="ignacio vera orellana" data-rut="11.223.344-5" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="moroso" data-nombre="ignacio vera orellana" data-rut="11.223.344-5" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-danger/10 flex items-center justify-center text-danger text-sm font-bold shrink-0">IV</div>
@@ -255,7 +255,7 @@
             <td><span class="fj-badge fj-badge-danger">Moroso</span></td>
             <td><span class="font-mono text-sm text-ink-700">2 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">1 jun</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -265,7 +265,7 @@
           </tr>
 
           <!-- Diego Contreras — Moroso / 3x -->
-          <tr class="client-row" data-estado="moroso" data-nombre="diego contreras fuentes" data-rut="19.012.345-7" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="moroso" data-nombre="diego contreras fuentes" data-rut="19.012.345-7" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-danger/10 flex items-center justify-center text-danger text-sm font-bold shrink-0">DC</div>
@@ -279,7 +279,7 @@
             <td><span class="fj-badge fj-badge-danger">Moroso</span></td>
             <td><span class="font-mono text-sm text-ink-700">0 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">28 may</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -289,7 +289,7 @@
           </tr>
 
           <!-- Andrea Flores — Al día / Full -->
-          <tr class="client-row" data-estado="al-dia" data-nombre="andrea flores sepúlveda" data-rut="13.456.789-0" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="al-dia" data-nombre="andrea flores sepúlveda" data-rut="13.456.789-0" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 text-sm font-bold shrink-0">AF</div>
@@ -303,7 +303,7 @@
             <td><span class="fj-badge fj-badge-success">Al día</span></td>
             <td><span class="font-mono text-sm text-ink-700">10 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">hoy 17:00</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -313,7 +313,7 @@
           </tr>
 
           <!-- Nicolás Espinoza — Al día / Ilimitado -->
-          <tr class="client-row" data-estado="al-dia" data-nombre="nicolás espinoza vidal" data-rut="20.123.456-8" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="al-dia" data-nombre="nicolás espinoza vidal" data-rut="20.123.456-8" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-success/10 flex items-center justify-center text-success text-sm font-bold shrink-0">NE</div>
@@ -327,7 +327,7 @@
             <td><span class="fj-badge fj-badge-success">Al día</span></td>
             <td><span class="font-mono text-sm text-ink-700">14 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">ayer 09:00</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -337,7 +337,7 @@
           </tr>
 
           <!-- Carla Gutiérrez — Por vencer / 3x -->
-          <tr class="client-row" data-estado="por-vencer" data-nombre="carla gutiérrez ramos" data-rut="12.987.654-3" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="por-vencer" data-nombre="carla gutiérrez ramos" data-rut="12.987.654-3" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-warning/10 flex items-center justify-center text-warning text-sm font-bold shrink-0">CG</div>
@@ -351,7 +351,7 @@
             <td><span class="fj-badge fj-badge-warning">Por vencer</span></td>
             <td><span class="font-mono text-sm text-ink-700">6 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">9 jun</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>
@@ -361,7 +361,7 @@
           </tr>
 
           <!-- Luis Morales — Moroso / Full -->
-          <tr class="client-row" data-estado="moroso" data-nombre="luis morales herrera" data-rut="10.567.890-4" onclick="location.href='cliente-perfil.html'" style="cursor:pointer">
+          <tr class="client-row" data-estado="moroso" data-nombre="luis morales herrera" data-rut="10.567.890-4" onclick="if(!event.target.closest('[data-row-action]'))location.href='cliente-perfil.html'" style="cursor:pointer">
             <td>
               <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-full bg-danger/10 flex items-center justify-center text-danger text-sm font-bold shrink-0">LM</div>
@@ -375,7 +375,7 @@
             <td><span class="fj-badge fj-badge-danger">Moroso</span></td>
             <td><span class="font-mono text-sm text-ink-700">1 este mes</span></td>
             <td><span class="font-mono text-sm text-ink-500">5 jun</span></td>
-            <td onclick="event.stopPropagation()">
+            <td data-row-action>
               <div class="flex items-center justify-end gap-1">
                 <button class="fj-icon-btn" title="Renovar plan" aria-label="Renovar plan"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></button>
                 <button class="fj-icon-btn" title="Registrar pago" aria-label="Registrar pago"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></button>

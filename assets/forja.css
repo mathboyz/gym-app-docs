@@ -260,6 +260,13 @@ textarea.fj-input{height:auto;padding:12px 14px;resize:vertical;min-height:90px;
 .ch-silver{color:#7C8696;} [data-theme="dark"] .ch-silver{color:#C4CCD6;}
 .ch-bronze{color:#B5703A;} [data-theme="dark"] .ch-bronze{color:#D69A63;}
 
+/* --------------------------------------------------------------------------- TOAST (feedback de acciones de mockup) */
+.fj-toast-wrap{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;}
+.fj-toast{background:#23272F;color:#fff;padding:11px 18px;border-radius:99px;font-size:13px;font-weight:600;
+  box-shadow:0 10px 28px rgba(0,0,0,.35);display:flex;align-items:center;gap:8px;pointer-events:auto;
+  animation:fjtoastin .22s cubic-bezier(.34,1.2,.64,1);transition:opacity .25s,transform .25s;}
+@keyframes fjtoastin{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+
 /* utilidades */
 .fj-empty{text-align:center;padding:48px 24px;}
 .fj-divider{height:1px;background:var(--fj-ink-100);}
