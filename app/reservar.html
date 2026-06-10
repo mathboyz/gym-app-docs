@@ -82,16 +82,16 @@
       <span class="text-xs" style="color:var(--fj-ink-400)">6 clases</span>
     </div>
 
-    <!-- Tu próxima clase — resaltada arriba -->
-    <div class="acard acard-pad" style="background:rgba(251,82,21,.08);border-color:rgba(251,82,21,.25);cursor:pointer" onclick="if(!event.target.closest('button,a'))location.href='ver-clase.html'">
+    <!-- Tu próxima clase — reservada, pendiente de confirmación -->
+    <div class="acard acard-pad" style="background:rgba(232,163,23,.08);border-color:rgba(232,163,23,.35);cursor:pointer" onclick="if(!event.target.closest('button,a'))location.href='ver-clase.html'">
       <div class="flex items-center gap-2 mb-3">
-        <span class="fj-dot" style="background:var(--fj-brand)"></span>
-        <span class="a-eyebrow" style="color:var(--fj-brand)">Tu próxima clase</span>
-        <span class="ml-auto fj-badge fj-badge-brand">en 1h 20min</span>
+        <span class="fj-dot" style="background:#E8A317"></span>
+        <span class="a-eyebrow" style="color:#B27D0E">Tu próxima clase · por confirmar</span>
+        <span class="ml-auto fj-badge" style="background:rgba(232,163,23,.15);color:#B27D0E">confirma antes de las 08:00</span>
       </div>
       <div class="flex items-center gap-3">
         <div class="min-w-[52px] text-center">
-          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-brand)">19:00</span>
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">09:00</span>
           <p class="a-muted text-[10px] mt-0.5">60 min</p>
         </div>
         <div class="flex-1 min-w-0">
@@ -102,26 +102,34 @@
           <p class="a-muted text-xs">Coach Vale Fuentes</p>
           <div class="flex items-center gap-1 mt-1">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--fj-ink-400)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
-            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">8<span style="color:var(--fj-ink-300)">/12</span></span>
+            <span class="font-mono text-xs" style="color:var(--fj-ink-400)">11<span style="color:var(--fj-ink-300)">/12</span></span>
           </div>
         </div>
-        <button class="a-btn a-btn-primary" style="width:auto;height:36px;padding:0 16px;font-size:13px">Reservar</button>
       </div>
+      <div class="flex gap-2 mt-3">
+        <button class="a-btn a-btn-primary" style="flex:1;height:38px;font-size:13px">Confirmar asistencia</button>
+        <button class="a-btn a-btn-ghost" style="width:auto;height:38px;padding:0 14px;font-size:13px;color:#E5484D;border-color:rgba(229,72,77,.3)">Cancelar</button>
+      </div>
+      <p class="a-muted text-[11px] mt-2 text-center">Si no confirmas, tu cupo se libera a las 08:00. Al confirmar, queda asegurado y ya no se puede cancelar.</p>
     </div>
 
     <!-- Leyenda -->
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3 flex-wrap">
       <div class="flex items-center gap-1.5">
         <span class="fj-dot" style="background:var(--fj-brand)"></span>
         <span class="text-xs" style="color:var(--fj-ink-400)">Disponible</span>
       </div>
       <div class="flex items-center gap-1.5">
-        <span class="fj-dot" style="background:#18A957"></span>
-        <span class="text-xs" style="color:var(--fj-ink-400)">Reservada</span>
+        <span class="fj-dot" style="background:#E8A317"></span>
+        <span class="text-xs" style="color:var(--fj-ink-400)">Por confirmar</span>
       </div>
       <div class="flex items-center gap-1.5">
-        <span class="fj-dot" style="background:#E8A317"></span>
-        <span class="text-xs" style="color:var(--fj-ink-400)">Lista espera</span>
+        <span class="fj-dot" style="background:#18A957"></span>
+        <span class="text-xs" style="color:var(--fj-ink-400)">Confirmada</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <span class="fj-dot" style="background:#E5484D"></span>
+        <span class="text-xs" style="color:var(--fj-ink-400)">Llena</span>
       </div>
     </div>
 
@@ -151,18 +159,18 @@
       </div>
     </div>
 
-    <!-- 09:00 — Reservada -->
+    <!-- 10:00 — Confirmada (bloqueada) -->
     <div class="acard acard-pad" style="cursor:pointer" onclick="if(!event.target.closest('button,a'))location.href='ver-clase.html'">
       <div class="flex items-center gap-3">
         <div class="min-w-[52px] text-center">
-          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">09:00</span>
+          <span class="font-mono font-bold text-lg leading-none" style="color:var(--fj-ink-900)">10:00</span>
           <p class="a-muted text-[10px] mt-0.5">45 min</p>
         </div>
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-2 mb-0.5 flex-wrap">
             <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">Funcional</span>
             <span class="fj-dot" style="background:#18A957"></span>
-            <span class="fj-badge fj-badge-success" style="font-size:10px;padding:1px 7px">Reservada</span>
+            <span class="fj-badge fj-badge-success" style="font-size:10px;padding:1px 7px">Confirmada</span>
           </div>
           <div class="flex items-center gap-2">
             <span class="a-muted text-xs">Coach Caro Ríos</span>
@@ -171,7 +179,10 @@
             <span class="font-mono text-xs" style="color:var(--fj-ink-400)">12<span style="color:var(--fj-ink-300)">/12</span></span>
           </div>
         </div>
-        <button class="a-btn a-btn-ghost" style="width:auto;height:36px;padding:0 14px;font-size:13px;color:#E5484D;border-color:rgba(229,72,77,.3)">Cancelar</button>
+        <span class="flex items-center gap-1.5 text-xs font-semibold" style="color:var(--fj-success)">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Cupo asegurado
+        </span>
       </div>
     </div>
 
@@ -185,7 +196,7 @@
         <div class="flex-1 min-w-0">
           <div class="flex items-center gap-2 mb-0.5 flex-wrap">
             <span class="text-sm font-semibold" style="color:var(--fj-ink-900)">CrossFit</span>
-            <span class="fj-dot" style="background:#E8A317"></span>
+            <span class="fj-dot" style="background:#E5484D"></span>
             <span class="rsv-fmt">EMOM</span>
           </div>
           <div class="flex items-center gap-2">

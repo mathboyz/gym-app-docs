@@ -68,10 +68,10 @@
           <span class="font-mono text-sm" style="color:var(--fj-ink-400)">11/12</span>
         </div>
         <p class="text-sm mt-3" style="color:var(--fj-ink-400)">WOD del día: <span class="font-semibold" style="color:var(--fj-ink-700)">Cindy</span> · lo ves completo dentro de la clase</p>
-        <!-- Reservada → confirma tu asistencia -->
-        <div class="flex items-center gap-1.5 mt-4 mb-2.5" style="color:var(--tx-green)">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          <span class="text-xs font-semibold">Reservada · confirma tu asistencia</span>
+        <!-- Reservada → pendiente de confirmación -->
+        <div class="flex items-center gap-1.5 mt-4 mb-2.5" style="color:var(--fj-warning)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span class="text-xs font-semibold">Por confirmar · si no confirmas, tu cupo se libera a las 08:00</span>
         </div>
         <div class="flex gap-2">
           <button class="a-btn a-btn-primary" id="hoy-confirm" onclick="confirmarHoy(this)" style="flex:1">Confirmar asistencia</button>
