@@ -407,23 +407,9 @@
         </div>
 
       </div>
-    </div>
 
-    <!-- ── 4. FORMATO Y ESCALA ── -->
-    <div class="acard acard-pad space-y-3">
-      <p class="sec-label">Formato y escala</p>
-
-      <!-- Resumen WOD elegido -->
-      <div class="flex items-center gap-2.5 rounded-xl px-3 py-2.5" style="background:var(--fj-ink-100)">
-        <span id="fmt-chip" class="fj-fmt fj-fmt-fortime">For Time</span>
-        <div class="flex-1 min-w-0">
-          <p id="fmt-wod-name" class="text-sm font-semibold" style="color:var(--fj-ink-900)">Fran</p>
-          <p id="fmt-wod-desc" class="a-muted text-xs truncate">21-15-9 · Thruster 43 kg + Pull-up · Mejor tiempo</p>
-        </div>
-      </div>
-
-      <!-- Segment Rx / Scaled -->
-      <div>
+      <!-- Escala de ejecución -->
+      <div class="pt-2" style="border-top:1px solid var(--fj-ink-100)">
         <p class="a-muted text-xs mb-2">Escala de ejecución</p>
         <div class="a-seg" role="tablist" id="seg-escala">
           <button role="tab" aria-selected="true" onclick="selectSeg('seg-escala',this)">Rx</button>
@@ -432,7 +418,7 @@
       </div>
     </div>
 
-    <!-- ── 5. QUÉ SE JUEGA ── -->
+    <!-- ── 4. QUÉ SE JUEGA ── -->
     <div class="acard acard-pad space-y-4">
       <p class="sec-label">Qué se juega</p>
 
@@ -461,20 +447,14 @@
           </span>
           <div class="flex-1 min-w-0">
             <p class="text-sm font-semibold" id="logro-name" style="color:var(--fj-brand)">Rey de Fran</p>
-            <p class="a-muted text-xs" id="logro-desc">Si ganas, le robas el logro a Camila Soto</p>
+            <p class="a-muted text-xs" id="logro-desc">De Camila Soto · PR <span class="font-mono font-semibold">2:58</span> · si le ganas el duelo, te lo llevas</p>
           </div>
           <div class="a-switch ml-auto" aria-checked="true" id="logro-switch" role="switch" style="flex-shrink:0"></div>
-        </div>
-        <!-- Info logro -->
-        <div id="logro-detail" class="mt-2 rounded-xl px-3 py-2.5 space-y-1" style="background:rgba(251,82,21,.07);border:1px solid rgba(251,82,21,.2)">
-          <p class="a-eyebrow" style="font-size:10px;color:var(--fj-brand)">Logro disponible para robar</p>
-          <p class="text-xs font-semibold" style="color:var(--fj-ink-900)">Rey de Fran</p>
-          <p class="a-muted text-xs">De <span class="font-semibold" style="color:var(--fj-ink-800)">Camila Soto</span> · PR: <span class="font-mono font-semibold">2:58</span>. Debes ganar el duelo de Fran contra ella para obtenerlo.</p>
         </div>
       </div>
     </div>
 
-    <!-- ── 6. PLAZO ── -->
+    <!-- ── 5. PLAZO ── -->
     <div class="acard acard-pad space-y-3">
       <p class="sec-label">Plazo para completar</p>
 
@@ -491,15 +471,9 @@
         <span class="a-muted text-xs">o elige una fecha exacta:</span>
       </div>
       <input type="datetime-local" class="fj-date" id="plazo-date" value="2026-06-10T08:00">
-
-      <!-- Indicador dinámico -->
-      <div class="flex items-center gap-1.5">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        <p class="text-xs font-semibold" id="plazo-label" style="color:var(--fj-brand)">Vence en 48 h</p>
-      </div>
     </div>
 
-    <!-- ── 7. MENSAJE OPCIONAL ── -->
+    <!-- ── 6. MENSAJE OPCIONAL ── -->
     <div class="acard acard-pad space-y-2">
       <p class="sec-label">Mensaje <span style="text-transform:none;font-weight:500;font-size:10px;color:var(--fj-ink-400)">(opcional)</span></p>
       <textarea class="fj-textarea" placeholder="Tírale un mensaje a tu rival… ej: &quot;A ver si le das a Fran esta vez, Matías 💪&quot;"></textarea>
@@ -546,12 +520,6 @@
             <p class="text-xs font-semibold mt-0.5" style="color:var(--fj-ink-900)">48 h</p>
           </div>
         </div>
-
-        <!-- Logro en juego -->
-        <div class="flex items-center gap-2 rounded-xl px-3 py-2" style="background:rgba(251,82,21,.07);border:1px solid rgba(251,82,21,.18)">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg>
-          <p class="text-xs" style="color:var(--fj-ink-800)">Logro en juego: <span class="font-semibold" style="color:var(--fj-brand)">Rey de Fran</span></p>
-        </div>
       </div>
     </div>
 
@@ -584,39 +552,20 @@
   function selectWod(row, fmt, desc) {
     document.querySelectorAll('#wod-list .wod-row').forEach(r => r.classList.remove('selected'));
     row.classList.add('selected');
-
-    // Actualizar sección Formato
-    var name = row.querySelector('.font-display').textContent;
-    document.getElementById('fmt-wod-name').textContent = name;
-    document.getElementById('fmt-wod-desc').textContent = desc;
-
-    var chip = document.getElementById('fmt-chip');
-    chip.className = 'fj-fmt fj-fmt-' + fmt;
-    chip.textContent = fmt === 'fortime' ? 'For Time' : 'AMRAP';
   }
 
   /* ── Plazo preset ── */
   function setPlazo(btn, val) {
     document.querySelectorAll('#plazo-presets .pts-preset').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    var labels = { '24h': 'Vence en 24 h', '48h': 'Vence en 48 h', '72h': 'Vence en 72 h', '1sem': 'Vence en 1 semana' };
-    document.getElementById('plazo-label').textContent = labels[val] || 'Plazo configurado';
   }
 
   /* ── Toggle logro ── */
   function toggleLogro(row) {
     var sw = document.getElementById('logro-switch');
-    var detail = document.getElementById('logro-detail');
     var enabled = sw.getAttribute('aria-checked') === 'true';
-    if (enabled) {
-      sw.setAttribute('aria-checked', 'false');
-      row.classList.remove('enabled');
-      detail.style.display = 'none';
-    } else {
-      sw.setAttribute('aria-checked', 'true');
-      row.classList.add('enabled');
-      detail.style.display = '';
-    }
+    sw.setAttribute('aria-checked', enabled ? 'false' : 'true');
+    row.classList.toggle('enabled', !enabled);
   }
 
   /* ── Lanzar reto ── */
