@@ -17,7 +17,7 @@
   .post-img {
     width: 100%;
     border-radius: 12px;
-    aspect-ratio: 4/3;
+    aspect-ratio: 16/10;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,10 +44,10 @@
   <main class="app-screen" style="padding-top:0;gap:0">
 
     <!-- Feed -->
-    <div style="display:flex;flex-direction:column;gap:14px;padding:14px 12px">
+    <div style="display:flex;flex-direction:column">
 
       <!-- ───── Post 1: Matías · PR Fran ───── -->
-      <article class="acard" style="overflow:hidden">
+      <article style="border-bottom:1px solid var(--fj-ink-100);padding:6px 0 2px">
 
         <!-- Header -->
         <div class="arow px-4" style="border-bottom:0">
@@ -82,11 +82,11 @@
 
         <!-- Caption -->
         <p class="text-sm leading-relaxed acard-pad" style="padding-top:0;padding-bottom:10px;color:var(--fj-ink-800)">
-          Fran en <span class="font-mono font-bold" style="color:var(--fj-brand)">3:42</span>. Meses entrenando para romper esa barrera. Gracias <span class="font-medium" style="color:var(--fj-brand)">@pancho.diaz</span> por el push. 💪
+          Meses entrenando para romper esa barrera. Gracias <span class="font-medium" style="color:var(--fj-brand)">@pancho.diaz</span> por el push. 💪
         </p>
 
         <!-- Acciones -->
-        <div class="acard-pad" style="padding-top:0;padding-bottom:10px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--fj-ink-100)">
+        <div class="acard-pad" style="padding-top:0;padding-bottom:10px;display:flex;align-items:center;gap:16px">
           <button onclick="toggleLike(this)" class="like-btn" style="display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;color:var(--fj-ink-400)" aria-label="Me gusta">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             <span class="font-mono text-sm">24</span>
@@ -115,7 +115,7 @@
       </article>
 
       <!-- ───── Post 2: Camila Soto · foto entrenamiento ───── -->
-      <article class="acard" style="overflow:hidden">
+      <article style="border-bottom:1px solid var(--fj-ink-100);padding:6px 0 2px">
 
         <!-- Header -->
         <div class="arow px-4" style="border-bottom:0">
@@ -147,7 +147,7 @@
         </p>
 
         <!-- Acciones -->
-        <div class="acard-pad" style="padding-top:0;padding-bottom:10px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--fj-ink-100)">
+        <div class="acard-pad" style="padding-top:0;padding-bottom:10px;display:flex;align-items:center;gap:16px">
           <button onclick="toggleLike(this)" class="like-btn" style="display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;color:var(--fj-ink-400)" aria-label="Me gusta">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             <span class="font-mono text-sm">37</span>
@@ -170,7 +170,7 @@
       </article>
 
       <!-- ───── Post 3: Pancho · logro desbloqueado (estilo especial) ───── -->
-      <article class="acard" style="overflow:hidden">
+      <article style="padding:6px 0 2px">
 
         <!-- Header -->
         <div class="arow px-4" style="border-bottom:0">
@@ -205,7 +205,7 @@
         </p>
 
         <!-- Acciones -->
-        <div class="acard-pad" style="padding-top:0;padding-bottom:10px;display:flex;align-items:center;gap:16px;border-bottom:1px solid var(--fj-ink-100)">
+        <div class="acard-pad" style="padding-top:0;padding-bottom:10px;display:flex;align-items:center;gap:16px">
           <button onclick="toggleLike(this)" class="like-btn liked" style="display:flex;align-items:center;gap:6px;background:none;border:none;cursor:pointer;padding:0;color:#E5484D" aria-label="Me gusta">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="#E5484D" stroke="#E5484D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
             <span class="font-mono text-sm">19</span>
