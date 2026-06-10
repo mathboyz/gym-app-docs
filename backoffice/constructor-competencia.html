@@ -87,6 +87,35 @@
               </div>
               <div><label class="fj-label">Descripción</label><textarea class="fj-input" placeholder="Reglas, formato general, cómo se puntúa…">Liga mensual de 4 semanas. Se acumulan puntos por WOD; gana quien sume más en su división.</textarea></div>
             </div>
+
+            <!-- Jueces y heats -->
+            <div class="fj-panel p-6 mt-4">
+              <p class="fj-eyebrow mb-1">Día de la competencia</p>
+              <h3 class="fj-section-h mb-4">Jueces y tandas (heats)</h3>
+              <label class="fj-label">Jueces asignados</label>
+              <div class="flex items-center gap-2 flex-wrap mb-1">
+                <span class="inline-flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full bg-ink-100 text-sm font-semibold text-ink-800"><span class="w-6 h-6 rounded-full bg-brand-100 grid place-items-center font-display font-bold text-brand-600" style="font-size:10px">VF</span>Vale Fuentes <span class="text-xs font-normal text-ink-400">coach</span></span>
+                <span class="inline-flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full bg-ink-100 text-sm font-semibold text-ink-800"><span class="w-6 h-6 rounded-full bg-ink-200 grid place-items-center font-display font-bold text-ink-600" style="font-size:10px">NT</span>Nacho Tapia <span class="text-xs font-normal text-ink-400">coach</span></span>
+                <span class="inline-flex items-center gap-2 pl-1.5 pr-2.5 py-1 rounded-full bg-ink-100 text-sm font-semibold text-ink-800"><span class="w-6 h-6 rounded-full bg-info/15 grid place-items-center font-display font-bold text-info" style="font-size:10px">JN</span>Javiera Núñez <span class="text-xs font-normal text-ink-400">atleta-juez</span></span>
+                <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="Forja.toast('Juez agregado (demo)')">+ Agregar juez</button>
+              </div>
+              <p class="text-xs text-ink-400 mb-4">Los jueces registran los resultados desde su app el día de la prueba.</p>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <label class="fj-label">Atletas por tanda</label>
+                  <input class="fj-input fj-mono" value="12" inputmode="numeric">
+                  <p class="text-xs text-ink-400 mt-1.5">Según la capacidad del box</p>
+                </div>
+                <div>
+                  <label class="fj-label">Armado de tandas</label>
+                  <select class="fj-input appearance-none cursor-pointer">
+                    <option selected>Automático al cerrar inscripciones</option>
+                    <option>Manual (yo armo las tandas)</option>
+                  </select>
+                  <p class="text-xs text-ink-400 mt-1.5">Por división y orden de inscripción. Cada atleta ve su tanda y horario en la app.</p>
+                </div>
+              </div>
+            </div>
             <div class="flex justify-end mt-5"><button class="fj-btn fj-btn-primary" onclick="goSec('divisiones')">Continuar a Divisiones →</button></div>
           </section>
 

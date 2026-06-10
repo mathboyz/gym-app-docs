@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Mi progreso</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<link rel="stylesheet" href="../assets/forja-app.css">
+<script src="../assets/forja-app.js"></script>
+</head>
+<body>
+<div class="app-frame">
+
+  <header class="app-bar">
+    <a href="perfil.html" class="fj-icon-btn" aria-label="Volver">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </a>
+    <div class="flex-1">
+      <p class="a-eyebrow">de 60 kg a hoy</p>
+      <p class="app-bar-title">Mi progreso</p>
+    </div>
+  </header>
+
+  <main class="app-screen space-y-5">
+
+    <!-- ── Resumen del mes ── -->
+    <div class="grid grid-cols-3 gap-2">
+      <div class="atile">
+        <p class="a-eyebrow" style="font-size:9px">Clases · jun</p>
+        <p class="font-mono font-bold text-xl leading-none mt-1" style="color:var(--fj-ink-900)">14</p>
+      </div>
+      <div class="atile">
+        <p class="a-eyebrow" style="font-size:9px">PRs nuevos</p>
+        <p class="font-mono font-bold text-xl leading-none mt-1" style="color:var(--fj-brand)">3</p>
+      </div>
+      <div class="atile">
+        <p class="a-eyebrow" style="font-size:9px">XP del mes</p>
+        <p class="font-mono font-bold text-xl leading-none mt-1" style="color:var(--fj-ink-900)">+1.240</p>
+      </div>
+    </div>
+
+    <!-- ── Hito reciente ── -->
+    <div class="acard overflow-hidden" style="border-color:rgba(251,82,21,.3)">
+      <div class="flex items-center gap-2 px-4 py-2" style="background:rgba(251,82,21,.10);border-bottom:1px solid rgba(251,82,21,.18)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        <span class="a-eyebrow" style="color:var(--fj-brand)">Nuevo PR · hace 2 días</span>
+      </div>
+      <div class="acard-pad">
+        <div class="flex items-center gap-3">
+          <div class="flex-1">
+            <p class="a-h text-base">Back Squat 102 kg</p>
+            <p class="a-muted text-xs mt-0.5">Superaste tu marca anterior por <span class="font-mono font-semibold" style="color:var(--tx-green)">+4 kg</span> · entraste al club de los 100</p>
+          </div>
+          <a href="crear-post.html" class="a-btn a-btn-primary" style="width:auto;height:34px;padding:0 14px;font-size:12px;border-radius:999px;flex-shrink:0">Compartirlo</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Evolución por ejercicio ── -->
+    <div>
+      <div class="flex items-center justify-between mb-3">
+        <p class="a-eyebrow">Evolución</p>
+        <span class="fj-badge fj-badge-success" id="improve-badge">+13% en 90 días</span>
+      </div>
+      <div class="a-seg mb-3" role="tablist">
+        <button role="tab" aria-selected="true" onclick="setEx('squat',this)">Back Squat</button>
+        <button role="tab" aria-selected="false" onclick="setEx('deadlift',this)">Deadlift</button>
+        <button role="tab" aria-selected="false" onclick="setEx('fran',this)">Fran</button>
+      </div>
+
+      <div class="acard acard-pad">
+        <div class="flex items-baseline justify-between mb-4">
+          <div>
+            <p class="font-mono font-bold text-2xl leading-none" style="color:var(--fj-ink-900)" id="chart-current">102 kg</p>
+            <p class="a-muted text-xs mt-1" id="chart-sub">1RM actual · validado en clase</p>
+          </div>
+          <p class="a-muted text-xs" id="chart-range">mar – jun</p>
+        </div>
+        <!-- Barras de evolución -->
+        <div class="flex items-end gap-2" style="height:110px" id="chart-bars"></div>
+        <div class="flex gap-2 mt-2" id="chart-labels"></div>
+      </div>
+    </div>
+
+    <!-- ── Todos los PRs ── -->
+    <div>
+      <p class="a-eyebrow mb-3">Tus PRs · últimos 90 días</p>
+      <div class="acard">
+        <div class="arow">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Back Squat</p>
+            <p class="a-muted text-xs">1RM · hace 2 días</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono font-bold text-sm" style="color:var(--fj-brand)">102 kg</p>
+            <p class="font-mono text-xs" style="color:var(--tx-green)">▲ +13%</p>
+          </div>
+        </div>
+        <div class="arow">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Deadlift</p>
+            <p class="a-muted text-xs">1RM · hace 1 semana</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono font-bold text-sm" style="color:var(--fj-ink-900)">130 kg</p>
+            <p class="font-mono text-xs" style="color:var(--tx-green)">▲ +8%</p>
+          </div>
+        </div>
+        <div class="arow">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Fran</p>
+            <p class="a-muted text-xs">For Time · hace 3 semanas</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono font-bold text-sm" style="color:var(--fj-ink-900)">3:48</p>
+            <p class="font-mono text-xs" style="color:var(--tx-green)">▲ −44s</p>
+          </div>
+        </div>
+        <div class="arow">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Clean &amp; Jerk</p>
+            <p class="a-muted text-xs">1RM · hace 1 mes</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono font-bold text-sm" style="color:var(--fj-ink-900)">75 kg</p>
+            <p class="font-mono text-xs" style="color:var(--tx-green)">▲ +4%</p>
+          </div>
+        </div>
+        <div class="arow" style="border-bottom:none">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-semibold" style="color:var(--fj-ink-900)">Cindy</p>
+            <p class="a-muted text-xs">AMRAP 20' · hace 2 meses</p>
+          </div>
+          <div class="text-right flex-shrink-0">
+            <p class="font-mono font-bold text-sm" style="color:var(--fj-ink-900)">21 rds</p>
+            <p class="font-mono text-xs" style="color:var(--fj-ink-400)">— igual</p>
+          </div>
+        </div>
+      </div>
+      <p class="a-muted text-xs mt-2 px-1">Tus PRs alimentan los % del WOD: cuando el coach programa "@ 75%", la app te muestra tu peso.</p>
+    </div>
+
+  </main>
+</div>
+
+<script>
+const SERIES = {
+  squat:    { unit:'kg', current:'102 kg', sub:'1RM actual · validado en clase', badge:'+13% en 90 días', range:'mar – jun',
+              points:[{l:'mar',v:90},{l:'abr',v:94},{l:'may',v:98},{l:'jun',v:102}] },
+  deadlift: { unit:'kg', current:'130 kg', sub:'1RM actual', badge:'+8% en 90 días', range:'mar – jun',
+              points:[{l:'mar',v:120},{l:'abr',v:122},{l:'may',v:126},{l:'jun',v:130}] },
+  fran:     { unit:'', current:'3:48', sub:'Mejor tiempo · menos es mejor', badge:'−44s en 90 días', range:'mar – jun', invert:true,
+              points:[{l:'mar',v:272,t:'4:32'},{l:'abr',v:260,t:'4:20'},{l:'may',v:243,t:'4:03'},{l:'jun',v:228,t:'3:48'}] },
+};
+
+function setEx(key, btn) {
+  if (btn) btn.closest('.a-seg').querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+  const s = SERIES[key];
+  document.getElementById('chart-current').textContent = s.current;
+  document.getElementById('chart-sub').textContent = s.sub;
+  document.getElementById('chart-range').textContent = s.range;
+  document.getElementById('improve-badge').textContent = s.badge;
+
+  const vals = s.points.map(p => p.v);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  // normaliza a 35–100% de altura; si es de tiempo (invert), mejor = más alto
+  const h = v => {
+    let r = max === min ? 1 : (v - min) / (max - min);
+    if (s.invert) r = 1 - r;
+    return 35 + r * 65;
+  };
+  document.getElementById('chart-bars').innerHTML = s.points.map((p, i) => {
+    const last = i === s.points.length - 1;
+    return `<div class="flex-1 flex flex-col items-center justify-end gap-1" style="height:100%">
+      <span class="font-mono font-semibold" style="font-size:10px;color:${last ? 'var(--fj-brand)' : 'var(--fj-ink-400)'}">${p.t || p.v + ' ' + s.unit}</span>
+      <div class="w-full rounded-t-lg" style="height:${h(p.v)}%;background:${last ? 'var(--fj-brand)' : 'rgba(251,82,21,.25)'}"></div>
+    </div>`;
+  }).join('');
+  document.getElementById('chart-labels').innerHTML = s.points.map(p =>
+    `<div class="flex-1 text-center" style="font-size:10px;color:var(--fj-ink-400);font-weight:500">${p.l}</div>`).join('');
+}
+setEx('squat', null);
+</script>
+</body>
+</html>

@@ -99,11 +99,13 @@ const FORMATS = [['fortime','For Time'],['amrap','AMRAP'],['emom','EMOM'],['taba
 // estado: bloques de la rutina (categorías ricas + descansos entre ellas)
 let CATS = [
   {type:'cat', name:'Warm-up', fmt:'series', lb:false, cap:'', rest:'', mode:'individual', open:false, items:[{ex:'Row',a:'500',b:'m',w:''},{ex:'Burpee',a:'2',b:'x10',w:''}]},
-  {type:'cat', name:'Skill', fmt:'emom', lb:true, cap:'12:00', rest:'', mode:'individual', open:false, items:[{ex:'Thruster',a:'5',b:'x3',w:'40'}]},
+  {type:'cat', name:'Skill', fmt:'emom', lb:true, cap:'12:00', rest:'', mode:'individual', open:false, items:[{ex:'Thruster',a:'5',b:'x3',w:'75',wu:'%'}]},
   {type:'rest', dur:'3:00'},
   {type:'cat', name:'WOD', fmt:'fortime', lb:true, cap:'20:00', rest:'1:00', mode:'duplas', open:false, items:[{ex:'Thruster',a:'21-15-9',b:'reps',w:'43'},{ex:'Pull-up',a:'21-15-9',b:'reps',w:''}]},
 ];
 const xsvg = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+// disponibilidad para duelos (catálogo del coach) + logro robable asociado
+let DUEL = { on:true, belt:'Rey de Fran' };
 const MODEL = {individual:'Individual', duplas:'En duplas', equipo:'Equipos'};
 
 function libHtml(){
@@ -123,7 +125,7 @@ function exRow(it, ci, ii){
     <span class="text-sm font-semibold text-ink-900" style="flex:1;min-width:0">${it.ex}</span>
     <input class="mini" value="${it.a}" title="Series / reps">
     <input class="seln" value="${it.b}" style="width:62px" title="Unidad">
-    <div style="display:flex;align-items:center;gap:3px"><input class="mini" value="${it.w}" placeholder="–" style="width:46px" title="Peso (kg)"><span class="text-xs text-ink-400">kg</span></div>
+    <div style="display:flex;align-items:center;gap:3px"><input class="mini" value="${it.w}" placeholder="–" style="width:46px" title="Peso o % del 1RM"><select class="seln" style="width:64px" title="kg fijo o % del 1RM de cada atleta" onchange="CATS[${ci}].items[${ii}].wu=this.value"><option ${it.wu!=='%'?'selected':''}>kg</option><option value="%" ${it.wu==='%'?'selected':''}>%1RM</option></select></div>
     <select class="seln" title="Escala"><option>Rx</option><option>Scaled</option></select>
     <button class="fj-icon-btn" style="width:28px;height:28px" onclick="delEx(${ci},${ii})" aria-label="Quitar"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E5484D" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
   </div>`;
@@ -194,9 +196,23 @@ function render(){
         Descanso
       </button>
     </div>
+    <p class="text-xs text-ink-400" style="padding:0 4px">💡 Si el peso va en <b>%1RM</b>, cada atleta ve su propio peso en la app calculado desde su PR registrado.</p>
     <div class="fj-panel" style="padding:16px;margin-top:4px">
       <label class="fj-label">Nota del coach</label>
       <textarea class="fj-input" placeholder="Escala recomendada, foco técnico, tiempo de corte…">Mantener cadencia en los thrusters. Scaled: jumping pull-ups.</textarea>
+    </div>
+    <div class="fj-panel" style="padding:16px;margin-top:4px">
+      <label style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--fj-ink-700);cursor:pointer">
+        <input type="checkbox" ${DUEL.on?'checked':''} onchange="DUEL.on=this.checked;render()" style="accent-color:var(--fj-brand);width:16px;height:16px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-brand)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><line x1="16" y1="16" x2="20" y2="20"/><line x1="19" y1="21" x2="21" y2="19"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" y1="14" x2="9" y2="18"/><line x1="7" y1="17" x2="4" y2="20"/><line x1="3" y1="19" x2="5" y2="21"/></svg>
+        Disponible como rutina de duelo
+      </label>
+      <p class="text-xs text-ink-400" style="margin:6px 0 0 24px">Los atletas podrán retarse con esta rutina desde la app. Cada reto pasa por aprobación del box.</p>
+      ${DUEL.on?`<div style="margin:12px 0 0 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <div><label class="fj-label" style="margin-bottom:4px">Logro robable asociado</label>
+        <input class="fj-input" style="height:38px;width:220px" value="${DUEL.belt}" onchange="DUEL.belt=this.value" placeholder="Ej: Rey de Fran"></div>
+        <p class="text-xs text-ink-400" style="align-self:end;padding-bottom:9px">Único por rutina: lo tiene una persona y se roba ganando el duelo. <a href="duelos-desafios.html" class="text-brand-600 font-semibold hover:underline">Ver logros →</a></p>
+      </div>`:''}
     </div>`;
 }
 

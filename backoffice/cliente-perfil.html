@@ -97,6 +97,23 @@
         <div class="fj-list">
           <div class="fj-list-head">
             <p class="fj-section-h">Membresía</p>
+            <div class="ml-auto flex items-center gap-2">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="Forja.toast('Cambio de plan (demo)')">Cambiar plan</button>
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="Forja.toast('Plan congelado manualmente (demo)')">Congelar</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="Forja.toast('Membresía renovada ✓')">Renovar</button>
+            </div>
+          </div>
+          <!-- Solicitud pendiente desde la app -->
+          <div class="fj-row fj-row-static" id="freeze-request" style="background:rgba(62,123,250,.06)">
+            <span class="w-8 h-8 rounded-lg bg-info/10 grid place-items-center shrink-0"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3E7BFA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/><line x1="2" y1="12" x2="22" y2="12"/></svg></span>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold text-ink-900">Solicitó congelar su plan <span class="fj-mono text-xs text-ink-500">14–28 jun · 14 días</span></p>
+              <p class="text-xs text-ink-400 mt-0.5">Motivo: viaje de trabajo · pedida desde la app hace 3 h · usa 0 de 30 días/año</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="resolveFreeze(this,'Solicitud rechazada · se avisó a Camila')">Rechazar</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="resolveFreeze(this,'Plan congelado 14–28 jun ✓')">Aprobar</button>
+            </div>
           </div>
           <div class="fj-row fj-row-static">
             <span class="text-sm text-ink-500 w-36 shrink-0">Plan</span>
@@ -190,5 +207,13 @@
 
   </div>
 </div>
+
+<script>
+function resolveFreeze(btn, msg) {
+  var row = document.getElementById('freeze-request');
+  if (row) { row.style.transition = 'opacity .3s'; row.style.opacity = '.35'; row.querySelectorAll('button').forEach(function(b){ b.disabled = true; b.style.pointerEvents = 'none'; }); }
+  Forja.toast(msg);
+}
+</script>
 </body>
 </html>

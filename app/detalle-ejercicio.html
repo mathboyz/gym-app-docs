@@ -137,7 +137,10 @@
         </div>
         <!-- separador suave -->
         <div style="height:1px;background:rgba(251,82,21,.18);margin-bottom:14px"></div>
-        <p class="text-sm text-ink-600">Hoy entrenas con <span class="font-bold text-ink-900">43 kg</span> <span class="text-ink-400 font-mono text-xs">(95 lb)</span> · <span class="font-mono">68%</span> de tu 1RM</p>
+        <div class="flex items-center justify-between gap-3">
+          <p class="text-sm text-ink-600">Hoy el coach programó <span class="font-mono">@ 75%</span> → <span class="font-bold text-ink-900">47 kg</span> <span class="text-ink-400 font-mono text-xs">(104 lb)</span> para ti</p>
+          <a href="progreso.html" class="text-xs font-semibold whitespace-nowrap shrink-0" style="color:var(--fj-brand)">Ver evolución →</a>
+        </div>
       </div>
     </div>
 
@@ -198,9 +201,9 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
             </button>
             <div class="flex items-baseline gap-1">
-              <span id="wb-val" class="font-mono font-bold text-ink-900 leading-none" style="font-size:28px">43</span>
+              <span id="wb-val" class="font-mono font-bold text-ink-900 leading-none" style="font-size:28px">47</span>
               <span class="font-mono text-ink-400 text-sm" id="wb-unit">kg</span>
-              <span id="wb-conv" class="font-mono text-ink-400 text-xs ml-1.5">≈ 95 lb</span>
+              <span id="wb-conv" class="font-mono text-ink-400 text-xs ml-1.5">≈ 104 lb</span>
             </div>
             <button class="wb-step" onclick="wbChange(2.5)" aria-label="Subir 2.5 kg">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -217,7 +220,7 @@
   </main>
 </div>
 <script>
-  var wKg = 43; // peso de trabajo en kg (fuente de verdad)
+  var wKg = 47; // peso de trabajo en kg (fuente de verdad) = 75% del 1RM (63)
   var unit = 'kg'; // preferencia (vendría del backoffice); 'kg' | 'lb'
   function fmtLb(kg){ return Math.round(kg * 2.20462); }
   function renderWeight(){

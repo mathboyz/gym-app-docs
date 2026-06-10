@@ -46,11 +46,11 @@
 <script>
 const ROUTINES = {
   crossfit:[
-    {name:'Fran',fmt:'fortime',sum:'21-15-9 · Thrusters + Pull-ups',cats:'Warm-up · Skill · WOD',used:'Hoy'},
-    {name:'Helen',fmt:'fortime',sum:'3 rondas · Run 400m, 21 KB, 12 Pull-ups',cats:'Warm-up · WOD',used:'hace 2 días'},
-    {name:'Cindy',fmt:'amrap',sum:"AMRAP 20' · 5 Pull-up, 10 Push-up, 15 Squat",cats:'Warm-up · WOD',used:'hace 5 días'},
+    {name:'Fran',fmt:'fortime',sum:'21-15-9 · Thrusters + Pull-ups',cats:'Warm-up · Skill · WOD',used:'Hoy',duel:'Rey de Fran'},
+    {name:'Helen',fmt:'fortime',sum:'3 rondas · Run 400m, 21 KB, 12 Pull-ups',cats:'Warm-up · WOD',used:'hace 2 días',duel:'Helen Master'},
+    {name:'Cindy',fmt:'amrap',sum:"AMRAP 20' · 5 Pull-up, 10 Push-up, 15 Squat",cats:'Warm-up · WOD',used:'hace 5 días',duel:'Cindy Queen'},
     {name:'Murph',fmt:'fortime',sum:'Run 1.6k, 100 PU, 200 Push, 300 Squat, Run 1.6k',cats:'Warm-up · WOD · Cooldown',used:'hace 1 sem'},
-    {name:'Grace',fmt:'fortime',sum:'30 Clean & Jerk @ 60kg',cats:'Skill · WOD',used:'hace 1 sem'},
+    {name:'Grace',fmt:'fortime',sum:'30 Clean & Jerk @ 60kg',cats:'Skill · WOD',used:'hace 1 sem',duel:'Amo de Grace'},
     {name:'EMOM Pesado',fmt:'emom',sum:"EMOM 16' · Power Clean + Front Squat",cats:'Warm-up · Strength · WOD',used:'hace 2 sem'},
   ],
   gimnasia:[
@@ -72,7 +72,7 @@ function render(mod){
   const list = ROUTINES[mod]||[];
   document.getElementById('routineList').innerHTML = list.length ? list.map(r=>`
     <a href="constructor-rutina.html" class="fj-row">
-      <div class="flex-1 min-w-0"><p class="text-sm font-bold text-ink-900">${r.name}</p><p class="text-xs text-ink-400">${r.sum}</p></div>
+      <div class="flex-1 min-w-0"><p class="text-sm font-bold text-ink-900">${r.name}${r.duel?` <span class="fj-badge fj-badge-brand ml-1" title="Rutina de duelo · logro: ${r.duel}" style="gap:4px"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" y1="19" x2="19" y2="13"/><polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5"/><line x1="5" y1="14" x2="9" y2="18"/></svg>Duelo</span>`:''}</p><p class="text-xs text-ink-400">${r.sum}${r.duel?` · Logro robable: ${r.duel}`:''}</p></div>
       <div style="width:120px"><span class="fj-fmt fj-fmt-${r.fmt==='series'?'rx':r.fmt}">${FMTLABEL[r.fmt]}</span></div>
       <div style="width:140px" class="text-xs text-ink-500">${r.cats}</div>
       <div style="width:110px" class="fj-mono text-xs text-ink-400">${r.used}</div>

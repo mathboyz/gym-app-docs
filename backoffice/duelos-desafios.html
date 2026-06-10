@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Duelos & Desafíos</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+<style>
+.dd-panel { display: none; }
+.dd-panel.is-active { display: block; }
+.dd-vs { font-family: 'Space Grotesk'; font-weight: 700; font-size: 11px; color: var(--fj-ink-400); }
+</style>
+</head>
+<body data-page="duelos" data-title="Duelos & Desafíos" data-eyebrow="Forja Box · Competitivo peer-to-peer">
+<div data-fj-content>
+<div class="fj-pad fj-maxw space-y-4">
+
+  <!-- Tabs -->
+  <div class="fj-pills" id="dd-pills">
+    <button class="fj-pill" aria-selected="true" data-sec="duelos" onclick="ddTab('duelos',this)">Duelos <span class="fj-mono ml-1">2</span></button>
+    <button class="fj-pill" aria-selected="false" data-sec="desafios" onclick="ddTab('desafios',this)">Desafíos <span class="fj-mono ml-1">3</span></button>
+    <button class="fj-pill" aria-selected="false" data-sec="logros" onclick="ddTab('logros',this)">Logros robables</button>
+  </div>
+
+  <!-- ═══════════════ PANEL: DUELOS ═══════════════ -->
+  <div class="dd-panel is-active" data-dd="duelos">
+    <div class="grid grid-cols-3 gap-4 items-start">
+
+      <div class="col-span-2 space-y-4">
+
+        <!-- Por aprobar -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1 flex items-center justify-between">
+              <div><p class="fj-eyebrow">Creados por atletas en la app</p><h3 class="fj-section-h mt-0.5">Por aprobar</h3></div>
+              <span class="fj-badge fj-badge-brand">2</span>
+            </div>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="w-9 h-9 rounded-xl bg-brand-500/10 grid place-items-center shrink-0"><svg width="15" height="15" viewBox="0 0 24 24" fill="#FB5215"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <p class="text-sm font-bold text-ink-900">Fran</p>
+                <span class="fj-fmt fj-fmt-fortime">For Time</span>
+                <span class="fj-badge fj-badge-neutral">1v1</span>
+                <span class="fj-tag-rx">Rx</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-1">Matías Rojas <span class="dd-vs">VS</span> Camila Soto · Elo: +165/−90 · Logro: <span class="font-semibold text-brand-600">Rey de Fran</span></p>
+              <p class="text-xs text-ink-400 mt-0.5">Juez propuesto: Nacho Tapia · Jueves 06:30 · en vivo</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="resolveRow(this,'Duelo rechazado · se avisó a los atletas')">Rechazar</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="resolveRow(this,'Duelo aprobado ⚔️ · publicado en la app')">Aprobar</button>
+            </div>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="w-9 h-9 rounded-xl bg-brand-500/10 grid place-items-center shrink-0"><svg width="15" height="15" viewBox="0 0 24 24" fill="#FB5215"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <p class="text-sm font-bold text-ink-900">Cindy</p>
+                <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+                <span class="fj-badge fj-badge-info">2v2</span>
+                <span class="fj-tag-rx" style="background:rgba(62,123,250,.1);color:#3E7BFA">Scaled</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-1">Bastián Mora + 1 cupo <span class="dd-vs">VS</span> Camila Soto + Karin Vera · Elo por equipo: +120/−70</p>
+              <p class="text-xs text-ink-400 mt-0.5">Juez propuesto: Vale Fuentes · Sábado 09:00 · en vivo</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="resolveRow(this,'Duelo rechazado · se avisó a los atletas')">Rechazar</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="resolveRow(this,'Duelo aprobado ⚔️ · publicado en la app')">Aprobar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activos -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1 flex items-center justify-between">
+              <div><p class="fj-eyebrow">Aprobados y en juego</p><h3 class="fj-section-h mt-0.5">Activos</h3></div>
+              <span class="fj-badge fj-badge-success">3</span>
+            </div>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <p class="text-sm font-semibold text-ink-900">Helen · 1v1 · Rx</p>
+                <span class="fj-badge fj-badge-warning">Buscando rival</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">Pancho Díaz espera rival · Jueves 06:30 · Logro en juego</p>
+            </div>
+            <p class="fj-mono text-xs text-ink-400 shrink-0">120 pts</p>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="fj-dot" style="background:var(--m-crossfit)"></span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <p class="text-sm font-semibold text-ink-900">Fran · 1v1 · Rx</p>
+                <span class="fj-badge fj-badge-success">Agendado</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">Pancho Díaz <span class="dd-vs">VS</span> Matías Rojas · mañana 07:00 · Juez: Nacho Tapia</p>
+            </div>
+            <p class="fj-mono text-xs text-ink-400 shrink-0">180 pts</p>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="fj-dot" style="background:var(--m-gimnasia)"></span>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 flex-wrap">
+                <p class="text-sm font-semibold text-ink-900">Cindy · 2v2 · Rx</p>
+                <span class="fj-badge fj-badge-info">Asincrónico</span>
+              </div>
+              <p class="text-xs text-ink-400 mt-0.5">Equipo Soto/Vera <span class="dd-vs">VS</span> Mora/cupo libre · cierra domingo · Juez: Vale Fuentes</p>
+            </div>
+            <p class="fj-mono text-xs text-ink-400 shrink-0">100 pts</p>
+          </div>
+        </div>
+
+        <!-- Resueltos -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1"><p class="fj-eyebrow">Últimos 14 días</p><h3 class="fj-section-h mt-0.5">Resueltos</h3></div>
+          </div>
+          <div class="fj-row-static fj-row">
+            <span class="w-8 h-8 rounded-full bg-success/10 grid place-items-center shrink-0"><svg width="13" height="13" viewBox="0 0 24 24" fill="#18A957"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></span>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold text-ink-900">Cindy · Matías Rojas venció a Bastián Mora</p>
+              <p class="text-xs text-ink-400 mt-0.5">hace 3 días · Juez: Nacho Tapia · +120 pts a Matías</p>
+            </div>
+          </div>
+          <div class="fj-row-static fj-row">
+            <span class="w-8 h-8 rounded-full bg-brand-500/10 grid place-items-center shrink-0"><svg width="13" height="13" viewBox="0 0 24 24" fill="#FB5215"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold text-ink-900">Helen · Matías Rojas le robó el logro a Karin Vera</p>
+              <p class="text-xs text-ink-400 mt-0.5">hace 2 semanas · Juez: Nacho Tapia · Logro robado 🔥</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Side: reglas + catálogo -->
+      <div class="space-y-4">
+        <div class="fj-panel p-5">
+          <p class="fj-eyebrow mb-1">Reglas del box</p>
+          <h3 class="fj-section-h mb-3">Cómo funcionan</h3>
+          <div class="space-y-2.5 text-sm text-ink-700">
+            <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-brand)"></span><span>Los crean los atletas en la app y <b>pasan por tu aprobación</b> antes de publicarse.</span></p>
+            <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-brand)"></span><span>Puntos <b>estilo Elo</b>: los calcula la plataforma según la diferencia de nivel. Sin apuestas.</span></p>
+            <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-brand)"></span><span>Juez requerido (coach o atleta) para validar el resultado.</span></p>
+            <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-brand)"></span><span>Solo se duelan <b>rutinas de duelo</b> del catálogo del coach.</span></p>
+          </div>
+          <a href="configuracion.html" class="fj-btn fj-btn-ghost fj-btn-sm w-full justify-center mt-4">Economía de puntos → Configuración</a>
+        </div>
+
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1"><p class="fj-eyebrow">Catálogo del coach</p><h3 class="fj-section-h mt-0.5">Rutinas de duelo</h3></div>
+          </div>
+          <a href="constructor-rutina.html" class="fj-row">
+            <div class="flex-1 min-w-0"><p class="text-sm font-bold text-ink-900">Fran</p><p class="text-xs text-ink-400">21-15-9 · Thruster + Pull-up</p></div>
+            <span class="fj-fmt fj-fmt-fortime">For Time</span>
+          </a>
+          <a href="constructor-rutina.html" class="fj-row">
+            <div class="flex-1 min-w-0"><p class="text-sm font-bold text-ink-900">Cindy</p><p class="text-xs text-ink-400">AMRAP 20' · 5-10-15</p></div>
+            <span class="fj-fmt fj-fmt-amrap">AMRAP</span>
+          </a>
+          <a href="constructor-rutina.html" class="fj-row">
+            <div class="flex-1 min-w-0"><p class="text-sm font-bold text-ink-900">Helen</p><p class="text-xs text-ink-400">3 rondas · Run + KB + Pull-up</p></div>
+            <span class="fj-fmt fj-fmt-fortime">For Time</span>
+          </a>
+          <a href="constructor-rutina.html" class="fj-row">
+            <div class="flex-1 min-w-0"><p class="text-sm font-bold text-ink-900">Grace</p><p class="text-xs text-ink-400">30 Clean & Jerk @ 60kg</p></div>
+            <span class="fj-fmt fj-fmt-fortime">For Time</span>
+          </a>
+          <a href="rutinas.html" class="fj-row" style="border-top:1px dashed var(--fj-ink-200)">
+            <span class="text-xs font-semibold text-brand-600">Se marcan en el constructor de rutina · Gestionar →</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════ PANEL: DESAFÍOS ═══════════════ -->
+  <div class="dd-panel" data-dd="desafios">
+    <div class="grid grid-cols-3 gap-4 items-start">
+
+      <div class="col-span-2 space-y-4">
+
+        <!-- Desafío de la semana -->
+        <div class="fj-panel p-5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <p class="fj-eyebrow mb-1">Desafío de la semana · 9–15 jun</p>
+              <h3 class="font-display font-bold text-xl text-ink-900">15 HSPU estrictas</h3>
+              <p class="text-sm text-ink-500 mt-1">Handstand push-ups estrictas, sin kipping, en una sola serie. Un coach valida en el box.</p>
+              <div class="flex items-center gap-2 mt-3 flex-wrap">
+                <span class="fj-badge fj-badge-brand">+150 XP</span>
+                <span class="fj-badge fj-badge-warning">Badge: Hombro de acero</span>
+                <span class="fj-badge fj-badge-neutral">Difícil</span>
+                <span class="text-xs text-ink-400 ml-1"><span class="fj-mono font-semibold text-ink-700">6</span> lo han logrado</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="Forja.toast('Editando desafío… (demo)')">Editar</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="openChallengeDrawer()">Nuevo desafío</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Por validar -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1 flex items-center justify-between">
+              <div><p class="fj-eyebrow">El atleta lo marcó como completado</p><h3 class="fj-section-h mt-0.5">Por validar en el box</h3></div>
+              <span class="fj-badge fj-badge-warning">3</span>
+            </div>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <div class="w-9 h-9 rounded-full bg-brand-100 grid place-items-center shrink-0"><span class="font-display font-bold text-xs text-brand-600">CS</span></div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold text-ink-900">Camila Soto · 15 HSPU estrictas</p>
+              <p class="text-xs text-ink-400 mt-0.5">Declara: 15 seguidas · pidió validación hace 2 h · suele venir a las 09:00</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="resolveRow(this,'Marcado como no logrado · puede reintentar')">No pasó</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="resolveRow(this,'Validado ✓ · +150 XP y badge para Camila')">Validar</button>
+            </div>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <div class="w-9 h-9 rounded-full bg-ink-100 grid place-items-center shrink-0"><span class="font-display font-bold text-xs text-ink-500">PD</span></div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold text-ink-900">Pancho Díaz · 15 HSPU estrictas</p>
+              <p class="text-xs text-ink-400 mt-0.5">Declara: 15 seguidas · pidió validación ayer · viene Lun-Mié-Vie 18:00</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="resolveRow(this,'Marcado como no logrado · puede reintentar')">No pasó</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="resolveRow(this,'Validado ✓ · +150 XP y badge para Pancho')">Validar</button>
+            </div>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <div class="w-9 h-9 rounded-full bg-info/10 grid place-items-center shrink-0"><span class="font-display font-bold text-xs text-info">JN</span></div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-semibold text-ink-900">Javiera Núñez · Muscle-up (desafío anterior)</p>
+              <p class="text-xs text-ink-400 mt-0.5">Declara: 1 muscle-up estricto · pidió validación hace 3 días</p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button class="fj-btn fj-btn-ghost fj-btn-sm" onclick="resolveRow(this,'Marcado como no logrado · puede reintentar')">No pasó</button>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="resolveRow(this,'Validado ✓ · +200 XP y badge para Javiera')">Validar</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Validados -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1"><p class="fj-eyebrow">Últimos 7 días</p><h3 class="fj-section-h mt-0.5">Validados</h3></div>
+          </div>
+          <div class="fj-row-static fj-row">
+            <span class="w-8 h-8 rounded-full bg-success/10 grid place-items-center shrink-0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">Matías Rojas · 15 HSPU estrictas</p><p class="text-xs text-ink-400 mt-0.5">Validó Vale Fuentes · martes · +150 XP</p></div>
+            <span class="fj-badge fj-badge-success shrink-0">Validado</span>
+          </div>
+          <div class="fj-row-static fj-row">
+            <span class="w-8 h-8 rounded-full bg-success/10 grid place-items-center shrink-0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">Karin Vera · 15 HSPU estrictas</p><p class="text-xs text-ink-400 mt-0.5">Validó Nacho Tapia · lunes · +150 XP</p></div>
+            <span class="fj-badge fj-badge-success shrink-0">Validado</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Side -->
+      <div class="space-y-4">
+        <div class="fj-panel p-5">
+          <p class="fj-eyebrow mb-1">Cómo funciona</p>
+          <h3 class="fj-section-h mb-3">Validación presencial</h3>
+          <div class="space-y-2.5 text-sm text-ink-700">
+            <p class="flex items-start gap-2"><span class="fj-mono font-bold text-brand-600 shrink-0">1.</span><span>Tú publicas el desafío (semanal o puntual) con su recompensa.</span></p>
+            <p class="flex items-start gap-2"><span class="fj-mono font-bold text-brand-600 shrink-0">2.</span><span>El atleta lo intenta cuando quiera y lo marca como completado en la app.</span></p>
+            <p class="flex items-start gap-2"><span class="fj-mono font-bold text-brand-600 shrink-0">3.</span><span>Un coach lo ve hacerlo <b>en el box</b> y lo valida aquí. Sin videos ni fotos.</span></p>
+            <p class="flex items-start gap-2"><span class="fj-mono font-bold text-brand-600 shrink-0">4.</span><span>El XP y el badge se acreditan al validar.</span></p>
+          </div>
+        </div>
+        <div class="fj-panel p-5">
+          <p class="fj-eyebrow mb-3">Próximos en cola</p>
+          <div class="space-y-2 text-sm">
+            <div class="flex items-center justify-between"><span class="text-ink-700">Doble cuerda × 30</span><span class="fj-mono text-xs text-ink-400">16–22 jun</span></div>
+            <div class="flex items-center justify-between"><span class="text-ink-700">Snatch a peso corporal</span><span class="fj-mono text-xs text-ink-400">23–29 jun</span></div>
+            <div class="flex items-center justify-between"><span class="text-ink-700">Run 5k bajo 25'</span><span class="fj-mono text-xs text-ink-400">30 jun–6 jul</span></div>
+          </div>
+          <button class="fj-btn fj-btn-ghost fj-btn-sm w-full justify-center mt-4" onclick="openChallengeDrawer()">Agregar a la cola</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════ PANEL: LOGROS ROBABLES ═══════════════ -->
+  <div class="dd-panel" data-dd="logros">
+    <div class="grid grid-cols-3 gap-4 items-start">
+
+      <div class="col-span-2 space-y-4">
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1 flex items-center justify-between">
+              <div><p class="fj-eyebrow">Cinturones de campeón · uno por rutina</p><h3 class="fj-section-h mt-0.5">Logros robables</h3></div>
+              <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="openBeltDrawer()">Nuevo logro</button>
+            </div>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="w-10 h-10 rounded-xl grid place-items-center shrink-0" style="background:rgba(236,192,74,.14)"><svg width="18" height="18" viewBox="0 0 24 24" fill="#ECC04A"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></span>
+            <div class="w-44 shrink-0">
+              <p class="text-sm font-bold text-ink-900">Rey de Fran</p>
+              <p class="text-xs text-ink-400 mt-0.5">Rutina: Fran</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm text-ink-700">Dueña: <span class="font-semibold">Camila Soto</span> <span class="fj-mono text-xs text-ink-400">(PR 2:58)</span></p>
+              <p class="text-xs text-ink-400 mt-0.5">3 defensas · lo tiene hace 5 semanas</p>
+            </div>
+            <span class="fj-badge fj-badge-warning shrink-0">En juego</span>
+            <button class="fj-icon-btn shrink-0" aria-label="Editar Rey de Fran"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="w-10 h-10 rounded-xl grid place-items-center shrink-0" style="background:rgba(236,192,74,.14)"><svg width="18" height="18" viewBox="0 0 24 24" fill="#ECC04A"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></span>
+            <div class="w-44 shrink-0">
+              <p class="text-sm font-bold text-ink-900">Cindy Queen</p>
+              <p class="text-xs text-ink-400 mt-0.5">Rutina: Cindy</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm text-ink-700">Dueña: <span class="font-semibold">Javiera Núñez</span> <span class="fj-mono text-xs text-ink-400">(23 rondas)</span></p>
+              <p class="text-xs text-ink-400 mt-0.5">1 defensa · lo tiene hace 2 semanas</p>
+            </div>
+            <span class="fj-badge fj-badge-success shrink-0">Defendido</span>
+            <button class="fj-icon-btn shrink-0" aria-label="Editar Cindy Queen"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="w-10 h-10 rounded-xl grid place-items-center shrink-0" style="background:rgba(236,192,74,.14)"><svg width="18" height="18" viewBox="0 0 24 24" fill="#ECC04A"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></span>
+            <div class="w-44 shrink-0">
+              <p class="text-sm font-bold text-ink-900">Amo de Grace</p>
+              <p class="text-xs text-ink-400 mt-0.5">Rutina: Grace</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm text-ink-700">Dueño: <span class="font-semibold">Matías Rojas</span> <span class="fj-mono text-xs text-ink-400">(2:11)</span></p>
+              <p class="text-xs text-ink-400 mt-0.5">Robado a Karin Vera hace 2 semanas 🔥</p>
+            </div>
+            <span class="fj-badge fj-badge-success shrink-0">Defendido</span>
+            <button class="fj-icon-btn shrink-0" aria-label="Editar Amo de Grace"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          </div>
+
+          <div class="fj-row-static fj-row">
+            <span class="w-10 h-10 rounded-xl grid place-items-center shrink-0" style="background:var(--fj-ink-100)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-300)" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></svg></span>
+            <div class="w-44 shrink-0">
+              <p class="text-sm font-bold text-ink-900">Helen Master</p>
+              <p class="text-xs text-ink-400 mt-0.5">Rutina: Helen</p>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm text-ink-500">Sin dueño todavía</p>
+              <p class="text-xs text-ink-400 mt-0.5">Se lo lleva quien gane el primer duelo de Helen</p>
+            </div>
+            <span class="fj-badge fj-badge-neutral shrink-0">Vacante</span>
+            <button class="fj-icon-btn shrink-0" aria-label="Editar Helen Master"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></button>
+          </div>
+        </div>
+
+        <!-- Historial de robos -->
+        <div class="fj-list">
+          <div class="fj-list-head">
+            <div class="flex-1"><p class="fj-eyebrow">Línea de tiempo</p><h3 class="fj-section-h mt-0.5">Historial de robos</h3></div>
+          </div>
+          <div class="fj-row-static fj-row">
+            <span class="fj-mono text-xs text-ink-400 w-24 shrink-0">26 may</span>
+            <p class="flex-1 text-sm text-ink-700"><span class="font-semibold text-ink-900">Amo de Grace</span> · Matías Rojas se lo robó a Karin Vera (duelo Grace, 2:11 vs 2:24)</p>
+          </div>
+          <div class="fj-row-static fj-row">
+            <span class="fj-mono text-xs text-ink-400 w-24 shrink-0">12 may</span>
+            <p class="flex-1 text-sm text-ink-700"><span class="font-semibold text-ink-900">Rey de Fran</span> · Camila Soto se lo robó a Pancho Díaz (duelo Fran, 2:58 vs 3:31)</p>
+          </div>
+          <div class="fj-row-static fj-row">
+            <span class="fj-mono text-xs text-ink-400 w-24 shrink-0">28 abr</span>
+            <p class="flex-1 text-sm text-ink-700"><span class="font-semibold text-ink-900">Cindy Queen</span> · Javiera Núñez se lo ganó (primer duelo de Cindy del box)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Side -->
+      <div class="fj-panel p-5">
+        <p class="fj-eyebrow mb-1">Cómo funciona</p>
+        <h3 class="fj-section-h mb-3">El cinturón de campeón</h3>
+        <div class="space-y-2.5 text-sm text-ink-700">
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--tier-gold)"></span><span><b>Uno por rutina de duelo.</b> Lo tiene una sola persona a la vez.</span></p>
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--tier-gold)"></span><span>Se roba ganándole un duelo de esa rutina al dueño actual.</span></p>
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--tier-gold)"></span><span>El dueño puede rechazar retos, pero tras 3 rechazos el logro queda <b>en juego</b> para duelos abiertos.</span></p>
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--tier-gold)"></span><span>Se exhibe en el perfil del atleta y en el ranking del box.</span></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function ddTab(sec, btn) {
+  document.querySelectorAll('#dd-pills .fj-pill').forEach(p => p.setAttribute('aria-selected', 'false'));
+  btn.setAttribute('aria-selected', 'true');
+  document.querySelectorAll('.dd-panel').forEach(p => p.classList.toggle('is-active', p.getAttribute('data-dd') === sec));
+}
+
+function resolveRow(btn, msg) {
+  var row = btn.closest('.fj-row');
+  if (row) { row.style.transition = 'opacity .3s'; row.style.opacity = '.35'; row.querySelectorAll('button').forEach(function(b){ b.disabled = true; b.style.pointerEvents = 'none'; }); }
+  Forja.toast(msg);
+}
+
+function openChallengeDrawer() {
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div><p class="fj-eyebrow">Desafíos</p><p class="font-display font-bold text-lg">Nuevo desafío</p></div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="fj-drawer-body space-y-4">
+      <div><label class="fj-label">Nombre</label><input class="fj-input" placeholder="Ej: Doble cuerda × 30"></div>
+      <div><label class="fj-label">La prueba</label><textarea class="fj-input h-20 py-3 resize-none" placeholder="Qué tiene que lograr el atleta, en una frase clara"></textarea></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="fj-label">Recompensa XP</label><input class="fj-input fj-mono" value="150" inputmode="numeric"></div>
+        <div><label class="fj-label">Dificultad</label><select class="fj-input appearance-none cursor-pointer"><option>Media</option><option selected>Difícil</option><option>Épica</option></select></div>
+      </div>
+      <div><label class="fj-label">Badge que desbloquea</label><input class="fj-input" placeholder="Ej: Hombro de acero"></div>
+      <div class="grid grid-cols-2 gap-3">
+        <div><label class="fj-label">Desde</label><input class="fj-input fj-mono" type="date" value="2026-06-16"></div>
+        <div><label class="fj-label">Hasta</label><input class="fj-input fj-mono" type="date" value="2026-06-22"></div>
+      </div>
+      <p class="text-xs text-ink-400">Los atletas lo verán en la app. Cuando uno lo marque como completado, te aparece aquí en "Por validar".</p>
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-ghost" data-fj-close>Cancelar</button>
+      <button class="fj-btn fj-btn-primary" onclick="Forja.toast('Desafío publicado ✓'); Forja.Drawer.close()">Publicar desafío</button>
+    </div>`);
+}
+
+function openBeltDrawer() {
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div><p class="fj-eyebrow">Logros robables</p><p class="font-display font-bold text-lg">Nuevo logro</p></div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="fj-drawer-body space-y-4">
+      <div><label class="fj-label">Nombre del logro</label><input class="fj-input" placeholder="Ej: Rey de Murph"></div>
+      <div><label class="fj-label">Rutina de duelo asociada</label>
+        <select class="fj-input appearance-none cursor-pointer"><option>Murph</option><option>Fran</option><option>Cindy</option><option>Helen</option><option>Grace</option></select>
+        <p class="text-xs text-ink-400 mt-1.5">Solo rutinas marcadas como "de duelo". Una rutina = un logro.</p>
+      </div>
+      <div><label class="fj-label">Cómo se gana</label>
+        <select class="fj-input appearance-none cursor-pointer"><option selected>Primer duelo ganado de esta rutina</option><option>Lo asigno manualmente al mejor PR actual</option></select>
+      </div>
+      <p class="text-xs text-ink-400">El logro es único: lo tiene una persona a la vez y se roba ganando duelos de esta rutina.</p>
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-ghost" data-fj-close>Cancelar</button>
+      <button class="fj-btn fj-btn-primary" onclick="Forja.toast('Logro robable creado 👑'); Forja.Drawer.close()">Crear logro</button>
+    </div>`);
+}
+</script>
+</body>
+</html>

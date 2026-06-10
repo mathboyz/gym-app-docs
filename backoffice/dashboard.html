@@ -94,12 +94,27 @@
     <div class="fj-panel p-5 flex flex-col">
       <div class="flex items-center justify-between mb-4">
         <div><p class="fj-eyebrow">Por hacer</p><h3 class="fj-section-h mt-0.5">Pendientes</h3></div>
-        <span class="fj-badge fj-badge-brand">4</span>
+        <span class="fj-badge fj-badge-brand">6</span>
       </div>
       <div class="space-y-2.5 flex-1">
         <a href="pagos.html" class="flex items-center gap-3 p-3 rounded-xl border border-ink-200 hover:border-brand-300 hover:bg-brand-50/40 transition-all">
           <span class="w-9 h-9 rounded-lg bg-brand-500/10 grid place-items-center shrink-0 text-brand-600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
           <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">3 comprobantes por aprobar</p><p class="text-xs text-ink-400">Transferencias pendientes</p></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <a href="retencion.html" class="flex items-center gap-3 p-3 rounded-xl border border-ink-200 hover:border-danger/40 hover:bg-danger/5 transition-all">
+          <span class="w-9 h-9 rounded-lg bg-danger/10 grid place-items-center shrink-0 text-danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">4 atletas en riesgo</p><p class="text-xs text-ink-400">Asistencia cayendo · planes sin renovar</p></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+        <button onclick="openFreezeDrawer()" class="w-full text-left flex items-center gap-3 p-3 rounded-xl border border-ink-200 hover:border-info/40 hover:bg-info/5 transition-all">
+          <span class="w-9 h-9 rounded-lg bg-info/10 grid place-items-center shrink-0 text-info"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="22"/><path d="m4.93 4.93 14.14 14.14"/><path d="m19.07 4.93-14.14 14.14"/><line x1="2" y1="12" x2="22" y2="12"/></svg></span>
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">1 solicitud de congelamiento</p><p class="text-xs text-ink-400">Camila Soto · 14–28 jun</p></div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <a href="duelos-desafios.html" class="flex items-center gap-3 p-3 rounded-xl border border-ink-200 hover:border-brand-300 hover:bg-brand-50/40 transition-all">
+          <span class="w-9 h-9 rounded-lg bg-brand-500/10 grid place-items-center shrink-0 text-brand-600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">2 duelos por aprobar</p><p class="text-xs text-ink-400">Fran 1v1 · Cindy 2v2</p></div>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A91A1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         </a>
         <a href="clientes.html" class="flex items-center gap-3 p-3 rounded-xl border border-ink-200 hover:border-warning/40 hover:bg-warning/5 transition-all">
@@ -148,5 +163,33 @@
 
 </div>
 </div>
+
+<script>
+function openFreezeDrawer() {
+  Forja.Drawer.open(`
+    <div class="fj-drawer-head">
+      <div><p class="fj-eyebrow">Membresías</p><p class="font-display font-bold text-lg">Solicitud de congelamiento</p></div>
+      <button class="fj-icon-btn" data-fj-close aria-label="Cerrar"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="fj-drawer-body space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full bg-brand-100 grid place-items-center"><span class="font-display font-bold text-sm text-brand-600">CS</span></div>
+        <div><p class="text-sm font-bold text-ink-900">Camila Soto</p><p class="text-xs text-ink-400">Plan Full · al día · miembro desde mar 2024</p></div>
+        <a href="cliente-perfil.html" class="ml-auto text-xs font-semibold text-brand-600 hover:underline">Ver perfil →</a>
+      </div>
+      <div class="rounded-xl border border-ink-200 p-4 space-y-2.5">
+        <div class="flex items-center justify-between text-sm"><span class="text-ink-500">Período solicitado</span><span class="fj-mono text-ink-900 font-semibold">14 – 28 jun · 14 días</span></div>
+        <div class="flex items-center justify-between text-sm"><span class="text-ink-500">Motivo</span><span class="text-ink-700">Viaje de trabajo</span></div>
+        <div class="flex items-center justify-between text-sm"><span class="text-ink-500">Usado este año</span><span class="fj-mono text-ink-700">0 de 30 días</span></div>
+        <div class="flex items-center justify-between text-sm"><span class="text-ink-500">Próximo cobro</span><span class="fj-mono text-ink-700">se corre al 14 jul</span></div>
+      </div>
+      <p class="text-xs text-ink-400">Cumple las reglas del box (mín 7 días, máx 30/año). Al aprobar, el plan se pausa y la fecha de cobro se desplaza automáticamente.</p>
+    </div>
+    <div class="fj-drawer-foot">
+      <button class="fj-btn fj-btn-ghost" onclick="Forja.toast('Solicitud rechazada · se avisó a Camila'); Forja.Drawer.close()">Rechazar</button>
+      <button class="fj-btn fj-btn-primary" onclick="Forja.toast('Plan congelado 14–28 jun ✓'); Forja.Drawer.close()">Aprobar congelamiento</button>
+    </div>`);
+}
+</script>
 </body>
 </html>

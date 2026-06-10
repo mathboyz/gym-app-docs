@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forja · Retención</title>
+<script>(function(){var w=console.warn;console.warn=function(){var a=arguments[0];if(typeof a==="string"&&a.indexOf("cdn.tailwindcss.com")!==-1)return;return w.apply(console,arguments)};})();</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="../assets/forja.config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/forja.css">
+<script src="../assets/forja.js"></script>
+</head>
+<body data-page="retencion" data-title="Retención" data-eyebrow="Forja Box · Radar de atletas en riesgo">
+<div data-fj-content>
+<div class="fj-pad fj-maxw space-y-4">
+
+  <!-- KPIs -->
+  <div class="grid grid-cols-4 gap-4">
+    <div class="fj-panel p-5">
+      <p class="fj-eyebrow mb-3">En riesgo ahora</p>
+      <p class="font-mono font-bold text-[34px] leading-none text-danger">4</p>
+      <p class="text-xs text-ink-500 mt-2">de 248 activos</p>
+    </div>
+    <div class="fj-panel p-5">
+      <p class="fj-eyebrow mb-3">Recuperados</p>
+      <p class="font-mono font-bold text-[34px] leading-none text-success">6</p>
+      <p class="text-xs text-ink-500 mt-2">últimos 30 días</p>
+    </div>
+    <div class="fj-panel p-5">
+      <p class="fj-eyebrow mb-3">Se fueron</p>
+      <p class="font-mono font-bold text-[34px] leading-none text-ink-900">3</p>
+      <p class="text-xs text-ink-500 mt-2">últimos 30 días · churn 1,2%</p>
+    </div>
+    <div class="fj-panel p-5">
+      <p class="fj-eyebrow mb-3">Detección promedio</p>
+      <p class="font-mono font-bold text-[34px] leading-none text-ink-900">9<span class="text-base text-ink-400"> días</span></p>
+      <p class="text-xs text-ink-500 mt-2">antes de que venza el plan</p>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="fj-pills" id="ret-pills">
+    <button class="fj-pill" aria-selected="true" data-ret="riesgo" onclick="retTab('riesgo',this)">En riesgo <span class="fj-mono ml-1">4</span></button>
+    <button class="fj-pill" aria-selected="false" data-ret="contactados" onclick="retTab('contactados',this)">Contactados <span class="fj-mono ml-1">2</span></button>
+    <button class="fj-pill" aria-selected="false" data-ret="recuperados" onclick="retTab('recuperados',this)">Recuperados <span class="fj-mono ml-1">6</span></button>
+  </div>
+
+  <div class="grid grid-cols-3 gap-4 items-start">
+
+    <div class="col-span-2 space-y-4">
+
+      <!-- EN RIESGO -->
+      <div class="ret-panel fj-list" data-rp="riesgo">
+        <div class="fj-list-head">
+          <div class="flex-1 flex items-center justify-between">
+            <div><p class="fj-eyebrow">Señales de las últimas 4 semanas</p><h3 class="fj-section-h mt-0.5">Atletas en riesgo</h3></div>
+            <span class="fj-badge fj-badge-danger">4</span>
+          </div>
+        </div>
+
+        <div class="fj-row-static fj-row">
+          <div class="w-10 h-10 rounded-full bg-danger/10 grid place-items-center shrink-0 relative">
+            <span class="font-display font-bold text-sm text-danger">IV</span>
+            <span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-danger border-2 border-white"></span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <p class="text-sm font-bold text-ink-900">Ignacio Vera</p>
+              <span class="fj-badge fj-badge-danger">Riesgo alto</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap mt-1.5">
+              <span class="fj-badge fj-badge-neutral">Asistencia −67%</span>
+              <span class="fj-badge fj-badge-neutral">Racha rota tras 9 sem</span>
+              <span class="fj-badge fj-badge-warning">Pago vencido 1 jun</span>
+            </div>
+            <p class="text-xs text-ink-400 mt-1.5">Venía 4×/sem, hace 12 días no entra · Pack 10 con 3 clases sin usar · su horario era 18:00 con Nacho</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="cliente-perfil.html" class="fj-btn fj-btn-ghost fj-btn-sm">Ver perfil</a>
+            <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="markContacted(this,'Ignacio marcado como contactado ✓')">Lo contacté</button>
+          </div>
+        </div>
+
+        <div class="fj-row-static fj-row">
+          <div class="w-10 h-10 rounded-full bg-warning/10 grid place-items-center shrink-0">
+            <span class="font-display font-bold text-sm" style="color:#9A6A09">PD</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <p class="text-sm font-bold text-ink-900">Pancho Díaz</p>
+              <span class="fj-badge fj-badge-warning">Riesgo medio</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap mt-1.5">
+              <span class="fj-badge fj-badge-neutral">Asistencia −50%</span>
+              <span class="fj-badge fj-badge-neutral">Plan vence en 5 días</span>
+            </div>
+            <p class="text-xs text-ink-400 mt-1.5">Pasó de 12 a 6 clases este mes · aún no renueva · sigue activo en duelos (señal buena)</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="cliente-perfil.html" class="fj-btn fj-btn-ghost fj-btn-sm">Ver perfil</a>
+            <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="markContacted(this,'Pancho marcado como contactado ✓')">Lo contacté</button>
+          </div>
+        </div>
+
+        <div class="fj-row-static fj-row">
+          <div class="w-10 h-10 rounded-full bg-warning/10 grid place-items-center shrink-0">
+            <span class="font-display font-bold text-sm" style="color:#9A6A09">KV</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <p class="text-sm font-bold text-ink-900">Karin Vera</p>
+              <span class="fj-badge fj-badge-warning">Riesgo medio</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap mt-1.5">
+              <span class="fj-badge fj-badge-neutral">Sin reservas hace 14 días</span>
+              <span class="fj-badge fj-badge-neutral">Racha rota tras 6 sem</span>
+            </div>
+            <p class="text-xs text-ink-400 mt-1.5">Plan Full al día · dejó de venir justo después de perder el logro de Helen · solía venir Lun-Mié-Vie 07:00</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="cliente-perfil.html" class="fj-btn fj-btn-ghost fj-btn-sm">Ver perfil</a>
+            <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="markContacted(this,'Karin marcada como contactada ✓')">La contacté</button>
+          </div>
+        </div>
+
+        <div class="fj-row-static fj-row">
+          <div class="w-10 h-10 rounded-full bg-info/10 grid place-items-center shrink-0">
+            <span class="font-display font-bold text-sm text-info">SM</span>
+          </div>
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center gap-2 flex-wrap">
+              <p class="text-sm font-bold text-ink-900">Sebastián Mora</p>
+              <span class="fj-badge fj-badge-info">Socio nuevo</span>
+            </div>
+            <div class="flex items-center gap-2 flex-wrap mt-1.5">
+              <span class="fj-badge fj-badge-neutral">Solo 1 clase en sus primeras 2 semanas</span>
+            </div>
+            <p class="text-xs text-ink-400 mt-1.5">Se inscribió hace 15 días (Plan 3x) y vino una vez · el primer mes define si se queda</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <a href="cliente-perfil.html" class="fj-btn fj-btn-ghost fj-btn-sm">Ver perfil</a>
+            <button class="fj-btn fj-btn-primary fj-btn-sm" onclick="markContacted(this,'Sebastián marcado como contactado ✓')">Lo contacté</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACTADOS -->
+      <div class="ret-panel fj-list" data-rp="contactados" hidden>
+        <div class="fj-list-head">
+          <div class="flex-1"><p class="fj-eyebrow">Esperando que vuelvan</p><h3 class="fj-section-h mt-0.5">Contactados</h3></div>
+        </div>
+        <div class="fj-row-static fj-row">
+          <div class="w-10 h-10 rounded-full bg-ink-100 grid place-items-center shrink-0"><span class="font-display font-bold text-sm text-ink-500">JP</span></div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-ink-900">José Pérez</p>
+            <p class="text-xs text-ink-400 mt-0.5">Contactado hace 3 días por Vale · motivo: lesión de hombro · vuelve la próxima semana</p>
+          </div>
+          <span class="fj-badge fj-badge-warning shrink-0">Esperando</span>
+        </div>
+        <div class="fj-row-static fj-row">
+          <div class="w-10 h-10 rounded-full bg-ink-100 grid place-items-center shrink-0"><span class="font-display font-bold text-sm text-ink-500">FT</span></div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-bold text-ink-900">Fernanda Torres</p>
+            <p class="text-xs text-ink-400 mt-0.5">Contactada ayer por Nacho · cambio de pega, evalúa pasarse al plan 3x con horario de mañana</p>
+          </div>
+          <span class="fj-badge fj-badge-warning shrink-0">Esperando</span>
+        </div>
+      </div>
+
+      <!-- RECUPERADOS -->
+      <div class="ret-panel fj-list" data-rp="recuperados" hidden>
+        <div class="fj-list-head">
+          <div class="flex-1"><p class="fj-eyebrow">Últimos 30 días</p><h3 class="fj-section-h mt-0.5">Recuperados</h3></div>
+        </div>
+        <div class="fj-row-static fj-row">
+          <span class="w-8 h-8 rounded-full bg-success/10 grid place-items-center shrink-0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">Javiera Núñez</p><p class="text-xs text-ink-400 mt-0.5">Detectada con asistencia −60% → contactada → volvió y lleva racha de 12 días 🔥</p></div>
+          <span class="fj-mono text-xs text-ink-400 shrink-0">hace 2 sem</span>
+        </div>
+        <div class="fj-row-static fj-row">
+          <span class="w-8 h-8 rounded-full bg-success/10 grid place-items-center shrink-0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">Marcela Lagos</p><p class="text-xs text-ink-400 mt-0.5">Plan vencido sin renovar → contactada → renovó semestral con descuento RETORNO</p></div>
+          <span class="fj-mono text-xs text-ink-400 shrink-0">hace 3 sem</span>
+        </div>
+        <div class="fj-row-static fj-row">
+          <span class="w-8 h-8 rounded-full bg-success/10 grid place-items-center shrink-0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+          <div class="flex-1 min-w-0"><p class="text-sm font-semibold text-ink-900">Rodrigo Herrera</p><p class="text-xs text-ink-400 mt-0.5">Socio nuevo estancado → contactado → se cambió al horario 06:00 y no ha faltado</p></div>
+          <span class="fj-mono text-xs text-ink-400 shrink-0">hace 4 sem</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Side: cómo funciona -->
+    <div class="space-y-4">
+      <div class="fj-panel p-5">
+        <p class="fj-eyebrow mb-1">Cómo funciona</p>
+        <h3 class="fj-section-h mb-3">Señales que vigila</h3>
+        <div class="space-y-2.5 text-sm text-ink-700">
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-danger)"></span><span><b>Asistencia cayendo:</b> baja ≥50% vs su promedio de 8 semanas.</span></p>
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-danger)"></span><span><b>Racha rota:</b> perdió una racha larga y no ha vuelto.</span></p>
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-danger)"></span><span><b>Plan por vencer sin renovar</b> o pago vencido.</span></p>
+          <p class="flex items-start gap-2"><span class="fj-dot mt-1.5" style="background:var(--fj-danger)"></span><span><b>Socio nuevo estancado:</b> pocas clases en el primer mes.</span></p>
+        </div>
+        <p class="text-xs text-ink-400 mt-4 pt-4 border-t border-ink-100">La conversación la manejas tú por el canal que prefieras. Aquí solo marcas que lo contactaste para que el equipo no lo duplique y el radar mida si volvió.</p>
+      </div>
+      <div class="fj-panel p-5">
+        <p class="fj-eyebrow mb-3">Por qué importa</p>
+        <p class="font-mono font-bold text-2xl text-ink-900 leading-none">5×</p>
+        <p class="text-sm text-ink-600 mt-2">más barato recuperar un socio que conseguir uno nuevo. Cada atleta recuperado son ~$89.000/mes que no se van.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<script>
+function retTab(sec, btn) {
+  document.querySelectorAll('#ret-pills .fj-pill').forEach(p => p.setAttribute('aria-selected', 'false'));
+  btn.setAttribute('aria-selected', 'true');
+  document.querySelectorAll('.ret-panel').forEach(p => p.hidden = p.getAttribute('data-rp') !== sec);
+}
+function markContacted(btn, msg) {
+  var row = btn.closest('.fj-row');
+  if (row) {
+    row.style.transition = 'opacity .3s';
+    row.style.opacity = '.4';
+    btn.outerHTML = '<span class="fj-badge fj-badge-success shrink-0">Contactado ✓</span>';
+  }
+  Forja.toast(msg);
+}
+</script>
+</body>
+</html>
