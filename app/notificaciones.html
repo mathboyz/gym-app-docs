@@ -18,7 +18,7 @@
   .notif-row {
     display: flex;
     align-items: flex-start;
-    gap: 13px;
+    gap: 12px;
     padding: 14px 16px;
     border-bottom: 1px solid var(--fj-ink-100);
     text-decoration: none;
@@ -29,13 +29,10 @@
   .notif-row:last-child { border-bottom: 0; }
   .notif-row:active { background: rgba(0,0,0,.04); }
 
-  /* Estado no leído: fondo muy suave */
-  .notif-row.unread {
-    background: rgba(251,82,21,.045);
-  }
-  [data-theme="dark"] .notif-row.unread {
-    background: rgba(251,82,21,.07);
-  }
+  /* No leída: SOLO dot + título fuerte (sin tint de fondo) */
+  .notif-row .notif-text { color: var(--fj-ink-600); }
+  .notif-row.unread .notif-text { color: var(--fj-ink-800); }
+  .notif-row.unread .notif-text b { color: var(--fj-ink-900); }
 
   /* Ícono cuadrado redondeado */
   .notif-ic {
@@ -47,44 +44,104 @@
     flex-shrink: 0;
   }
 
-  /* Punto no-leído brand */
-  .notif-unread-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--fj-brand, #FB5215);
+  /* Avatar de persona con mini-badge de contexto */
+  .notif-av {
+    position: relative;
+    width: 40px;
+    height: 40px;
     flex-shrink: 0;
-    margin-top: 6px;
+  }
+  .notif-av .a-av { width: 40px; height: 40px; font-size: 12px; }
+  .notif-mini {
+    position: absolute;
+    right: -4px;
+    bottom: -4px;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 10px;
+    background: var(--fj-surface);
+    border: 1.5px solid var(--fj-ink-100);
   }
 
-  /* Texto principal */
+  /* Cabecera: texto + hora a la derecha */
+  .notif-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+  }
   .notif-text {
     font-size: 13.5px;
     line-height: 1.45;
-    color: var(--fj-ink-800);
     margin: 0;
+    min-width: 0;
   }
   .notif-text b { color: var(--fj-ink-900); }
-
-  /* Subtexto */
+  .notif-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--fj-ink-300);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
   .notif-sub {
     font-size: 12px;
     color: var(--fj-ink-400);
     margin: 2px 0 0;
   }
 
-  /* Tiempo mono */
-  .notif-time {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10.5px;
-    color: var(--fj-ink-300);
-    margin: 5px 0 0;
-    display: block;
+  /* Punto no-leído brand */
+  .notif-unread-dot {
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fj-brand, #FB5215);
   }
+
+  /* Acciones inline */
+  .notif-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 9px;
+  }
+  .notif-btn {
+    height: 30px;
+    padding: 0 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border: 0;
+  }
+  .notif-btn-primary { background: var(--fj-brand); color: #fff; }
+  .notif-btn-ghost { background: transparent; color: var(--fj-ink-700); border: 1px solid var(--fj-ink-200); }
 
   /* Encabezado de grupo */
   .notif-group-header {
-    padding: 10px 16px 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 2px 7px;
+  }
+  .notif-count {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--fj-brand-600, #E0410A);
+    background: rgba(251,82,21,.10);
+    border-radius: 99px;
+    padding: 1px 7px;
   }
 
   /* Botón marcar leídas */
@@ -119,74 +176,92 @@
     <!-- ─── HOY ─────────────────────────────────────────────── -->
     <div class="notif-group-header">
       <p class="a-eyebrow">Hoy</p>
+      <span class="notif-count" id="unread-count">5 nuevas</span>
     </div>
 
-    <div class="acard" style="margin:0 16px 4px">
+    <div class="acard" style="margin:0 0 4px">
 
-      <!-- 0. Encuesta post-clase — NO LEÍDA -->
-      <a href="responder-encuesta.html" class="notif-row unread">
-        <span class="notif-ic" style="background:rgba(124,58,237,.16)">
+      <!-- 0. Reto de duelo — NO LEÍDA · accionable -->
+      <div class="notif-row unread">
+        <span class="notif-unread-dot"></span>
+        <span class="notif-av">
+          <span class="a-av" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">MR</span>
+          <span class="notif-mini">⚔️</span>
+        </span>
+        <div style="flex:1;min-width:0">
+          <div class="notif-head">
+            <p class="notif-text"><b>Matías Rojas</b> te retó a un duelo</p>
+            <span class="notif-time">1 h</span>
+          </div>
+          <p class="notif-sub">Fran · tiempo vs tiempo · expira en 24 h</p>
+          <div class="notif-actions">
+            <a href="duelos.html" class="notif-btn notif-btn-primary">Aceptar reto</a>
+            <a href="duelos.html" class="notif-btn notif-btn-ghost">Ver duelo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. Encuesta post-clase — NO LEÍDA · accionable -->
+      <div class="notif-row unread">
+        <span class="notif-unread-dot"></span>
+        <span class="notif-ic" style="background:rgba(124,58,237,.13)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>¿Cómo estuvo tu clase de hoy?</b> Cuéntanos 🙌</p>
-          <p class="notif-sub">Encuesta rápida · CrossFit 09:00 · +20 XP</p>
-          <span class="notif-time">hace 25 min</span>
+          <div class="notif-head">
+            <p class="notif-text"><b>¿Cómo estuvo tu clase de hoy?</b></p>
+            <span class="notif-time">25 min</span>
+          </div>
+          <p class="notif-sub">CrossFit 09:00 con Vale · 1 minuto</p>
+          <div class="notif-actions">
+            <a href="responder-encuesta.html" class="notif-btn notif-btn-primary">Responder · +20 XP</a>
+          </div>
         </div>
-        <span class="notif-unread-dot"></span>
-      </a>
+      </div>
 
-      <!-- 1. Recordatorio clase mañana — NO LEÍDA -->
-      <div class="notif-row unread">
+      <!-- 2. Recordatorio clase mañana — NO LEÍDA -->
+      <a href="ver-clase.html" class="notif-row unread">
+        <span class="notif-unread-dot"></span>
         <span class="notif-ic" style="background:rgba(24,169,87,.13)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>Clase mañana a las 07:00</b> — no la pierdas 💪</p>
-          <p class="notif-sub">CrossFit · Coach Valentina Fuentes · Forja Providencia</p>
-          <a href="ver-clase.html" style="display:inline-block;margin-top:6px;font-size:12px;font-weight:600;color:var(--fj-brand-600,#E0410A)">Ver detalle →</a>
-          <span class="notif-time">hace 10 min</span>
+          <div class="notif-head">
+            <p class="notif-text"><b>Clase mañana 07:00</b> — tienes tu cupo reservado</p>
+            <span class="notif-time">10 min</span>
+          </div>
+          <p class="notif-sub">CrossFit · Vale Fuentes · Forja Providencia</p>
         </div>
-        <span class="notif-unread-dot"></span>
-      </div>
+      </a>
 
-      <!-- 2. Nuevo logro desbloqueado — NO LEÍDA -->
-      <a href="desafios.html" class="notif-row unread">
+      <!-- 3. Nuevo logro desbloqueado — NO LEÍDA -->
+      <a href="perfil.html" class="notif-row unread">
+        <span class="notif-unread-dot"></span>
         <span class="notif-ic" style="background:rgba(236,192,74,.18)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C49A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>¡Logro desbloqueado!</b> "Sin Descanso" 🏅</p>
-          <p class="notif-sub">Completaste 7 clases en una semana · +120 XP</p>
-          <span class="notif-time">hace 34 min</span>
+          <div class="notif-head">
+            <p class="notif-text"><b>Logro desbloqueado:</b> "Sin Descanso" 🏅</p>
+            <span class="notif-time">34 min</span>
+          </div>
+          <p class="notif-sub">7 clases en una semana · +120 XP</p>
         </div>
-        <span class="notif-unread-dot"></span>
-      </a>
-
-      <!-- 3. Reto de duelo — NO LEÍDA -->
-      <a href="duelos.html" class="notif-row unread">
-        <span class="notif-ic" style="background:rgba(251,82,21,.12)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E0410A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 9.5-5 5"/><path d="M18 6 6 18"/><path d="m21 3-3 3-3-3 3-3z"/><path d="m3 21 3-3 3 3-3 3z"/></svg>
-        </span>
-        <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>Matías Rojas</b> te retó a un duelo ⚔️</p>
-          <p class="notif-sub">Fran · Tiempo vs tiempo · Expira en 24 h</p>
-          <span class="notif-time">hace 1 h</span>
-        </div>
-        <span class="notif-unread-dot"></span>
       </a>
 
       <!-- 4. Subiste de posición en ranking — NO LEÍDA -->
       <a href="ranking.html" class="notif-row unread">
+        <span class="notif-unread-dot"></span>
         <span class="notif-ic" style="background:rgba(62,123,250,.12)">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2350B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 4-8 4 4 4-6 4 4"/><polyline points="17 7 21 7 21 11"/></svg>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text">Subiste al <b>puesto #4</b> en el ranking semanal 🚀</p>
-          <p class="notif-sub">Superaste a Javiera Núñez · Ranking Forja Providencia</p>
-          <span class="notif-time">hace 2 h</span>
+          <div class="notif-head">
+            <p class="notif-text">Subiste al <b>puesto #4</b> del ranking semanal</p>
+            <span class="notif-time">2 h</span>
+          </div>
+          <p class="notif-sub">Superaste a Javiera Núñez</p>
         </div>
-        <span class="notif-unread-dot"></span>
       </a>
 
     </div>
@@ -196,17 +271,20 @@
       <p class="a-eyebrow">Esta semana</p>
     </div>
 
-    <div class="acard" style="margin:0 16px 4px">
+    <div class="acard" style="margin:0 0 4px">
 
       <!-- 5. Alguien reaccionó tu publicación — leída -->
       <a href="red-social.html" class="notif-row">
-        <span class="notif-ic" style="background:rgba(232,90,152,.13)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4246A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        <span class="notif-av">
+          <span class="a-av" style="background:linear-gradient(135deg,#E89BC0,#C4246A)">CP</span>
+          <span class="notif-mini">❤️</span>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>Catalina Pérez</b> y <b>3 personas más</b> reaccionaron tu post</p>
-          <p class="notif-sub">"Primer Muscle Up conseguido 🙌" · Comunidad</p>
-          <span class="notif-time">ayer, 20:14</span>
+          <div class="notif-head">
+            <p class="notif-text"><b>Catalina Pérez</b> y 3 más reaccionaron a tu post</p>
+            <span class="notif-time">ayer</span>
+          </div>
+          <p class="notif-sub">"Primer Muscle Up conseguido 🙌"</p>
         </div>
       </a>
 
@@ -216,21 +294,26 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F7A3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text">¡Ganaste el duelo contra <b>Rodrigo Saavedra</b>! 🏆</p>
-          <p class="notif-sub">Isabel · 4:38 vs 5:12 · +80 XP ganados</p>
-          <span class="notif-time">ayer, 18:05</span>
+          <div class="notif-head">
+            <p class="notif-text">Ganaste el duelo contra <b>Rodrigo Saavedra</b> 🏆</p>
+            <span class="notif-time">ayer</span>
+          </div>
+          <p class="notif-sub">Isabel · 4:38 vs 5:12 · +80 XP</p>
         </div>
       </a>
 
       <!-- 7. Coach validó tu desafío — leída -->
       <a href="desafios.html" class="notif-row">
-        <span class="notif-ic" style="background:rgba(62,123,250,.11)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2350B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        <span class="notif-av">
+          <span class="a-av" style="background:linear-gradient(135deg,#61D2C4,#18A957)">VF</span>
+          <span class="notif-mini">✅</span>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>Vale Fuentes</b> validó tu desafío "100 Dobles Bajo Tiempo"</p>
-          <p class="notif-sub">Completado · +200 XP · Desafíos activos</p>
-          <span class="notif-time">mar 4 jun · 11:30</span>
+          <div class="notif-head">
+            <p class="notif-text"><b>Vale Fuentes</b> validó tu desafío</p>
+            <span class="notif-time">mar 4</span>
+          </div>
+          <p class="notif-sub">"100 Dobles Bajo Tiempo" · +200 XP</p>
         </div>
       </a>
 
@@ -241,7 +324,7 @@
       <p class="a-eyebrow">Antes</p>
     </div>
 
-    <div class="acard" style="margin:0 16px 16px">
+    <div class="acard" style="margin:0 0 16px">
 
       <!-- 8. Subiste de nivel — leída -->
       <div class="notif-row">
@@ -249,21 +332,26 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E0410A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>¡Subiste al Nivel 12!</b> Seguís en racha 🔥</p>
+          <div class="notif-head">
+            <p class="notif-text"><b>¡Subiste al Nivel 12!</b> Sigues en racha 🔥</p>
+            <span class="notif-time">lun 2</span>
+          </div>
           <p class="notif-sub">Ganaste acceso a Desafíos Avanzados</p>
-          <span class="notif-time">lun 2 jun · 09:15</span>
         </div>
       </div>
 
       <!-- 9. Alguien comentó tu post — leída -->
       <a href="red-social.html" class="notif-row">
-        <span class="notif-ic" style="background:rgba(62,123,250,.10)">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2350B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <span class="notif-av">
+          <span class="a-av" style="background:linear-gradient(135deg,#6AA8FF,#3E7BFA)">FA</span>
+          <span class="notif-mini">💬</span>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text"><b>Felipe Alarcón</b> comentó tu post en la comunidad</p>
-          <p class="notif-sub">"¡Qué brutalidad po! 💪 sigo tu onda" · hace 4 días</p>
-          <span class="notif-time">dom 1 jun · 21:47</span>
+          <div class="notif-head">
+            <p class="notif-text"><b>Felipe Alarcón</b> comentó tu post</p>
+            <span class="notif-time">dom 1</span>
+          </div>
+          <p class="notif-sub">"¡Qué brutalidad po! 💪 sigo tu onda"</p>
         </div>
       </a>
 
@@ -273,9 +361,11 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A6A09" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
         </span>
         <div style="flex:1;min-width:0">
-          <p class="notif-text">Mantuviste tu racha de <b>10 días</b> seguidos 🔥</p>
-          <p class="notif-sub">Logro "Semana Perfecta" desbloqueado · +50 XP</p>
-          <span class="notif-time">sáb 31 may · 19:02</span>
+          <div class="notif-head">
+            <p class="notif-text">Mantuviste tu racha de <b>10 días</b> 🔥</p>
+            <span class="notif-time">sáb 31</span>
+          </div>
+          <p class="notif-sub">Logro "Semana Perfecta" · +50 XP</p>
         </div>
       </div>
 
@@ -292,6 +382,8 @@
     document.querySelectorAll('.notif-unread-dot').forEach(function(dot) {
       dot.remove();
     });
+    var c = document.getElementById('unread-count');
+    if (c) c.remove();
     btn.style.opacity = '0.4';
     btn.disabled = true;
   }

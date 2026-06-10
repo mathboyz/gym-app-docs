@@ -14,9 +14,6 @@
 <link rel="stylesheet" href="../assets/forja-app.css">
 <script src="../assets/forja-app.js"></script>
 <style>
-  /* Footer fijo de reserva — separación por sombra, sin borde de un solo lado */
-  .fj-footer-fixed{position:sticky;bottom:0;left:0;right:0;padding:12px 16px 20px;
-    background:var(--fj-surface);box-shadow:0 -10px 22px -10px rgba(0,0,0,.14);z-index:10;}
   /* Check "listo" por ejercicio */
   .ex-check{width:26px;height:26px;border-radius:50%;border:2px solid var(--fj-ink-200);
     background:transparent;display:flex;align-items:center;justify-content:center;flex-shrink:0;
@@ -41,7 +38,7 @@
     </div>
   </header>
 
-  <main class="app-screen space-y-4">
+  <main class="app-screen space-y-4" style="padding-bottom:0">
 
     <!-- Coach card -->
     <div class="acard acard-pad">
@@ -115,7 +112,7 @@
         </div>
         <div>
           <p class="text-xs font-bold mb-1" style="color:var(--fj-brand)">Nota de Vale</p>
-          <p class="text-sm text-ink-700">Vamos con Cindy hoy. Foco en mantener el ritmo desde el primer round, no salir demasiado rápido. Si los pull-ups te quiebran el ritmo, podés bajar a ring rows sin drama.</p>
+          <p class="text-sm text-ink-700">Vamos con Cindy hoy. Foco en mantener el ritmo desde el primer round, no salir demasiado rápido. Si los pull-ups te quiebran el ritmo, puedes bajar a ring rows sin drama.</p>
         </div>
       </div>
     </div>
@@ -127,7 +124,7 @@
         <p class="a-eyebrow">Warm-up · 10 min</p>
       </div>
       <div class="acard" style="overflow:hidden">
-        <div class="arow px-4">
+        <a href="detalle-ejercicio.html" class="arow px-4" style="text-decoration:none">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-success)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </div>
@@ -135,9 +132,9 @@
             <p class="text-sm font-semibold text-ink-900">Cuerda doble bajo</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">3 × 30 rep</span>
-          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
-        </div>
-        <div class="arow px-4">
+          <button class="ex-check" aria-label="Marcar hecho" onclick="event.preventDefault();event.stopPropagation();this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
+        </a>
+        <a href="detalle-ejercicio.html" class="arow px-4" style="text-decoration:none">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-success)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
@@ -145,9 +142,9 @@
             <p class="text-sm font-semibold text-ink-900">Hip hinge + movilidad cadera</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">2 × 10 c/l</span>
-          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
-        </div>
-        <div class="arow px-4">
+          <button class="ex-check" aria-label="Marcar hecho" onclick="event.preventDefault();event.stopPropagation();this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
+        </a>
+        <a href="detalle-ejercicio.html" class="arow px-4" style="text-decoration:none">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-success)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
           </div>
@@ -155,9 +152,9 @@
             <p class="text-sm font-semibold text-ink-900">Kip swing en barra</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">3 × 10 rep</span>
-          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
-        </div>
-        <div class="arow px-4">
+          <button class="ex-check" aria-label="Marcar hecho" onclick="event.preventDefault();event.stopPropagation();this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
+        </a>
+        <a href="detalle-ejercicio.html" class="arow px-4" style="text-decoration:none">
           <div class="w-8 h-8 rounded-xl grid place-items-center shrink-0" style="background:rgba(24,169,87,.10)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-success)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18L18 6M6 6l12 12"/></svg>
           </div>
@@ -165,8 +162,8 @@
             <p class="text-sm font-semibold text-ink-900">Air squat + apertura de cadera</p>
           </div>
           <span class="font-mono text-xs font-bold text-ink-500">2 × 15 rep</span>
-          <button class="ex-check" aria-label="Marcar hecho" onclick="this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
-        </div>
+          <button class="ex-check" aria-label="Marcar hecho" onclick="event.preventDefault();event.stopPropagation();this.closest('.arow').classList.toggle('ex-done');this.classList.toggle('on')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></button>
+        </a>
       </div>
     </div>
 
@@ -231,7 +228,6 @@
               <div class="flex-1">
                 <p class="text-sm font-semibold text-white">Pull-up</p>
                 <div class="flex items-center gap-1.5 mt-0.5">
-                  <span class="fj-tag-rx" style="height:18px;font-size:10px">Rx</span>
                   <span class="text-xs" style="color:#8A91A1">Kipping</span>
                 </div>
               </div>
@@ -242,7 +238,6 @@
               <div class="flex-1">
                 <p class="text-sm font-semibold text-white">Push-up</p>
                 <div class="flex items-center gap-1.5 mt-0.5">
-                  <span class="fj-tag-rx" style="height:18px;font-size:10px">Rx</span>
                   <span class="text-xs" style="color:#8A91A1">Pecho al suelo</span>
                 </div>
               </div>
@@ -253,7 +248,6 @@
               <div class="flex-1">
                 <p class="text-sm font-semibold text-white">Air squat</p>
                 <div class="flex items-center gap-1.5 mt-0.5">
-                  <span class="fj-tag-rx" style="height:18px;font-size:10px">Rx</span>
                   <span class="text-xs" style="color:#8A91A1">Cadera bajo rodillas</span>
                 </div>
               </div>
@@ -328,7 +322,7 @@
     </div><!-- /#wod-content -->
 
     <!-- Footer fijo: reservar / confirmar cupo -->
-    <div class="fj-footer-fixed" id="rsv-footer" style="margin:0 -16px -16px">
+    <div class="fj-footer-fixed" id="rsv-footer">
       <button class="a-btn a-btn-primary" id="rsv-btn" onclick="reservar()" style="gap:8px">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
         Reservar mi cupo

@@ -36,6 +36,16 @@ body{background:var(--fj-ink-100);}
 .app-tab-fab .app-fab svg{width:24px;height:24px;}
 [data-theme="dark"] .app-tab-fab .app-fab{border-color:#0A0C0F;}
 
+/* --------------------------------------------------------------------------- FOOTER FIJO DE ACCIÓN
+   Pega al borde del frame (compensa el padding de .app-screen: 18px lateral y
+   la pantalla que lo usa lleva main con padding-bottom:0) y separa con sombra — nunca border-top. */
+.fj-footer-fixed{position:sticky;bottom:0;z-index:10;
+  margin:4px -18px 0;
+  padding:14px 18px calc(20px + env(safe-area-inset-bottom,0));
+  background:var(--fj-glass);backdrop-filter:blur(12px);
+  box-shadow:0 -12px 24px -14px rgba(0,0,0,.20);}
+[data-theme="dark"] .fj-footer-fixed{box-shadow:0 -12px 24px -14px rgba(0,0,0,.55);}
+
 /* --------------------------------------------------------------------------- COMPONENTES MOBILE */
 .acard{background:var(--fj-surface);border:1px solid var(--fj-ink-200);border-radius:18px;}
 .acard-pad{padding:16px;}
@@ -56,9 +66,10 @@ body{background:var(--fj-ink-100);}
 /* avatar gradiente con anillo */
 .a-av{border-radius:99px;display:grid;place-items:center;font-weight:700;color:#fff;
   background:linear-gradient(135deg,#FF7340,#FB5215);flex-shrink:0;}
-.a-ring{padding:2px;border-radius:99px;background:linear-gradient(135deg,#FF7340,#FB5215);}
-.a-ring.seen{background:var(--fj-ink-200);}
-.a-ring > *{border:2px solid var(--fj-surface);}
+.a-ring{padding:3px;border-radius:99px;position:relative;}
+.a-ring::before{content:"";position:absolute;inset:0;border-radius:99px;border:2px solid var(--fj-brand);}
+.a-ring.seen::before{border-color:var(--fj-ink-200);}
+.a-ring > *{border:0;width:100%;height:100%;}
 /* badge de nivel sobre el avatar (gold sólido, alto contraste en ambos temas) */
 .a-lvl{position:absolute;bottom:-3px;right:-3px;min-width:22px;height:22px;padding:0 5px;border-radius:99px;
   display:grid;place-items:center;font-family:"JetBrains Mono",monospace;font-size:11px;font-weight:700;
