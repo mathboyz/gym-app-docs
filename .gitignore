@@ -2,3 +2,4 @@
 .current-focus
 .playwright-mcp/
 *.log
+docs/superpowers/

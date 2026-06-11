@@ -618,6 +618,15 @@ body::before {
   box-shadow: 0 6px 14px rgba(251,82,21,0.3); transition: transform 150ms ease; }
 .book-btn:hover { transform: translateY(-1px); }
 .book-btn.full { background: rgba(29,27,22,0.08); color: var(--ink-dim); box-shadow: none; }
+/* estados de clase — Agenda */
+.book-btn.amber { background: linear-gradient(165deg, #E0A848, var(--amber) 55%, var(--amber-deep)); box-shadow: 0 6px 14px rgba(201,138,43,0.3); }
+.book-btn.done { background: rgba(31,138,76,0.14); color: #1F7A45; box-shadow: none; cursor: default; }
+.book-btn.done:hover { transform: none; }
+.book-btn.ghost { background: transparent; color: var(--ink-dim); font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--line); }
+.book-btn.ghost:hover { background: rgba(29,27,22,0.04); }
+.state-chip { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 5px 9px; border-radius: 999px; white-space: nowrap; background: rgba(29,27,22,0.08); color: var(--ink-dim); }
+.state-chip.warm { background: var(--amber-soft); color: var(--amber-deep); }
+.lrow-end { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .plan-line { margin: 16px 22px 0; padding: 15px 18px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line);
   box-shadow: 0 2px 4px rgba(29,27,22,0.04); }
 
@@ -1277,6 +1286,7 @@ body::before {
             <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></span><span class="exrow-extra">Por confirmar</span></span>
             <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#1F8A4C"></span><span class="exrow-extra">Confirmada</span></span>
             <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--danger)"></span><span class="exrow-extra">Llena</span></span>
+            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:transparent;box-shadow:inset 0 0 0 2px var(--amber-deep)"></span><span class="exrow-extra">Lista de espera</span></span>
           </div>
 
           <div class="sec-h"><span class="t">Miércoles 10</span></div>
@@ -1284,24 +1294,60 @@ body::before {
             <div class="lrow">
               <span class="sched-hour">07:00</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">CrossFit</p><p style="font-size:12px;color:var(--ink-faint)">Coach Nico · 9/12</p></div>
-              <button class="book-btn">Reservar</button>
+              <button class="book-btn" onclick="reservar(this)">Reservar</button>
             </div>
             <div class="lrow">
               <span class="sched-hour">12:30</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">Halterofilia</p><p style="font-size:12px;color:var(--ink-faint)">Coach Pau · 5/8</p></div>
-              <button class="book-btn">Reservar</button>
+              <button class="book-btn" onclick="reservar(this)">Reservar</button>
             </div>
             <div class="lrow" style="background:var(--amber-soft)">
               <span class="sched-hour" style="color:var(--amber-deep)">19:00</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">CrossFit</p><p style="font-size:12px;color:var(--ink-faint)">Coach Vale · 11/12</p></div>
-              <span class="tape amber" style="transform:rotate(2deg)">Por confirmar</span>
+              <button class="book-btn amber" onclick="confirmar(this)">Confirmar</button>
             </div>
             <div class="lrow">
               <span class="sched-hour">20:00</span>
-              <div style="flex:1"><p style="font-size:14px;font-weight:600">Funcional</p><p style="font-size:12px;color:var(--ink-faint)">Coach Nico · 12/12 · llena</p></div>
-              <button class="book-btn full">Lista de espera</button>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600">Funcional</p><p style="font-size:12px;color:var(--ink-faint)">Coach Nico · 12/12</p></div>
+              <span class="lrow-end"><span class="state-chip">Llena</span><button class="book-btn ghost" onclick="avisar(this)">Avisarme</button></span>
+            </div>
+            <div class="lrow">
+              <span class="sched-hour">20:00</span>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600">Halterofilia</p><p style="font-size:12px;color:var(--ink-faint)">Coach Pau · 8/8</p></div>
+              <span class="lrow-end"><span class="state-chip warm">En lista</span><button class="book-btn ghost" onclick="salir(this)">Salir</button></span>
             </div>
           </div>
+          <script>
+            function reservar(btn){
+              const row = btn.closest('.lrow');
+              row.style.background = 'var(--amber-soft)';
+              row.querySelector('.sched-hour').style.color = 'var(--amber-deep)';
+              btn.className = 'book-btn amber';
+              btn.textContent = 'Confirmar';
+              btn.setAttribute('onclick','confirmar(this)');
+            }
+            function confirmar(btn){
+              btn.className = 'book-btn done';
+              btn.textContent = 'Confirmada ✓';
+              btn.removeAttribute('onclick');
+            }
+            function avisar(btn){
+              const chip = btn.closest('.lrow-end').querySelector('.state-chip');
+              chip.className = 'state-chip warm';
+              chip.textContent = 'En lista';
+              btn.className = 'book-btn ghost';
+              btn.textContent = 'Salir';
+              btn.setAttribute('onclick','salir(this)');
+            }
+            function salir(btn){
+              const chip = btn.closest('.lrow-end').querySelector('.state-chip');
+              chip.className = 'state-chip';
+              chip.textContent = 'Llena';
+              btn.className = 'book-btn ghost';
+              btn.textContent = 'Avisarme';
+              btn.setAttribute('onclick','avisar(this)');
+            }
+          </script>
           <p style="font-family:var(--mono);font-size:9.5px;letter-spacing:1px;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-top:12px">Reservar guarda el cupo · confirmar lo asegura</p>
           <div style="height:24px"></div>
         </div>
