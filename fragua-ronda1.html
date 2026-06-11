@@ -612,7 +612,7 @@ body::before {
 .wday.on .d { color: rgba(255,255,255,0.5); } .wday.on .n { color: var(--bone); }
 .sched-hour { font-family: var(--display); font-size: 25px; color: var(--ink); width: 72px; flex-shrink: 0;
   text-shadow: 0 1px 0 rgba(255,255,255,0.8); }
-.book-btn { all: unset; box-sizing: border-box; cursor: pointer; font-family: var(--grotesk); font-weight: 700; font-size: 12.5px;
+.book-btn { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; font-family: var(--grotesk); font-weight: 700; font-size: 12.5px;
   color: #fff; padding: 9px 16px; border-radius: 999px; white-space: nowrap;
   background: linear-gradient(165deg, #FF6A30, var(--ember) 55%, var(--ember-deep));
   box-shadow: 0 6px 14px rgba(251,82,21,0.3); transition: transform 150ms ease; }
@@ -624,9 +624,23 @@ body::before {
 .book-btn.done:hover { transform: none; }
 .book-btn.ghost { background: transparent; color: var(--ink-dim); font-weight: 600; box-shadow: inset 0 0 0 1.5px var(--line); }
 .book-btn.ghost:hover { background: rgba(29,27,22,0.04); }
-.state-chip { font-family: var(--mono); font-size: 9px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; padding: 5px 9px; border-radius: 999px; white-space: nowrap; background: rgba(29,27,22,0.08); color: var(--ink-dim); }
-.state-chip.warm { background: var(--amber-soft); color: var(--amber-deep); }
-.lrow-end { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.cls-state { font-weight: 600; display: inline-flex; align-items: center; vertical-align: -2px; }
+/* ── bottom sheet (modal) ── */
+.sheet-overlay { position: absolute; inset: 0; z-index: 500; display: none; }
+.sheet-overlay.on { display: block; }
+.sheet-scrim { position: absolute; inset: 0; background: rgba(14,15,18,0.44); backdrop-filter: blur(2px); animation: fadeIn 220ms ease; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--bone); border-radius: 26px 26px 0 0;
+  padding: 0 24px 26px; box-shadow: 0 -16px 44px rgba(29,27,22,0.32); animation: sheetUp 340ms cubic-bezier(0.22,1,0.36,1); }
+.sheet-grip { width: 40px; height: 4px; border-radius: 99px; background: rgba(29,27,22,0.16); margin: 10px auto 18px; }
+.sheet-ttl { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-size: 21px; color: var(--ink); line-height: 1.15; }
+.sheet-ic { width: 38px; height: 38px; border-radius: 50%; flex-shrink: 0; display: grid; place-items: center; background: var(--amber-soft); color: var(--amber-deep); }
+.sheet-body { font-size: 13.5px; color: var(--ink-dim); line-height: 1.5; margin-top: 13px; }
+.sheet-opt { display: flex; align-items: flex-start; gap: 14px; padding: 15px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line); margin-top: 18px; }
+.sheet-opt .ot { flex: 1; }
+.sheet-opt .ot-h { font-size: 14px; font-weight: 600; color: var(--ink); }
+.sheet-opt .ot-d { font-size: 12px; color: var(--ink-faint); margin-top: 4px; line-height: 1.4; }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .plan-line { margin: 16px 22px 0; padding: 15px 18px; border-radius: 16px; background: var(--paper); border: 1px solid var(--line);
   box-shadow: 0 2px 4px rgba(29,27,22,0.04); }
 
@@ -1281,13 +1295,6 @@ body::before {
             <p style="font-size:12px;color:var(--ink-faint);margin-top:8px">Vas al día — la racha se mantiene cumpliendo tu cupo. <b style="color:var(--ember-deep)">El fuego no se cuida solo.</b></p>
           </div>
 
-          <!-- leyenda de estados -->
-          <div style="display:flex;gap:14px;flex-wrap:wrap;padding:14px 24px 0">
-            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--amber)"></span><span class="exrow-extra">Por confirmar</span></span>
-            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:#1F8A4C"></span><span class="exrow-extra">Confirmada</span></span>
-            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:var(--danger)"></span><span class="exrow-extra">Llena</span></span>
-            <span style="display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:transparent;box-shadow:inset 0 0 0 2px var(--amber-deep)"></span><span class="exrow-extra">Lista de espera</span></span>
-          </div>
 
           <div class="sec-h"><span class="t">Miércoles 10</span></div>
           <div class="card" style="margin:0 22px">
@@ -1301,6 +1308,11 @@ body::before {
               <div style="flex:1"><p style="font-size:14px;font-weight:600">Halterofilia</p><p style="font-size:12px;color:var(--ink-faint)">Coach Pau · 5/8</p></div>
               <button class="book-btn" onclick="reservar(this)">Reservar</button>
             </div>
+            <div class="lrow" style="background:rgba(31,138,76,0.07)">
+              <span class="sched-hour" style="color:#1F7A45">17:00</span>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600">Funcional</p><p style="font-size:12px;color:var(--ink-faint)">Coach Nico · 8/10</p></div>
+              <button class="book-btn done" style="cursor:default">Confirmada ✓</button>
+            </div>
             <div class="lrow" style="background:var(--amber-soft)">
               <span class="sched-hour" style="color:var(--amber-deep)">19:00</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">CrossFit</p><p style="font-size:12px;color:var(--ink-faint)">Coach Vale · 11/12</p></div>
@@ -1308,13 +1320,13 @@ body::before {
             </div>
             <div class="lrow">
               <span class="sched-hour">20:00</span>
-              <div style="flex:1"><p style="font-size:14px;font-weight:600">Funcional</p><p style="font-size:12px;color:var(--ink-faint)">Coach Nico · 12/12</p></div>
-              <span class="lrow-end"><span class="state-chip">Llena</span><button class="book-btn ghost" onclick="avisar(this)">Avisarme</button></span>
+              <div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:600">Funcional</p><p style="font-size:12px;color:var(--ink-faint)">Coach Nico · 12/12<span class="cls-state" style="margin-left:4px"></span></p></div>
+              <button class="book-btn ghost" onclick="avisar(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Avísame</button>
             </div>
             <div class="lrow">
               <span class="sched-hour">20:00</span>
-              <div style="flex:1"><p style="font-size:14px;font-weight:600">Halterofilia</p><p style="font-size:12px;color:var(--ink-faint)">Coach Pau · 8/8</p></div>
-              <span class="lrow-end"><span class="state-chip warm">En lista</span><button class="book-btn ghost" onclick="salir(this)">Salir</button></span>
+              <div style="flex:1;min-width:0"><p style="font-size:14px;font-weight:600">Halterofilia</p><p style="font-size:12px;color:var(--ink-faint)">Coach Pau · 8/8 · <span class="cls-state" style="color:var(--amber-deep)" title="En lista · te inscribimos automáticamente"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span></p></div>
+              <button class="book-btn ghost" onclick="salir(this)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.63 13A17.89 17.89 0 0 1 18 8"/><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"/><path d="M18 8a6 6 0 0 0-9.33-5"/><line x1="1" y1="1" x2="23" y2="23"/></svg>Silenciar</button>
             </div>
           </div>
           <script>
@@ -1331,20 +1343,47 @@ body::before {
               btn.textContent = 'Confirmada ✓';
               btn.removeAttribute('onclick');
             }
+            const bellOn = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
+            const bellOff = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.63 13A17.89 17.89 0 0 1 18 8"/><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"/><path d="M18 8a6 6 0 0 0-9.33-5"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
+            const eyeIco = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>';
+            const zapIco = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>';
+            const hintOff = 'Solo te avisamos. El cupo queda libre para quien lo confirme primero.';
+            const hintOn = 'Si se libera, lo reservamos a tu nombre. Igual deberás confirmar la clase.';
+            let avisoRow = null;
             function avisar(btn){
-              const chip = btn.closest('.lrow-end').querySelector('.state-chip');
-              chip.className = 'state-chip warm';
-              chip.textContent = 'En lista';
-              btn.className = 'book-btn ghost';
-              btn.textContent = 'Salir';
-              btn.setAttribute('onclick','salir(this)');
+              avisoRow = btn.closest('.lrow');
+              document.getElementById('aviso-auto').classList.remove('on');
+              document.getElementById('aviso-hint').textContent = hintOff;
+              document.getElementById('avisar-sheet').classList.add('on');
+            }
+            function autoHint(t, e){
+              e.stopPropagation();
+              t.classList.toggle('on');
+              document.getElementById('aviso-hint').textContent = t.classList.contains('on') ? hintOn : hintOff;
+            }
+            function cerrarAviso(){
+              document.getElementById('avisar-sheet').classList.remove('on');
+              avisoRow = null;
+            }
+            function activarAviso(){
+              if(avisoRow){
+                const auto = document.getElementById('aviso-auto').classList.contains('on');
+                const st = avisoRow.querySelector('.cls-state');
+                st.style.color = 'var(--amber-deep)';
+                st.innerHTML = auto ? zapIco : eyeIco;
+                st.setAttribute('title', auto ? 'En lista · te inscribimos automáticamente' : 'Te avisamos si se libera');
+                const b = avisoRow.querySelector('.book-btn');
+                b.innerHTML = bellOff + 'Silenciar';
+                b.setAttribute('onclick','salir(this)');
+              }
+              cerrarAviso();
             }
             function salir(btn){
-              const chip = btn.closest('.lrow-end').querySelector('.state-chip');
-              chip.className = 'state-chip';
-              chip.textContent = 'Llena';
-              btn.className = 'book-btn ghost';
-              btn.textContent = 'Avisarme';
+              const st = btn.closest('.lrow').querySelector('.cls-state');
+              st.removeAttribute('title');
+              st.innerHTML = '';
+              st.style.color = '';
+              btn.innerHTML = bellOn + 'Avísame';
               btn.setAttribute('onclick','avisar(this)');
             }
           </script>
@@ -1777,6 +1816,28 @@ body::before {
           <div style="height:18px"></div>
         </div>
       </section>
+
+      <!-- bottom-sheet: avisar si se libera un cupo -->
+      <div class="sheet-overlay" id="avisar-sheet">
+        <div class="sheet-scrim" onclick="cerrarAviso()"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <div class="sheet-ttl">
+            <span class="sheet-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg></span>
+            Te avisamos si se libera un cupo
+          </div>
+          <p class="sheet-body">Esta clase está llena. Apenas alguien libere su lugar, te llega una notificación al instante.</p>
+          <div class="sheet-opt">
+            <div class="ot">
+              <div class="ot-h">Tomar el cupo automáticamente</div>
+              <div class="ot-d" id="aviso-hint">Solo te avisamos. El cupo queda libre para quien lo confirme primero.</div>
+            </div>
+            <div class="tgl" id="aviso-auto" onclick="autoHint(this, event)"></div>
+          </div>
+          <button class="cta" style="width:100%;margin-top:20px" onclick="activarAviso()">Activar aviso</button>
+          <button class="cta ghost" style="width:100%;margin-top:8px" onclick="cerrarAviso()">Cancelar</button>
+        </div>
+      </div>
 
     </div>
   </div>
