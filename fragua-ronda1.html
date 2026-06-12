@@ -722,7 +722,7 @@ body::before {
 .tgl.on::after { left: 21px; }
 
 /* ═══════════ P10 · Login (tenant branded) ═══════════ */
-#s-login { align-items: center; justify-content: center; text-align: center; padding: 40px 32px;
+#s-login, #s-recover, #s-firstlogin, #s-gympick { align-items: center; justify-content: center; text-align: center; padding: 40px 32px;
   background:
     radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.9) 0%, transparent 50%),
     radial-gradient(ellipse at 50% 115%, rgba(251,82,21,0.10) 0%, transparent 55%),
@@ -762,6 +762,44 @@ body::before {
 .bar .bv { font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--ink-dim); text-align: center; margin-bottom: 6px; }
 .bar.em .bv { color: var(--ember-deep); }
 .bar .bk { font-family: var(--mono); font-size: 8.5px; letter-spacing: 1px; color: var(--ink-faint); text-transform: uppercase; text-align: center; margin-top: 7px; }
+
+/* ── pill: estado plano y derecho (los tapes rotados quedan solo para momentos puntuales) ── */
+.pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 9.5px; font-weight: 500;
+  letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-dim);
+  background: rgba(29,27,22,0.07); border-radius: 999px; padding: 5px 11px; white-space: nowrap; }
+.pill.green { background: rgba(31,138,76,0.13); color: #1F7A45; }
+.pill.amber { background: var(--amber-soft); color: var(--amber-deep); }
+.pill.ember { background: var(--ember-soft); color: var(--ember-deep); }
+
+/* ── badge de nivel sobre el avatar (feed) ── */
+.lvl-dot { position: absolute; bottom: -3px; right: -3px; min-width: 17px; height: 17px; padding: 0 3px; border-radius: 99px;
+  display: grid; place-items: center; font-family: var(--mono); font-size: 9px; font-weight: 700;
+  background: var(--gold-bright); color: #3A2D05; border: 2px solid var(--bone); line-height: 1; z-index: 2; }
+
+/* ── dosis de reps visible (antes era eyebrow apenas legible) ── */
+.dose { font-family: var(--mono); font-weight: 700; font-size: 13px; color: var(--ink); min-width: 52px; flex-shrink: 0; line-height: 1.25; }
+.dose small { display: block; font-weight: 400; font-size: 9px; color: var(--ink-faint); letter-spacing: 0.5px; }
+
+/* ── nota del coach a nivel de categoría ── */
+.cat-note { display: flex; gap: 9px; align-items: baseline; margin: 8px 26px 0;
+  font-family: var(--marker); font-weight: 600; font-size: 16px; color: var(--ink-dim); line-height: 1.35; transform: rotate(-0.4deg); }
+.cat-note b { color: var(--mk-red); font-weight: 700; }
+
+/* ── detalle expandible (pizarra de duelo / pruebas de competencia) ── */
+.expand { display: none; }
+.expand.on { display: block; }
+.exp-hint { font-family: var(--mono); font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--ink-faint); }
+
+/* ── comentarios de un post ── */
+.cmts { margin-top: 12px; padding: 12px 14px; border-radius: 14px; background: rgba(29,27,22,0.04); }
+.cmt { display: flex; gap: 10px; align-items: flex-start; }
+.cmt + .cmt { margin-top: 10px; }
+.cmt .who { font-weight: 700; color: var(--ink); }
+.cmt p { font-size: 13px; color: var(--ink-dim); line-height: 1.4; }
+.cmt-input { margin-top: 12px; padding: 10px 14px; border-radius: 999px; background: var(--paper);
+  border: 1px solid var(--line-strong); font-size: 12.5px; color: var(--ink-faint); }
+.bumpers { margin-top: 10px; font-family: var(--mono); font-size: 10px; color: var(--ink-faint); letter-spacing: 0.5px; }
+.bumpers b { color: var(--ink-dim); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001s !important; animation-delay: 0s !important; transition-duration: 0.001s !important; }
@@ -809,7 +847,7 @@ body::before {
     <div class="rail-title">FIERRO <em>&</em> TIZA</div>
     <div class="rail-sub">La fragua a plena luz: el WOD se escribe con plumón en la pizarra — los récords quedan grabados en fierro.</div>
     <ul class="rail-screens" id="rail"></ul>
-    <div class="rail-note"><b>Cómo recorrerlo:</b> parte en la portada y sigue los botones. Los controles punteados azules son <b>andamiaje del prototipo</b>. Cobertura: crear post vive arriba del feed, crear duelo dentro de Duelos, la encuesta en Notificaciones; activar cuenta / recuperar clave comparten el lenguaje del login; multi-gimnasio es visión v2.</div>
+    <div class="rail-note"><b>Cómo recorrerlo:</b> parte en la portada y sigue los botones. Los controles punteados azules son <b>andamiaje del prototipo</b>. Cobertura: crear post vive arriba del feed, crear duelo dentro de Duelos, la encuesta en Notificaciones. Auth: la cuenta la crea el admin desde el backoffice (llega correo con clave temporal) — no existe "activar cuenta"; el primer ingreso fuerza cambio de clave; con más de un gimnasio asociado, eliges al entrar.</div>
   </aside>
 
   <!-- el teléfono -->
@@ -827,7 +865,7 @@ body::before {
           <h1 class="intro-title">FOR<em>JA</em></h1>
           <div class="intro-sub">Fierro y tiza — la fragua a plena luz</div>
           <div class="intro-rule"><i></i><svg width="34" height="14" viewBox="0 0 150 14"><use href="#g-chalkline"/></svg><i></i></div>
-          <p class="intro-quote">«El WOD de hoy se escribe con plumón. Tu récord queda grabado en fierro.»</p>
+          <p class="intro-quote">«El WOD de hoy se escribe con plumón. Tu récord queda guardado para siempre.»</p>
           <div class="intro-cta-wrap"><button class="cta" data-go="hoy" style="margin:34px auto 0;width:fit-content;padding:17px 38px">Entrar al box</button></div>
         </div>
         <div class="intro-meta">BOX EL YUNQUE · OSORNO, CHILE — 40°34′ S</div>
@@ -870,7 +908,7 @@ body::before {
           <div class="class-card">
             <div class="hour-row">
               <span class="class-hour">19:00</span>
-              <span class="tape amber" style="transform:rotate(2deg)">Por confirmar</span>
+              <span class="pill amber">Por confirmar</span>
             </div>
             <p class="meta"><b>CrossFit</b> · Coach Vale Fuentes · sala principal</p>
             <div class="slots-row">
@@ -889,8 +927,8 @@ body::before {
           <script>
             function confirmHoy(btn){
               const card = btn.closest('.class-card');
-              card.querySelector('.tape.amber').className = 'tape green';
-              card.querySelector('.tape.green').textContent = 'Confirmada';
+              card.querySelector('.pill.amber').className = 'pill green';
+              card.querySelector('.pill.green').textContent = 'Confirmada';
               const warn = btn.closest('.actions').previousElementSibling;
               warn.style.color = 'var(--ember-deep)';
               warn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span style="font-size:12px;font-weight:600">Cupo asegurado · te esperamos a las 19:00</span>';
@@ -958,31 +996,32 @@ body::before {
             </div>
             <div class="bd-tray"><i class="b"></i><i class="r"></i></div>
           </div>
+          <p style="font-family:var(--mono);font-size:9px;letter-spacing:1.2px;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-top:10px">En la pizarra va la categoría que el coach destaca — hoy, el WOD</p>
 
           <!-- quiénes van -->
           <div class="sec-h"><span class="t">Hoy entrenan</span></div>
           <div class="roster">
-            <div class="plate-av">MR</div><div class="plate-av">JN</div><div class="plate-av">CP</div>
-            <button class="more more-btn" onclick="document.getElementById('roster-sheet').classList.add('on')">y 8 personas más</button>
+            <div class="plate-av">MR</div><div class="plate-av">JN</div><div class="plate-av">CP</div><div class="plate-av">IV</div><div class="plate-av">SD</div><div class="plate-av">DM</div>
+            <button class="more more-btn" onclick="document.getElementById('roster-sheet').classList.add('on')">y 5 más</button>
           </div>
 
           <!-- la clase por categorías: cada ejercicio se abre -->
           <div class="sec-h"><span class="t">01 · Calentamiento</span><span class="exrow-extra" style="margin-left:auto">8 min</span></div>
           <div class="card" style="margin:0 22px">
             <div class="lrow" style="cursor:pointer" data-go="exercise">
-              <span class="eyebrow" style="width:44px">3 min</span>
+              <span class="dose">3 min</span>
               <p style="flex:1;font-size:14px;font-weight:600">Remo suave + movilidad de hombro</p>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
             <div class="lrow" style="cursor:pointer" data-go="exercise">
-              <span class="eyebrow" style="width:44px">2×10</span>
+              <span class="dose">2×10</span>
               <p style="flex:1;font-size:14px;font-weight:600">Scap pull-ups</p>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
             <div class="lrow" style="cursor:pointer" data-go="exercise">
-              <span class="eyebrow" style="width:44px">2×15</span>
+              <span class="dose">2×15</span>
               <p style="flex:1;font-size:14px;font-weight:600">Air squats con pausa abajo</p>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -992,37 +1031,39 @@ body::before {
           <div class="sec-h"><span class="t">02 · Skill</span><span class="exrow-extra" style="margin-left:auto">15 min</span></div>
           <div class="card" style="margin:0 22px">
             <div class="lrow" style="cursor:pointer" data-go="exercise">
-              <span class="eyebrow" style="width:44px">5×3</span>
+              <span class="dose">2×5<small>+ 3×3</small></span>
               <div style="flex:1">
                 <p style="font-size:14px;font-weight:600">Power Clean</p>
-                <p class="exrow-extra" style="margin-top:2px">@ 75% 1RM → <b style="color:var(--ember-deep)">tuyo: 35 kg</b></p>
+                <p class="exrow-extra" style="margin-top:2px">@ 75% 1RM → <b style="color:var(--ember-deep)">tuyo: 35 kg</b> · descanso 3:00</p>
               </div>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
           </div>
+          <p class="cat-note">→ las 2 primeras series de 5 livianas; las 3 de 3 ya con el 75% — <b>sube solo si la técnica aguanta</b></p>
 
           <div class="sec-h"><span class="t">03 · WOD — “Cindy”</span><span class="exrow-extra" style="margin-left:auto">20 min</span></div>
           <div class="card" style="margin:0 22px">
             <div class="lrow" style="cursor:pointer" data-go="exercise">
-              <span class="eyebrow" style="width:44px">5</span>
+              <span class="dose">5</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">Pull-ups</p><p class="exrow-extra" style="margin-top:2px">kipping permitido</p></div>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
             <div class="lrow" style="cursor:pointer" data-go="exercise">
-              <span class="eyebrow" style="width:44px">10</span>
+              <span class="dose">10</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">Push-ups</p><p class="exrow-extra" style="margin-top:2px">pecho al suelo</p></div>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
             <div class="lrow" style="cursor:pointer" data-go="exercise">
-              <span class="eyebrow" style="width:44px">15</span>
+              <span class="dose">15</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">Air squats</p><p class="exrow-extra" style="margin-top:2px">cadera bajo paralelo</p></div>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
           </div>
+          <p class="cat-note">→ <b>regla de hoy:</b> si fallas una rep, la siguiente ronda parte con +1 de ese ejercicio — solo esa ronda</p>
 
           <button class="mock-ctl" data-go="score">▸ Simular: terminaste el WOD</button>
           <div style="height:18px"></div>
@@ -1036,9 +1077,9 @@ body::before {
             <button class="backbtn" data-go="board"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
             <div style="flex:1">
               <p class="t">Power Clean</p>
-              <p class="s">Skill de hoy · 5×3 @ 75%</p>
+              <p class="s">Skill de hoy · 2×5 + 3×3 @ 75%</p>
             </div>
-            <span class="tape" style="transform:rotate(2deg)">Halterofilia</span>
+            <span class="pill">Halterofilia</span>
           </header>
 
           <!-- video de técnica -->
@@ -1063,11 +1104,11 @@ body::before {
           </div>
 
           <!-- tu fierro en este ejercicio -->
-          <div class="sec-h"><span class="t">Tu fierro acá</span></div>
+          <div class="sec-h"><span class="t">Tu marca</span></div>
           <div class="my-iron">
             <div class="disc-sm" style="width:74px;height:74px"><span class="k">Clean</span><span class="v" style="font-size:17px">47</span><span class="k">kg · plata</span></div>
             <div style="flex:1">
-              <p style="font-size:13.5px;color:var(--ink-dim);line-height:1.45">Tu 1RM: <b style="color:var(--ink)">47 kg</b>, forjado el 3 de mayo. A <b style="color:var(--ember-deep)">3 kg</b> del disco de oro.</p>
+              <p style="font-size:13.5px;color:var(--ink-dim);line-height:1.45">Tu 1RM: <b style="color:var(--ink)">47 kg</b>, logrado el 3 de mayo. A <b style="color:var(--ember-deep)">3 kg</b> del disco de oro.</p>
               <p style="font-family:var(--mono);font-size:10px;color:var(--ember-deep);margin-top:6px;letter-spacing:1px;cursor:pointer" data-go="progreso">VER EVOLUCIÓN →</p>
             </div>
           </div>
@@ -1081,7 +1122,19 @@ body::before {
           </div>
 
           <p class="coach-cue">→ pecho orgulloso y paciencia con la barra — Vale</p>
-          <div style="height:18px"></div>
+          <div style="height:14px"></div>
+
+          <!-- tu peso de trabajo en ESTE ejercicio: editable y guardable -->
+          <div class="foot-cta" style="display:flex;align-items:center;gap:12px">
+            <div style="flex:1;min-width:0">
+              <p class="eyebrow" style="font-size:9px">Tu peso de trabajo hoy</p>
+              <p style="font-family:var(--mono);font-weight:700;font-size:22px;color:var(--ink);line-height:1.1"><span id="wk-num">35</span> kg</p>
+              <p class="exrow-extra" id="wk-hint" style="font-size:9px">la vez pasada: 35 kg</p>
+            </div>
+            <button class="step-btn" style="width:42px;height:42px;font-size:20px" onclick="wkAdj(-1)">−</button>
+            <button class="step-btn" style="width:42px;height:42px;font-size:20px" onclick="wkAdj(1)">+</button>
+            <button class="cta" id="wk-save" style="padding:13px 20px;font-size:14px" onclick="wkSave(this)">Guardar</button>
+          </div>
         </div>
       </section>
 
@@ -1092,11 +1145,17 @@ body::before {
             <button class="backbtn" data-go="board"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
             <div style="flex:1">
               <p class="t">Tu resultado</p>
-              <p class="s">“Cindy” · AMRAP 20 min</p>
+              <p class="s">“Cindy” · cap 20 min</p>
             </div>
           </header>
 
-          <div class="score-hero">
+          <!-- ¿terminó o no? define qué se anota -->
+          <div class="div-row" style="margin-top:8px">
+            <div class="div-plate" id="done-yes" onclick="setDone(true)">Lo terminé<span class="s">se anota tu tiempo</span></div>
+            <div class="div-plate on" id="done-no" onclick="setDone(false)">No alcancé<span class="s">rondas + reps extra</span></div>
+          </div>
+
+          <div class="score-hero" id="res-rounds">
             <span class="eyebrow">Rondas completas</span>
             <div class="stepper">
               <button class="step-btn" id="st-minus">−</button>
@@ -1107,18 +1166,32 @@ body::before {
             <div class="pr-hint" id="pr-hint"><span class="dot"></span> Tu mejor: 15 · esto es un PR</div>
           </div>
 
-          <div class="div-row">
-            <div class="div-plate on" data-div="rx">Rx<span class="s">como está escrito</span></div>
-            <div class="div-plate" data-div="sc">Adaptado<span class="s">con banda · cajón</span></div>
+          <div class="score-hero" id="res-time" style="display:none">
+            <span class="eyebrow">Tu tiempo</span>
+            <div class="stepper">
+              <button class="step-btn" onclick="tAdj(-5)">−</button>
+              <span class="step-num" id="t-num" style="font-size:72px;min-width:190px">18:45</span>
+              <button class="step-btn" onclick="tAdj(5)">+</button>
+            </div>
+            <p class="step-lbl">minutos : segundos</p>
           </div>
 
+          <!-- encuesta del box: aparece según configuración del backoffice -->
           <div class="rpe">
-            <span class="eyebrow">¿Cómo se sintió?</span>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+              <span class="eyebrow">¿Cómo se sintió?</span>
+              <span class="pill" style="font-size:8px">Encuesta del box · según config</span>
+            </div>
             <div class="rpe-scale" id="rpe"></div>
             <div class="rpe-lbls"><span>Paseo</span><span>Al límite</span></div>
+            <div class="cmt-input" style="margin-top:14px;border-radius:14px">¿Algo que decirle al coach? (opcional)</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px">
+              <div><p style="font-size:13px;font-weight:600">Enviar como anónimo</p><p class="exrow-extra" style="margin-top:1px">Si lo apagas, el coach ve tu nombre</p></div>
+              <span class="tgl on"></span>
+            </div>
           </div>
 
-          <div style="padding:0 22px"><button class="cta" data-go="forge" style="margin-top:18px;width:100%">Grabar en el fierro</button></div>
+          <div style="padding:0 22px"><button class="cta" data-go="forge" style="margin-top:18px;width:100%">Guardar resultado</button></div>
           <div style="height:18px"></div>
         </div>
       </section>
@@ -1129,13 +1202,13 @@ body::before {
         <div id="sparks"></div>
         <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center">
           <div class="forge-pre">Nuevo récord personal</div>
-          <h2 class="forge-title">Forjado</h2>
+          <h2 class="forge-title">¡Nuevo PR!</h2>
           <div class="plate3d">
             <div class="bumper">
               <div class="rim"></div>
               <div class="ring r1"></div><div class="ring r2"></div>
               <div class="hub">
-                <span class="eng eng-k">“Cindy” · Rx</span>
+                <span class="eng eng-k">“Cindy” · AMRAP</span>
                 <span class="eng eng-big">17<span style="font-size:18px;letter-spacing:0"> rondas</span></span>
                 <span class="eng eng-name">Valentina Fuentes</span>
                 <span class="eng eng-date">10 · JUN · 2026</span>
@@ -1167,7 +1240,7 @@ body::before {
           <header class="subbar">
             <button class="backbtn" data-go="forge"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
             <div style="flex:1">
-              <p class="t">Duelo de fierro</p>
+              <p class="t">Duelo</p>
               <p class="s">Matías te retó · expira en 6 días</p>
             </div>
           </header>
@@ -1186,9 +1259,25 @@ body::before {
                 <p class="elo">1.535 ELO</p>
               </div>
             </div>
-            <div class="vs-wod">
-              <p class="t">“FRAN” — por tiempo</p>
+            <div class="vs-wod" style="cursor:pointer" onclick="document.getElementById('duel-exp').classList.toggle('on')">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px">
+                <p class="t">“FRAN” — por tiempo</p>
+                <span class="exp-hint">Ver detalle ▾</span>
+              </div>
               <p class="s">21-15-9 · thrusters + pull-ups</p>
+              <!-- detalle del WOD: ejercicios con peso según el nivel acordado -->
+              <div class="expand" id="duel-exp">
+                <div style="border-top:1px dashed var(--line-strong);margin-top:12px;padding-top:12px;display:flex;flex-direction:column;gap:10px;font-family:var(--ui)">
+                  <div style="display:flex;align-items:baseline;gap:10px">
+                    <span class="dose" style="min-width:60px">21-15-9</span>
+                    <div style="flex:1"><p style="font-size:13.5px;font-weight:600;transform:none">Thrusters</p><p class="exrow-extra">Rx 43 kg · Scaled 30 kg — <b style="color:var(--ember-deep)">acordado: Rx</b></p></div>
+                  </div>
+                  <div style="display:flex;align-items:baseline;gap:10px">
+                    <span class="dose" style="min-width:60px">21-15-9</span>
+                    <div style="flex:1"><p style="font-size:13.5px;font-weight:600;transform:none">Pull-ups</p><p class="exrow-extra">Rx kipping · Scaled con banda</p></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -1202,11 +1291,11 @@ body::before {
           <div class="card" style="margin:0 22px">
             <div class="lrow">
               <span class="rule-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-              <p style="flex:1;font-size:13.5px;color:var(--ink-dim)">Ambos corren “Fran” dentro de la ventana, en cualquier clase.</p>
+              <p style="flex:1;font-size:13.5px;color:var(--ink-dim)"><b style="color:var(--ink)">Thruster:</b> cadera bajo paralelo y codos extendidos arriba — si no, la rep no cuenta.</p>
             </div>
             <div class="lrow">
               <span class="rule-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
-              <p style="flex:1;font-size:13.5px;color:var(--ink-dim)">El tiempo lo valida el coach de turno — sin video, sin pelea.</p>
+              <p style="flex:1;font-size:13.5px;color:var(--ink-dim)"><b style="color:var(--ink)">Pull-up:</b> mentón sobre la barra en cada rep. Ambos corren dentro de la ventana, en cualquier clase.</p>
             </div>
             <div class="lrow">
               <span class="rule-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/></svg></span>
@@ -1262,13 +1351,13 @@ body::before {
 
           <div class="card" style="margin:16px 22px 0">
             <div class="wallrow"><span class="pos">4</span><span class="nm">Ignacio Vera</span><span class="sc">17+8</span></div>
-            <div class="wallrow you"><span class="pos">5</span><span class="nm" style="white-space:nowrap">Valentina F.</span><span class="tape ember" style="transform:rotate(-2deg);padding:3px 9px">Tú · PR</span><span class="sc">17+3</span></div>
+            <div class="wallrow you"><span class="pos">5</span><span class="nm" style="white-space:nowrap">Valentina F.</span><span class="pill ember" style="padding:3px 9px">Tú · PR</span><span class="sc">17+3</span></div>
             <div class="wallrow"><span class="pos">6</span><span class="nm">Carlos Soto</span><span class="sc">16+12</span></div>
             <div class="wallrow"><span class="pos">7</span><span class="nm">Daniela Mora</span><span class="sc">15+4</span></div>
             <div class="wallrow"><span class="pos">8</span><span class="nm">Seba Díaz</span><span class="sc">14+9</span></div>
           </div>
 
-          <p class="season-note">El muro se borra cuando parte la temporada nueva.<br><b>Lo que está grabado en fierro, queda en tu historial para siempre.</b></p>
+          <p class="season-note">El muro es el ranking vivo del box: la mejor marca de cada atleta en cada benchmark, esta temporada.<br><b>Se borra al partir la temporada nueva — tus PRs quedan en tu historial para siempre.</b></p>
 
           <button class="mock-ctl" data-go="intro" style="margin-top:22px">▸ Volver a la portada</button>
           <div style="height:24px"></div>
@@ -1284,7 +1373,7 @@ body::before {
               <span class="eyebrow">Semana 6 · Otoño</span>
               <p class="hi">Agenda</p>
             </div>
-            <span class="tape" style="cursor:pointer" data-go="plan">Quedan 7 / 12</span>
+            <span class="pill" style="cursor:pointer" data-go="plan">Quedan 7 / 12</span>
           </header>
 
           <div class="week">
@@ -1403,13 +1492,13 @@ body::before {
               <span class="eyebrow">Box El Yunque</span>
               <p class="hi">Comunidad</p>
             </div>
-            <span class="tape ember">11 entrenando hoy</span>
+            <span class="pill ember">11 entrenando hoy</span>
           </header>
 
           <!-- crear post — full-width, divisor abajo -->
           <div class="fpost" style="display:flex;align-items:center;gap:11px;box-shadow:inset 0 -1px 0 var(--line)">
             <div class="plate-av" style="width:36px;height:36px;font-size:11px">VF</div>
-            <p style="flex:1;font-size:13.5px;color:var(--ink-faint)">¿Qué forjaste hoy?</p>
+            <p style="flex:1;font-size:13.5px;color:var(--ink-faint)">Comparte algo con el box…</p>
             <button class="book-btn" style="font-size:11.5px;padding:8px 14px">Publicar</button>
           </div>
 
@@ -1425,9 +1514,9 @@ body::before {
             <!-- post de PR: el disco forjado se cuelga en el feed -->
             <div class="fpost">
               <div class="post-head">
-                <div class="plate-av" style="width:40px;height:40px;font-size:13px">VF</div>
+                <div class="plate-av" style="width:40px;height:40px;font-size:13px;position:relative">VF<span class="lvl-dot">12</span></div>
                 <div style="flex:1"><p class="nm">Valentina Fuentes</p><p class="tm">hace 1 min · “Cindy”</p></div>
-                <span class="tape ember" style="padding:3px 9px">PR</span>
+                <span class="pill ember">PR</span>
               </div>
               <div class="pr-post">
                 <div class="disc-sm gd">
@@ -1435,18 +1524,35 @@ body::before {
                   <span class="v">17</span>
                   <span class="k">rondas · oro</span>
                 </div>
-                <p style="flex:1;font-size:13.5px;color:var(--ink-dim);line-height:1.45">Forjó un <b style="color:var(--ink)">disco de oro</b> — superó su marca de 15 rondas después de 3 meses.</p>
+                <p style="flex:1;font-size:13.5px;color:var(--ink-dim);line-height:1.45">Subió a <b style="color:var(--ink)">disco de oro</b> — superó su marca de 15 rondas después de 3 meses.</p>
               </div>
               <div class="post-foot">
                 <button class="bump" onclick="bump(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 11V6a2 2 0 0 0-4 0v5"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="m7 15-1.76-1.76a2 2 0 0 0-2.83 2.82l3.6 3.6A8 8 0 0 0 12 22h2a8 8 0 0 0 8-8V7a2 2 0 0 0-4 0v5"/></svg>Chócala · <b class="ct">12</b></button>
-                <button class="bump">3 comentarios</button>
+                <button class="bump" onclick="document.getElementById('cmts1').classList.toggle('on');document.getElementById('cmts1').style.display=document.getElementById('cmts1').classList.contains('on')?'block':'none'">3 comentarios</button>
+              </div>
+              <!-- comentarios: inline bajo el post, estilo Strava -->
+              <div class="cmts" id="cmts1" style="display:none">
+                <p class="bumpers">Le chocaron <b>Matías, Javiera, Coach Vale y 9 más</b></p>
+                <div class="cmt" style="margin-top:12px">
+                  <div class="plate-av" style="width:26px;height:26px;font-size:9px;flex-shrink:0">MR</div>
+                  <p><span class="who">Matías</span> ¡Vamos! Te dije que hoy caía 💪</p>
+                </div>
+                <div class="cmt">
+                  <div class="plate-av" style="width:26px;height:26px;font-size:9px;flex-shrink:0">CV</div>
+                  <p><span class="who">Coach Vale</span> Tres meses de ritmo parejo — bien merecido.</p>
+                </div>
+                <div class="cmt">
+                  <div class="plate-av" style="width:26px;height:26px;font-size:9px;flex-shrink:0">JN</div>
+                  <p><span class="who">Javiera</span> La próxima vamos por las 18 🔥</p>
+                </div>
+                <div class="cmt-input">Comenta…</div>
               </div>
             </div>
 
             <!-- post normal -->
             <div class="fpost">
               <div class="post-head">
-                <div class="plate-av" style="width:40px;height:40px;font-size:13px">MR</div>
+                <div class="plate-av" style="width:40px;height:40px;font-size:13px;position:relative">MR<span class="lvl-dot">15</span></div>
                 <div style="flex:1"><p class="nm">Matías Rojas</p><p class="tm">hace 40 min · Clean 1RM</p></div>
               </div>
               <p class="post-body">Por fin los <b>100 kg de Clean</b>. Seis meses persiguiendo este número 🔥 Gracias coach Vale por el ojo en la técnica.</p>
@@ -1459,9 +1565,9 @@ body::before {
             <!-- logro -->
             <div class="fpost">
               <div class="post-head">
-                <div class="plate-av" style="width:40px;height:40px;font-size:13px">JN</div>
+                <div class="plate-av" style="width:40px;height:40px;font-size:13px;position:relative">JN<span class="lvl-dot">9</span></div>
                 <div style="flex:1"><p class="nm">Javiera Núñez</p><p class="tm">hace 2 h · logro</p></div>
-                <span class="tape" style="padding:3px 9px;transform:rotate(2deg)">50 clases</span>
+                <span class="pill">50 clases</span>
               </div>
               <p class="post-body">Completó <b>50 clases</b> en El Yunque — medio centenar de WODs al cuerpo.</p>
               <div class="post-foot">
@@ -1484,14 +1590,14 @@ body::before {
             <p class="us">@vale.fuentes · en El Yunque desde 2024</p>
             <div class="prof-tapes">
               <span class="tape">Nivel 12 · Forjadora</span>
-              <span class="tape ember" style="transform:rotate(1.4deg)">1.482 ELO</span>
+              <span class="pill ember" style="align-self:center">1.482 ELO</span>
             </div>
           </div>
 
           <div class="stat-tiles">
             <div class="stile"><div class="v">14</div><div class="k">Racha</div></div>
             <div class="stile"><div class="v">134</div><div class="k">Clases</div></div>
-            <div class="stile"><div class="v">9</div><div class="k">PRs en fierro</div></div>
+            <div class="stile"><div class="v">9</div><div class="k">PRs</div></div>
           </div>
 
           <!-- logro robable -->
@@ -1502,11 +1608,11 @@ body::before {
               <p style="font-family:var(--grotesk);font-weight:700;font-size:14.5px">Reina de “Cindy”</p>
               <p style="font-size:12px;color:var(--ink-dim);margin-top:2px">Lo defiendes hace 2 días — cualquiera puede retarte por él.</p>
             </div>
-            <span class="tape" style="transform:rotate(2deg);padding:4px 9px">Robable</span>
+            <span class="pill amber">Robable</span>
           </div>
 
-          <!-- la colección: lo grabado en fierro -->
-          <div class="sec-h"><span class="t">Tu fierro</span><span class="exrow-extra" style="margin-left:auto;cursor:pointer;color:var(--ember-deep)" data-go="progreso">VER PROGRESO →</span></div>
+          <!-- la colección de PRs -->
+          <div class="sec-h"><span class="t">Tus marcas</span><span class="exrow-extra" style="margin-left:auto;cursor:pointer;color:var(--ember-deep)" data-go="progreso">VER PROGRESO →</span></div>
           <div class="iron-grid">
             <div class="iron-cell"><div class="disc-sm gd"><span class="k">“Cindy”</span><span class="v">17</span><span class="k">rondas</span></div><p class="lbl">Oro</p></div>
             <div class="iron-cell"><div class="disc-sm"><span class="k">“Fran”</span><span class="v">9:12</span><span class="k">min</span></div><p class="lbl">Plata</p></div>
@@ -1522,19 +1628,85 @@ body::before {
         <nav class="tabbar" data-tabs="yo"></nav>
       </section>
 
-      <!-- ════════ P10 · LOGIN ════════ -->
+      <!-- ════════ P10 · LOGIN (cuenta única de plataforma) ════════ -->
       <section class="screen" id="s-login">
         <div style="width:100%;max-width:300px">
-          <div class="plate-av" style="width:76px;height:76px;font-size:22px;margin:0 auto">EY</div>
-          <h2 style="font-family:var(--display);font-size:30px;letter-spacing:3px;margin-top:16px;text-shadow:0 2px 0 rgba(255,255,255,.85)">EL YUNQUE</h2>
-          <p style="font-family:var(--grotesk);font-weight:500;font-size:14px;color:var(--ink-dim);margin-top:4px">Osorno · CrossFit & Funcional</p>
+          <div class="plate-av" style="width:76px;height:76px;margin:0 auto">
+            <svg width="32" height="32" viewBox="0 0 64 80" fill="none" stroke="#C9CCD2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 c2 10 -3 14 -7 22 c-4 8 -5 13 -5 18 a22 21 0 0 0 44 0 c0 -9 -5 -16 -10 -23 c-5 -7 -7 -13 -5 -21 c-7 4 -10 9 -11 15 c-3 -4 -5 -7 -6 -11 Z"/></svg>
+          </div>
+          <h2 style="font-family:var(--display);font-size:30px;letter-spacing:4px;margin-top:16px;text-shadow:0 2px 0 rgba(255,255,255,.85)">FOR<span style="color:var(--ember)">JA</span></h2>
+          <p style="font-family:var(--grotesk);font-weight:500;font-size:14px;color:var(--ink-dim);margin-top:4px">Una cuenta · todos tus gimnasios</p>
           <div style="margin-top:26px">
             <div class="inp">Tu correo</div>
             <div class="inp">Contraseña</div>
           </div>
-          <button class="cta" data-go="hoy" style="width:100%;margin-top:16px">Entrar</button>
-          <div class="login-links"><span>Activar mi cuenta</span><span>Olvidé mi clave</span></div>
-          <p style="font-size:12px;color:var(--ink-faint);margin-top:20px;line-height:1.55">Tu cuenta la crea el box — si aún no la activas, pide tu código en recepción.</p>
+          <button class="cta" data-go="firstlogin" style="width:100%;margin-top:16px">Entrar</button>
+          <div class="login-links" style="justify-content:center"><span data-go="recover">Olvidé mi clave</span></div>
+          <p style="font-size:12px;color:var(--ink-faint);margin-top:20px;line-height:1.55">¿Primera vez? Tu cuenta la creó tu gimnasio — usa el correo y la clave temporal que te llegaron por mail.</p>
+          <button class="mock-ctl" data-go="gympick" style="margin-top:16px">▸ Simular: usuario recurrente</button>
+        </div>
+        <div class="powered">Forjado con <b>FORJA</b></div>
+      </section>
+
+      <!-- ════════ P10b · PRIMER INGRESO (clave temporal → propia) ════════ -->
+      <section class="screen" id="s-firstlogin">
+        <div style="width:100%;max-width:300px">
+          <span class="pill ember">Primer ingreso detectado</span>
+          <h2 style="font-family:var(--display);font-size:26px;letter-spacing:3px;margin-top:18px;text-shadow:0 2px 0 rgba(255,255,255,.85)">CREA TU CLAVE</h2>
+          <p style="font-size:13px;color:var(--ink-dim);margin-top:8px;line-height:1.5">La clave temporal del correo es de un solo uso. Deja una tuya y listo.</p>
+          <div style="margin-top:22px">
+            <div class="inp">Nueva clave</div>
+            <div class="inp">Repítela</div>
+          </div>
+          <p style="font-family:var(--mono);font-size:9.5px;letter-spacing:1px;color:var(--ink-faint);text-transform:uppercase;text-align:left;margin-top:10px">Mínimo 8 caracteres · una mayúscula · un número</p>
+          <button class="cta" data-go="gympick" style="width:100%;margin-top:16px">Guardar y entrar</button>
+        </div>
+        <div class="powered">Forjado con <b>FORJA</b></div>
+      </section>
+
+      <!-- ════════ P10c · ELIGE TU GIMNASIO (multi-box) ════════ -->
+      <section class="screen" id="s-gympick">
+        <div style="width:100%;max-width:310px">
+          <h2 style="font-family:var(--display);font-size:25px;letter-spacing:3px;text-shadow:0 2px 0 rgba(255,255,255,.85)">¿DÓNDE ENTRENAS?</h2>
+          <p style="font-size:13px;color:var(--ink-dim);margin-top:6px">Hola Vale — tienes dos gimnasios asociados.</p>
+          <div class="card" style="margin-top:22px;cursor:pointer;text-align:left" data-go="hoy">
+            <div class="lrow" style="padding:16px 18px">
+              <div class="plate-av" style="width:48px;height:48px;font-size:15px">EY</div>
+              <div style="flex:1">
+                <p style="font-family:var(--grotesk);font-weight:700;font-size:15.5px">El Yunque</p>
+                <p class="exrow-extra" style="margin-top:2px">CrossFit · Osorno · racha 14 🔥</p>
+              </div>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--ember-deep)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+          <div class="card" style="margin-top:10px;cursor:pointer;text-align:left" data-go="hoy">
+            <div class="lrow" style="padding:16px 18px">
+              <div class="plate-av" style="width:48px;height:48px;font-size:15px;background:radial-gradient(circle at 32% 28%, #4A7FB5, #2B5E8C 55%, #173A5A)">AS</div>
+              <div style="flex:1">
+                <p style="font-family:var(--grotesk);font-weight:700;font-size:15.5px">AquaSur</p>
+                <p class="exrow-extra" style="margin-top:2px">Natación · Puerto Varas</p>
+              </div>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+          <p style="font-size:12px;color:var(--ink-faint);margin-top:18px;line-height:1.5">Cada gimnasio tiene su propio portal, sus colores y su comunidad. Si tuvieras uno solo, entrarías directo.</p>
+        </div>
+        <div class="powered">Forjado con <b>FORJA</b></div>
+      </section>
+
+      <!-- ════════ P10d · RECUPERAR CLAVE ════════ -->
+      <section class="screen" id="s-recover">
+        <div style="width:100%;max-width:300px">
+          <div class="plate-av" style="width:64px;height:64px;margin:0 auto">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C9CCD2" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h2 style="font-family:var(--display);font-size:25px;letter-spacing:3px;margin-top:16px;text-shadow:0 2px 0 rgba(255,255,255,.85)">¿OLVIDASTE TU CLAVE?</h2>
+          <p style="font-size:13px;color:var(--ink-dim);margin-top:8px;line-height:1.5">Te mandamos un enlace al correo para que crees una nueva.</p>
+          <div style="margin-top:22px">
+            <div class="inp">Tu correo</div>
+          </div>
+          <button class="cta" style="width:100%;margin-top:16px" onclick="this.textContent='Enlace enviado — revisa tu correo ✓';this.style.background='#1F8A4C';this.style.boxShadow='0 10px 26px rgba(31,138,76,.35)'">Enviarme el enlace</button>
+          <div class="login-links" style="justify-content:center"><span data-go="login">← Volver a entrar</span></div>
         </div>
         <div class="powered">Forjado con <b>FORJA</b></div>
       </section>
@@ -1556,7 +1728,7 @@ body::before {
               <div class="plate-av" style="width:38px;height:38px;font-size:12px">MR</div>
               <div style="flex:1">
                 <div style="display:flex;justify-content:space-between;gap:8px"><p style="font-size:13.5px"><b>Matías</b> te retó a “Fran”</p><span class="n-tm">hace 2 h</span></div>
-                <p style="font-size:12px;color:var(--ink-faint);margin-top:2px">Duelo de fierro · +18 ELO si ganas</p>
+                <p style="font-size:12px;color:var(--ink-faint);margin-top:2px">Duelo · +18 ELO si ganas</p>
                 <div class="n-acts">
                   <button class="book-btn" data-go="duel" style="font-size:11.5px;padding:7px 14px">Aceptar reto</button>
                   <button class="bump" data-go="duel">Ver duelo</button>
@@ -1607,8 +1779,8 @@ body::before {
             <p class="s">→ pecho al suelo, sin perder la plancha · lo cuenta un coach</p>
           </div>
           <div style="display:flex;align-items:center;gap:10px;margin:14px 22px 0">
-            <span class="tape ember">+80 XP · badge</span>
-            <span class="exrow-extra" style="flex:1">Lo han logrado 4 de 32 atletas</span>
+            <span class="pill ember">+80 XP · badge</span>
+            <span class="exrow-extra" style="flex:1">4 de 32 lo lograron · <b>Juez: un coach o un atleta que se ofrezca</b></span>
           </div>
           <div style="padding:0 22px"><button class="cta" style="width:100%;margin-top:14px" onclick="this.textContent='Aviso enviado al coach ✓';this.style.background='#1F8A4C';this.style.boxShadow='0 10px 26px rgba(31,138,76,.35)'">Intentarlo ahora — avisar al coach</button></div>
 
@@ -1631,7 +1803,7 @@ body::before {
             </div>
           </div>
 
-          <p class="season-note">Desafío ≠ duelo: el desafío lo validas con el staff;<br><b>el duelo es fierro contra otro atleta.</b></p>
+          <p class="season-note">Desafío ≠ duelo: el desafío lo validas con un juez;<br><b>el duelo es contra otro atleta.</b></p>
           <div style="height:18px"></div>
         </div>
       </section>
@@ -1645,7 +1817,7 @@ body::before {
               <p class="t">Open interno de Otoño</p>
               <p class="s">Sábado 13 jun · 10:00</p>
             </div>
-            <span class="tape ember" style="transform:rotate(2deg)">Inscrita · Rx</span>
+            <span class="pill ember">Inscrita · Rx</span>
           </header>
 
           <!-- tu tanda: grabada en acero -->
@@ -1655,15 +1827,31 @@ body::before {
             <p class="k" style="margin-top:6px">Calle 3 · juez: coach Nico</p>
           </div>
 
-          <div class="sec-h"><span class="t">Las pruebas</span></div>
+          <div class="sec-h"><span class="t">Las pruebas</span><span class="exp-hint" style="margin-left:auto">Toca para ver el detalle</span></div>
           <div class="card" style="margin:0 22px">
-            <div class="lrow">
+            <div class="lrow" style="cursor:pointer;flex-wrap:wrap" onclick="document.getElementById('comp-exp1').classList.toggle('on')">
               <span class="eyebrow" style="width:28px">01</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">“Cindy” con chaleco</p><p class="exrow-extra" style="margin-top:2px">AMRAP 15 · variante por división</p></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <!-- igual que una clase: ejercicios con reps y peso por división -->
+              <div class="expand" id="comp-exp1" style="flex-basis:100%;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)">
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">5</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Pull-ups</p><p class="exrow-extra">Rx estrictas · Scaled kipping · Masters con banda</p></div></div>
+                  <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">10</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Push-ups</p><p class="exrow-extra">Todas las divisiones: pecho al suelo</p></div></div>
+                  <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">15</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Air squats con chaleco</p><p class="exrow-extra">Rx 9 kg · Scaled 5 kg · Masters sin chaleco</p></div></div>
+                </div>
+              </div>
             </div>
-            <div class="lrow">
+            <div class="lrow" style="cursor:pointer;flex-wrap:wrap" onclick="document.getElementById('comp-exp2').classList.toggle('on')">
               <span class="eyebrow" style="width:28px">02</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">Fran modificada</p><p class="exrow-extra" style="margin-top:2px">Por tiempo · cap 8:00</p></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+              <div class="expand" id="comp-exp2" style="flex-basis:100%;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)">
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">15-12-9</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Thrusters</p><p class="exrow-extra">Rx 43/30 kg · Scaled 30/20 kg · Masters 20/15 kg</p></div></div>
+                  <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">15-12-9</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Pull-ups</p><p class="exrow-extra">Rx kipping · Scaled banda · Masters ring rows</p></div></div>
+                </div>
+              </div>
             </div>
             <div class="lrow lockrow">
               <span class="eyebrow" style="width:28px">03</span>
@@ -1679,7 +1867,7 @@ body::before {
           <div class="card" style="margin:12px 22px 0">
             <div class="wallrow"><span class="pos">1</span><span class="nm">Camila Paredes</span><span class="sc">192 pts</span></div>
             <div class="wallrow"><span class="pos">2</span><span class="nm">Matías Rojas</span><span class="sc">180 pts</span></div>
-            <div class="wallrow you"><span class="pos">3</span><span class="nm" style="white-space:nowrap">Valentina F.</span><span class="tape ember" style="transform:rotate(-2deg);padding:3px 9px">Tú</span><span class="sc">171 pts</span></div>
+            <div class="wallrow you"><span class="pos">3</span><span class="nm" style="white-space:nowrap">Valentina F.</span><span class="pill ember" style="padding:3px 9px">Tú</span><span class="sc">171 pts</span></div>
           </div>
           <div style="height:18px"></div>
         </div>
@@ -1692,7 +1880,7 @@ body::before {
             <button class="backbtn" data-go="perfil"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
             <div style="flex:1">
               <p class="t">Tu progreso</p>
-              <p class="s">Lo que va quedando en fierro</p>
+              <p class="s">Tu evolución por ejercicio</p>
             </div>
           </header>
 
@@ -1703,7 +1891,7 @@ body::before {
           <div class="card" style="margin:12px 22px 0;padding:18px 20px">
             <div style="display:flex;align-items:center;justify-content:space-between">
               <span class="eyebrow">Clean 1RM · 6 meses</span>
-              <span class="tape ember" style="transform:rotate(1.5deg)">+24%</span>
+              <span class="pill ember">+24%</span>
             </div>
             <div class="bars">
               <div class="bar"><span class="bv">38</span><i style="height:52%"></i><span class="bk">Ene</span></div>
@@ -1731,7 +1919,7 @@ body::before {
               <p class="t">Mi plan</p>
               <p class="s">El Yunque · plan atleta</p>
             </div>
-            <span class="tape" style="transform:rotate(2deg)">Al día</span>
+            <span class="pill green">Al día</span>
           </header>
 
           <div class="class-card" style="margin-top:8px">
@@ -1742,7 +1930,7 @@ body::before {
             <p class="meta"><b>Plan recurrente</b> · 12 clases al mes</p>
             <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 22px 0">
               <div><p class="class-hour" style="font-size:30px">$45.000</p><p class="exrow-extra" style="margin-top:2px">próximo cobro · 1 jul</p></div>
-              <span class="tape amber" style="transform:rotate(2deg)">en 21 días</span>
+              <span class="pill amber">en 21 días</span>
             </div>
             <div style="padding:14px 22px 0">
               <div style="display:flex;justify-content:space-between"><span class="eyebrow">Usadas este mes</span><span class="lvl-xp">7 de 12</span></div>
@@ -1760,12 +1948,12 @@ body::before {
             <div class="lrow">
               <span class="eyebrow" style="width:44px">1 jun</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">$45.000</p><p class="exrow-extra" style="margin-top:2px">MercadoPago</p></div>
-              <span class="tape" style="padding:3px 9px">Pagado</span>
+              <span class="pill green">Pagado</span>
             </div>
             <div class="lrow">
               <span class="eyebrow" style="width:44px">1 may</span>
               <div style="flex:1"><p style="font-size:14px;font-weight:600">$45.000</p><p class="exrow-extra" style="margin-top:2px">Transferencia · comprobante ✓</p></div>
-              <span class="tape" style="padding:3px 9px;transform:rotate(1.5deg)">Pagado</span>
+              <span class="pill green">Pagado</span>
             </div>
           </div>
           <div style="height:18px"></div>
@@ -1879,7 +2067,7 @@ body::before {
       <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>La pizarra</em> — el WOD escrito a plumón, como en el box real.</p></div>
       <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>Anotar</em> — números grandes, dos toques, cero fricción.</p></div>
       <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>La forja</em> — si hay PR, se graba un disco con tu nombre.</p></div>
-      <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>Duelo</em> — fierro contra fierro, el ELO se gana.</p></div>
+      <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>Duelo</em> — uno contra uno, el ELO se gana.</p></div>
       <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>Comunidad</em> — el disco se comparte, el box chócala.</p></div>
       <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>El muro</em> — la temporada se borra; el fierro queda.</p></div>
       <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>Perfil</em> — tu colección: todo lo grabado, tuyo para siempre.</p></div>
@@ -1892,14 +2080,17 @@ body::before {
 /* ── navegación ── */
 const SCREENS = [
   { id: 'intro',    nm: 'Portada' },
-  { id: 'login',    nm: 'Login' },
+  { id: 'login',      nm: 'Login' },
+  { id: 'firstlogin', nm: 'Primer ingreso' },
+  { id: 'gympick',    nm: 'Elige tu box' },
+  { id: 'recover',    nm: 'Recuperar clave' },
   { id: 'hoy',      nm: 'Hoy' },
   { id: 'notifs',   nm: 'Notificaciones' },
   { id: 'agenda',   nm: 'Agenda' },
   { id: 'board',    nm: 'Pizarra' },
   { id: 'exercise', nm: 'Ejercicio' },
   { id: 'score',    nm: 'Anotar' },
-  { id: 'forge',    nm: 'La forja · PR' },
+  { id: 'forge',    nm: 'Nuevo PR' },
   { id: 'duel',     nm: 'Duelos' },
   { id: 'desafios', nm: 'Desafíos' },
   { id: 'compe',    nm: 'Competencia' },
@@ -1961,7 +2152,7 @@ function bump(btn) {
   if (ct) ct.textContent = +ct.textContent + (on ? 1 : -1);
 }
 
-/* ── anotar: stepper + división + RPE ── */
+/* ── anotar: stepper + terminó/no terminó + RPE ── */
 const stNum = document.getElementById('st-num');
 const prHint = document.getElementById('pr-hint');
 let rounds = 17;
@@ -1971,10 +2162,37 @@ function paintRounds() {
 }
 document.getElementById('st-plus').onclick = () => { rounds++; paintRounds(); };
 document.getElementById('st-minus').onclick = () => { if (rounds > 0) rounds--; paintRounds(); };
-document.querySelectorAll('.div-plate').forEach(p => p.onclick = () => {
-  document.querySelectorAll('.div-plate').forEach(x => x.classList.remove('on'));
-  p.classList.add('on');
-});
+
+/* terminó → tiempo; no terminó → rondas + reps */
+function setDone(done) {
+  document.getElementById('done-yes').classList.toggle('on', done);
+  document.getElementById('done-no').classList.toggle('on', !done);
+  document.getElementById('res-time').style.display = done ? '' : 'none';
+  document.getElementById('res-rounds').style.display = done ? 'none' : '';
+}
+let tsec = 18 * 60 + 45;
+function tAdj(d) {
+  tsec = Math.max(0, tsec + d);
+  document.getElementById('t-num').textContent =
+    Math.floor(tsec / 60) + ':' + String(tsec % 60).padStart(2, '0');
+}
+
+/* ── ejercicio: peso de trabajo editable ── */
+let wk = 35;
+function wkAdj(d) {
+  wk = Math.max(0, wk + d);
+  document.getElementById('wk-num').textContent = wk;
+  const save = document.getElementById('wk-save');
+  save.textContent = 'Guardar';
+  save.style.background = '';
+  save.style.boxShadow = '';
+}
+function wkSave(btn) {
+  btn.textContent = 'Guardado ✓';
+  btn.style.background = '#1F8A4C';
+  btn.style.boxShadow = '0 10px 26px rgba(31,138,76,.35)';
+  document.getElementById('wk-hint').textContent = 'guardado: ' + wk + ' kg · queda para la próxima';
+}
 const rpe = document.getElementById('rpe');
 rpe.innerHTML = '';
 for (let i = 1; i <= 10; i++) {
