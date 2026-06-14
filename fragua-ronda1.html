@@ -226,15 +226,15 @@ body::before {
 /* barra inferior de tabs */
 .tabbar {
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 455;
-  display: flex; justify-content: space-around; align-items: flex-start;
-  padding: 12px 10px calc(16px + env(safe-area-inset-bottom));
+  display: flex; justify-content: space-around; align-items: center;
+  padding: 14px 10px calc(18px + env(safe-area-inset-bottom));
   background: rgba(251,248,241,0.88); backdrop-filter: blur(14px);
   box-shadow: 0 -14px 30px -14px rgba(29,27,22,0.22);
 }
-.tab { all: unset; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 5px;
-  font-family: var(--mono); font-size: 8.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--ink-faint); width: 70px; }
+.tab { all: unset; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  color: var(--ink-faint); width: 56px; height: 34px; border-radius: 12px; }
 .tab.on { color: var(--ember); }
-.tab svg { opacity: 0.8; } .tab.on svg { opacity: 1; }
+.tab svg { opacity: 0.65; } .tab.on svg { opacity: 1; }
 /* footer de acción dentro del scroll */
 .foot-cta {
   position: sticky; bottom: 0; z-index: 10; margin-top: 10px;
@@ -801,6 +801,110 @@ body::before {
 .bumpers { margin-top: 10px; font-family: var(--mono); font-size: 10px; color: var(--ink-faint); letter-spacing: 0.5px; }
 .bumpers b { color: var(--ink-dim); }
 
+/* ═══════════ Herramientas (Tools) ═══════════ */
+.tool-badge { width: 42px; height: 42px; border-radius: 13px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  background: var(--ember-soft); color: var(--ember-deep); }
+
+/* reloj */
+.clk-modes { display: flex; gap: 8px; overflow-x: auto; padding: 18px 22px 4px; scrollbar-width: none; }
+.clk-modes::-webkit-scrollbar { display: none; }
+.clk-mode { all: unset; cursor: pointer; flex-shrink: 0; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 9px 15px; border-radius: 999px; color: var(--ink-dim); border: 1px solid var(--line-strong); }
+.clk-mode.on { color: #E8E4DC; border-color: transparent; background: radial-gradient(circle at 30% 25%, var(--steel-hi), var(--steel) 60%, var(--steel-deep)); }
+.clk-face { margin: 18px 22px 0; border-radius: 22px; padding: 34px 18px 28px; text-align: center;
+  background: radial-gradient(circle at 50% 30%, #23262B, #15171A 72%); box-shadow: inset 0 2px 0 rgba(255,255,255,0.05), 0 16px 40px rgba(0,0,0,0.3); }
+.clk-sub { font-family: var(--mono); font-size: 9.5px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(232,228,220,0.45); }
+.clk-time { font-family: var(--display); font-size: 84px; line-height: 1; letter-spacing: 2px; color: #F3EDE2; margin-top: 10px; text-shadow: 0 2px 0 rgba(0,0,0,0.4); }
+.clk-cfg { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.clk-chip { font-family: var(--mono); font-size: 10px; letter-spacing: 1px; color: rgba(232,228,220,0.7); border: 1px solid rgba(255,255,255,0.14); border-radius: 999px; padding: 6px 12px; }
+.clk-ctrls { display: flex; gap: 12px; margin: 18px 22px 0; }
+.clk-face.cd   { background: radial-gradient(circle at 50% 30%, #5A4216, #2A1E08 72%); }
+.clk-face.work { background: radial-gradient(circle at 50% 30%, #14512E, #0A2C19 72%); }
+.clk-face.rest { background: radial-gradient(circle at 50% 30%, #5C1E18, #2C0E0B 72%); }
+.clk-face.done { background: radial-gradient(circle at 50% 30%, #6A3408, #341803 72%); }
+#clk-config.hide { display: none; }
+.rcfg { display: none; margin: 4px 22px 0; }
+.rcfg.on { display: block; }
+.rcfg-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+.rcfg-row + .rcfg-row { box-shadow: inset 0 1px 0 var(--line); }
+.rcfg-row.off { opacity: 0.4; pointer-events: none; }
+.rcfg-lbl { flex: 1; font-size: 14px; font-weight: 600; color: var(--ink); }
+.rcfg-val { display: flex; align-items: center; gap: 12px; }
+.rcfg-step { all: unset; box-sizing: border-box; cursor: pointer; width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 20px; color: var(--ink); background: var(--paper); border: 1px solid var(--line-strong); }
+.rcfg-step:hover { background: var(--bone-2); }
+.rcfg-num { font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--ink); min-width: 60px; text-align: center; }
+.rcfg-note { margin: 4px 22px 0; font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
+
+/* REMIX builder */
+.rx-block { background: var(--paper); border: 1px solid var(--line-strong); border-radius: 16px; margin: 10px 22px 0; overflow: hidden; }
+.rx-block.dragging { opacity: 0.4; }
+.rx-bhead { display: flex; align-items: center; gap: 8px; padding: 10px 12px; background: var(--bone-2); }
+.rx-handle { cursor: grab; color: var(--ink-faint); font-size: 14px; line-height: 1; flex-shrink: 0; }
+.rx-btitle { font-family: var(--grotesk); font-weight: 700; font-size: 13px; color: var(--ink); }
+.rx-rounds { display: flex; align-items: center; gap: 8px; margin-left: auto; }
+.rx-rounds .rcfg-num { min-width: 22px; font-size: 15px; }
+.rx-rounds .mov-tag { margin-left: 2px; }
+.rx-mini { all: unset; box-sizing: border-box; cursor: pointer; width: 26px; height: 26px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 16px; color: var(--ink); background: var(--paper); border: 1px solid var(--line-strong); }
+.rx-mini:hover { background: var(--bone-2); }
+.rx-del { all: unset; cursor: pointer; color: var(--ink-faint); font-size: 16px; padding: 0 2px; flex-shrink: 0; }
+.rx-del:hover { color: var(--mk-red); }
+.rx-items { min-height: 16px; padding: 6px; display: flex; flex-direction: column; gap: 6px; border-radius: 12px; }
+.rx-items.rx-over { box-shadow: inset 0 0 0 2px var(--ember); }
+.rx-item { border: 1px solid var(--line); border-radius: 12px; background: var(--white); }
+.rx-item.dragging { opacity: 0.4; }
+.rx-irow { display: flex; align-items: center; gap: 8px; padding: 9px 10px; }
+.rx-badge { font-family: var(--mono); font-size: 8px; letter-spacing: 0.5px; font-weight: 700; padding: 3px 6px; border-radius: 6px; color: #fff; flex-shrink: 0; }
+.rx-isum { font-family: var(--mono); font-size: 11px; color: var(--ink-dim); flex: 1; min-width: 0; }
+.rx-exp { all: unset; cursor: pointer; color: var(--ink-faint); font-size: 11px; transition: transform .15s; }
+.rx-item.open .rx-exp { transform: rotate(90deg); }
+.rx-idetail { display: none; padding: 0 12px 8px; }
+.rx-item.open .rx-idetail { display: block; }
+.rx-idetail .rcfg-row { padding: 8px 0; }
+.rx-idetail .rcfg-lbl { font-size: 12.5px; }
+.rx-add { padding: 2px 10px 10px; }
+.rx-additem { all: unset; cursor: pointer; font-family: var(--mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-dim); }
+.rx-additem:hover { color: var(--ember-deep); }
+.rx-pick { display: none; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.rx-pick.on { display: flex; }
+.rx-addbtn { all: unset; cursor: pointer; font-family: var(--mono); font-size: 9px; letter-spacing: 0.5px; color: var(--ember-deep); border: 1px dashed var(--line-strong); border-radius: 999px; padding: 5px 9px; }
+.rx-addbtn:hover { background: var(--ember-soft); }
+.rx-addblock { all: unset; cursor: pointer; display: block; text-align: center; margin: 12px 22px 0; padding: 12px; border: 1px dashed var(--line-strong); border-radius: 14px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-dim); }
+.rx-addblock:hover { background: var(--bone-2); color: var(--ink); }
+
+/* calculadora */
+.calc-panel { display: none; } .calc-panel.on { display: block; }
+.calc-field { margin: 16px 22px 0; }
+.calc-field label { font-family: var(--mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-faint); display: block; margin-bottom: 7px; }
+.calc-in { width: 100%; box-sizing: border-box; padding: 14px 16px; border-radius: 14px; border: 1px solid var(--line-strong); background: var(--paper);
+  font-family: var(--mono); font-size: 19px; font-weight: 700; color: var(--ink); }
+select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
+.pct-table { margin: 16px 22px 0; border: 1px solid var(--line); border-radius: 16px; overflow: hidden; background: var(--paper); }
+.pct-row { display: flex; align-items: center; padding: 11px 18px; }
+.pct-row + .pct-row { box-shadow: inset 0 1px 0 var(--line); }
+.pct-row .p { font-family: var(--mono); font-size: 13px; color: var(--ink-dim); width: 54px; }
+.pct-row .w { font-family: var(--display); font-size: 22px; color: var(--ink); flex: 1; text-align: right; }
+.pct-row .w span { font-size: 12px; color: var(--ink-faint); }
+.conv-eq { text-align: center; font-family: var(--display); font-size: 26px; color: var(--ember-deep); margin: 10px 0 0; }
+.plate-vis { display: flex; align-items: center; justify-content: center; gap: 3px; flex-wrap: wrap; margin: 8px 22px 0; min-height: 70px; }
+.plate-disc { border-radius: 4px; font-family: var(--mono); font-weight: 700; display: flex; align-items: center; justify-content: center;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.14); }
+.plate-empty { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.5px; color: var(--ink-faint); }
+
+/* librería */
+.lib-search { margin: 14px 22px 0; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-radius: 14px;
+  background: var(--paper); border: 1px solid var(--line-strong); }
+.lib-search input { all: unset; flex: 1; font-size: 13.5px; color: var(--ink); }
+.lib-search input::placeholder { color: var(--ink-faint); }
+.mov-tag { font-family: var(--mono); font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-faint); }
+
+/* segmento de unidad (kg/lb) en Ajustes */
+.unit-seg { display: flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--bone-2); flex-shrink: 0; }
+.us-opt { all: unset; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 999px; color: var(--ink-dim); }
+.us-opt.on { color: #E8E4DC; background: radial-gradient(circle at 30% 25%, var(--steel-hi), var(--steel) 60%, var(--steel-deep)); }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001s !important; animation-delay: 0s !important; transition-duration: 0.001s !important; }
 }
@@ -1001,8 +1105,8 @@ body::before {
           <!-- quiénes van -->
           <div class="sec-h"><span class="t">Hoy entrenan</span></div>
           <div class="roster">
-            <div class="plate-av">MR</div><div class="plate-av">JN</div><div class="plate-av">CP</div><div class="plate-av">IV</div><div class="plate-av">SD</div><div class="plate-av">DM</div>
-            <button class="more more-btn" onclick="document.getElementById('roster-sheet').classList.add('on')">y 5 más</button>
+            <div class="plate-av">MR</div><div class="plate-av">JN</div><div class="plate-av">CP</div>
+            <button class="more more-btn" onclick="document.getElementById('roster-sheet').classList.add('on')">y 8 personas más</button>
           </div>
 
           <!-- la clase por categorías: cada ejercicio se abre -->
@@ -1976,10 +2080,6 @@ body::before {
               <p style="flex:1;font-size:14px;font-weight:600">Mi plan y pagos</p>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </div>
-            <div class="lrow" style="cursor:pointer" data-go="progreso">
-              <p style="flex:1;font-size:14px;font-weight:600">Tu progreso</p>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-            </div>
             <div class="lrow">
               <div style="flex:1"><p style="font-size:14px;font-weight:600">Notificaciones</p><p class="exrow-extra" style="margin-top:2px">Clases, duelos, comunidad</p></div>
               <span class="tgl on"></span>
@@ -1996,6 +2096,13 @@ body::before {
               <p style="flex:1;font-size:14px;font-weight:600">Idioma</p>
               <span class="exrow-extra">Español · CL</span>
             </div>
+            <div class="lrow">
+              <div style="flex:1"><p style="font-size:14px;font-weight:600">Unidad de medida</p><p class="exrow-extra" style="margin-top:2px">Para la calculadora</p></div>
+              <div class="unit-seg" id="unit-seg">
+                <button class="us-opt on" data-unit="kg" onclick="setUnit('kg')">kg</button>
+                <button class="us-opt" data-unit="lb" onclick="setUnit('lb')">lb</button>
+              </div>
+            </div>
           </div>
 
           <div class="card" style="margin:14px 22px 0">
@@ -2004,6 +2111,264 @@ body::before {
             </div>
           </div>
           <div style="height:18px"></div>
+        </div>
+      </section>
+
+      <!-- ════════ P18 · HERRAMIENTAS (Tools) ════════ -->
+      <section class="screen" id="s-tools">
+        <div class="scrolly" style="padding-bottom:96px">
+          <header class="subbar">
+            <div style="flex:1">
+              <p class="t">Herramientas</p>
+              <p class="s">Tu caja de herramientas</p>
+            </div>
+          </header>
+
+          <div class="card" style="margin:14px 22px 0">
+            <div class="lrow" style="cursor:pointer;gap:14px" data-go="reloj">
+              <span class="tool-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M9 2h6M12 5V2"/></svg></span>
+              <div style="flex:1"><p style="font-family:var(--grotesk);font-size:15px;font-weight:700">Reloj</p><p class="exrow-extra" style="margin-top:2px">AMRAP · EMOM · Tabata · For Time</p></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="lrow" style="cursor:pointer;gap:14px" data-go="calc">
+              <span class="tool-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="14" x2="8" y2="14"/><line x1="12" y1="14" x2="12" y2="14"/><line x1="16" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="8" y2="18"/><line x1="12" y1="18" x2="12" y2="18"/><line x1="16" y1="18" x2="16" y2="18"/></svg></span>
+              <div style="flex:1"><p style="font-family:var(--grotesk);font-size:15px;font-weight:700">Calculadora</p><p class="exrow-extra" style="margin-top:2px">% de 1RM · lb/kg · discos</p></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+            <div class="lrow" style="cursor:pointer;gap:14px" data-go="libreria">
+              <span class="tool-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+              <div style="flex:1"><p style="font-family:var(--grotesk);font-size:15px;font-weight:700">Librería de ejercicios</p><p class="exrow-extra" style="margin-top:2px">Técnica de cada movimiento</p></div>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+
+          <p class="season-note" style="margin-top:18px">Lo que necesitas en el box, a un toque.</p>
+          <div style="height:24px"></div>
+        </div>
+        <nav class="tabbar" data-tabs="tools"></nav>
+      </section>
+
+      <!-- ════════ P19 · RELOJ ════════ -->
+      <section class="screen" id="s-reloj">
+        <div class="scrolly" style="padding-bottom:18px">
+          <header class="subbar">
+            <button class="backbtn" data-go="tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div style="flex:1">
+              <p class="t">Reloj</p>
+              <p class="s">Timer del box</p>
+            </div>
+          </header>
+
+          <div class="clk-modes" id="clk-modes">
+            <button class="clk-mode on" data-mode="amrap" onclick="clkMode('amrap')">AMRAP</button>
+            <button class="clk-mode" data-mode="emom" onclick="clkMode('emom')">EMOM</button>
+            <button class="clk-mode" data-mode="tabata" onclick="clkMode('tabata')">Tabata</button>
+            <button class="clk-mode" data-mode="fortime" onclick="clkMode('fortime')">For Time</button>
+            <button class="clk-mode" data-mode="crono" onclick="clkMode('crono')">Cronómetro</button>
+            <button class="clk-mode" data-mode="remix" onclick="clkMode('remix')">REMIX</button>
+          </div>
+
+          <div class="clk-face" id="clk-face">
+            <p class="clk-sub" id="clk-sub">AMRAP</p>
+            <p class="clk-time" id="clk-time">20:00</p>
+            <div class="clk-cfg" id="clk-cfg"></div>
+          </div>
+
+          <div class="clk-ctrls">
+            <button class="cta" id="clk-go" style="flex:1" onclick="clkToggle()">Comenzar</button>
+            <button class="cta ghost" style="flex:1" onclick="clkReset()">Reiniciar</button>
+          </div>
+
+          <!-- configuración por modo (estilo SmartWOD) -->
+          <div id="clk-config">
+            <div class="sec-h"><span class="t">Configuración</span></div>
+
+            <div class="rcfg on" id="rcfg-amrap">
+              <div class="rcfg-row"><span class="rcfg-lbl">Tiempo total</span>
+                <div class="rcfg-val"><button class="rcfg-step" onclick="cfgAdj('amrap','total',-5)">−</button><span class="rcfg-num" id="cfg-amrap-total">20:00</span><button class="rcfg-step" onclick="cfgAdj('amrap','total',5)">+</button></div>
+              </div>
+            </div>
+
+            <div class="rcfg" id="rcfg-emom">
+              <div class="rcfg-row"><span class="rcfg-lbl">Cada</span>
+                <div class="rcfg-val"><button class="rcfg-step" onclick="cfgAdj('emom','every',-5)">−</button><span class="rcfg-num" id="cfg-emom-every">1:00</span><button class="rcfg-step" onclick="cfgAdj('emom','every',5)">+</button></div>
+              </div>
+              <div class="rcfg-row"><span class="rcfg-lbl">Rondas</span>
+                <div class="rcfg-val"><button class="rcfg-step" onclick="cfgAdj('emom','rounds',-1)">−</button><span class="rcfg-num" id="cfg-emom-rounds">10</span><button class="rcfg-step" onclick="cfgAdj('emom','rounds',1)">+</button></div>
+              </div>
+            </div>
+
+            <div class="rcfg" id="rcfg-tabata">
+              <div class="rcfg-row"><span class="rcfg-lbl">Rondas</span>
+                <div class="rcfg-val"><button class="rcfg-step" onclick="cfgAdj('tabata','rounds',-1)">−</button><span class="rcfg-num" id="cfg-tabata-rounds">8</span><button class="rcfg-step" onclick="cfgAdj('tabata','rounds',1)">+</button></div>
+              </div>
+              <div class="rcfg-row"><span class="rcfg-lbl">Trabajo</span>
+                <div class="rcfg-val"><button class="rcfg-step" onclick="cfgAdj('tabata','work',-5)">−</button><span class="rcfg-num" id="cfg-tabata-work">0:20</span><button class="rcfg-step" onclick="cfgAdj('tabata','work',5)">+</button></div>
+              </div>
+              <div class="rcfg-row"><span class="rcfg-lbl">Descanso</span>
+                <div class="rcfg-val"><button class="rcfg-step" onclick="cfgAdj('tabata','rest',-5)">−</button><span class="rcfg-num" id="cfg-tabata-rest">0:10</span><button class="rcfg-step" onclick="cfgAdj('tabata','rest',5)">+</button></div>
+              </div>
+            </div>
+
+            <div class="rcfg" id="rcfg-fortime">
+              <div class="rcfg-row"><div style="flex:1"><span class="rcfg-lbl">Con tope (Time cap)</span><p class="exrow-extra" id="cfg-ft-hint" style="margin-top:2px">Apágalo para NOT FOR TIME</p></div>
+                <span class="tgl on" id="cfg-ft-tgl" onclick="ftToggle(event)"></span>
+              </div>
+              <div class="rcfg-row" id="cfg-ft-caprow"><span class="rcfg-lbl">Time cap</span>
+                <div class="rcfg-val"><button class="rcfg-step" onclick="cfgAdj('fortime','cap',-5)">−</button><span class="rcfg-num" id="cfg-fortime-cap">10:00</span><button class="rcfg-step" onclick="cfgAdj('fortime','cap',5)">+</button></div>
+              </div>
+            </div>
+
+            <div class="rcfg" id="rcfg-crono">
+              <p class="rcfg-note">El cronómetro cuenta hacia arriba sin tope. Sin configuración.</p>
+            </div>
+
+            <div class="rcfg" id="rcfg-remix">
+              <p class="rcfg-note" style="margin-bottom:4px">Arma tu WOD: arrastra bloques e items (⠿) para ordenarlos o moverlos entre bloques.</p>
+              <div id="remix-blocks"></div>
+              <button class="rx-addblock" onclick="addBlock()">+ Bloque</button>
+            </div>
+
+            <div class="sec-h"><span class="t">Cuenta regresiva</span></div>
+            <div class="clk-modes" id="cd-chips" style="padding-top:4px">
+              <button class="clk-mode" data-cd="0" onclick="setReady(0)">0 s</button>
+              <button class="clk-mode on" data-cd="3" onclick="setReady(3)">3 s</button>
+              <button class="clk-mode" data-cd="5" onclick="setReady(5)">5 s</button>
+              <button class="clk-mode" data-cd="10" onclick="setReady(10)">10 s</button>
+            </div>
+          </div>
+
+          <p style="font-family:var(--mono);font-size:9px;letter-spacing:1.2px;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-top:16px">El reloj corre en tu teléfono — proyéctalo en la pizarra</p>
+        </div>
+        <nav class="tabbar" data-tabs="tools"></nav>
+      </section>
+
+      <!-- ════════ P20 · CALCULADORA ════════ -->
+      <section class="screen" id="s-calc">
+        <div class="scrolly" style="padding-bottom:18px">
+          <header class="subbar">
+            <button class="backbtn" data-go="tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div style="flex:1">
+              <p class="t">Calculadora</p>
+              <p class="s">Pesos y porcentajes</p>
+            </div>
+          </header>
+
+          <div class="div-row">
+            <div class="div-plate on" id="ct-pct" onclick="calcTab('pct')">% de 1RM<span class="s">porcentajes</span></div>
+            <div class="div-plate" id="ct-conv" onclick="calcTab('conv')">lb ⇄ kg<span class="s">conversor</span></div>
+            <div class="div-plate" id="ct-plate" onclick="calcTab('plate')">Discos<span class="s">en la barra</span></div>
+          </div>
+
+          <!-- % de 1RM -->
+          <div class="calc-panel on" id="cp-pct">
+            <div class="calc-field"><label id="pct-unit-lbl">Tu 1RM (kg)</label>
+              <input class="calc-in" id="pct-1rm" type="number" inputmode="decimal" value="100"></div>
+            <div class="pct-table" id="pct-table"></div>
+          </div>
+
+          <!-- lb ⇄ kg -->
+          <div class="calc-panel" id="cp-conv">
+            <div class="calc-field"><label>Libras (lb)</label><input class="calc-in" id="conv-lb" type="number" inputmode="decimal" value="135"></div>
+            <p class="conv-eq">⇅</p>
+            <div class="calc-field"><label>Kilos (kg)</label><input class="calc-in" id="conv-kg" type="number" inputmode="decimal" value="61.2"></div>
+            <p style="font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--ink-faint);text-align:center;margin-top:16px;text-transform:uppercase">1 kg = 2.205 lb</p>
+          </div>
+
+          <!-- Discos -->
+          <div class="calc-panel" id="cp-plate">
+            <div class="calc-field"><label id="pl-unit-lbl">Peso objetivo (kg)</label><input class="calc-in" id="pl-target" type="number" inputmode="decimal" value="60"></div>
+            <div class="calc-field"><label>Barra</label>
+              <select class="calc-in" id="pl-bar"><option value="20">Olímpica · 20 kg</option><option value="15">Mujer · 15 kg</option><option value="10">Técnica · 10 kg</option></select>
+            </div>
+            <div class="sec-h"><span class="t">Por lado</span></div>
+            <div class="plate-vis" id="plate-vis"></div>
+            <p class="plate-empty" id="plate-note" style="text-align:center;margin-top:8px"></p>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="tools"></nav>
+      </section>
+
+      <!-- ════════ P21 · LIBRERÍA DE EJERCICIOS ════════ -->
+      <section class="screen" id="s-libreria">
+        <div class="scrolly" style="padding-bottom:18px">
+          <header class="subbar">
+            <button class="backbtn" data-go="tools"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div style="flex:1">
+              <p class="t">Librería</p>
+              <p class="s">Todos los movimientos</p>
+            </div>
+          </header>
+
+          <div class="lib-search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+            <input placeholder="Buscar movimiento…">
+          </div>
+
+          <div class="sec-h"><span class="t">Halterofilia</span></div>
+          <div class="card" style="margin:0 22px">
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Back Squat</p><span class="mov-tag">Fuerza</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Clean</p><span class="mov-tag">Potencia</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Snatch</p><span class="mov-tag">Potencia</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Deadlift</p><span class="mov-tag">Fuerza</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Push Press</p><span class="mov-tag">Fuerza</span></div>
+          </div>
+
+          <div class="sec-h"><span class="t">Gimnásticos</span></div>
+          <div class="card" style="margin:0 22px">
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Pull-up</p><span class="mov-tag">Tirón</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Toes-to-bar</p><span class="mov-tag">Core</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Handstand Push-up</p><span class="mov-tag">Empuje</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Muscle-up</p><span class="mov-tag">Avanzado</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Air Squat</p><span class="mov-tag">Base</span></div>
+          </div>
+
+          <div class="sec-h"><span class="t">Cardio / Mono</span></div>
+          <div class="card" style="margin:0 22px">
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Remo (Row)</p><span class="mov-tag">Cardio</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Assault Bike</p><span class="mov-tag">Cardio</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Double Under</p><span class="mov-tag">Salto</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Wall Ball</p><span class="mov-tag">Mixto</span></div>
+            <div class="lrow" style="cursor:pointer" data-go="mov"><p style="flex:1;font-size:14px;font-weight:600">Burpee</p><span class="mov-tag">Mono</span></div>
+          </div>
+          <div style="height:18px"></div>
+        </div>
+        <nav class="tabbar" data-tabs="tools"></nav>
+      </section>
+
+      <!-- ════════ P22 · MOVIMIENTO (detalle de librería) ════════ -->
+      <section class="screen" id="s-mov">
+        <div class="scrolly" style="padding-bottom:18px">
+          <header class="subbar">
+            <button class="backbtn" data-go="libreria"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div style="flex:1">
+              <p class="t">Air Squat</p>
+              <p class="s">Sentadilla sin peso</p>
+            </div>
+            <span class="pill">Gimnásticos</span>
+          </header>
+
+          <div class="video-card">
+            <div class="figure">
+              <svg width="150" height="150" viewBox="0 0 280 130" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="2.4" stroke-linecap="round">
+                <path d="M30 84 Q140 92 250 84"/>
+                <circle cx="140" cy="30" r="9"/>
+                <path d="M140 39 v26 M140 50 L120 64 M140 50 L160 64 M140 65 L124 100 M140 65 L156 100 M124 100 L120 116 M156 100 L160 116"/>
+              </svg>
+            </div>
+            <button class="play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="video-tag">0:48 · técnica</span>
+          </div>
+
+          <div class="sec-h"><span class="t">Las claves</span></div>
+          <div class="card" style="margin:0 22px">
+            <div class="key-row"><span class="key-n">1</span><p>Pies al ancho de hombros, punta levemente hacia afuera.</p></div>
+            <div class="key-row"><span class="key-n">2</span><p>Baja con el pecho arriba hasta romper la paralela; las rodillas siguen la punta del pie.</p></div>
+            <div class="key-row"><span class="key-n">3</span><p>Sube empujando con los talones y abre la cadera por completo arriba.</p></div>
+          </div>
+
+          <p class="coach-cue">→ profundidad antes que velocidad — Vale</p>
+          <div style="height:14px"></div>
         </div>
       </section>
 
@@ -2100,6 +2465,11 @@ const SCREENS = [
   { id: 'perfil',   nm: 'Perfil' },
   { id: 'plan',     nm: 'Mi plan' },
   { id: 'ajustes',  nm: 'Ajustes' },
+  { id: 'tools',    nm: 'Herramientas' },
+  { id: 'reloj',    nm: 'Reloj' },
+  { id: 'calc',     nm: 'Calculadora' },
+  { id: 'libreria', nm: 'Librería' },
+  { id: 'mov',      nm: 'Movimiento' },
 ];
 const rail = document.getElementById('rail');
 rail.innerHTML = ''; /* idempotente: nunca duplica aunque el script corra dos veces */
@@ -2128,14 +2498,14 @@ const TABS = [
   { k: 'hoy',    nm: 'Hoy',       go: 'hoy',    ic: '<path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/>' },
   { k: 'agenda', nm: 'Agenda',    go: 'agenda', ic: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>' },
   { k: 'social', nm: 'Comunidad', go: 'social', ic: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
-  { k: 'muro',   nm: 'Muro',      go: 'wall',   ic: '<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/>' },
+  { k: 'tools',  nm: 'Herramientas', go: 'tools',  ic: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
   { k: 'yo',     nm: 'Yo',        go: 'perfil', ic: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>' },
 ];
 document.querySelectorAll('.tabbar').forEach(bar => {
   const cur = bar.dataset.tabs;
   bar.innerHTML = TABS.map(t =>
-    `<button class="tab ${t.k === cur ? 'on' : ''}" data-go="${t.go}">
-      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${t.ic}</svg>${t.nm}</button>`
+    `<button class="tab ${t.k === cur ? 'on' : ''}" data-go="${t.go}" aria-label="${t.nm}" title="${t.nm}">
+      <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${t.ic}</svg></button>`
   ).join('');
 });
 
@@ -2216,6 +2586,410 @@ function forgeSparks() {
     host.appendChild(s);
   }
 }
+
+/* ── reloj (timer del box · estilo SmartWOD) ── */
+const RCFG = {
+  amrap:   { total: 1200 },
+  emom:    { every: 60, rounds: 10 },
+  tabata:  { rounds: 8, work: 20, rest: 10 },
+  fortime: { cap: 600, capped: true },
+  crono:   {},
+};
+let clkKey = 'amrap';
+let getReady = 3;
+let run = null;       // { phases, idx, t } mientras corre o está pausado
+let clkTick = null;   // id del setInterval (corriendo)
+
+const mmss = s => Math.floor(s / 60) + ':' + String(Math.floor(s % 60)).padStart(2, '0');
+const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+/* —— config —— */
+function cfgPaintAll() {
+  document.getElementById('cfg-amrap-total').textContent = mmss(RCFG.amrap.total);
+  document.getElementById('cfg-emom-every').textContent = mmss(RCFG.emom.every);
+  document.getElementById('cfg-emom-rounds').textContent = RCFG.emom.rounds;
+  document.getElementById('cfg-tabata-rounds').textContent = RCFG.tabata.rounds;
+  document.getElementById('cfg-tabata-work').textContent = mmss(RCFG.tabata.work);
+  document.getElementById('cfg-tabata-rest').textContent = mmss(RCFG.tabata.rest);
+  document.getElementById('cfg-fortime-cap').textContent = mmss(RCFG.fortime.cap);
+}
+function cfgAdj(mode, field, delta) {
+  const v = RCFG[mode][field] + delta;
+  RCFG[mode][field] = field === 'rounds' ? clamp(v, 1, 99) : clamp(v, 5, 5999);
+  cfgPaintAll();
+  if (!run) paintReady();
+}
+function ftToggle(e) {
+  if (e) e.stopPropagation();
+  RCFG.fortime.capped = !RCFG.fortime.capped;
+  document.getElementById('cfg-ft-tgl').classList.toggle('on', RCFG.fortime.capped);
+  document.getElementById('cfg-ft-caprow').classList.toggle('off', !RCFG.fortime.capped);
+  document.getElementById('cfg-ft-hint').textContent = RCFG.fortime.capped ? 'Apágalo para NOT FOR TIME' : 'NOT FOR TIME · tiempo ilimitado';
+  if (!run) paintReady();
+}
+function setReady(s) {
+  getReady = s;
+  document.querySelectorAll('#cd-chips .clk-mode').forEach(b => b.classList.toggle('on', +b.dataset.cd === s));
+  if (!run) paintReady();
+}
+
+/* —— modo —— */
+function clkMode(k) {
+  clkReset();
+  clkKey = k;
+  document.querySelectorAll('#clk-modes .clk-mode').forEach(b => b.classList.toggle('on', b.dataset.mode === k));
+  ['amrap', 'emom', 'tabata', 'fortime', 'crono', 'remix'].forEach(m =>
+    document.getElementById('rcfg-' + m).classList.toggle('on', m === k));
+  paintReady();
+}
+
+/* —— secuencia de fases —— */
+function buildPhases() {
+  const ph = [], c = RCFG[clkKey];
+  if (getReady > 0) ph.push({ kind: 'ready', dur: getReady, dir: 'down', label: 'PREPARADO' });
+  if (clkKey === 'amrap') ph.push({ kind: 'go', dur: c.total, dir: 'down', label: 'AMRAP' });
+  else if (clkKey === 'emom') for (let r = 1; r <= c.rounds; r++) ph.push({ kind: 'go', dur: c.every, dir: 'down', label: 'EMOM', round: r, of: c.rounds });
+  else if (clkKey === 'tabata') for (let r = 1; r <= c.rounds; r++) { ph.push({ kind: 'work', dur: c.work, dir: 'down', label: 'TRABAJO', round: r, of: c.rounds }); ph.push({ kind: 'rest', dur: c.rest, dir: 'down', label: 'DESCANSO', round: r, of: c.rounds }); }
+  else if (clkKey === 'fortime') ph.push({ kind: 'go', dur: c.capped ? c.cap : Infinity, dir: 'up', label: c.capped ? 'FOR TIME' : 'NOT FOR TIME' });
+  else if (clkKey === 'crono') ph.push({ kind: 'go', dur: Infinity, dir: 'up', label: 'CRONÓMETRO' });
+  else remix.forEach(block => { for (let r = 1; r <= block.rounds; r++) block.items.forEach(it => pushItemPhases(ph, it, block.rounds > 1 ? { br: r, bof: block.rounds } : null)); });
+  return ph;
+}
+
+/* —— pintar —— */
+function setFace(cls) { document.getElementById('clk-face').className = 'clk-face' + (cls ? ' ' + cls : ''); }
+function faceClass(kind) { return kind === 'ready' ? 'cd' : kind === 'work' ? 'work' : kind === 'rest' ? 'rest' : kind === 'done' ? 'done' : ''; }
+function readyChips() {
+  const c = RCFG[clkKey];
+  let chips;
+  if (clkKey === 'amrap') chips = ['CAP ' + mmss(c.total)];
+  else if (clkKey === 'emom') chips = [mmss(c.every) + ' × ' + c.rounds];
+  else if (clkKey === 'tabata') chips = [c.rounds + ' rondas', mmss(c.work) + ' / ' + mmss(c.rest)];
+  else if (clkKey === 'fortime') chips = c.capped ? ['CAP ' + mmss(c.cap)] : ['sin tope'];
+  else if (clkKey === 'remix') chips = [remix.length + ' bloques', mmss(remixTotal()) + ' total'];
+  else chips = ['libre'];
+  if (getReady > 0) chips.push('go ' + getReady + 's');
+  return chips.map(x => `<span class="clk-chip">${x}</span>`).join('');
+}
+function paintReady() {
+  let t0, sub;
+  if (clkKey === 'remix') { t0 = remixTotal(); sub = 'REMIX'; }
+  else {
+    const c = RCFG[clkKey];
+    t0 = clkKey === 'amrap' ? c.total : clkKey === 'emom' ? c.every : clkKey === 'tabata' ? c.work : (clkKey === 'fortime' && c.capped) ? c.cap : 0;
+    sub = clkKey === 'fortime' ? (c.capped ? 'FOR TIME' : 'NOT FOR TIME') : clkKey.toUpperCase();
+  }
+  document.getElementById('clk-time').textContent = mmss(t0);
+  document.getElementById('clk-sub').textContent = sub;
+  document.getElementById('clk-cfg').innerHTML = readyChips();
+  setFace('');
+  document.getElementById('clk-go').textContent = 'Comenzar';
+}
+function paintRun() {
+  const cur = run.phases[run.idx];
+  const shown = cur.dir === 'down' ? Math.max(0, cur.dur - run.t) : run.t;
+  document.getElementById('clk-time').textContent = cur.dur === Infinity ? mmss(run.t) : mmss(shown);
+  document.getElementById('clk-sub').textContent = cur.label + (cur.round ? ' · ' + cur.round + '/' + cur.of : '');
+  const chips = [];
+  if (cur.blockRound) chips.push('Bloque ' + cur.blockRound + '/' + cur.blockOf);
+  if (cur.kind === 'go' && cur.dir === 'up' && cur.dur !== Infinity) chips.push('CAP ' + mmss(cur.dur));
+  document.getElementById('clk-cfg').innerHTML = chips.map(x => `<span class="clk-chip">${x}</span>`).join('');
+  setFace(faceClass(cur.kind));
+}
+
+/* —— control —— */
+function clkToggle() {
+  if (clkTick) { clearInterval(clkTick); clkTick = null; document.getElementById('clk-go').textContent = 'Continuar'; return; }
+  if (!run) {
+    const phases = buildPhases();
+    if (!phases.length) return;
+    run = { phases, idx: 0, t: 0 };
+    document.getElementById('clk-config').classList.add('hide');
+    paintRun();
+    beep(run.phases[0].kind === 'ready' ? 'soft' : 'go');
+  }
+  document.getElementById('clk-go').textContent = 'Pausar';
+  clkTick = setInterval(tick, 1000);
+}
+function tick() {
+  run.t++;
+  let cur = run.phases[run.idx];
+  const remaining = cur.dur - run.t;
+  if (cur.dur !== Infinity && remaining <= 3 && remaining >= 1) beep('soft');
+  if (cur.dur !== Infinity && run.t >= cur.dur) {
+    run.idx++; run.t = 0;
+    if (run.idx >= run.phases.length) { clkDone(); return; }
+    cur = run.phases[run.idx];
+    beep(cur.kind === 'rest' ? 'rest' : 'go');
+  }
+  paintRun();
+}
+function clkDone() {
+  clearInterval(clkTick); clkTick = null; run = null;
+  document.getElementById('clk-sub').textContent = 'TERMINADO';
+  document.getElementById('clk-time').textContent = '0:00';
+  document.getElementById('clk-cfg').innerHTML = '<span class="clk-chip">¡bien ahí!</span>';
+  setFace('done');
+  document.getElementById('clk-go').textContent = 'Comenzar';
+  document.getElementById('clk-config').classList.remove('hide');
+  beep('end');
+}
+function clkReset() {
+  if (clkTick) { clearInterval(clkTick); clkTick = null; }
+  run = null;
+  document.getElementById('clk-config').classList.remove('hide');
+  paintReady();
+}
+
+/* —— beeps (WebAudio) —— */
+let actx = null;
+function beep(kind) {
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.type = 'sine';
+    o.frequency.value = kind === 'end' ? 1200 : kind === 'go' ? 880 : kind === 'rest' ? 440 : 660;
+    const len = kind === 'end' ? 0.5 : 0.16;
+    g.gain.setValueAtTime(0.0001, actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.25, actx.currentTime + 0.01);
+    g.gain.exponentialRampToValueAtTime(0.0001, actx.currentTime + len);
+    o.connect(g); g.connect(actx.destination);
+    o.start(); o.stop(actx.currentTime + len + 0.02);
+  } catch (e) {}
+}
+/* —— REMIX: constructor de WOD —— */
+let uid = 1;
+const nid = () => 'x' + (uid++);
+const ITEM_DEF = {
+  amrap:   () => ({ total: 1200 }),
+  fortime: () => ({ cap: 600 }),
+  emom:    () => ({ every: 60, rounds: 10 }),
+  tabata:  () => ({ rounds: 8, work: 20, rest: 10 }),
+  rest:    () => ({ dur: 60 }),
+};
+const ITEM_BADGE = { amrap: ['AMRAP', '#2B2E34'], fortime: ['FT', '#C2390B'], emom: ['EMOM', '#2456B3'], tabata: ['TBT', '#1F7A45'], rest: ['REST', '#9A6610'] };
+function mkItem(type) { return Object.assign({ id: nid(), type }, ITEM_DEF[type]()); }
+let remix = [
+  { id: nid(), rounds: 3, items: [mkItem('amrap'), mkItem('rest'), mkItem('fortime')] },
+  { id: nid(), rounds: 1, items: [mkItem('rest')] },
+  { id: nid(), rounds: 1, items: [mkItem('fortime')] },
+];
+
+function itemSummary(it) {
+  if (it.type === 'amrap') return 'AMRAP · ' + mmss(it.total);
+  if (it.type === 'fortime') return 'FOR TIME · cap ' + mmss(it.cap);
+  if (it.type === 'emom') return 'EMOM · ' + mmss(it.every) + ' × ' + it.rounds;
+  if (it.type === 'tabata') return 'TABATA · ' + it.rounds + '×(' + mmss(it.work) + '/' + mmss(it.rest) + ')';
+  return 'DESCANSO · ' + mmss(it.dur);
+}
+function itemFields(it) {
+  if (it.type === 'amrap') return [['total', 'Tiempo', 5]];
+  if (it.type === 'fortime') return [['cap', 'Time cap', 5]];
+  if (it.type === 'emom') return [['every', 'Cada', 5], ['rounds', 'Rondas', 1]];
+  if (it.type === 'tabata') return [['rounds', 'Rondas', 1], ['work', 'Trabajo', 5], ['rest', 'Descanso', 5]];
+  return [['dur', 'Duración', 5]];
+}
+const fieldVal = (it, f) => f === 'rounds' ? it[f] : mmss(it[f]);
+
+function remixItemHTML(bid, it) {
+  const [lbl, col] = ITEM_BADGE[it.type];
+  return `<div class="rx-item" draggable="true" data-bid="${bid}" data-iid="${it.id}">
+      <div class="rx-irow">
+        <span class="rx-handle">⠿</span>
+        <span class="rx-badge" style="background:${col}">${lbl}</span>
+        <span class="rx-isum" id="sum-${it.id}">${itemSummary(it)}</span>
+        <button class="rx-exp" onclick="toggleItem('${it.id}')">▶</button>
+        <button class="rx-del" onclick="delItem('${bid}','${it.id}')">✕</button>
+      </div>
+      <div class="rx-idetail">
+        ${itemFields(it).map(([f, label, step]) => `<div class="rcfg-row"><span class="rcfg-lbl">${label}</span><div class="rcfg-val"><button class="rcfg-step" onclick="itemAdj('${it.id}','${f}',${-step})">−</button><span class="rcfg-num" id="num-${it.id}-${f}">${fieldVal(it, f)}</span><button class="rcfg-step" onclick="itemAdj('${it.id}','${f}',${step})">+</button></div></div>`).join('')}
+      </div>
+    </div>`;
+}
+function remixRender() {
+  document.getElementById('remix-blocks').innerHTML = remix.map(b => `<div class="rx-block" draggable="true" data-bid="${b.id}">
+      <div class="rx-bhead">
+        <span class="rx-handle">⠿</span>
+        <span class="rx-btitle">Bloque</span>
+        <div class="rx-rounds">
+          <button class="rx-mini" onclick="blockRounds('${b.id}',-1)">−</button>
+          <span class="rcfg-num" id="br-${b.id}">${b.rounds}</span>
+          <button class="rx-mini" onclick="blockRounds('${b.id}',1)">+</button>
+          <span class="mov-tag">rondas</span>
+        </div>
+        <button class="rx-del" onclick="delBlock('${b.id}')">✕</button>
+      </div>
+      <div class="rx-items" data-bid="${b.id}">${b.items.map(it => remixItemHTML(b.id, it)).join('')}</div>
+      <div class="rx-add">
+        <button class="rx-additem" onclick="togglePick('${b.id}')">+ item</button>
+        <div class="rx-pick" id="pick-${b.id}">${['amrap', 'fortime', 'emom', 'tabata', 'rest'].map(t => `<button class="rx-addbtn" onclick="addItem('${b.id}','${t}')">${ITEM_BADGE[t][0]}</button>`).join('')}</div>
+      </div>
+    </div>`).join('');
+}
+function findItem(iid) { for (const b of remix) { const it = b.items.find(i => i.id === iid); if (it) return { b, it }; } return {}; }
+function blockRounds(bid, d) {
+  const b = remix.find(x => x.id === bid); if (!b) return;
+  b.rounds = clamp(b.rounds + d, 1, 99);
+  document.getElementById('br-' + bid).textContent = b.rounds;
+  if (!run) paintReady();
+}
+function itemAdj(iid, f, d) {
+  const { it } = findItem(iid); if (!it) return;
+  it[f] = f === 'rounds' ? clamp(it[f] + d, 1, 99) : clamp(it[f] + d, 5, 5999);
+  document.getElementById('num-' + iid + '-' + f).textContent = fieldVal(it, f);
+  document.getElementById('sum-' + iid).textContent = itemSummary(it);
+  if (!run) paintReady();
+}
+function toggleItem(iid) { document.querySelector(`.rx-item[data-iid="${iid}"]`).classList.toggle('open'); }
+function togglePick(bid) { document.getElementById('pick-' + bid).classList.toggle('on'); }
+function addItem(bid, type) { const b = remix.find(x => x.id === bid); if (b) { b.items.push(mkItem(type)); remixRender(); if (!run) paintReady(); } }
+function delItem(bid, iid) { const b = remix.find(x => x.id === bid); if (b) { b.items = b.items.filter(i => i.id !== iid); remixRender(); if (!run) paintReady(); } }
+function addBlock() { remix.push({ id: nid(), rounds: 1, items: [] }); remixRender(); if (!run) paintReady(); }
+function delBlock(bid) { remix = remix.filter(b => b.id !== bid); remixRender(); if (!run) paintReady(); }
+
+/* expansión de fases */
+function pushItemPhases(ph, it, bi) {
+  const tag = p => { if (bi) { p.blockRound = bi.br; p.blockOf = bi.bof; } return p; };
+  if (it.type === 'amrap') ph.push(tag({ kind: 'go', dur: it.total, dir: 'down', label: 'AMRAP' }));
+  else if (it.type === 'fortime') ph.push(tag({ kind: 'go', dur: it.cap, dir: 'up', label: 'FOR TIME' }));
+  else if (it.type === 'rest') ph.push(tag({ kind: 'rest', dur: it.dur, dir: 'down', label: 'DESCANSO' }));
+  else if (it.type === 'emom') for (let r = 1; r <= it.rounds; r++) ph.push(tag({ kind: 'go', dur: it.every, dir: 'down', label: 'EMOM', round: r, of: it.rounds }));
+  else if (it.type === 'tabata') for (let r = 1; r <= it.rounds; r++) { ph.push(tag({ kind: 'work', dur: it.work, dir: 'down', label: 'TRABAJO', round: r, of: it.rounds })); ph.push(tag({ kind: 'rest', dur: it.rest, dir: 'down', label: 'DESCANSO', round: r, of: it.rounds })); }
+}
+function remixTotal() {
+  const ph = []; remix.forEach(b => { for (let r = 1; r <= b.rounds; r++) b.items.forEach(it => pushItemPhases(ph, it, null)); });
+  return ph.reduce((s, p) => s + (p.dur === Infinity ? 0 : p.dur), 0);
+}
+
+/* drag & drop (HTML5, anidado) */
+let dragKind = null, dragInfo = null;
+const remixHost = document.getElementById('remix-blocks');
+function getAfter(container, y, sel) {
+  let best = { off: -Infinity, el: null };
+  container.querySelectorAll(sel + ':not(.dragging)').forEach(ch => {
+    const box = ch.getBoundingClientRect(), off = y - box.top - box.height / 2;
+    if (off < 0 && off > best.off) best = { off, el: ch };
+  });
+  return best.el;
+}
+remixHost.addEventListener('dragstart', e => {
+  const item = e.target.closest('.rx-item');
+  if (item) { dragKind = 'item'; dragInfo = { bid: item.dataset.bid, iid: item.dataset.iid }; setTimeout(() => item.classList.add('dragging'), 0); return; }
+  const block = e.target.closest('.rx-block');
+  if (block) { dragKind = 'block'; dragInfo = { bid: block.dataset.bid }; setTimeout(() => block.classList.add('dragging'), 0); }
+});
+remixHost.addEventListener('dragend', () => {
+  remixHost.querySelectorAll('.dragging').forEach(el => el.classList.remove('dragging'));
+  remixHost.querySelectorAll('.rx-over').forEach(el => el.classList.remove('rx-over'));
+  dragKind = null; dragInfo = null;
+});
+remixHost.addEventListener('dragover', e => {
+  e.preventDefault();
+  remixHost.querySelectorAll('.rx-over').forEach(el => el.classList.remove('rx-over'));
+  if (dragKind === 'item') { const block = e.target.closest('.rx-block'); if (block) block.querySelector('.rx-items').classList.add('rx-over'); }
+});
+remixHost.addEventListener('drop', e => {
+  e.preventDefault();
+  if (dragKind === 'item') {
+    const block = e.target.closest('.rx-block'); if (!block) return;
+    const after = getAfter(block.querySelector('.rx-items'), e.clientY, '.rx-item');
+    moveItem(dragInfo.bid, dragInfo.iid, block.dataset.bid, after ? after.dataset.iid : null);
+  } else if (dragKind === 'block') {
+    const after = getAfter(remixHost, e.clientY, '.rx-block');
+    moveBlock(dragInfo.bid, after ? after.dataset.bid : null);
+  }
+});
+function moveItem(srcBid, iid, tgtBid, beforeIid) {
+  const src = remix.find(b => b.id === srcBid), tgt = remix.find(b => b.id === tgtBid);
+  if (!src || !tgt) return;
+  const idx = src.items.findIndex(i => i.id === iid); if (idx < 0) return;
+  const [it] = src.items.splice(idx, 1);
+  let pos = tgt.items.length;
+  if (beforeIid != null) { const bi = tgt.items.findIndex(i => i.id === beforeIid); if (bi >= 0) pos = bi; }
+  tgt.items.splice(pos, 0, it);
+  remixRender(); if (!run) paintReady();
+}
+function moveBlock(bid, beforeBid) {
+  const idx = remix.findIndex(b => b.id === bid); if (idx < 0) return;
+  const [b] = remix.splice(idx, 1);
+  let pos = remix.length;
+  if (beforeBid != null) { const bi = remix.findIndex(x => x.id === beforeBid); if (bi >= 0) pos = bi; }
+  remix.splice(pos, 0, b);
+  remixRender(); if (!run) paintReady();
+}
+
+cfgPaintAll(); remixRender(); clkMode('amrap');
+
+/* ── calculadora (% de 1RM · lb/kg · discos) ── */
+function calcTab(k) {
+  ['pct', 'conv', 'plate'].forEach(t => {
+    document.getElementById('ct-' + t).classList.toggle('on', t === k);
+    document.getElementById('cp-' + t).classList.toggle('on', t === k);
+  });
+}
+let unit = 'kg';
+function setUnit(u) {
+  unit = u;
+  document.querySelectorAll('.us-opt').forEach(b => b.classList.toggle('on', b.dataset.unit === u));
+  applyUnit();
+}
+function applyUnit() {
+  document.getElementById('pct-unit-lbl').textContent = 'Tu 1RM (' + unit + ')';
+  document.getElementById('pl-unit-lbl').textContent = 'Peso objetivo (' + unit + ')';
+  fillBarOptions();
+  pctPaint(); platePaint();
+}
+
+const PCTS = [95, 90, 85, 80, 75, 70, 65, 60, 50];
+function pctPaint() {
+  const rm = parseFloat(document.getElementById('pct-1rm').value) || 0;
+  document.getElementById('pct-table').innerHTML = PCTS.map(p =>
+    `<div class="pct-row"><span class="p">${p}%</span><span class="w">${(rm * p / 100).toFixed(1).replace(/\.0$/, '')} <span>${unit}</span></span></div>`
+  ).join('');
+}
+
+const LB = 2.20462;
+function convFrom(which) {
+  const lb = document.getElementById('conv-lb'), kg = document.getElementById('conv-kg');
+  if (which === 'lb') kg.value = (parseFloat(lb.value) / LB || 0).toFixed(1);
+  else lb.value = (parseFloat(kg.value) * LB || 0).toFixed(1);
+}
+
+const PLATES = { kg: [25, 20, 15, 10, 5, 2.5, 1.25], lb: [45, 35, 25, 10, 5, 2.5] };
+const BARS = {
+  kg: [{ v: 20, l: 'Olímpica · 20 kg' }, { v: 15, l: 'Mujer · 15 kg' }, { v: 10, l: 'Técnica · 10 kg' }],
+  lb: [{ v: 45, l: 'Olímpica · 45 lb' }, { v: 35, l: 'Mujer · 35 lb' }, { v: 15, l: 'Técnica · 15 lb' }],
+};
+const TIER = ['#C0392B', '#2456B3', '#C98A2B', '#1F7A45', '#E8E4DC', '#2B2925', '#8C9199'];
+function fillBarOptions() {
+  document.getElementById('pl-bar').innerHTML = BARS[unit].map(b => `<option value="${b.v}">${b.l}</option>`).join('');
+}
+function platePaint() {
+  const target = parseFloat(document.getElementById('pl-target').value) || 0;
+  const bar = parseFloat(document.getElementById('pl-bar').value) || BARS[unit][0].v;
+  const vis = document.getElementById('plate-vis'), note = document.getElementById('plate-note');
+  if (target < bar) { vis.innerHTML = ''; note.textContent = 'Menos que la barra (' + bar + ' ' + unit + ').'; return; }
+  const plates = PLATES[unit], max = plates[0];
+  let perSide = (target - bar) / 2, html = '', used = false;
+  plates.forEach((d, i) => {
+    while (perSide >= d - 1e-9) {
+      perSide -= d; used = true;
+      const light = ['#E8E4DC', '#8C9199'].includes(TIER[i]);
+      const r = d / max;
+      html += `<span class="plate-disc" style="width:${14 + r * 14}px;height:${44 + r * 46}px;font-size:${d >= 5 ? 11 : 9}px;background:${TIER[i]};color:${light ? '#1D1B16' : '#fff'}">${d}</span>`;
+    }
+  });
+  vis.innerHTML = html || '<span class="plate-empty">solo la barra</span>';
+  const leftover = perSide > 0.01 ? ' · faltan ' + (perSide * 2).toFixed(2).replace(/\.?0+$/, '') + ' ' + unit : '';
+  note.textContent = (used ? 'por lado, de mayor a menor' : 'solo la barra') + leftover;
+}
+
+document.getElementById('pct-1rm').addEventListener('input', pctPaint);
+document.getElementById('conv-lb').addEventListener('input', () => convFrom('lb'));
+document.getElementById('conv-kg').addEventListener('input', () => convFrom('kg'));
+['pl-target', 'pl-bar'].forEach(id => document.getElementById(id).addEventListener('input', platePaint));
+applyUnit();
 
 /* ── el teléfono se escala para caber completo en el viewport ── */
 const phoneEl = document.querySelector('.phone');
