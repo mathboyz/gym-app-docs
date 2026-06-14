@@ -841,6 +841,10 @@ body::before {
   font-size: 20px; color: var(--ink); background: var(--paper); border: 1px solid var(--line-strong); }
 .rcfg-step:hover { background: var(--bone-2); }
 .rcfg-num { font-family: var(--mono); font-weight: 700; font-size: 18px; color: var(--ink); min-width: 60px; text-align: center; }
+#s-score .lrow > p { white-space: nowrap; }
+#s-score .rcfg-num { min-width: 50px; font-size: 15px; }
+#s-score .rcfg-step { width: 30px; height: 30px; font-size: 18px; }
+#s-score .dose { flex-shrink: 0; }
 .rcfg-note { margin: 4px 22px 0; font-size: 13px; color: var(--ink-dim); line-height: 1.5; }
 
 /* REMIX builder */
@@ -1180,7 +1184,7 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
               <span class="dose">2×5<small>+ 3×3</small></span>
               <div style="flex:1">
                 <p style="font-size:14px;font-weight:600">Power Clean</p>
-                <p class="exrow-extra" style="margin-top:2px">@ 75% 1RM → <b style="color:var(--ember-deep)">tuyo: 35 kg</b> · descanso 3:00</p>
+                <p class="exrow-extra" style="margin-top:2px">@ 75% 1RM → <b style="color:var(--ember-deep)">tuyo: <span class="wt" data-kg="35">35 kg</span></b> · descanso 3:00</p>
               </div>
               <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -1246,15 +1250,15 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
           <!-- hoy te toca -->
           <div class="rx-tiles">
             <div class="rx-tile"><div class="v">75<span style="font-size:15px">%</span></div><div class="k">Prescrito hoy · de tu 1RM</div></div>
-            <div class="rx-tile"><div class="v em">35 <span style="font-size:15px">kg</span></div><div class="k">Te toca a ti · 77 lb</div></div>
+            <div class="rx-tile"><div class="v em wt" data-kg="35">35 kg</div><div class="k">Te toca a ti</div></div>
           </div>
 
           <!-- tu fierro en este ejercicio -->
           <div class="sec-h"><span class="t">Tu marca</span></div>
           <div class="my-iron">
-            <div class="disc-sm" style="width:74px;height:74px"><span class="k">Clean</span><span class="v" style="font-size:17px">47</span><span class="k">kg · plata</span></div>
+            <div class="disc-sm" style="width:74px;height:74px"><span class="k">Clean</span><span class="v wt" data-kg="47" style="font-size:17px">47 kg</span><span class="k">plata</span></div>
             <div style="flex:1">
-              <p style="font-size:13.5px;color:var(--ink-dim);line-height:1.45">Tu 1RM: <b style="color:var(--ink)">47 kg</b>, logrado el 3 de mayo. A <b style="color:var(--ember-deep)">3 kg</b> del disco de oro.</p>
+              <p style="font-size:13.5px;color:var(--ink-dim);line-height:1.45">Tu 1RM: <b style="color:var(--ink)"><span class="wt" data-kg="47">47 kg</span></b>, logrado el 3 de mayo. A <b style="color:var(--ember-deep)"><span class="wt" data-kg="3">3 kg</span></b> del disco de oro.</p>
               <p style="font-family:var(--mono);font-size:10px;color:var(--ember-deep);margin-top:6px;letter-spacing:1px;cursor:pointer" data-go="progreso">VER EVOLUCIÓN →</p>
             </div>
           </div>
@@ -1421,7 +1425,7 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
                 <div style="border-top:1px dashed var(--line-strong);margin-top:12px;padding-top:12px;display:flex;flex-direction:column;gap:10px;font-family:var(--ui)">
                   <div style="display:flex;align-items:baseline;gap:10px">
                     <span class="dose" style="min-width:60px">21-15-9</span>
-                    <div style="flex:1"><p style="font-size:13.5px;font-weight:600;transform:none">Thrusters</p><p class="exrow-extra">Rx 43 kg · Scaled 30 kg — <b style="color:var(--ember-deep)">acordado: Rx</b></p></div>
+                    <div style="flex:1"><p style="font-size:13.5px;font-weight:600;transform:none">Thrusters</p><p class="exrow-extra">Rx <span class="wt" data-kg="43">43 kg</span> · Scaled <span class="wt" data-kg="30">30 kg</span> — <b style="color:var(--ember-deep)">acordado: Rx</b></p></div>
                   </div>
                   <div style="display:flex;align-items:baseline;gap:10px">
                     <span class="dose" style="min-width:60px">21-15-9</span>
@@ -1898,7 +1902,7 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
               <span class="vid-badge" style="width:38px;height:38px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8z"/></svg></span>
               <div style="flex:1">
                 <div style="display:flex;justify-content:space-between;gap:8px"><p style="font-size:13.5px">¿Cómo estuvo la clase de las <b>19:00</b>?</p><span class="n-tm">hace 3 h</span></div>
-                <div class="n-acts"><button class="bump on">Responder · +20 XP</button></div>
+                <div class="n-acts"><button class="bump on" onclick="this.textContent='¡Gracias! +20 XP';this.classList.remove('on')">Responder · +20 XP</button></div>
               </div>
             </div>
             <div class="lrow" style="cursor:pointer" data-go="social">
@@ -1996,7 +2000,7 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
                 <div style="display:flex;flex-direction:column;gap:9px">
                   <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">5</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Pull-ups</p><p class="exrow-extra">Rx estrictas · Scaled kipping · Masters con banda</p></div></div>
                   <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">10</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Push-ups</p><p class="exrow-extra">Todas las divisiones: pecho al suelo</p></div></div>
-                  <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">15</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Air squats con chaleco</p><p class="exrow-extra">Rx 9 kg · Scaled 5 kg · Masters sin chaleco</p></div></div>
+                  <div style="display:flex;align-items:baseline;gap:10px"><span class="dose">15</span><div style="flex:1"><p style="font-size:13px;font-weight:600">Air squats con chaleco</p><p class="exrow-extra">Rx <span class="wt" data-kg="9">9 kg</span> · Scaled <span class="wt" data-kg="5">5 kg</span> · Masters sin chaleco</p></div></div>
                 </div>
               </div>
             </div>
@@ -2042,27 +2046,21 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
             </div>
           </header>
 
-          <div class="seg" style="padding-top:4px">
-            <button class="on">Clean</button><button>“Cindy”</button><button>Deadlift</button><button>Back squat</button>
+          <div class="seg" id="prog-seg" style="padding-top:4px">
+            <button class="on" onclick="progSel('clean',this)">Clean</button><button onclick="progSel('cindy',this)">“Cindy”</button><button onclick="progSel('deadlift',this)">Deadlift</button><button onclick="progSel('backsquat',this)">Back squat</button>
           </div>
 
           <div class="card" style="margin:12px 22px 0;padding:18px 20px">
             <div style="display:flex;align-items:center;justify-content:space-between">
-              <span class="eyebrow">Clean 1RM · 6 meses</span>
-              <span class="pill ember">+24%</span>
+              <span class="eyebrow" id="prog-cap">Clean 1RM · 5 meses</span>
+              <span class="pill ember" id="prog-pct">+24%</span>
             </div>
-            <div class="bars">
-              <div class="bar"><span class="bv">38</span><i style="height:52%"></i><span class="bk">Ene</span></div>
-              <div class="bar"><span class="bv">41</span><i style="height:62%"></i><span class="bk">Feb</span></div>
-              <div class="bar"><span class="bv">43</span><i style="height:70%"></i><span class="bk">Mar</span></div>
-              <div class="bar"><span class="bv">45</span><i style="height:80%"></i><span class="bk">Abr</span></div>
-              <div class="bar em"><span class="bv">47</span><i style="height:92%"></i><span class="bk">May</span></div>
-            </div>
+            <div class="bars" id="prog-bars"></div>
           </div>
 
           <div class="my-iron" style="margin-top:14px">
-            <div class="disc-sm locked" style="width:70px;height:70px"><span class="v">50</span><span class="k">kg · oro</span></div>
-            <p style="flex:1;font-size:13.5px;color:var(--ink-dim);line-height:1.5">El disco de oro de Clean se forja en <b style="color:var(--ink)">50 kg</b> — estás a <b style="color:var(--ember-deep)">3 kg</b>. Al ritmo de estos meses, lo grabas en julio.</p>
+            <div class="disc-sm locked" style="width:70px;height:70px"><span class="v" id="prog-goal">50</span><span class="k" id="prog-goal-u">kg · oro</span></div>
+            <p style="flex:1;font-size:13.5px;color:var(--ink-dim);line-height:1.5" id="prog-note">El disco de oro de Clean se forja en <b style="color:var(--ink)">50 kg</b> — estás a <b style="color:var(--ember-deep)">3 kg</b>. Al ritmo de estos meses, lo grabas en julio.</p>
           </div>
           <div style="height:18px"></div>
         </div>
@@ -2151,7 +2149,7 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
               <span class="exrow-extra">Español · CL</span>
             </div>
             <div class="lrow">
-              <div style="flex:1"><p style="font-size:14px;font-weight:600">Unidad de medida</p><p class="exrow-extra" style="margin-top:2px">Para la calculadora</p></div>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600">Unidad de medida</p><p class="exrow-extra" style="margin-top:2px">kg o lb en toda la app</p></div>
               <div class="unit-seg" id="unit-seg">
                 <button class="us-opt on" data-unit="kg" onclick="setUnit('kg')">kg</button>
                 <button class="us-opt" data-unit="lb" onclick="setUnit('lb')">lb</button>
@@ -2610,7 +2608,34 @@ function tAdj(d) {
 
 /* ── anotar: peso usado por serie del skill ── */
 const SK = [35, 35, 40, 40, 42.5];
-function skAdj(i, d) { SK[i] = Math.max(0, SK[i] + d); document.getElementById('sk-' + i).textContent = SK[i]; }
+function renderSkill() { SK.forEach((v, i) => { const el = document.getElementById('sk-' + i); if (el) el.textContent = fmtWt(v); }); }
+function skAdj(i, d) { SK[i] = Math.max(0, SK[i] + d); renderSkill(); }
+
+/* ── progreso: gráfico por benchmark (unit-aware) ── */
+const PROG = {
+  clean:     { cap: 'Clean 1RM',      pct: '+24%', kg: true,  data: [['Ene',38],['Feb',41],['Mar',43],['Abr',45],['May',47]], goal: 50,  gap: 3, note: 'El disco de oro de Clean se forja en {g} — estás a {d}. Al ritmo de estos meses, lo grabas en julio.' },
+  cindy:     { cap: '“Cindy”',        pct: '+13%', kg: false, ub: 'rondas', data: [['Feb',15],['Mar',15],['Abr',16],['May',17]], goal: 18, gap: 1, note: 'El disco de oro de “Cindy” se forja en {g} — estás a {d}.' },
+  deadlift:  { cap: 'Deadlift 1RM',   pct: '+11%', kg: true,  data: [['Ene',92],['Feb',95],['Mar',98],['Abr',100],['May',102]], goal: 110, gap: 8, note: 'El oro de Deadlift está en {g} — a {d} de tu marca.' },
+  backsquat: { cap: 'Back squat 1RM', pct: '+9%',  kg: true,  data: [['Ene',70],['Feb',72],['Mar',74],['Abr',76],['May',78]], goal: 85, gap: 7, note: 'El oro de Back squat está en {g} — a {d}.' },
+};
+let progKey = 'clean';
+function progSel(k, btn) { progKey = k; document.querySelectorAll('#prog-seg button').forEach(b => b.classList.remove('on')); btn.classList.add('on'); renderProgreso(); }
+function renderProgreso() {
+  const host = document.getElementById('prog-bars'); if (!host) return;
+  const p = PROG[progKey];
+  const conv = v => p.kg ? (unit === 'kg' ? v : Math.round(v * 2.20462)) : v;
+  const u = p.kg ? unit : p.ub;
+  const max = Math.max(...p.data.map(d => d[1]), p.goal);
+  document.getElementById('prog-cap').textContent = p.cap + ' · ' + p.data.length + ' meses';
+  document.getElementById('prog-pct').textContent = p.pct;
+  host.innerHTML = p.data.map((d, i) => `<div class="bar${i === p.data.length - 1 ? ' em' : ''}"><span class="bv">${conv(d[1])}</span><i style="height:${Math.round(d[1] / max * 92)}%"></i><span class="bk">${d[0]}</span></div>`).join('');
+  document.getElementById('prog-goal').textContent = conv(p.goal);
+  document.getElementById('prog-goal-u').textContent = u + ' · oro';
+  const du = (!p.kg && conv(p.gap) === 1) ? p.ub.replace(/s$/, '') : u;
+  document.getElementById('prog-note').innerHTML = p.note
+    .replace('{g}', '<b style="color:var(--ink)">' + conv(p.goal) + ' ' + u + '</b>')
+    .replace('{d}', '<b style="color:var(--ember-deep)">' + conv(p.gap) + ' ' + du + '</b>');
+}
 const rpe = document.getElementById('rpe');
 rpe.innerHTML = '';
 for (let i = 1; i <= 10; i++) {
@@ -2983,11 +3008,14 @@ function setUnit(u) {
   document.querySelectorAll('.us-opt').forEach(b => b.classList.toggle('on', b.dataset.unit === u));
   applyUnit();
 }
+const fmtWt = kg => unit === 'kg' ? (kg + ' kg') : (Math.round(kg * 2.20462) + ' lb');
 function applyUnit() {
   document.getElementById('pct-unit-lbl').textContent = 'Tu 1RM (' + unit + ')';
   document.getElementById('pl-unit-lbl').textContent = 'Peso objetivo (' + unit + ')';
   fillBarOptions();
   pctPaint(); platePaint();
+  document.querySelectorAll('.wt').forEach(e => e.textContent = fmtWt(parseFloat(e.dataset.kg)));
+  renderSkill(); renderProgreso();
 }
 
 const PCTS = [95, 90, 85, 80, 75, 70, 65, 60, 50];
