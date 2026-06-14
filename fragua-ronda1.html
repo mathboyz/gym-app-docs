@@ -1481,12 +1481,12 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
       <!-- ════════ P6 · EL MURO ════════ -->
       <section class="screen" id="s-wall">
         <div class="scrolly" style="padding-bottom:96px">
-          <header class="appbar" style="align-items:flex-end">
-            <div class="tx">
-              <span class="eyebrow">Ranking del box</span>
-              <p class="hi">El muro</p>
+          <header class="subbar">
+            <button class="backbtn" data-go="social"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div style="flex:1">
+              <p class="t">El muro</p>
+              <p class="s">Ranking del box · Otoño sem 6</p>
             </div>
-            <span class="tape">Otoño · sem 6</span>
           </header>
 
           <div class="seg" id="wall-seg">
@@ -1513,7 +1513,7 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
           <button class="mock-ctl" data-go="intro" style="margin-top:22px">▸ Volver a la portada</button>
           <div style="height:24px"></div>
         </div>
-        <nav class="tabbar" data-tabs="muro"></nav>
+        <nav class="tabbar" data-tabs="social"></nav>
       </section>
 
       <!-- ════════ P7 · AGENDA ════════ -->
@@ -1645,6 +1645,13 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
             </div>
             <span class="pill ember">11 entrenando hoy</span>
           </header>
+
+          <!-- acceso al ranking del box (el muro vive bajo Comunidad) -->
+          <div style="margin:10px 22px 0;display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--paper);border:1px solid var(--line-strong);border-radius:14px;cursor:pointer" data-go="wall">
+            <span class="belt-ic" style="width:34px;height:34px;flex-shrink:0"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg></span>
+            <div style="flex:1"><p style="font-size:14px;font-weight:700;font-family:var(--grotesk)">El muro</p><p class="exrow-extra" style="margin-top:1px">Ranking del box · esta temporada</p></div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
 
           <!-- crear post — full-width, divisor abajo -->
           <div class="fpost" style="display:flex;align-items:center;gap:11px;box-shadow:inset 0 -1px 0 var(--line)">
@@ -2287,7 +2294,6 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
 
           <p style="font-family:var(--mono);font-size:9px;letter-spacing:1.2px;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-top:16px">El reloj corre en tu teléfono — proyéctalo en la pizarra</p>
         </div>
-        <nav class="tabbar" data-tabs="tools"></nav>
       </section>
 
       <!-- ════════ P20 · CALCULADORA ════════ -->
@@ -2333,7 +2339,6 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
             <p class="plate-empty" id="plate-note" style="text-align:center;margin-top:8px"></p>
           </div>
         </div>
-        <nav class="tabbar" data-tabs="tools"></nav>
       </section>
 
       <!-- ════════ P21 · LIBRERÍA DE EJERCICIOS ════════ -->
@@ -2380,7 +2385,6 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
           </div>
           <div style="height:18px"></div>
         </div>
-        <nav class="tabbar" data-tabs="tools"></nav>
       </section>
 
       <!-- ════════ P22 · MOVIMIENTO (detalle de librería) ════════ -->
@@ -2682,6 +2686,7 @@ function clkMode(k) {
   clkReset();
   clkKey = k;
   document.querySelectorAll('#clk-modes .clk-mode').forEach(b => b.classList.toggle('on', b.dataset.mode === k));
+  document.querySelector('#clk-modes .clk-mode.on')?.scrollIntoView({ inline: 'center', block: 'nearest', behavior: 'smooth' });
   ['amrap', 'emom', 'tabata', 'fortime', 'crono', 'remix'].forEach(m =>
     document.getElementById('rcfg-' + m).classList.toggle('on', m === k));
   paintReady();
