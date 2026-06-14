@@ -356,6 +356,13 @@ body::before {
   display: flex; align-items: center; gap: 8px; padding: 0 14px; position: relative; }
 .bd-tray i { width: 38px; height: 6px; border-radius: 3px; margin-top: -4px; }
 .bd-tray i.b { background: var(--mk-blue); } .bd-tray i.r { background: var(--mk-red); }
+/* carrusel de secciones de la pizarra */
+.board-track { display: flex; align-items: stretch; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 16px 0 24px; }
+.board-track::-webkit-scrollbar { display: none; }
+.board-track > .board { box-sizing: border-box; flex: 0 0 100%; scroll-snap-align: start; }
+.board-dots { display: flex; justify-content: center; gap: 7px; margin-top: 2px; }
+.bd-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); cursor: pointer; transition: all .2s; }
+.bd-dot.on { background: var(--ember); width: 20px; border-radius: 4px; }
 /* asistentes */
 .roster { display: flex; align-items: center; padding: 0 24px; }
 .roster .plate-av { width: 38px; height: 38px; font-size: 12px; }
@@ -1083,24 +1090,59 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
             </div>
           </header>
 
-          <!-- LA PIZARRA: el WOD como lo escribe el coach -->
+          <!-- LA PIZARRA: cada sección de la sesión, deslizable -->
           <div class="board-wrap">
-            <div class="board">
-              <span class="magnet m1"></span><span class="magnet m2"></span>
-              <p class="bd-date">mié 10 · jun</p>
-              <p class="bd-title">“CINDY”</p>
-              <svg class="bd-under" viewBox="0 0 150 14"><use href="#g-chalkline"/></svg>
-              <p class="bd-scheme">AMRAP 20 MIN:</p>
-              <ul class="bd-moves">
-                <li><span class="n">5</span> pull-ups</li>
-                <li><span class="n">10</span> push-ups</li>
-                <li><span class="n">15</span> air squats</li>
-              </ul>
-              <p class="bd-note">→ ritmo parejo, guarden gas pa’l final — Vale</p>
+            <div class="board-track" id="board-track">
+
+              <!-- 01 · Calentamiento -->
+              <div class="board">
+                <span class="magnet m1"></span><span class="magnet m2"></span>
+                <p class="bd-date">mié 10 · jun</p>
+                <p class="bd-title" style="font-size:32px">Calentamiento</p>
+                <svg class="bd-under" viewBox="0 0 150 14"><use href="#g-chalkline"/></svg>
+                <p class="bd-scheme">8 MIN</p>
+                <ul class="bd-moves">
+                  <li><span class="n">3'</span> remo + movilidad</li>
+                  <li><span class="n">2×10</span> scap pull-ups</li>
+                  <li><span class="n">2×15</span> air squats</li>
+                </ul>
+                <p class="bd-note">→ entren en calor sin apuro — Vale</p>
+              </div>
+
+              <!-- 02 · Skill -->
+              <div class="board">
+                <span class="magnet m1"></span><span class="magnet m2"></span>
+                <p class="bd-date">mié 10 · jun</p>
+                <p class="bd-title" style="font-size:40px">Skill</p>
+                <svg class="bd-under" viewBox="0 0 150 14"><use href="#g-chalkline"/></svg>
+                <p class="bd-scheme">POWER CLEAN · 15 MIN</p>
+                <ul class="bd-moves">
+                  <li><span class="n">2×5</span> liviano</li>
+                  <li><span class="n">3×3</span> @ 75% 1RM</li>
+                </ul>
+                <p class="bd-note">→ sube solo si la técnica aguanta — Vale</p>
+              </div>
+
+              <!-- 03 · WOD -->
+              <div class="board">
+                <span class="magnet m1"></span><span class="magnet m2"></span>
+                <p class="bd-date">mié 10 · jun</p>
+                <p class="bd-title">“CINDY”</p>
+                <svg class="bd-under" viewBox="0 0 150 14"><use href="#g-chalkline"/></svg>
+                <p class="bd-scheme">AMRAP 20 MIN:</p>
+                <ul class="bd-moves">
+                  <li><span class="n">5</span> pull-ups</li>
+                  <li><span class="n">10</span> push-ups</li>
+                  <li><span class="n">15</span> air squats</li>
+                </ul>
+                <p class="bd-note">→ ritmo parejo, guarden gas pa’l final — Vale</p>
+              </div>
+
             </div>
-            <div class="bd-tray"><i class="b"></i><i class="r"></i></div>
+            <div class="bd-tray" style="margin-top:-30px;position:relative;z-index:1"><i class="b"></i><i class="r"></i></div>
           </div>
-          <p style="font-family:var(--mono);font-size:9px;letter-spacing:1.2px;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-top:10px">En la pizarra va la categoría que el coach destaca — hoy, el WOD</p>
+          <div class="board-dots" id="board-dots"><span class="bd-dot on"></span><span class="bd-dot"></span><span class="bd-dot"></span></div>
+          <p style="font-family:var(--mono);font-size:9px;letter-spacing:1.2px;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-top:8px">Desliza para ver cada sección — calentamiento · skill · WOD</p>
 
           <!-- quiénes van -->
           <div class="sec-h"><span class="t">Hoy entrenan</span></div>
@@ -1217,6 +1259,8 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
             </div>
           </div>
 
+          <div style="padding:0 22px;margin-top:10px"><button class="cta ghost" data-go="forge" style="width:100%">+ Añadir nueva marca</button></div>
+
           <!-- las claves -->
           <div class="sec-h"><span class="t">Las claves</span></div>
           <div class="card" style="margin:0 22px">
@@ -1227,18 +1271,6 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
 
           <p class="coach-cue">→ pecho orgulloso y paciencia con la barra — Vale</p>
           <div style="height:14px"></div>
-
-          <!-- tu peso de trabajo en ESTE ejercicio: editable y guardable -->
-          <div class="foot-cta" style="display:flex;align-items:center;gap:12px">
-            <div style="flex:1;min-width:0">
-              <p class="eyebrow" style="font-size:9px">Tu peso de trabajo hoy</p>
-              <p style="font-family:var(--mono);font-weight:700;font-size:22px;color:var(--ink);line-height:1.1"><span id="wk-num">35</span> kg</p>
-              <p class="exrow-extra" id="wk-hint" style="font-size:9px">la vez pasada: 35 kg</p>
-            </div>
-            <button class="step-btn" style="width:42px;height:42px;font-size:20px" onclick="wkAdj(-1)">−</button>
-            <button class="step-btn" style="width:42px;height:42px;font-size:20px" onclick="wkAdj(1)">+</button>
-            <button class="cta" id="wk-save" style="padding:13px 20px;font-size:14px" onclick="wkSave(this)">Guardar</button>
-          </div>
         </div>
       </section>
 
@@ -1248,13 +1280,28 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
           <header class="subbar">
             <button class="backbtn" data-go="board"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1D1B16" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
             <div style="flex:1">
-              <p class="t">Tu resultado</p>
-              <p class="s">“Cindy” · cap 20 min</p>
+              <p class="t">Anotar</p>
+              <p class="s">CrossFit · 19:00 · Coach Vale</p>
             </div>
           </header>
 
+          <p style="font-family:var(--mono);font-size:9px;letter-spacing:1.2px;color:var(--ink-faint);text-transform:uppercase;text-align:center;margin-top:8px">Anota cada sección — el calentamiento no se anota</p>
+
+          <!-- 02 · Skill: peso usado por serie -->
+          <div class="sec-h"><span class="t">Skill · Power Clean</span><span class="exrow-extra" style="margin-left:auto">peso por serie</span></div>
+          <div class="card" style="margin:0 22px">
+            <div class="lrow"><span class="dose">5 reps</span><p style="flex:1;font-size:13.5px;font-weight:600">Serie 1</p><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(0,-2.5)">−</button><span class="rcfg-num" id="sk-0">35</span><button class="rcfg-step" onclick="skAdj(0,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">5 reps</span><p style="flex:1;font-size:13.5px;font-weight:600">Serie 2</p><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(1,-2.5)">−</button><span class="rcfg-num" id="sk-1">35</span><button class="rcfg-step" onclick="skAdj(1,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">3 reps</span><p style="flex:1;font-size:13.5px;font-weight:600">Serie 3</p><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(2,-2.5)">−</button><span class="rcfg-num" id="sk-2">40</span><button class="rcfg-step" onclick="skAdj(2,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">3 reps</span><p style="flex:1;font-size:13.5px;font-weight:600">Serie 4</p><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(3,-2.5)">−</button><span class="rcfg-num" id="sk-3">40</span><button class="rcfg-step" onclick="skAdj(3,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">3 reps</span><p style="flex:1;font-size:13.5px;font-weight:600">Serie 5</p><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(4,-2.5)">−</button><span class="rcfg-num" id="sk-4">42.5</span><button class="rcfg-step" onclick="skAdj(4,2.5)">+</button></div></div>
+          </div>
+
+          <!-- 03 · WOD: resultado -->
+          <div class="sec-h"><span class="t">WOD · “Cindy”</span><span class="exrow-extra" style="margin-left:auto">cap 20 min</span></div>
+
           <!-- ¿terminó o no? define qué se anota -->
-          <div class="div-row" style="margin-top:8px">
+          <div class="div-row" style="margin-top:4px">
             <div class="div-plate" id="done-yes" onclick="setDone(true)">Lo terminé<span class="s">se anota tu tiempo</span></div>
             <div class="div-plate on" id="done-no" onclick="setDone(false)">No alcancé<span class="s">rondas + reps extra</span></div>
           </div>
@@ -2360,6 +2407,16 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
             <span class="video-tag">0:48 · técnica</span>
           </div>
 
+          <div class="sec-h"><span class="t">Tu marca</span></div>
+          <div class="my-iron">
+            <div class="disc-sm" style="width:74px;height:74px"><span class="k">A. Squat</span><span class="v" style="font-size:17px">150</span><span class="k">reps · oro</span></div>
+            <div style="flex:1">
+              <p style="font-size:13.5px;color:var(--ink-dim);line-height:1.45">Tu récord: <b style="color:var(--ink)">150 reps</b> seguidas, el 12 de abril. <b style="color:var(--ember-deep)">+18</b> sobre tu marca anterior.</p>
+              <p style="font-family:var(--mono);font-size:10px;color:var(--ember-deep);margin-top:6px;letter-spacing:1px;cursor:pointer" data-go="progreso">VER EVOLUCIÓN →</p>
+            </div>
+          </div>
+          <div style="padding:0 22px;margin-top:10px"><button class="cta ghost" data-go="forge" style="width:100%">+ Añadir nueva marca</button></div>
+
           <div class="sec-h"><span class="t">Las claves</span></div>
           <div class="card" style="margin:0 22px">
             <div class="key-row"><span class="key-n">1</span><p>Pies al ancho de hombros, punta levemente hacia afuera.</p></div>
@@ -2547,22 +2604,9 @@ function tAdj(d) {
     Math.floor(tsec / 60) + ':' + String(tsec % 60).padStart(2, '0');
 }
 
-/* ── ejercicio: peso de trabajo editable ── */
-let wk = 35;
-function wkAdj(d) {
-  wk = Math.max(0, wk + d);
-  document.getElementById('wk-num').textContent = wk;
-  const save = document.getElementById('wk-save');
-  save.textContent = 'Guardar';
-  save.style.background = '';
-  save.style.boxShadow = '';
-}
-function wkSave(btn) {
-  btn.textContent = 'Guardado ✓';
-  btn.style.background = '#1F8A4C';
-  btn.style.boxShadow = '0 10px 26px rgba(31,138,76,.35)';
-  document.getElementById('wk-hint').textContent = 'guardado: ' + wk + ' kg · queda para la próxima';
-}
+/* ── anotar: peso usado por serie del skill ── */
+const SK = [35, 35, 40, 40, 42.5];
+function skAdj(i, d) { SK[i] = Math.max(0, SK[i] + d); document.getElementById('sk-' + i).textContent = SK[i]; }
 const rpe = document.getElementById('rpe');
 rpe.innerHTML = '';
 for (let i = 1; i <= 10; i++) {
@@ -2990,6 +3034,19 @@ document.getElementById('conv-lb').addEventListener('input', () => convFrom('lb'
 document.getElementById('conv-kg').addEventListener('input', () => convFrom('kg'));
 ['pl-target', 'pl-bar'].forEach(id => document.getElementById(id).addEventListener('input', platePaint));
 applyUnit();
+
+/* ── pizarra: carrusel de secciones (swipe + dots) ── */
+(function () {
+  const track = document.getElementById('board-track');
+  if (!track) return;
+  const dots = [...document.querySelectorAll('#board-dots .bd-dot')];
+  const sync = () => {
+    const i = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach((d, k) => d.classList.toggle('on', k === i));
+  };
+  track.addEventListener('scroll', sync, { passive: true });
+  dots.forEach((d, k) => d.onclick = () => track.scrollTo({ left: k * track.clientWidth, behavior: 'smooth' }));
+})();
 
 /* ── el teléfono se escala para caber completo en el viewport ── */
 const phoneEl = document.querySelector('.phone');
