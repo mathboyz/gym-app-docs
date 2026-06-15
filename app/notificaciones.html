@@ -36,6 +36,7 @@
 
   /* Ícono cuadrado redondeado */
   .notif-ic {
+    position: relative;
     width: 40px;
     height: 40px;
     border-radius: 12px;
@@ -93,10 +94,10 @@
     margin: 2px 0 0;
   }
 
-  /* Punto no-leído brand */
+  /* Punto no-leído brand — a la izquierda del icono/avatar, centrado verticalmente */
   .notif-unread-dot {
     position: absolute;
-    left: 5px;
+    left: -10px;
     top: 50%;
     transform: translateY(-50%);
     width: 7px;
@@ -183,10 +184,10 @@
 
       <!-- 0. Reto de duelo — NO LEÍDA · accionable -->
       <div class="notif-row unread">
-        <span class="notif-unread-dot"></span>
         <span class="notif-av">
           <span class="a-av" style="background:linear-gradient(135deg,#FF9E78,#FB5215)">MR</span>
           <span class="notif-mini">⚔️</span>
+          <span class="notif-unread-dot"></span>
         </span>
         <div style="flex:1;min-width:0">
           <div class="notif-head">
@@ -203,8 +204,8 @@
 
       <!-- 1. Encuesta post-clase — NO LEÍDA · accionable -->
       <div class="notif-row unread">
-        <span class="notif-unread-dot"></span>
         <span class="notif-ic" style="background:rgba(124,58,237,.13)">
+          <span class="notif-unread-dot"></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
         </span>
         <div style="flex:1;min-width:0">
@@ -221,8 +222,8 @@
 
       <!-- 2. Recordatorio clase mañana — NO LEÍDA -->
       <a href="ver-clase.html" class="notif-row unread">
-        <span class="notif-unread-dot"></span>
         <span class="notif-ic" style="background:rgba(24,169,87,.13)">
+          <span class="notif-unread-dot"></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </span>
         <div style="flex:1;min-width:0">
@@ -236,8 +237,8 @@
 
       <!-- 3. Nuevo logro desbloqueado — NO LEÍDA -->
       <a href="perfil.html" class="notif-row unread">
-        <span class="notif-unread-dot"></span>
         <span class="notif-ic" style="background:rgba(236,192,74,.18)">
+          <span class="notif-unread-dot"></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C49A0A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
         </span>
         <div style="flex:1;min-width:0">
@@ -251,8 +252,8 @@
 
       <!-- 4. Subiste de posición en ranking — NO LEÍDA -->
       <a href="ranking.html" class="notif-row unread">
-        <span class="notif-unread-dot"></span>
         <span class="notif-ic" style="background:rgba(62,123,250,.12)">
+          <span class="notif-unread-dot"></span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2350B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 4-8 4 4 4-6 4 4"/><polyline points="17 7 21 7 21 11"/></svg>
         </span>
         <div style="flex:1;min-width:0">

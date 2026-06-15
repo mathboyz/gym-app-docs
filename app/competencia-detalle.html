@@ -109,7 +109,7 @@
       <p class="a-eyebrow mb-3">Pruebas · 3 WODs</p>
       <div class="acard">
 
-        <div class="arow">
+        <div class="arow px-4">
           <span class="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(24,169,87,.12)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#18A957" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
           </span>
@@ -123,7 +123,7 @@
           </div>
         </div>
 
-        <div class="arow">
+        <div class="arow px-4">
           <span class="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0" style="background:rgba(251,82,21,.1)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--fj-brand)"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           </span>
@@ -134,7 +134,7 @@
           <span class="fj-badge fj-badge-brand flex-shrink-0">Esta semana</span>
         </div>
 
-        <div class="arow" style="border-bottom:none">
+        <div class="arow px-4" style="border-bottom:none">
           <span class="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0" style="background:var(--fj-ink-100)">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--fj-ink-400)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </span>
@@ -191,7 +191,7 @@ const LB = {
 function renderLb(div) {
   const rows = LB[div];
   document.getElementById('lb-list').innerHTML = rows.map((r, i) => `
-    <div class="arow" style="${i === rows.length-1 ? 'border-bottom:none;' : ''}${r.me ? 'background:rgba(251,82,21,.06);' : ''}">
+    <div class="arow px-4" style="${i === rows.length-1 ? 'border-bottom:none;' : ''}${r.me ? 'background:rgba(251,82,21,.06);' : ''}">
       <span class="font-mono font-bold text-sm w-7 flex-shrink-0" style="color:${r.pos <= 3 ? 'var(--tier-gold)' : 'var(--fj-ink-400)'}">#${r.pos}</span>
       <div class="a-av w-9 h-9 flex-shrink-0" style="font-size:11px;background:${r.grad}${r.me ? ';box-shadow:0 0 0 2px rgba(251,82,21,.4)' : ''}">${r.ini}</div>
       <div class="flex-1 min-w-0">
