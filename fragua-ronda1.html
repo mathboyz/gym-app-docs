@@ -652,6 +652,21 @@ body::before {
 .more-btn { all: unset; cursor: pointer; margin-left: 12px; font-family: var(--mono); font-size: 11px; color: var(--ember-deep); border-bottom: 1px solid rgba(201,90,43,0.35); line-height: 1.3; }
 .more-btn:hover { border-bottom-color: var(--ember-deep); }
 .roster-list { margin-top: 16px; max-height: 44vh; overflow-y: auto; display: flex; flex-direction: column; }
+.scroll-fade-wrap { position: relative; }
+.scroll-fade-top, .scroll-fade-bottom {
+  position: absolute; left: 0; right: 0; height: 28px; pointer-events: none;
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+.scroll-fade-top {
+  top: 0;
+  mask-image: linear-gradient(to bottom, black, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+}
+.scroll-fade-bottom {
+  bottom: 0;
+  mask-image: linear-gradient(to top, black, transparent);
+  -webkit-mask-image: linear-gradient(to top, black, transparent);
+}
 .rl-row { display: flex; align-items: center; gap: 13px; padding: 9px 2px; }
 .rl-row + .rl-row { box-shadow: inset 0 1px 0 var(--line); }
 .rl-row .plate-av { width: 40px; height: 40px; font-size: 13px; }
@@ -2463,18 +2478,22 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
             Hoy entrenan · 11
           </div>
           <p class="sheet-body">CrossFit · 19:00 · Coach Vale</p>
-          <div class="roster-list">
-            <div class="rl-row"><span class="plate-av">MR</span><span class="rl-nm">Martín Rojas</span></div>
-            <div class="rl-row"><span class="plate-av">JN</span><span class="rl-nm">Javiera Núñez</span></div>
-            <div class="rl-row"><span class="plate-av">CP</span><span class="rl-nm">Camila Pérez</span></div>
-            <div class="rl-row"><span class="plate-av">IV</span><span class="rl-nm">Ignacio Vera</span></div>
-            <div class="rl-row"><span class="plate-av">SD</span><span class="rl-nm">Sofía Díaz</span></div>
-            <div class="rl-row"><span class="plate-av">TF</span><span class="rl-nm">Tomás Fuentes</span></div>
-            <div class="rl-row"><span class="plate-av">VA</span><span class="rl-nm">Valentina Aguilar</span></div>
-            <div class="rl-row"><span class="plate-av">RM</span><span class="rl-nm">Rodrigo Muñoz</span></div>
-            <div class="rl-row"><span class="plate-av">PC</span><span class="rl-nm">Paula Castro</span></div>
-            <div class="rl-row"><span class="plate-av">GL</span><span class="rl-nm">Gabriel León</span></div>
-            <div class="rl-row you"><span class="plate-av">EY</span><span class="rl-nm">Tú</span><span class="rl-tag">tú</span></div>
+          <div class="scroll-fade-wrap">
+            <div class="roster-list">
+              <div class="rl-row"><span class="plate-av">MR</span><span class="rl-nm">Martín Rojas</span></div>
+              <div class="rl-row"><span class="plate-av">JN</span><span class="rl-nm">Javiera Núñez</span></div>
+              <div class="rl-row"><span class="plate-av">CP</span><span class="rl-nm">Camila Pérez</span></div>
+              <div class="rl-row"><span class="plate-av">IV</span><span class="rl-nm">Ignacio Vera</span></div>
+              <div class="rl-row"><span class="plate-av">SD</span><span class="rl-nm">Sofía Díaz</span></div>
+              <div class="rl-row"><span class="plate-av">TF</span><span class="rl-nm">Tomás Fuentes</span></div>
+              <div class="rl-row"><span class="plate-av">VA</span><span class="rl-nm">Valentina Aguilar</span></div>
+              <div class="rl-row"><span class="plate-av">RM</span><span class="rl-nm">Rodrigo Muñoz</span></div>
+              <div class="rl-row"><span class="plate-av">PC</span><span class="rl-nm">Paula Castro</span></div>
+              <div class="rl-row"><span class="plate-av">GL</span><span class="rl-nm">Gabriel León</span></div>
+              <div class="rl-row you"><span class="plate-av">EY</span><span class="rl-nm">Tú</span><span class="rl-tag">tú</span></div>
+            </div>
+            <div class="scroll-fade-top"></div>
+            <div class="scroll-fade-bottom"></div>
           </div>
           <button class="cta ghost" style="width:100%;margin-top:18px" onclick="document.getElementById('roster-sheet').classList.remove('on')">Cerrar</button>
         </div>
