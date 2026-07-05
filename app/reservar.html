@@ -85,9 +85,9 @@
     <!-- Tu próxima clase — reservada, pendiente de confirmación -->
     <div class="acard acard-pad" style="background:rgba(232,163,23,.08);border-color:rgba(232,163,23,.35);cursor:pointer" onclick="if(!event.target.closest('button,a'))location.href='ver-clase.html'">
       <div class="flex items-center gap-2 mb-3">
-        <span class="fj-dot" style="background:#E8A317"></span>
-        <span class="a-eyebrow" style="color:#B27D0E">Tu próxima clase · por confirmar</span>
-        <span class="ml-auto fj-badge" style="background:rgba(232,163,23,.15);color:#B27D0E">confirma antes de las 08:00</span>
+        <span class="fj-dot" id="rsv-dot" style="background:#E8A317"></span>
+        <span class="a-eyebrow" id="rsv-eyebrow" style="color:#B27D0E">Tu próxima clase · por confirmar</span>
+        <span class="ml-auto fj-badge" id="rsv-badge" style="background:rgba(232,163,23,.15);color:#B27D0E">confirma antes de las 08:00</span>
       </div>
       <div class="flex items-center gap-3">
         <div class="min-w-[52px] text-center">
@@ -107,10 +107,10 @@
         </div>
       </div>
       <div class="flex gap-2 mt-3">
-        <button class="a-btn a-btn-primary" style="flex:1;height:38px;font-size:13px">Confirmar asistencia</button>
-        <button class="a-btn a-btn-ghost" style="width:auto;height:38px;padding:0 14px;font-size:13px;color:#E5484D;border-color:rgba(229,72,77,.3)">Cancelar</button>
+        <button class="a-btn a-btn-primary" id="rsv-confirm-btn" onclick="confirmarReservar(this)" style="flex:1;height:38px;font-size:13px">Confirmar asistencia</button>
+        <button class="a-btn a-btn-ghost" id="rsv-cancel-btn" style="width:auto;height:38px;padding:0 14px;font-size:13px;color:#E5484D;border-color:rgba(229,72,77,.3)">Cancelar</button>
       </div>
-      <p class="a-muted text-[11px] mt-2 text-center">Si no confirmas, tu cupo se libera a las 08:00. Al confirmar, queda asegurado y ya no se puede cancelar.</p>
+      <p class="a-muted text-[11px] mt-2 text-center" id="rsv-help">Si no confirmas, tu cupo se libera a las 08:00. Al confirmar, queda asegurado y ya no se puede cancelar.</p>
     </div>
 
     <!-- Leyenda -->
@@ -282,5 +282,29 @@
 
   </main>
 </div>
+<script>
+  function confirmarReservar(btn) {
+    window.ForjaApp.confirmModal({
+      title: '¿Confirmar tu asistencia?',
+      body: 'Una vez confirmada, tu cupo queda asegurado y no vas a poder cancelarlo.',
+      confirmLabel: 'Sí, confirmar',
+      onConfirm: function () {
+        document.getElementById('rsv-dot').style.background = 'var(--fj-success)';
+        var eyebrow = document.getElementById('rsv-eyebrow');
+        eyebrow.textContent = 'Tu próxima clase · confirmada';
+        eyebrow.style.color = 'var(--fj-success)';
+        var badge = document.getElementById('rsv-badge');
+        if (badge) badge.remove();
+        var cancelBtn = document.getElementById('rsv-cancel-btn');
+        if (cancelBtn) cancelBtn.remove();
+        btn.style.background = 'var(--fj-success)';
+        btn.textContent = 'Asistencia confirmada ✓';
+        btn.disabled = true;
+        document.getElementById('rsv-help').textContent = 'Tu cupo está confirmado. Te esperamos 💪';
+        window.ForjaApp.toast('¡Confirmada! Te esperamos 💪');
+      }
+    });
+  }
+</script>
 </body>
 </html>
