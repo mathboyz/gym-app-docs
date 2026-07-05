@@ -689,6 +689,11 @@ body::before {
   mask-image: linear-gradient(to top, #000, rgba(0,0,0,.45) 66%, transparent 82%);
   -webkit-mask-image: linear-gradient(to top, #000, rgba(0,0,0,.45) 66%, transparent 82%); }
 .sheet-grip, .sheet-ttl, .sheet-body { position: relative; z-index: 2; }
+/* box-shadow externo pinta su caja rectangular sin recorte bajo la máscara/blur
+   y el borde aparece como línea recta junto al círculo — drop-shadow sigue la
+   silueta redonda real. Se conservan las sombras inset (viven dentro del círculo). */
+.rl-row .plate-av { box-shadow: inset 0 1px 1px rgba(255,255,255,0.18), inset 0 -2px 3px rgba(0,0,0,0.4);
+  filter: drop-shadow(0 3px 4px rgba(29,27,22,0.3)); }
 /* subtítulo legible sobre el contenido que pasa difuminado por detrás */
 #roster-sheet .sheet-body { font-family: var(--grotesk); font-weight: 600; font-size: 14px; color: var(--ink);
   text-shadow: 0 0 6px var(--bone), 0 0 12px var(--bone), 0 1px 18px var(--bone); }
