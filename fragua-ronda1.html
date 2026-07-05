@@ -651,22 +651,47 @@ body::before {
 /* roster: contador clickable + lista en modal */
 .more-btn { all: unset; cursor: pointer; margin-left: 12px; font-family: var(--mono); font-size: 11px; color: var(--ember-deep); border-bottom: 1px solid rgba(201,90,43,0.35); line-height: 1.3; }
 .more-btn:hover { border-bottom-color: var(--ember-deep); }
-.roster-list { margin-top: 16px; max-height: 44vh; overflow-y: auto; display: flex; flex-direction: column; }
-.scroll-fade-wrap { position: relative; }
-.scroll-fade-top, .scroll-fade-bottom {
-  position: absolute; left: 0; right: 0; height: 28px; pointer-events: none;
-  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+/* la lista se mete por detrás del encabezado del sheet: al subir, cada fila
+   se vuelve más transparente (máscara sobre la lista) y más borrosa (capas
+   de blur progresivo). El encabezado queda nítido encima (z-index). */
+.scroll-fade-wrap { position: relative; margin-top: -72px; }
+.roster-list {
+  max-height: calc(44vh + 72px); overflow-y: auto; display: flex; flex-direction: column;
+  padding-top: 88px;
+  /* curva en S (sin quiebres de pendiente = sin bandas de Mach) */
+  mask-image: linear-gradient(to bottom,
+    transparent 10px, rgba(0,0,0,.06) 34px, rgba(0,0,0,.28) 58px, rgba(0,0,0,.62) 82px, rgba(0,0,0,.9) 102px, #000 118px,
+    #000 calc(100% - 46px), rgba(0,0,0,.55) calc(100% - 22px), transparent);
+  -webkit-mask-image: linear-gradient(to bottom,
+    transparent 10px, rgba(0,0,0,.06) 34px, rgba(0,0,0,.28) 58px, rgba(0,0,0,.62) 82px, rgba(0,0,0,.9) 102px, #000 118px,
+    #000 calc(100% - 46px), rgba(0,0,0,.55) calc(100% - 22px), transparent);
 }
-.scroll-fade-top {
-  top: 0;
-  mask-image: linear-gradient(to bottom, black, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
-}
-.scroll-fade-bottom {
-  bottom: 0;
-  mask-image: linear-gradient(to top, black, transparent);
-  -webkit-mask-image: linear-gradient(to top, black, transparent);
-}
+/* cada capa se apaga por gradiente ANTES de su borde de caja, y las cajas se
+   extienden más allá del contenido (lados/arriba/abajo) para que su recorte
+   caiga sobre fondo liso — la niebla del blur muere por gradiente, nunca cortada.
+   translateZ(0): cada capa en su propia capa de composición — evita las vetas
+   horizontales por residuo de repintado del backdrop (scroll / animación de
+   entrada del sheet, especialmente en Safari). */
+.scroll-blur { position: absolute; left: -20px; right: -20px; pointer-events: none; transform: translateZ(0); }
+.scroll-blur.t1 { top: -20px; height: 132px; backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+  mask-image: linear-gradient(to bottom, #000, rgba(0,0,0,.85) 47%, rgba(0,0,0,.4) 64%, transparent 81%);
+  -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0,0,0,.85) 47%, rgba(0,0,0,.4) 64%, transparent 81%); }
+.scroll-blur.t2 { top: -20px; height: 98px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  mask-image: linear-gradient(to bottom, #000, rgba(0,0,0,.8) 49%, rgba(0,0,0,.35) 64%, transparent 79%);
+  -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0,0,0,.8) 49%, rgba(0,0,0,.35) 64%, transparent 79%); }
+.scroll-blur.t3 { top: -20px; height: 68px; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  mask-image: linear-gradient(to bottom, #000, rgba(0,0,0,.75) 53%, rgba(0,0,0,.3) 66%, transparent 79%);
+  -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0,0,0,.75) 53%, rgba(0,0,0,.3) 66%, transparent 79%); }
+.scroll-blur.b1 { bottom: -20px; height: 70px; backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+  mask-image: linear-gradient(to top, #000, rgba(0,0,0,.5) 61%, transparent 82%);
+  -webkit-mask-image: linear-gradient(to top, #000, rgba(0,0,0,.5) 61%, transparent 82%); }
+.scroll-blur.b2 { bottom: -20px; height: 50px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  mask-image: linear-gradient(to top, #000, rgba(0,0,0,.45) 66%, transparent 82%);
+  -webkit-mask-image: linear-gradient(to top, #000, rgba(0,0,0,.45) 66%, transparent 82%); }
+.sheet-grip, .sheet-ttl, .sheet-body { position: relative; z-index: 2; }
+/* subtítulo legible sobre el contenido que pasa difuminado por detrás */
+#roster-sheet .sheet-body { font-family: var(--grotesk); font-weight: 600; font-size: 14px; color: var(--ink);
+  text-shadow: 0 0 6px var(--bone), 0 0 12px var(--bone), 0 1px 18px var(--bone); }
 .rl-row { display: flex; align-items: center; gap: 13px; padding: 9px 2px; }
 .rl-row + .rl-row { box-shadow: inset 0 1px 0 var(--line); }
 .rl-row .plate-av { width: 40px; height: 40px; font-size: 13px; }
@@ -2492,8 +2517,11 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
               <div class="rl-row"><span class="plate-av">GL</span><span class="rl-nm">Gabriel León</span></div>
               <div class="rl-row you"><span class="plate-av">EY</span><span class="rl-nm">Tú</span><span class="rl-tag">tú</span></div>
             </div>
-            <div class="scroll-fade-top"></div>
-            <div class="scroll-fade-bottom"></div>
+            <div class="scroll-blur t1"></div>
+            <div class="scroll-blur t2"></div>
+            <div class="scroll-blur t3"></div>
+            <div class="scroll-blur b1"></div>
+            <div class="scroll-blur b2"></div>
           </div>
           <button class="cta ghost" style="width:100%;margin-top:18px" onclick="document.getElementById('roster-sheet').classList.remove('on')">Cerrar</button>
         </div>
