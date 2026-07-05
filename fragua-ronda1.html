@@ -692,6 +692,9 @@ body::before {
 /* subtítulo legible sobre el contenido que pasa difuminado por detrás */
 #roster-sheet .sheet-body { font-family: var(--grotesk); font-weight: 600; font-size: 14px; color: var(--ink);
   text-shadow: 0 0 6px var(--bone), 0 0 12px var(--bone), 0 1px 18px var(--bone); }
+/* el botón queda por encima de las capas de blur (que se extienden 20px bajo la
+   lista y alcanzaban a difuminarle el borde superior) */
+#roster-sheet .cta { position: relative; z-index: 2; }
 /* 12px horizontales: la sombra del avatar (blur 8px) cabe sin recortarse
    contra el borde de la lista */
 .rl-row { display: flex; align-items: center; gap: 13px; padding: 9px 12px; }
