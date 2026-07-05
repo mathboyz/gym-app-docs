@@ -94,6 +94,39 @@
     setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateY(8px)'; setTimeout(() => t.remove(), 260); }, 2000);
   }
 
+  // modal de confirmación reutilizable (ej. "confirmar asistencia")
+  function confirmModal({ title, body, confirmLabel, onConfirm }) {
+    let backdrop = document.querySelector('.fj-modal-backdrop');
+    if (!backdrop) {
+      backdrop = document.createElement('div');
+      backdrop.className = 'fj-modal-backdrop';
+      backdrop.innerHTML = `<div class="fj-modal" role="dialog" aria-modal="true">
+        <div class="fj-modal-icon">${svg('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>')}</div>
+        <p class="fj-modal-title"></p>
+        <p class="fj-modal-body"></p>
+        <div class="fj-modal-actions">
+          <button class="a-btn a-btn-primary" data-modal-confirm></button>
+          <button class="a-btn a-btn-ghost" data-modal-cancel>Volver</button>
+        </div>
+      </div>`;
+      document.body.appendChild(backdrop);
+      backdrop.addEventListener('click', e => {
+        if (e.target === backdrop || e.target.closest('[data-modal-cancel]')) {
+          backdrop.setAttribute('data-open', 'false');
+        }
+      });
+    }
+    backdrop.querySelector('.fj-modal-title').textContent = title;
+    backdrop.querySelector('.fj-modal-body').textContent = body;
+    const confirmBtn = backdrop.querySelector('[data-modal-confirm]');
+    confirmBtn.textContent = confirmLabel;
+    confirmBtn.onclick = () => {
+      backdrop.setAttribute('data-open', 'false');
+      onConfirm && onConfirm();
+    };
+    backdrop.setAttribute('data-open', 'true');
+  }
+
   // toggle de tema reutilizable (para ajustes)
   window.ForjaApp = {
     toggleTheme() {
@@ -104,7 +137,8 @@
       return !dark;
     },
     isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; },
-    toast
+    toast,
+    confirmModal
   };
 
   document.addEventListener('DOMContentLoaded', init);

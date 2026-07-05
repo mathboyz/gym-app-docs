@@ -347,12 +347,19 @@
       btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Confirmar asistencia';
       window.ForjaApp && ForjaApp.toast('Cupo reservado ✓ Confirma el día de la clase');
     } else if (rsvState === 1) {
-      rsvState = 2;
-      btn.className = 'a-btn a-btn-primary';
-      btn.style.background = 'var(--fj-success)';
-      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Asistencia confirmada';
-      btn.disabled = true;
-      window.ForjaApp && ForjaApp.toast('¡Listo! Te esperamos 💪');
+      window.ForjaApp.confirmModal({
+        title: '¿Confirmar tu asistencia?',
+        body: 'Una vez confirmada, tu cupo queda asegurado y no vas a poder cancelarlo.',
+        confirmLabel: 'Sí, confirmar',
+        onConfirm: function () {
+          rsvState = 2;
+          btn.className = 'a-btn a-btn-primary';
+          btn.style.background = 'var(--fj-success)';
+          btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Asistencia confirmada';
+          btn.disabled = true;
+          window.ForjaApp.toast('¡Listo! Te esperamos 💪');
+        }
+      });
     }
   }
 </script>
