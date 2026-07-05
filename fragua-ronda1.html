@@ -1042,13 +1042,15 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
           </div>
           <script>
             function confirmHoy(btn){
-              const card = btn.closest('.class-card');
-              card.querySelector('.pill.amber').className = 'pill green';
-              card.querySelector('.pill.green').textContent = 'Confirmada';
-              const warn = btn.closest('.actions').previousElementSibling;
-              warn.style.color = 'var(--ember-deep)';
-              warn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span style="font-size:12px;font-weight:600">Cupo asegurado · te esperamos a las 19:00</span>';
-              btn.closest('.actions').innerHTML = '<button class="cta ghost" data-go="board" style="width:100%">Ver la pizarra</button>';
+              abrirConfirmar(function () {
+                const card = btn.closest('.class-card');
+                card.querySelector('.pill.amber').className = 'pill green';
+                card.querySelector('.pill.green').textContent = 'Confirmada';
+                const warn = btn.closest('.actions').previousElementSibling;
+                warn.style.color = 'var(--ember-deep)';
+                warn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span style="font-size:12px;font-weight:600">Cupo asegurado · te esperamos a las 19:00</span>';
+                btn.closest('.actions').innerHTML = '<button class="cta ghost" data-go="board" style="width:100%">Ver la pizarra</button>';
+              });
             }
           </script>
 
@@ -1582,9 +1584,11 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
               btn.setAttribute('onclick','confirmar(this)');
             }
             function confirmar(btn){
-              btn.className = 'book-btn done';
-              btn.textContent = 'Confirmada ✓';
-              btn.removeAttribute('onclick');
+              abrirConfirmar(function () {
+                btn.className = 'book-btn done';
+                btn.textContent = 'Confirmada ✓';
+                btn.removeAttribute('onclick');
+              });
             }
             const bellOn = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
             const bellOff = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.73 21a2 2 0 0 1-3.46 0"/><path d="M18.63 13A17.89 17.89 0 0 1 18 8"/><path d="M6.26 6.26A5.86 5.86 0 0 0 6 8c0 7-3 9-3 9h14"/><path d="M18 8a6 6 0 0 0-9.33-5"/><line x1="1" y1="1" x2="23" y2="23"/></svg>';
@@ -2476,6 +2480,21 @@ select.calc-in { -webkit-appearance: none; appearance: none; cursor: pointer; }
         </div>
       </div>
 
+      <!-- bottom-sheet: confirmar asistencia -->
+      <div class="sheet-overlay" id="confirmar-sheet">
+        <div class="sheet-scrim" onclick="cerrarConfirmar()"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <div class="sheet-ttl">
+            <span class="sheet-ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            ¿Confirmar tu asistencia?
+          </div>
+          <p class="sheet-body">Una vez confirmada, tu cupo queda asegurado y no vas a poder cancelarlo.</p>
+          <button class="cta" style="width:100%;margin-top:20px" onclick="ejecutarConfirmar()">Sí, confirmar</button>
+          <button class="cta ghost" style="width:100%;margin-top:8px" onclick="cerrarConfirmar()">Volver</button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -2547,6 +2566,23 @@ document.addEventListener('click', e => {
   const t = e.target.closest('[data-go]');
   if (t) go(t.dataset.go);
 });
+
+/* ── sheet: confirmar asistencia (reusado por Hoy y Agenda) ── */
+let confirmarCb = null;
+function abrirConfirmar(cb) {
+  confirmarCb = cb;
+  document.getElementById('confirmar-sheet').classList.add('on');
+}
+function cerrarConfirmar() {
+  document.getElementById('confirmar-sheet').classList.remove('on');
+  confirmarCb = null;
+}
+function ejecutarConfirmar() {
+  document.getElementById('confirmar-sheet').classList.remove('on');
+  const cb = confirmarCb;
+  confirmarCb = null;
+  if (cb) cb();
+}
 
 /* ── tab bars ── */
 const TABS = [
