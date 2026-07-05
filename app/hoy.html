@@ -81,10 +81,17 @@
     </div>
     <script>
       function confirmarHoy(btn){
-        btn.style.background='var(--fj-success)';
-        btn.textContent='Asistencia confirmada ✓';
-        btn.disabled=true;
-        window.ForjaApp && ForjaApp.toast('¡Confirmada! Te esperamos a las 09:00 💪');
+        window.ForjaApp.confirmModal({
+          title: '¿Confirmar tu asistencia?',
+          body: 'Una vez confirmada, tu cupo queda asegurado y no vas a poder cancelarlo.',
+          confirmLabel: 'Sí, confirmar',
+          onConfirm: function () {
+            btn.style.background='var(--fj-success)';
+            btn.textContent='Asistencia confirmada ✓';
+            btn.disabled=true;
+            window.ForjaApp.toast('¡Confirmada! Te esperamos a las 09:00 💪');
+          }
+        });
       }
     </script>
 
