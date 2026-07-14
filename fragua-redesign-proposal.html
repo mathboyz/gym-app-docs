@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Forja — Ronda 2 · Cuaderno de taller</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@500;600;700;800&family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   FORJA · Dirección de arte Ronda 2 — "CUADERNO DE TALLER"
+   La app como el papeleo real del box: la planilla del coach, el
+   pizarrón, la ficha de récord. Efímero = tiza y papel (WOD, asistencia,
+   temporada). Permanente = el sello (el récord queda estampado y
+   archivado en el fichero). Papel reglado + máquina de escribir + tiza.
+   Regla dura: nada flota. Cero gradiente glossy, cero sombra suave.
+   ═══════════════════════════════════════════════════════════════════ */
+:root {
+  --paper: #EFE9DB;
+  --paper-2: #E5DDC9;
+  --manila: #E7DBBE;
+  --ink: #22201A;
+  --ink-soft: #5B564A;
+  --ink-faint: #938C78;
+  --line: rgba(34,32,26,0.14);
+  --line-strong: rgba(34,32,26,0.30);
+  --margin: #B23A2E;
+  --stamp: #C8452D;
+  --stamp-deep: #9C3117;
+  --stamp-soft: rgba(200,69,45,0.12);
+  --slate: #232B22;
+  --slate-2: #1B211B;
+  --grid: rgba(42,54,82,0.07);
+  --chalk: #F1ECDD;
+  --chalk-dim: rgba(241,236,221,0.6);
+  --chalk-blue: #7BA0E6;
+  --chalk-red: #E88376;
+  --chalk-yellow: #E8C15A;
+  --bronze: #A6703F;
+  --silver: #9AA0A6;
+  --gold: #C79A3A;
+  --green: #2E7D46;
+  --desk: #26282A;
+  --display: "Saira Condensed", "Arial Narrow", sans-serif;
+  --tw: "Courier Prime", ui-monospace, monospace;
+  --chalk-f: "Caveat", "Bradley Hand", cursive;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background:
+    radial-gradient(ellipse at 50% -8%, rgba(255,232,196,0.16) 0%, transparent 46%),
+    radial-gradient(ellipse at 84% 96%, rgba(0,0,0,0.35) 0%, transparent 50%),
+    var(--desk);
+  color: var(--ink);
+  font-family: var(--tw);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+/* grano del mesón de taller */
+body::before {
+  content: ""; position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════ Escritorio: mesón + fichas laterales ═══════════ */
+.desk { position: fixed; inset: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.desk-rail { justify-self: end; padding-right: 54px; max-width: 322px; position: relative; z-index: 2;
+  max-height: 94vh; overflow-y: auto; scrollbar-width: none; color: var(--chalk); }
+.desk-rail::-webkit-scrollbar { display: none; }
+.desk-rail-right { justify-self: start; padding-left: 54px; padding-right: 0; max-width: 300px; }
+.rail-pre { font-family: var(--tw); font-size: 10px; letter-spacing: 2px; color: rgba(241,236,221,0.5); text-transform: uppercase; }
+.rail-pre::before { content: "▸ "; color: var(--stamp); }
+.rail-title { font-family: var(--display); font-weight: 800; font-size: 42px; line-height: 0.92; letter-spacing: 1px;
+  color: var(--chalk); text-transform: uppercase; margin: 12px 0 0; }
+.rail-title em { font-style: normal; color: var(--stamp); }
+.rail-sub { font-size: 12.5px; color: rgba(241,236,221,0.62); margin: 14px 0 22px; line-height: 1.55; }
+.rail-screens { list-style: none; display: flex; flex-direction: column; gap: 1px; }
+.rail-screens button {
+  all: unset; box-sizing: border-box; cursor: pointer; display: flex; align-items: center; gap: 12px;
+  padding: 7px 12px; width: 100%; transition: background 160ms ease, transform 160ms ease;
+  border-left: 2px solid transparent;
+}
+.rail-screens button:hover { background: rgba(241,236,221,0.05); transform: translateX(3px); }
+.rail-screens button.active { background: rgba(200,69,45,0.13); border-left-color: var(--stamp); }
+.rail-screens .num { font-family: var(--tw); font-size: 11px; color: rgba(241,236,221,0.4); width: 22px; }
+.rail-screens button.active .num { color: var(--stamp); }
+.rail-screens .nm { font-family: var(--display); font-weight: 600; font-size: 16px; letter-spacing: 0.5px; color: rgba(241,236,221,0.7); text-transform: uppercase; }
+.rail-screens button.active .nm { color: var(--chalk); }
+.rail-note { margin-top: 22px; padding-top: 16px; border-top: 1px dashed rgba(241,236,221,0.22);
+  font-size: 12px; line-height: 1.6; color: rgba(241,236,221,0.5); }
+.rail-note b { color: rgba(241,236,221,0.82); font-weight: 400; }
+.rail-flow { display: flex; flex-direction: column; }
+.rail-flow-step { display: flex; gap: 11px; }
+.rail-flow-dot { width: 6px; height: 6px; background: var(--stamp); margin-top: 7px; flex-shrink: 0; position: relative; }
+.rail-flow-step:not(:last-child) .rail-flow-dot::after { content: ""; position: absolute; left: 2.5px; top: 8px; width: 1px; height: 26px; background: rgba(241,236,221,0.2); }
+.rail-flow-txt { font-size: 12.5px; color: rgba(241,236,221,0.6); padding-bottom: 12px; line-height: 1.4; }
+.rail-flow-txt em { color: var(--chalk); font-style: normal; }
+
+/* ═══════════ El teléfono — una hoja del cuaderno en el clip ═══════════ */
+.phone {
+  position: relative; z-index: 2; width: 393px; height: 832px; border-radius: 46px; background: #16171A;
+  box-shadow: 0 40px 90px rgba(0,0,0,0.5), 0 0 0 2px #0C0D0F, 0 0 0 11px #303234, 0 0 0 12px rgba(255,255,255,0.05);
+  overflow: hidden;
+}
+.phone-screen { position: absolute; inset: 11px; border-radius: 38px; overflow: hidden; background: var(--paper); }
+/* la cuadrícula del papel, fija bajo el contenido */
+.phone-screen::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.notch { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); width: 112px; height: 30px; border-radius: 18px; background: #16171A; z-index: 500; }
+.statusbar { position: absolute; top: 0; left: 0; right: 0; height: 52px; z-index: 460;
+  display: flex; justify-content: space-between; align-items: center; padding: 18px 28px 0;
+  font-family: var(--tw); font-weight: 700; font-size: 12px; color: var(--ink); pointer-events: none; }
+.statusbar .right { display: flex; gap: 6px; align-items: center; letter-spacing: 1px; }
+
+@media (max-width: 1120px) { .desk-rail { display: none; } .desk { grid-template-columns: 1fr; justify-items: center; } }
+@media (max-width: 520px), (max-height: 900px) and (max-width: 1120px) {
+  body { overflow: auto; }
+  .desk { position: static; display: block; }
+  .phone { width: 100vw; height: 100svh; border-radius: 0; box-shadow: none; }
+  .phone-screen { inset: 0; border-radius: 0; }
+  .notch { display: none; }
+}
+
+/* ═══════════ Sistema de pantallas ═══════════ */
+.screen { position: absolute; inset: 0; display: none; flex-direction: column; z-index: 1; }
+.screen.on { display: flex; animation: screenIn 380ms cubic-bezier(0.22,1,0.36,1); }
+@keyframes screenIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.scrolly { overflow-y: auto; flex: 1; scrollbar-width: none; position: relative; }
+.scrolly::-webkit-scrollbar { display: none; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+/* línea de margen roja: sobre las pantallas de "hoja" */
+.page-margin { position: absolute; top: 0; bottom: 0; left: 40px; width: 1.5px; background: rgba(178,58,46,0.55); z-index: 1; pointer-events: none; }
+.page-margin::before, .page-margin::after { content: ""; position: absolute; left: -46px; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--desk); box-shadow: inset 0 1px 2px rgba(0,0,0,0.5); }
+.page-margin::before { top: 96px; } .page-margin::after { top: 150px; }
+
+/* andamiaje del prototipo */
+.mock-ctl { display: flex; align-items: center; gap: 8px; justify-content: center; margin: 16px auto 0; padding: 8px 14px;
+  border: 1.5px dashed rgba(110,147,200,0.7); background: rgba(110,147,200,0.08);
+  font-family: var(--tw); font-size: 10px; letter-spacing: 1px; color: #4a6db0; text-transform: uppercase;
+  cursor: pointer; width: fit-content; transition: background 160ms ease; }
+.mock-ctl:hover { background: rgba(110,147,200,0.16); }
+
+/* ── pieza: cabecera de sección tipeada, con guía punteada (índice de libro) ── */
+.tw-h { display: flex; align-items: center; gap: 10px; padding: 24px 22px 10px 52px; position: relative; z-index: 2; }
+.tw-h .no { font-family: var(--display); font-weight: 800; font-size: 13px; color: var(--paper); background: var(--ink);
+  padding: 1px 6px; letter-spacing: 1px; flex-shrink: 0; }
+.tw-h .t { font-family: var(--tw); font-weight: 700; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink); white-space: nowrap; }
+.tw-h .lead { flex: 1; border-bottom: 1.5px dotted var(--line-strong); align-self: flex-end; margin-bottom: 4px; }
+.tw-h .end { font-family: var(--tw); font-size: 10.5px; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 1px; white-space: nowrap; }
+
+/* ── pieza: slip de papel (reemplaza la card) ── */
+.slip { position: relative; z-index: 2; margin: 0 22px 0 52px; background: var(--paper-2);
+  border: 1.5px solid var(--ink); }
+.slip.dust { background: var(--manila); }
+.slip-rows > * { padding: 13px 16px; }
+.slip-rows > * + * { border-top: 1px solid var(--line); }
+
+/* ── pieza: sello de goma ── */
+.stamp { display: inline-flex; align-items: center; gap: 5px; font-family: var(--display); font-weight: 800; font-size: 11px;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--stamp);
+  border: 2px solid var(--stamp); padding: 3px 8px; transform: rotate(-2.4deg); position: relative; }
+.stamp::after { content: ""; position: absolute; inset: 2px; border: 1px solid currentColor; opacity: 0.5; }
+.stamp.sm { font-size: 9px; padding: 2px 6px; letter-spacing: 1px; }
+.stamp.amber { color: #9A6610; border-color: #9A6610; }
+.stamp.green { color: var(--green); border-color: var(--green); }
+.stamp.ink  { color: var(--ink); border-color: var(--ink); }
+.stamp.flat { transform: none; }
+
+/* ── pieza: botón entintado (letterpress duro) ── */
+.ink-btn { all: unset; box-sizing: border-box; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--display); font-weight: 700; font-size: 16px; letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 13px 22px; background: var(--stamp); color: var(--paper); border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink); transition: transform 100ms ease, box-shadow 100ms ease; text-align: center; }
+.ink-btn:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 var(--ink); }
+.ink-btn:active { transform: translate(3px,3px); box-shadow: 0 0 0 var(--ink); }
+.ink-btn.ghost { background: transparent; color: var(--ink); }
+.ink-btn.dark { background: var(--ink); color: var(--paper); }
+/* sobre fondo oscuro (ceremonia) el botón fantasma va en tiza */
+#s-forge .ink-btn.ghost { color: var(--chalk); border-color: var(--chalk); box-shadow: 3px 3px 0 rgba(0,0,0,0.5); }
+#s-forge .ink-btn.ghost:hover { box-shadow: 4px 4px 0 rgba(0,0,0,0.5); }
+
+/* ── pieza: monograma de fichero (avatar) ── */
+.mono-av { flex-shrink: 0; display: grid; place-items: center; background: var(--manila); border: 1.5px solid var(--ink);
+  font-family: var(--tw); font-weight: 700; color: var(--ink); border-radius: 3px; }
+.mono-av.you { border-color: var(--stamp); color: var(--stamp-deep); background: var(--stamp-soft); }
+
+/* ── fila de lista genérica ── */
+.lrow { display: flex; align-items: center; gap: 12px; padding: 13px 16px; }
+.lrow + .lrow { border-top: 1px solid var(--line); }
+
+/* ── tab bar: pestañas de fichero ── */
+.tabbar { position: absolute; bottom: 0; left: 0; right: 0; z-index: 455; display: flex; justify-content: space-around; align-items: stretch;
+  padding: 8px 8px calc(12px + env(safe-area-inset-bottom)); background: var(--manila); border-top: 2px solid var(--ink); }
+.tab { all: unset; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--ink-faint);
+  padding: 6px 4px 4px; flex: 1; border-top: 3px solid transparent; margin-top: -8px; }
+.tab .tl { font-family: var(--tw); font-size: 8px; letter-spacing: 1px; text-transform: uppercase; }
+.tab.on { color: var(--stamp-deep); border-top-color: var(--stamp); }
+.tab svg { opacity: 0.7; } .tab.on svg { opacity: 1; }
+
+/* ── footer sticky ── */
+.foot-cta { position: sticky; bottom: 0; z-index: 10; margin-top: 12px; padding: 14px 22px calc(18px + env(safe-area-inset-bottom));
+  background: linear-gradient(transparent, var(--paper) 24%); }
+
+/* ── toast prototipo ── */
+.toast { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%) translateY(10px); z-index: 700;
+  background: var(--ink); color: var(--paper); font-family: var(--tw); font-size: 12px; padding: 10px 16px; border-radius: 3px;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3); opacity: 0; pointer-events: none; transition: opacity 200ms ease, transform 200ms ease; }
+.toast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ═══════════ S0 · PORTADA — portada del cuaderno ═══════════ */
+#s-intro { background: var(--manila); align-items: center; justify-content: center; text-align: center; padding: 40px 32px; overflow: hidden; }
+#s-intro::before { content: ""; position: absolute; inset: 0; opacity: 0.5; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.13 0 0 0 0 0.11 0 0 0 0 0.07 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.cover-tab { position: absolute; top: 58px; right: 0; background: var(--stamp); color: var(--paper); font-family: var(--display); font-weight: 700;
+  font-size: 12px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px 6px 14px; z-index: 3; }
+.cover-frame { position: absolute; inset: 26px; border: 2px solid var(--ink); z-index: 1; pointer-events: none; }
+.cover-frame::before { content: ""; position: absolute; inset: 5px; border: 1px solid var(--line-strong); }
+.intro-inner { position: relative; z-index: 2; animation: fadeUp 700ms both; }
+.intro-bar { width: 240px; margin: 0 auto 20px; animation: fadeUp 800ms 100ms both; }
+.intro-pre { font-family: var(--tw); font-size: 10px; letter-spacing: 3px; color: var(--ink-soft); text-transform: uppercase; }
+.intro-title { font-family: var(--display); font-weight: 800; font-size: 96px; line-height: 0.86; letter-spacing: 2px; color: var(--ink);
+  text-transform: uppercase; margin: 6px 0 0; }
+.intro-title em { font-style: normal; -webkit-text-stroke: 2px var(--ink); color: transparent; }
+.intro-sub { font-family: var(--tw); font-size: 13px; color: var(--ink-soft); margin-top: 8px; letter-spacing: 0.5px; }
+.intro-rule { display: flex; align-items: center; gap: 12px; justify-content: center; margin: 20px auto; width: 210px; }
+.intro-rule i { flex: 1; height: 1.5px; background: var(--ink); }
+.intro-quote { font-family: var(--chalk-f); font-weight: 600; font-size: 24px; color: var(--stamp-deep); line-height: 1.35; max-width: 280px; margin: 0 auto; transform: rotate(-1.4deg); }
+.intro-seal { position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%) rotate(-6deg); }
+.intro-meta { position: absolute; bottom: 44px; left: 0; right: 0; font-family: var(--tw); font-size: 9.5px; letter-spacing: 1.5px; color: var(--ink-faint); text-transform: uppercase; z-index: 2; }
+
+/* ═══════════ P1 · HOY ═══════════ */
+.appbar { padding: 62px 22px 10px 52px; display: flex; align-items: flex-end; gap: 12px; position: relative; z-index: 2; }
+.appbar .tx { flex: 1; }
+.appbar .date { font-family: var(--tw); font-size: 11px; letter-spacing: 1px; color: var(--ink-faint); text-transform: uppercase; }
+.appbar .hi { font-family: var(--display); font-weight: 700; font-size: 34px; letter-spacing: 0.5px; color: var(--ink); line-height: 1; margin-top: 3px; text-transform: uppercase; }
+.icon-btn { all: unset; cursor: pointer; width: 40px; height: 40px; flex-shrink: 0; background: var(--paper-2); border: 1.5px solid var(--ink);
+  display: grid; place-items: center; border-radius: 3px; position: relative; }
+.ndot { width: 8px; height: 8px; border-radius: 50%; background: var(--stamp); flex-shrink: 0; }
+
+/* racha: tarja */
+.streak { position: relative; z-index: 2; margin: 14px 22px 0 52px; padding: 16px 18px; background: var(--slate); border: 1.5px solid var(--ink);
+  display: flex; align-items: center; gap: 18px; overflow: hidden; }
+.streak::before { content: ""; position: absolute; inset: 0; opacity: 0.5; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='c'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.04 0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23c)'/%3E%3C/svg%3E"); }
+.streak-num { position: relative; font-family: var(--display); font-weight: 800; font-size: 58px; line-height: 0.8; color: var(--chalk); }
+.streak-r { position: relative; flex: 1; }
+.streak-lbl { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--chalk-yellow); }
+.streak-sub { font-family: var(--tw); font-size: 12px; color: var(--chalk-dim); margin-top: 5px; line-height: 1.4; }
+.streak-sub b { color: var(--chalk-red); font-weight: 400; }
+.tally { display: flex; gap: 8px; margin-top: 9px; }
+.tally svg { display: block; }
+
+/* nivel: sello + medidor reglado */
+.lvl { position: relative; z-index: 2; display: flex; align-items: center; gap: 12px; margin: 14px 22px 0 52px; }
+.gauge { flex: 1; height: 14px; border: 1.5px solid var(--ink); position: relative; background: repeating-linear-gradient(90deg, transparent 0 calc(10% - 1px), var(--line) calc(10% - 1px) 10%); }
+.gauge i { display: block; height: 100%; width: 64%; background: var(--stamp); border-right: 1.5px solid var(--ink); }
+.lvl-xp { font-family: var(--tw); font-weight: 700; font-size: 11px; color: var(--ink-soft); white-space: nowrap; }
+
+/* clase de hoy */
+.class-slip { position: relative; z-index: 2; margin: 4px 22px 0 52px; background: var(--manila); border: 1.5px solid var(--ink); }
+.class-slip .band { height: 6px; background: var(--stamp); border-bottom: 1.5px solid var(--ink); }
+.class-slip .top { display: flex; align-items: center; gap: 14px; padding: 16px 18px 0; }
+.class-hour { font-family: var(--display); font-weight: 800; font-size: 52px; line-height: 0.85; color: var(--ink); }
+.class-slip .meta { font-family: var(--tw); font-size: 12.5px; color: var(--ink-soft); padding: 8px 18px 0; line-height: 1.4; }
+.class-slip .meta b { color: var(--ink); font-weight: 700; }
+.slots { display: flex; align-items: center; gap: 10px; padding: 12px 18px 0; }
+.slot-dots { display: flex; gap: 3px; }
+.slot-dots i { width: 12px; height: 14px; border: 1.5px solid var(--ink); background: var(--ink); }
+.slot-dots i.free { background: transparent; }
+.slots .cnt { font-family: var(--tw); font-weight: 700; font-size: 12px; color: var(--ink-soft); }
+.warn { display: flex; align-items: center; gap: 7px; padding: 12px 18px 0; color: #9A6610; font-family: var(--tw); font-size: 11.5px; }
+.warn.ok { color: var(--green); }
+.class-slip .acts { display: flex; gap: 10px; padding: 14px 18px 16px; }
+.class-slip .acts .ink-btn { flex: 1; font-size: 14px; padding: 12px 8px; }
+
+/* misiones: checklist reglado */
+.mis-check { width: 24px; height: 24px; flex-shrink: 0; border: 1.5px solid var(--ink); background: var(--paper); display: grid; place-items: center; color: transparent; }
+.mis-check.done { background: var(--ink); color: var(--paper); }
+.mis-t { font-family: var(--tw); font-size: 13px; font-weight: 700; color: var(--ink); }
+.mis-s { font-family: var(--tw); font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
+.mis-xp { font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: 0.5px; color: var(--ink-faint); white-space: nowrap; }
+.mis-xp.got { color: var(--stamp-deep); }
+
+/* atajos */
+.shorts { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 14px 22px 0 52px; position: relative; z-index: 2; }
+.short { background: var(--paper-2); border: 1.5px solid var(--ink); padding: 14px 6px; text-align: center; cursor: pointer; transition: transform 120ms ease; }
+.short:hover { transform: translateY(-2px); }
+.short .k { font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink); margin-top: 6px; }
+
+/* ═══════════ P2 · PIZARRA ═══════════ */
+.subbar { padding: 60px 22px 8px 52px; display: flex; align-items: center; gap: 12px; position: relative; z-index: 2; }
+.backbtn { all: unset; cursor: pointer; width: 38px; height: 38px; flex-shrink: 0; background: var(--paper-2); border: 1.5px solid var(--ink);
+  display: grid; place-items: center; border-radius: 3px; }
+.subbar .t { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: 0.5px; color: var(--ink); text-transform: uppercase; line-height: 1; }
+.subbar .s { font-family: var(--tw); font-size: 10.5px; letter-spacing: 0.5px; color: var(--ink-faint); text-transform: uppercase; margin-top: 3px; }
+
+/* la pizarra: chalkboard real */
+.board-wrap { padding: 8px 18px 0 48px; position: relative; z-index: 2; }
+.board { position: relative; padding: 24px 22px 26px; background: var(--slate); border: 8px solid #3A3126; box-shadow: inset 0 0 0 1.5px rgba(0,0,0,0.5); overflow: hidden; }
+.board::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.55;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='ch'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23ch)'/%3E%3C/svg%3E"); }
+.board::after { content: ""; position: absolute; top: 8%; left: -10%; width: 55%; height: 40%; pointer-events: none; opacity: 0.06; border-radius: 50%;
+  background: radial-gradient(#fff, transparent 70%); }
+.clip { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); width: 46px; height: 20px; background: #B9BEC6; border: 1.5px solid #6c7076;
+  border-radius: 4px 4px 2px 2px; box-shadow: inset 0 -3px 4px rgba(0,0,0,0.3); z-index: 3; }
+.bd-date { position: relative; font-family: var(--chalk-f); font-weight: 600; font-size: 19px; color: var(--chalk-red); transform: rotate(-1deg); }
+.bd-title { position: relative; font-family: var(--chalk-f); font-weight: 700; font-size: 54px; color: var(--chalk-blue); line-height: 0.95; transform: rotate(-0.8deg); margin-top: 2px; }
+.bd-under { position: relative; width: 150px; margin-top: 2px; display: block; }
+.bd-scheme { position: relative; font-family: var(--chalk-f); font-weight: 700; font-size: 24px; color: var(--chalk-red); margin-top: 10px; transform: rotate(-0.4deg); }
+.bd-moves { position: relative; list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.bd-moves li { font-family: var(--chalk-f); font-weight: 600; font-size: 25px; color: var(--chalk); display: flex; align-items: baseline; gap: 12px; line-height: 1.05; }
+.bd-moves li:nth-child(odd) { transform: rotate(-0.5deg); } .bd-moves li:nth-child(even) { transform: rotate(0.4deg); }
+.bd-moves .n { font-family: var(--chalk-f); font-size: 27px; font-weight: 700; color: var(--chalk-blue); min-width: 34px; }
+.bd-note { position: relative; font-family: var(--chalk-f); font-weight: 600; font-size: 18px; color: var(--chalk-dim); margin-top: 14px; transform: rotate(-0.8deg); }
+.bd-tray { margin: -4px 14px 0; height: 12px; background: #3A3126; box-shadow: inset 0 2px 3px rgba(0,0,0,0.4); display: flex; align-items: center; gap: 8px; padding: 0 14px; position: relative; z-index: 1; }
+.bd-tray i { width: 34px; height: 6px; margin-top: -3px; border-radius: 2px; }
+.bd-tray i.b { background: var(--chalk-blue); } .bd-tray i.r { background: var(--chalk-red); } .bd-tray i.w { background: var(--chalk); }
+.board-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding: 14px 0 0; }
+.board-track::-webkit-scrollbar { display: none; }
+.board-track > .bcard { box-sizing: border-box; flex: 0 0 100%; scroll-snap-align: start; }
+.board-dots { display: flex; justify-content: center; gap: 6px; margin-top: 14px; }
+.bd-dot { width: 8px; height: 8px; border: 1.5px solid var(--ink); cursor: pointer; transition: all .2s; }
+.bd-dot.on { background: var(--stamp); border-color: var(--stamp); width: 22px; }
+.board-hint { font-family: var(--tw); font-size: 9.5px; letter-spacing: 0.5px; color: var(--ink-faint); text-transform: uppercase; text-align: center; margin-top: 8px; padding: 0 22px; }
+
+/* roster */
+.roster { display: flex; align-items: center; gap: 6px; padding: 0 22px 0 52px; position: relative; z-index: 2; }
+.roster .mono-av { width: 38px; height: 38px; font-size: 12px; }
+.more-btn { all: unset; cursor: pointer; margin-left: 8px; font-family: var(--tw); font-size: 12px; color: var(--stamp-deep); border-bottom: 1.5px solid rgba(200,69,45,0.4); }
+.more-btn:hover { border-bottom-color: var(--stamp-deep); }
+
+/* filas de ejercicio */
+.dose { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: 0.5px; color: var(--ink); min-width: 54px; flex-shrink: 0; line-height: 1.1; }
+.dose small { display: block; font-family: var(--tw); font-weight: 400; font-size: 9px; color: var(--ink-faint); letter-spacing: 0; }
+.ex-name { font-family: var(--tw); font-size: 13.5px; font-weight: 700; color: var(--ink); }
+.ex-sub { font-family: var(--tw); font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+.ex-sub b { color: var(--stamp-deep); font-weight: 700; }
+.vid-badge { width: 26px; height: 26px; flex-shrink: 0; display: grid; place-items: center; background: var(--paper); border: 1.5px solid var(--ink); color: var(--ink); }
+.cat-note { display: flex; gap: 9px; align-items: baseline; margin: 10px 22px 0 52px; position: relative; z-index: 2;
+  font-family: var(--chalk-f); font-weight: 600; font-size: 18px; color: var(--ink-soft); line-height: 1.3; transform: rotate(-0.3deg); }
+.cat-note b { color: var(--stamp-deep); font-weight: 700; }
+
+/* ═══════════ P3 · ANOTAR ═══════════ */
+.hint-line { font-family: var(--tw); font-size: 10px; letter-spacing: 0.5px; color: var(--ink-faint); text-transform: uppercase; text-align: center; margin-top: 10px; padding: 0 22px; position: relative; z-index: 2; }
+.rcfg-val { display: flex; align-items: center; gap: 10px; }
+.rcfg-step { all: unset; box-sizing: border-box; cursor: pointer; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 22px; color: var(--ink); background: var(--paper); border: 1.5px solid var(--ink); }
+.rcfg-step:hover { background: var(--stamp); color: var(--paper); }
+.rcfg-num { font-family: var(--display); font-weight: 700; font-size: 20px; color: var(--ink); min-width: 48px; text-align: center; }
+
+/* terminó / no terminó */
+.div-row { display: flex; gap: 10px; margin: 6px 22px 0 52px; position: relative; z-index: 2; }
+.div-plate { flex: 1; cursor: pointer; text-align: center; padding: 13px 8px; font-family: var(--display); font-weight: 700; font-size: 16px; letter-spacing: 0.5px;
+  text-transform: uppercase; color: var(--ink-soft); background: var(--paper-2); border: 1.5px solid var(--ink); transition: all 140ms ease; }
+.div-plate .s { display: block; font-family: var(--tw); font-size: 9px; font-weight: 400; letter-spacing: 0.5px; color: var(--ink-faint); margin-top: 3px; text-transform: uppercase; }
+.div-plate.on { color: var(--paper); background: var(--ink); box-shadow: 3px 3px 0 rgba(34,32,26,0.25); }
+.div-plate.on .s { color: rgba(239,233,219,0.6); }
+
+/* hero de resultado: entrada del cuaderno */
+.score-hero { position: relative; z-index: 2; margin: 12px 22px 0 52px; padding: 20px 18px 20px; text-align: center; background: var(--manila); border: 1.5px solid var(--ink); }
+.score-eyebrow { font-family: var(--tw); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-faint); }
+.stepper { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 10px; }
+.step-btn { all: unset; cursor: pointer; width: 48px; height: 48px; flex-shrink: 0; display: grid; place-items: center; font-family: var(--display); font-size: 26px; font-weight: 700;
+  color: var(--paper); background: var(--ink); border: 1.5px solid var(--ink); box-shadow: 2px 2px 0 rgba(34,32,26,0.3); }
+.step-btn:active { transform: translate(2px,2px); box-shadow: none; }
+.step-num { font-family: var(--display); font-weight: 800; font-size: 84px; line-height: 0.85; color: var(--ink); min-width: 120px; }
+.step-lbl { font-family: var(--tw); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-soft); margin-top: 8px; }
+.pr-hint { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--stamp-deep); border: 2px solid var(--stamp); padding: 5px 12px; transform: rotate(-1.5deg); }
+.pr-hint .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--stamp); animation: blink 1.4s ease-in-out infinite; }
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+/* encuesta RPE */
+.rpe { position: relative; z-index: 2; margin: 14px 22px 0 52px; padding: 16px 16px; background: var(--paper-2); border: 1.5px solid var(--ink); }
+.rpe-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.rpe-scale { display: flex; gap: 4px; margin-top: 12px; }
+.rpe-tick { flex: 1; cursor: pointer; text-align: center; padding: 8px 0; font-family: var(--tw); font-weight: 700; font-size: 12px; color: var(--ink-soft);
+  background: var(--paper); border: 1.5px solid var(--ink); transition: all 120ms ease; }
+.rpe-tick:hover { background: var(--manila); }
+.rpe-tick.on { background: var(--stamp); color: var(--paper); }
+.rpe-lbls { display: flex; justify-content: space-between; margin-top: 8px; font-family: var(--tw); font-size: 9px; letter-spacing: 0.5px; color: var(--ink-faint); text-transform: uppercase; }
+.field-line { margin-top: 12px; padding: 11px 14px; background: var(--paper); border: 1.5px solid var(--ink); font-family: var(--tw); font-size: 12px; color: var(--ink-faint); }
+.tgl { width: 42px; height: 24px; border: 1.5px solid var(--ink); background: var(--paper); position: relative; cursor: pointer; flex-shrink: 0; }
+.tgl::after { content: ""; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: var(--ink); transition: left 140ms ease; }
+.tgl.on { background: var(--stamp); } .tgl.on::after { left: 22px; background: var(--paper); }
+
+/* ═══════════ P4 · RÉCORD — la ceremonia del sello ═══════════ */
+#s-forge { background: var(--slate-2); align-items: center; justify-content: center; text-align: center; padding: 30px; overflow: hidden; }
+#s-forge::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 40%, rgba(255,214,150,0.14) 0%, transparent 55%); }
+.forge-inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%; }
+.forge-pre { font-family: var(--tw); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--chalk-yellow); }
+.on .forge-pre { animation: fadeUp 500ms 120ms both; }
+.forge-title { font-family: var(--display); font-weight: 800; font-size: 40px; letter-spacing: 1px; color: var(--chalk); margin: 6px 0 24px; text-transform: uppercase; }
+.on .forge-title { animation: fadeUp 500ms 240ms both; }
+
+/* la ficha de récord */
+.ficha { position: relative; width: 290px; background: var(--manila); border: 1.5px solid var(--ink); padding: 22px 22px 20px; text-align: left;
+  box-shadow: 5px 6px 0 rgba(0,0,0,0.4); }
+.on .ficha { animation: fichaIn 600ms 360ms cubic-bezier(0.22,1,0.36,1) both; }
+@keyframes fichaIn { from { opacity: 0; transform: translateY(30px) rotate(-2deg); } to { opacity: 1; transform: none; } }
+.ficha::before { content: ""; position: absolute; left: 0; right: 0; top: 46px; height: 1px; background: var(--margin); opacity: 0.5; }
+.ficha .hole { position: absolute; top: 12px; right: 16px; width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid var(--line-strong); }
+.ficha-k { font-family: var(--tw); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ink-faint); }
+.ficha-cat { font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink); margin-top: 2px; }
+.ficha-big { font-family: var(--display); font-weight: 800; font-size: 66px; line-height: 0.85; color: var(--ink); margin-top: 14px; }
+.ficha-big span { font-family: var(--tw); font-size: 16px; font-weight: 700; letter-spacing: 0; }
+.ficha-name { font-family: var(--tw); font-weight: 700; font-size: 13px; color: var(--ink); margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line-strong); }
+.ficha-date { font-family: var(--tw); font-size: 11px; color: var(--ink-faint); margin-top: 2px; }
+/* el sello RÉCORD que baja */
+.stamp-record { position: absolute; top: 34px; right: -14px; font-family: var(--display); font-weight: 800; font-size: 28px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--stamp); border: 3px solid var(--stamp); padding: 6px 12px; transform: rotate(-9deg); opacity: 0.92; }
+.stamp-record::after { content: ""; position: absolute; inset: 3px; border: 1.5px solid currentColor; opacity: 0.5; }
+.on .stamp-record { animation: stampDown 500ms 1000ms cubic-bezier(0.3,1.4,0.5,1) both; }
+@keyframes stampDown { 0% { opacity: 0; transform: rotate(-9deg) scale(2.4); } 60% { opacity: 1; } 100% { opacity: 0.92; transform: rotate(-9deg) scale(1); } }
+
+/* sellos de grado (colección) */
+.seals { margin-top: 26px; }
+.on .seals { animation: fadeUp 600ms 1500ms both; }
+.seals .k { font-family: var(--tw); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--chalk-dim); }
+.seal-row { display: flex; gap: 12px; justify-content: center; margin-top: 12px; }
+.seal { width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;
+  color: var(--slate-2); border: 2px solid; position: relative; }
+.seal::after { content: ""; position: absolute; inset: 3px; border-radius: 50%; border: 1px dashed rgba(0,0,0,0.35); }
+.seal.bz { background: var(--bronze); border-color: #7a4f28; } .seal.sv { background: var(--silver); border-color: #6f757b; } .seal.gd { background: var(--gold); border-color: #977219; }
+.seal.empty { background: transparent; border: 2px dashed rgba(241,236,221,0.3); color: rgba(241,236,221,0.4); }
+.seal.justgot { animation: sealPop 500ms 1700ms cubic-bezier(0.34,1.56,0.64,1) both; }
+@keyframes sealPop { 0% { transform: scale(0.3) rotate(-20deg); } 70% { transform: scale(1.25); } 100% { transform: scale(1); } }
+.forge-xp { font-family: var(--tw); font-size: 13px; color: var(--chalk-dim); margin-top: 16px; }
+.forge-xp b { font-family: var(--display); font-weight: 800; font-size: 16px; letter-spacing: 0.5px; color: var(--chalk-yellow); }
+.on .forge-xp { animation: fadeUp 600ms 1700ms both; }
+.forge-acts { margin-top: 22px; display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 290px; }
+.on .forge-acts { animation: fadeUp 600ms 1900ms both; }
+.forge-back { all: unset; cursor: pointer; font-family: var(--tw); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--chalk-dim); padding: 8px; }
+.forge-back:hover { color: var(--chalk); }
+/* especks de tinta */
+.speck { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--stamp); opacity: 0; pointer-events: none; }
+.on .speck { animation: speckFly 900ms var(--sd,1100ms) cubic-bezier(0.1,0.8,0.3,1) both; }
+@keyframes speckFly { 0% { opacity: 0; transform: translate(0,0) scale(0.4); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--sx), var(--sy)) scale(1); } }
+
+/* ═══════════ P9 · PERFIL — el fichero ═══════════ */
+.prof-head { text-align: center; padding: 12px 22px 0; position: relative; z-index: 2; }
+.prof-av { width: 84px; height: 84px; margin: 52px auto 0; font-size: 26px; border-radius: 4px; }
+.prof-nm { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink); margin-top: 12px; }
+.prof-us { font-family: var(--tw); font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
+.prof-tapes { display: flex; gap: 10px; justify-content: center; align-items: center; margin-top: 14px; }
+.stat-tiles { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; padding: 18px 22px 0 52px; position: relative; z-index: 2; }
+.stile { background: var(--paper-2); border: 1.5px solid var(--ink); padding: 12px 6px; text-align: center; }
+.stile .v { font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 0.9; color: var(--ink); }
+.stile .k { font-family: var(--tw); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-faint); margin-top: 4px; }
+
+/* logro robable */
+.belt { position: relative; z-index: 2; margin: 4px 22px 0 52px; padding: 14px 16px; display: flex; align-items: center; gap: 14px; background: var(--manila); border: 1.5px solid var(--ink); }
+.belt-ic { width: 44px; height: 44px; flex-shrink: 0; display: grid; place-items: center; background: var(--gold); border: 1.5px solid #977219; color: var(--slate-2); border-radius: 3px; }
+.belt-t { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink); }
+.belt-s { font-family: var(--tw); font-size: 11px; color: var(--ink-soft); margin-top: 3px; line-height: 1.4; }
+
+/* la colección de fichas de récord */
+.fichero { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; padding: 6px 22px 0 52px; position: relative; z-index: 2; }
+.rcard { position: relative; background: var(--manila); border: 1.5px solid var(--ink); padding: 12px 12px 10px; box-shadow: 2px 2px 0 rgba(34,32,26,0.18); }
+.rcard::before { content: ""; position: absolute; left: 8px; right: 8px; top: 30px; height: 1px; background: var(--margin); opacity: 0.4; }
+.rcard .rk { font-family: var(--tw); font-size: 9.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-faint); }
+.rcard .rv { font-family: var(--display); font-weight: 800; font-size: 32px; line-height: 0.9; color: var(--ink); margin-top: 12px; }
+.rcard .ru { font-family: var(--tw); font-size: 10px; color: var(--ink-faint); }
+.rcard .grade { position: absolute; top: 8px; right: 8px; width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid; }
+.rcard .grade.bz { background: var(--bronze); border-color: #7a4f28; } .rcard .grade.sv { background: var(--silver); border-color: #6f757b; } .rcard .grade.gd { background: var(--gold); border-color: #977219; }
+.rcard.locked { background: repeating-linear-gradient(45deg, var(--paper-2) 0 8px, var(--paper) 8px 16px); box-shadow: none; }
+.rcard.locked .rv { color: var(--ink-faint); }
+.rcard.locked .grade { background: transparent; border: 1.5px dashed var(--line-strong); }
+.season-note { position: relative; z-index: 2; margin: 20px 24px 0 52px; font-family: var(--tw); font-size: 12px; color: var(--ink-faint); text-align: center; line-height: 1.6; }
+.season-note b { color: var(--ink-soft); }
+
+/* ═══════════ bottom sheets ═══════════ */
+.sheet-overlay { position: absolute; inset: 0; z-index: 500; display: none; }
+.sheet-overlay.on { display: block; }
+.sheet-scrim { position: absolute; inset: 0; background: rgba(20,18,14,0.5); animation: fadeIn 200ms ease; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--paper); border-top: 2px solid var(--ink);
+  padding: 0 22px 24px; box-shadow: 0 -10px 30px rgba(0,0,0,0.3); animation: sheetUp 320ms cubic-bezier(0.22,1,0.36,1); }
+.sheet::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 24px 24px; }
+.sheet-grip { width: 40px; height: 4px; background: var(--line-strong); margin: 10px auto 16px; position: relative; }
+.sheet-ttl { display: flex; align-items: center; gap: 11px; font-family: var(--display); font-weight: 700; font-size: 22px; letter-spacing: 0.5px; text-transform: uppercase; color: var(--ink); line-height: 1.1; position: relative; }
+.sheet-ic { width: 36px; height: 36px; flex-shrink: 0; display: grid; place-items: center; background: var(--manila); border: 1.5px solid var(--ink); color: var(--ink); border-radius: 3px; }
+.sheet-body { font-family: var(--tw); font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; margin-top: 12px; position: relative; }
+@keyframes sheetUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* roster list en sheet: hoja de asistencia con fade de papel */
+.roster-list { max-height: 46vh; overflow-y: auto; margin-top: 14px; scrollbar-width: none; position: relative;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 26px, #000 calc(100% - 26px), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 26px, #000 calc(100% - 26px), transparent); }
+.roster-list::-webkit-scrollbar { display: none; }
+.rl-row { display: flex; align-items: center; gap: 12px; padding: 9px 4px; }
+.rl-row + .rl-row { border-top: 1px solid var(--line); }
+.rl-row .mono-av { width: 38px; height: 38px; font-size: 12px; }
+.rl-nm { font-family: var(--tw); font-size: 13px; font-weight: 700; color: var(--ink); }
+.rl-row.you .rl-nm { color: var(--stamp-deep); }
+.rl-tag { margin-left: auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001s !important; animation-delay: 0s !important; transition-duration: 0.001s !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════ SVG defs: line-art propio ════════ -->
+<svg width="0" height="0" style="position:absolute"><defs>
+  <g id="g-barbell">
+    <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round">
+      <path d="M30 64 Q140 74 250 64"/>
+      <line x1="14" y1="64" x2="30" y2="64" stroke-width="5"/>
+      <line x1="250" y1="64" x2="266" y2="64" stroke-width="5"/>
+      <rect x="34" y="24" width="14" height="80" rx="2" stroke-width="3.2"/>
+      <rect x="52" y="36" width="11" height="56" rx="2" stroke-width="2.8"/>
+      <rect x="232" y="24" width="14" height="80" rx="2" stroke-width="3.2"/>
+      <rect x="217" y="36" width="11" height="56" rx="2" stroke-width="2.8"/>
+      <line x1="70" y1="56" x2="70" y2="74" stroke-width="4"/>
+      <line x1="210" y1="56" x2="210" y2="74" stroke-width="4"/>
+    </g>
+  </g>
+  <g id="g-flame">
+    <path d="M22 10 c2 10 -3 14 -7 22 c-4 8 -5 13 -5 18 a22 21 0 0 0 44 0 c0 -9 -5 -16 -10 -23 c-5 -7 -7 -13 -5 -21 c-7 4 -10 9 -11 15 c-3 -4 -5 -7 -6 -11 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+  </g>
+  <g id="g-chalkline"><path d="M3 8 q 36 -8 74 -3 q 38 4 70 -2" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/></g>
+</defs></svg>
+
+<div class="desk">
+  <!-- rail izquierdo -->
+  <aside class="desk-rail">
+    <div class="rail-pre">Forja · Dirección de arte · Ronda 2</div>
+    <div class="rail-title">CUADERNO<br>DE <em>TALLER</em></div>
+    <div class="rail-sub">La app es el papeleo real del box: el WOD escrito con tiza en la pizarra, la asistencia en la planilla — y el récord queda <b style="color:var(--chalk)">sellado y archivado en el fichero</b>. Nadie te lo quita.</div>
+    <ul class="rail-screens" id="rail"></ul>
+    <div class="rail-note"><b>Primera pasada — loop central.</b> Estas 6 pantallas prueban la dirección. El resto de las 28 llega en la próxima ronda. Los controles punteados azules son andamiaje del prototipo.</div>
+  </aside>
+
+  <!-- el teléfono -->
+  <div class="phone">
+    <div class="phone-screen" id="app">
+      <div class="notch"></div>
+      <div class="statusbar"><span>18:32</span><span class="right">●●● ▲ ▮▮▮</span></div>
+
+      <!-- ════════ S0 · PORTADA ════════ -->
+      <section class="screen" id="s-intro">
+        <div class="cover-tab">Ronda 1</div>
+        <div class="cover-frame"></div>
+        <div class="intro-inner">
+          <svg class="intro-bar" viewBox="0 0 280 130" style="color:var(--ink)"><use href="#g-barbell"/></svg>
+          <div class="intro-pre">Prototipo navegable</div>
+          <h1 class="intro-title">FOR<em>JA</em></h1>
+          <div class="intro-sub">Cuaderno de taller — el box, anotado</div>
+          <div class="intro-rule"><i></i><svg width="34" height="14" viewBox="0 0 150 14" style="color:var(--stamp)"><use href="#g-chalkline"/></svg><i></i></div>
+          <p class="intro-quote">«El WOD de hoy se escribe con tiza.<br>Tu récord se sella para siempre.»</p>
+          <div style="margin-top:30px"><button class="ink-btn" data-go="hoy">Entrar al box</button></div>
+        </div>
+        <span class="stamp intro-seal ink sm">Box El Yunque</span>
+        <div class="intro-meta">Osorno, Chile — 40°34′ S · Est. 2024</div>
+      </section>
+
+      <!-- ════════ P1 · HOY ════════ -->
+      <section class="screen" id="s-hoy">
+        <div class="scrolly" style="padding-bottom:96px">
+          <div class="page-margin"></div>
+          <header class="appbar">
+            <div class="tx">
+              <span class="date">Mié 10 · jun</span>
+              <p class="hi">Hola, Vale</p>
+            </div>
+            <button class="icon-btn" data-go="notifs">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#22201A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+              <span class="ndot" style="position:absolute;top:-4px;right:-4px;border:1.5px solid var(--paper)"></span>
+            </button>
+            <button class="mono-av" data-go="perfil" style="width:40px;height:40px;font-size:14px;cursor:pointer">VF</button>
+          </header>
+
+          <!-- racha: la tarja del fuego -->
+          <div class="streak">
+            <span class="streak-num" id="streak-num">14</span>
+            <div class="streak-r">
+              <div class="streak-lbl">Días al fuego</div>
+              <div class="tally" id="tally"></div>
+              <p class="streak-sub">A <b>3 días</b> de tu mejor racha. No dejes que se enfríe.</p>
+            </div>
+          </div>
+
+          <!-- nivel -->
+          <div class="lvl">
+            <span class="stamp ink sm flat">Nivel 12 · Forjadora</span>
+            <div class="gauge"><i></i></div>
+            <span class="lvl-xp">2.840 XP</span>
+          </div>
+
+          <!-- clase de hoy -->
+          <div class="tw-h"><span class="no">A</span><span class="t">Tu clase de hoy</span><span class="lead"></span></div>
+          <div class="class-slip">
+            <div class="band"></div>
+            <div class="top">
+              <span class="class-hour">19:00</span>
+              <span class="stamp amber" id="hoy-state">Por confirmar</span>
+            </div>
+            <p class="meta"><b>CrossFit</b> · Coach Vale Fuentes · sala principal</p>
+            <div class="slots">
+              <div class="slot-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="free"></i></div>
+              <span class="cnt">11/12</span>
+            </div>
+            <div class="warn" id="hoy-warn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              <span>Si no confirmas, tu cupo se libera a las 18:00</span>
+            </div>
+            <div class="acts" id="hoy-acts">
+              <button class="ink-btn" onclick="confirmHoy(this)">Confirmar</button>
+              <button class="ink-btn ghost" data-go="board">La pizarra</button>
+            </div>
+          </div>
+
+          <!-- misiones del taller -->
+          <div class="tw-h"><span class="no">B</span><span class="t">El taller de hoy</span><span class="lead"></span><span class="end">+180 XP</span></div>
+          <div class="slip slip-rows">
+            <div class="lrow">
+              <span class="mis-check done"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <div style="flex:1"><p class="mis-t">Reserva una clase</p><p class="mis-s">Hecho a las 8:14</p></div>
+              <span class="mis-xp got">+50</span>
+            </div>
+            <div class="lrow" style="cursor:pointer" data-go="score">
+              <span class="mis-check"></span>
+              <div style="flex:1"><p class="mis-t">Anota tu resultado</p><p class="mis-s">Después de la clase</p></div>
+              <span class="mis-xp">+100</span>
+            </div>
+            <div class="lrow" style="cursor:pointer" data-go="social">
+              <span class="mis-check"></span>
+              <div style="flex:1"><p class="mis-t">Choca esos cinco</p><p class="mis-s">Felicita a alguien del box</p></div>
+              <span class="mis-xp">+30</span>
+            </div>
+          </div>
+
+          <!-- atajos -->
+          <div class="shorts">
+            <div class="short" data-go="duel"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--stamp-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 9.5-5 5"/><path d="M18 6 6 18"/><path d="m21 3-3 3-3-3 3-3z"/><path d="m3 21 3-3 3 3-3 3z"/></svg><div class="k">Duelos</div></div>
+            <div class="short" data-go="desafios"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--stamp-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><div class="k">Desafíos</div></div>
+            <div class="short" data-go="progreso"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--stamp-deep)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-5 4 3 5-7"/></svg><div class="k">Progreso</div></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="hoy"></nav>
+      </section>
+
+      <!-- ════════ P2 · PIZARRA ════════ -->
+      <section class="screen" id="s-board">
+        <div class="scrolly" style="padding-bottom:18px">
+          <div class="page-margin"></div>
+          <header class="subbar">
+            <button class="backbtn" data-go="hoy"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22201A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div style="flex:1"><p class="t">Pizarra</p><p class="s">CrossFit · 19:00 · Coach Vale</p></div>
+          </header>
+
+          <div class="board-wrap">
+            <div class="board-track" id="board-track">
+              <!-- 01 -->
+              <div class="bcard"><div class="board">
+                <span class="clip"></span>
+                <p class="bd-date">mié 10 · jun</p>
+                <p class="bd-title" style="font-size:34px">Calentamiento</p>
+                <svg class="bd-under" viewBox="0 0 150 14" style="color:var(--chalk-blue)"><use href="#g-chalkline"/></svg>
+                <p class="bd-scheme">8 MIN</p>
+                <ul class="bd-moves">
+                  <li><span class="n">3'</span> remo + movilidad</li>
+                  <li><span class="n">2×10</span> scap pull-ups</li>
+                  <li><span class="n">2×15</span> air squats</li>
+                </ul>
+                <p class="bd-note">→ entren en calor sin apuro — Vale</p>
+              </div></div>
+              <!-- 02 -->
+              <div class="bcard"><div class="board">
+                <span class="clip"></span>
+                <p class="bd-date">mié 10 · jun</p>
+                <p class="bd-title" style="font-size:44px">Skill</p>
+                <svg class="bd-under" viewBox="0 0 150 14" style="color:var(--chalk-blue)"><use href="#g-chalkline"/></svg>
+                <p class="bd-scheme">POWER CLEAN · 15 MIN</p>
+                <ul class="bd-moves">
+                  <li><span class="n">2×5</span> liviano</li>
+                  <li><span class="n">3×3</span> @ 75% 1RM</li>
+                </ul>
+                <p class="bd-note">→ sube solo si la técnica aguanta — Vale</p>
+              </div></div>
+              <!-- 03 -->
+              <div class="bcard"><div class="board">
+                <span class="clip"></span>
+                <p class="bd-date">mié 10 · jun</p>
+                <p class="bd-title">“CINDY”</p>
+                <svg class="bd-under" viewBox="0 0 150 14" style="color:var(--chalk-blue)"><use href="#g-chalkline"/></svg>
+                <p class="bd-scheme">AMRAP 20 MIN:</p>
+                <ul class="bd-moves">
+                  <li><span class="n">5</span> pull-ups</li>
+                  <li><span class="n">10</span> push-ups</li>
+                  <li><span class="n">15</span> air squats</li>
+                </ul>
+                <p class="bd-note">→ ritmo parejo, guarden gas pa'l final — Vale</p>
+              </div></div>
+            </div>
+            <div class="bd-tray"><i class="b"></i><i class="r"></i><i class="w"></i></div>
+          </div>
+          <div class="board-dots" id="board-dots"><span class="bd-dot on"></span><span class="bd-dot"></span><span class="bd-dot"></span></div>
+          <p class="board-hint">Desliza — calentamiento · skill · WOD</p>
+
+          <!-- quiénes van -->
+          <div class="tw-h"><span class="no">✓</span><span class="t">Hoy entrenan</span><span class="lead"></span><span class="end">11</span></div>
+          <div class="roster">
+            <div class="mono-av">MR</div><div class="mono-av">JN</div><div class="mono-av">CP</div>
+            <button class="more-btn" onclick="document.getElementById('roster-sheet').classList.add('on')">y 8 más</button>
+          </div>
+
+          <!-- categorías -->
+          <div class="tw-h"><span class="no">01</span><span class="t">Calentamiento</span><span class="lead"></span><span class="end">8 min</span></div>
+          <div class="slip slip-rows">
+            <div class="lrow" style="cursor:pointer" data-go="exercise"><span class="dose">3 min</span><p class="ex-name" style="flex:1">Remo suave + movilidad de hombro</p><span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+            <div class="lrow" style="cursor:pointer" data-go="exercise"><span class="dose">2×10</span><p class="ex-name" style="flex:1">Scap pull-ups</p><span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+            <div class="lrow" style="cursor:pointer" data-go="exercise"><span class="dose">2×15</span><p class="ex-name" style="flex:1">Air squats con pausa abajo</p><span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+          </div>
+
+          <div class="tw-h"><span class="no">02</span><span class="t">Skill</span><span class="lead"></span><span class="end">15 min</span></div>
+          <div class="slip slip-rows">
+            <div class="lrow" style="cursor:pointer" data-go="exercise">
+              <span class="dose">2×5<small>+ 3×3</small></span>
+              <div style="flex:1"><p class="ex-name">Power Clean</p><p class="ex-sub">@ 75% 1RM → <b>tuyo: <span class="wt" data-kg="35">35 kg</span></b> · descanso 3:00</p></div>
+              <span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+            </div>
+          </div>
+          <p class="cat-note">→ las 2 primeras series de 5 livianas; las 3 de 3 ya con el 75% — <b>sube solo si la técnica aguanta</b></p>
+
+          <div class="tw-h"><span class="no">03</span><span class="t">WOD — “Cindy”</span><span class="lead"></span><span class="end">20 min</span></div>
+          <div class="slip slip-rows">
+            <div class="lrow" style="cursor:pointer" data-go="exercise"><span class="dose">5</span><div style="flex:1"><p class="ex-name">Pull-ups</p><p class="ex-sub">kipping permitido</p></div><span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+            <div class="lrow" style="cursor:pointer" data-go="exercise"><span class="dose">10</span><div style="flex:1"><p class="ex-name">Push-ups</p><p class="ex-sub">pecho al suelo</p></div><span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+            <div class="lrow" style="cursor:pointer" data-go="exercise"><span class="dose">15</span><div style="flex:1"><p class="ex-name">Air squats</p><p class="ex-sub">cadera bajo paralelo</p></div><span class="vid-badge"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></div>
+          </div>
+          <p class="cat-note">→ <b>regla de hoy:</b> si fallas una rep, la siguiente ronda parte con +1 de ese ejercicio — solo esa ronda</p>
+
+          <button class="mock-ctl" data-go="score">▸ Simular: terminaste el WOD</button>
+        </div>
+      </section>
+
+      <!-- ════════ P3 · ANOTAR ════════ -->
+      <section class="screen" id="s-score">
+        <div class="scrolly" style="padding-bottom:18px">
+          <div class="page-margin"></div>
+          <header class="subbar">
+            <button class="backbtn" data-go="board"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22201A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <div style="flex:1"><p class="t">Anotar</p><p class="s">CrossFit · 19:00 · Coach Vale</p></div>
+          </header>
+          <p class="hint-line">Anota cada sección — el calentamiento no se anota</p>
+
+          <!-- Skill: peso por serie -->
+          <div class="tw-h"><span class="no">02</span><span class="t">Skill · Power Clean</span><span class="lead"></span><span class="end">peso/serie</span></div>
+          <div class="slip slip-rows">
+            <div class="lrow"><span class="dose">5 reps</span><div style="flex:1"><p class="ex-name">Serie 1</p><p class="ex-sub">Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(0,-2.5)">−</button><span class="rcfg-num" id="sk-0">35</span><button class="rcfg-step" onclick="skAdj(0,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">5 reps</span><div style="flex:1"><p class="ex-name">Serie 2</p><p class="ex-sub">Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(1,-2.5)">−</button><span class="rcfg-num" id="sk-1">35</span><button class="rcfg-step" onclick="skAdj(1,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">3 reps</span><div style="flex:1"><p class="ex-name">Serie 3</p><p class="ex-sub">Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(2,-2.5)">−</button><span class="rcfg-num" id="sk-2">40</span><button class="rcfg-step" onclick="skAdj(2,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">3 reps</span><div style="flex:1"><p class="ex-name">Serie 4</p><p class="ex-sub">Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(3,-2.5)">−</button><span class="rcfg-num" id="sk-3">40</span><button class="rcfg-step" onclick="skAdj(3,2.5)">+</button></div></div>
+            <div class="lrow"><span class="dose">3 reps</span><div style="flex:1"><p class="ex-name">Serie 5</p><p class="ex-sub">Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="rcfg-val"><button class="rcfg-step" onclick="skAdj(4,-2.5)">−</button><span class="rcfg-num" id="sk-4">42.5</span><button class="rcfg-step" onclick="skAdj(4,2.5)">+</button></div></div>
+          </div>
+
+          <!-- WOD: resultado -->
+          <div class="tw-h"><span class="no">03</span><span class="t">WOD · “Cindy”</span><span class="lead"></span><span class="end">cap 20 min</span></div>
+          <div class="div-row">
+            <div class="div-plate" id="done-yes" onclick="setDone(true)">Lo terminé<span class="s">se anota tu tiempo</span></div>
+            <div class="div-plate on" id="done-no" onclick="setDone(false)">No alcancé<span class="s">rondas + reps extra</span></div>
+          </div>
+
+          <div class="score-hero" id="res-rounds">
+            <span class="score-eyebrow">Rondas completas</span>
+            <div class="stepper">
+              <button class="step-btn" id="st-minus">−</button>
+              <span class="step-num" id="st-num">17</span>
+              <button class="step-btn" id="st-plus">+</button>
+            </div>
+            <p class="step-lbl">+ 3 reps extra</p>
+            <div style="margin-top:12px"><span class="pr-hint" id="pr-hint"><span class="dot"></span> Tu mejor: 15 · esto es un PR</span></div>
+          </div>
+
+          <div class="score-hero" id="res-time" style="display:none">
+            <span class="score-eyebrow">Tu tiempo</span>
+            <div class="stepper">
+              <button class="step-btn" onclick="tAdj(-5)">−</button>
+              <span class="step-num" id="t-num" style="font-size:64px;min-width:170px">18:45</span>
+              <button class="step-btn" onclick="tAdj(5)">+</button>
+            </div>
+            <p class="step-lbl">minutos : segundos</p>
+          </div>
+
+          <!-- encuesta -->
+          <div class="rpe">
+            <div class="rpe-head"><span class="score-eyebrow">¿Cómo se sintió?</span><span class="stamp ink sm">Encuesta del box</span></div>
+            <div class="rpe-scale" id="rpe"></div>
+            <div class="rpe-lbls"><span>Paseo</span><span>Al límite</span></div>
+            <div class="field-line">¿Algo que decirle al coach? (opcional)</div>
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;gap:10px">
+              <div><p class="ex-name">Enviar como anónimo</p><p class="ex-sub">Si lo apagas, el coach ve tu nombre</p></div>
+              <span class="tgl on" onclick="this.classList.toggle('on')"></span>
+            </div>
+          </div>
+
+          <div style="padding:16px 22px 0 52px"><button class="ink-btn" data-go="forge" style="width:100%">Guardar resultado</button></div>
+        </div>
+      </section>
+
+      <!-- ════════ P4 · RÉCORD (ceremonia del sello) ════════ -->
+      <section class="screen" id="s-forge">
+        <div id="sparks"></div>
+        <div class="forge-inner">
+          <div class="forge-pre">Nuevo récord personal</div>
+          <h2 class="forge-title">¡Quedó sellado!</h2>
+          <div class="ficha">
+            <span class="hole"></span>
+            <span class="ficha-k">Récord · “Cindy” · AMRAP</span>
+            <p class="ficha-cat">Cindy</p>
+            <p class="ficha-big">17<span> rondas</span></p>
+            <p class="ficha-name">Valentina Fuentes</p>
+            <p class="ficha-date">10 · JUN · 2026 · Box El Yunque</p>
+            <span class="stamp-record">Récord</span>
+          </div>
+          <div class="seals">
+            <span class="k">Tu colección de “Cindy”</span>
+            <div class="seal-row">
+              <div class="seal bz">BRO</div>
+              <div class="seal sv">PLA</div>
+              <div class="seal gd justgot">ORO</div>
+              <div class="seal empty">PLT</div>
+            </div>
+          </div>
+          <p class="forge-xp"><b>+250 XP</b> · pasaste al sello de oro</p>
+          <div class="forge-acts">
+            <button class="ink-btn" data-go="social">Compartir con el box</button>
+            <button class="ink-btn ghost" data-go="wall">Ver el muro</button>
+            <button class="forge-back" data-go="duel">Hay un duelo esperándote →</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ P9 · PERFIL ════════ -->
+      <section class="screen" id="s-perfil">
+        <div class="scrolly" style="padding-bottom:96px">
+          <div class="page-margin"></div>
+          <button class="icon-btn" data-go="ajustes" style="position:absolute;top:60px;right:20px;z-index:5">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22201A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </button>
+          <div class="prof-head">
+            <div class="mono-av prof-av">VF</div>
+            <p class="prof-nm">Valentina Fuentes</p>
+            <p class="prof-us">@vale.fuentes · en El Yunque desde 2024</p>
+            <div class="prof-tapes">
+              <span class="stamp ink sm flat">Nivel 12 · Forjadora</span>
+              <span class="stamp sm flat">1.482 ELO</span>
+            </div>
+          </div>
+
+          <div class="stat-tiles">
+            <div class="stile"><div class="v">14</div><div class="k">Racha</div></div>
+            <div class="stile"><div class="v">134</div><div class="k">Clases</div></div>
+            <div class="stile"><div class="v">9</div><div class="k">PRs</div></div>
+          </div>
+
+          <div class="tw-h"><span class="no">★</span><span class="t">En tu poder</span><span class="lead"></span></div>
+          <div class="belt">
+            <span class="belt-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M5 9a2 2 0 0 1-2-2V5h4M19 9a2 2 0 0 0 2-2V5h-4"/></svg></span>
+            <div style="flex:1"><p class="belt-t">Reina de “Cindy”</p><p class="belt-s">Lo defiendes hace 2 días — cualquiera puede retarte por él.</p></div>
+            <span class="stamp amber sm">Robable</span>
+          </div>
+
+          <div class="tw-h"><span class="no">▦</span><span class="t">Tus marcas</span><span class="lead"></span><span class="end" style="cursor:pointer;color:var(--stamp-deep)" data-go="progreso">Progreso →</span></div>
+          <div class="fichero">
+            <div class="rcard"><span class="grade gd"></span><span class="rk">“Cindy”</span><p class="rv">17</p><p class="ru">rondas · oro</p></div>
+            <div class="rcard"><span class="grade sv"></span><span class="rk">“Fran”</span><p class="rv">9:12</p><p class="ru">min · plata</p></div>
+            <div class="rcard"><span class="grade sv"></span><span class="rk">Clean</span><p class="rv wt" data-kg="47">47</p><p class="ru">kg · plata</p></div>
+            <div class="rcard"><span class="grade bz"></span><span class="rk">Deadlift</span><p class="rv wt" data-kg="82">82</p><p class="ru">kg · bronce</p></div>
+            <div class="rcard"><span class="grade bz"></span><span class="rk">Back squat</span><p class="rv wt" data-kg="68">68</p><p class="ru">kg · bronce</p></div>
+            <div class="rcard locked"><span class="grade"></span><span class="rk">Snatch</span><p class="rv">?</p><p class="ru">por forjar</p></div>
+          </div>
+
+          <p class="season-note">Cada ficha es un PR sellado.<br><b>Nadie te las puede quitar — solo tú las puedes superar.</b></p>
+        </div>
+        <nav class="tabbar" data-tabs="yo"></nav>
+      </section>
+
+      <!-- ════════ bottom-sheet: roster ════════ -->
+      <div class="sheet-overlay" id="roster-sheet">
+        <div class="sheet-scrim" onclick="document.getElementById('roster-sheet').classList.remove('on')"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <div class="sheet-ttl">
+            <span class="sheet-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+            Hoja de asistencia · 11
+          </div>
+          <p class="sheet-body">CrossFit · 19:00 · Coach Vale</p>
+          <div class="roster-list">
+            <div class="rl-row"><span class="mono-av">MR</span><span class="rl-nm">Martín Rojas</span></div>
+            <div class="rl-row"><span class="mono-av">JN</span><span class="rl-nm">Javiera Núñez</span></div>
+            <div class="rl-row"><span class="mono-av">CP</span><span class="rl-nm">Camila Pérez</span></div>
+            <div class="rl-row"><span class="mono-av">IV</span><span class="rl-nm">Ignacio Vera</span></div>
+            <div class="rl-row"><span class="mono-av">SD</span><span class="rl-nm">Sofía Díaz</span></div>
+            <div class="rl-row"><span class="mono-av">TF</span><span class="rl-nm">Tomás Fuentes</span></div>
+            <div class="rl-row"><span class="mono-av">VA</span><span class="rl-nm">Valentina Aguilar</span></div>
+            <div class="rl-row"><span class="mono-av">RM</span><span class="rl-nm">Rodrigo Muñoz</span></div>
+            <div class="rl-row"><span class="mono-av">PC</span><span class="rl-nm">Paula Castro</span></div>
+            <div class="rl-row"><span class="mono-av">GL</span><span class="rl-nm">Gabriel León</span></div>
+            <div class="rl-row you"><span class="mono-av you">EY</span><span class="rl-nm">Tú</span><span class="stamp sm rl-tag">tú</span></div>
+          </div>
+          <button class="ink-btn ghost" style="width:100%;margin-top:16px" onclick="document.getElementById('roster-sheet').classList.remove('on')">Cerrar</button>
+        </div>
+      </div>
+
+      <!-- ════════ bottom-sheet: confirmar ════════ -->
+      <div class="sheet-overlay" id="confirmar-sheet">
+        <div class="sheet-scrim" onclick="cerrarConfirmar()"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <div class="sheet-ttl">
+            <span class="sheet-ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+            ¿Confirmar tu asistencia?
+          </div>
+          <p class="sheet-body">Una vez confirmada, tu cupo queda asegurado y no vas a poder cancelarlo.</p>
+          <button class="ink-btn" style="width:100%;margin-top:18px" onclick="ejecutarConfirmar()">Sí, confirmar</button>
+          <button class="ink-btn ghost" style="width:100%;margin-top:8px" onclick="cerrarConfirmar()">Volver</button>
+        </div>
+      </div>
+
+      <!-- toast -->
+      <div class="toast" id="toast"></div>
+
+    </div>
+  </div>
+
+  <!-- rail derecho -->
+  <aside class="desk-rail desk-rail-right">
+    <div class="rail-pre">La tesis del rediseño</div>
+    <div class="rail-flow" style="margin-top:16px">
+      <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>Tiza y papel</em> — lo del día: el WOD, la asistencia, la temporada. Se borra.</p></div>
+      <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>El sello</em> — lo permanente: el PR queda estampado y archivado. Nadie te lo quita.</p></div>
+      <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>La máquina de escribir</em> — la voz de trabajo de toda la app.</p></div>
+      <div class="rail-flow-step"><span class="rail-flow-dot"></span><p class="rail-flow-txt"><em>La pizarra</em> — sigue siendo el corazón: tiza de verdad.</p></div>
+    </div>
+    <div class="rail-note"><b>Firma:</b> el sello de goma. Cada estado y cada récord se estampa — «Confirmada», «Récord», «Robable». Es lo único que grita; el resto queda callado y tipeado.</div>
+  </aside>
+</div>
+
+<script>
+/* ── índice de pantallas (solo el loop central en esta ronda) ── */
+const SCREENS = [
+  { id: 'intro',  nm: 'Portada' },
+  { id: 'hoy',    nm: 'Hoy' },
+  { id: 'board',  nm: 'Pizarra' },
+  { id: 'score',  nm: 'Anotar' },
+  { id: 'forge',  nm: 'Récord' },
+  { id: 'perfil', nm: 'Perfil' },
+];
+const rail = document.getElementById('rail');
+rail.innerHTML = '';
+SCREENS.forEach((s, i) => {
+  const li = document.createElement('li');
+  li.innerHTML = `<button data-go="${s.id}"><span class="num">${String(i).padStart(2,'0')}</span><span class="nm">${s.nm}</span></button>`;
+  rail.appendChild(li);
+});
+const BUILT = new Set(SCREENS.map(s => s.id));
+
+let toastT = null;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2200);
+}
+
+function go(id) {
+  const el = document.getElementById('s-' + id);
+  if (!el) { toast('« ' + id + ' » llega en la próxima ronda'); return; }
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('on'));
+  void el.offsetWidth;
+  el.classList.add('on');
+  el.querySelector('.scrolly')?.scrollTo(0, 0);
+  document.querySelectorAll('#rail button').forEach(b => b.classList.toggle('active', b.dataset.go === id));
+  if (id === 'forge') inkSpecks();
+}
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-go]');
+  if (t) go(t.dataset.go);
+});
+
+/* ── tab bar (pestañas de fichero) ── */
+const TABS = [
+  { k: 'hoy',    nm: 'Hoy',       go: 'hoy',    ic: '<path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/>' },
+  { k: 'agenda', nm: 'Agenda',    go: 'agenda', ic: '<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>' },
+  { k: 'social', nm: 'Box',       go: 'social', ic: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>' },
+  { k: 'tools',  nm: 'Tools',     go: 'tools',  ic: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>' },
+  { k: 'yo',     nm: 'Yo',        go: 'perfil', ic: '<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/>' },
+];
+document.querySelectorAll('.tabbar').forEach(bar => {
+  const cur = bar.dataset.tabs;
+  bar.innerHTML = TABS.map(t =>
+    `<button class="tab ${t.k === cur ? 'on' : ''}" data-go="${t.go}" aria-label="${t.nm}">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${t.ic}</svg>
+      <span class="tl">${t.nm}</span></button>`
+  ).join('');
+});
+
+/* ── tarja de la racha ── */
+function renderTally(n, hostId) {
+  const host = document.getElementById(hostId);
+  if (!host) return;
+  const groups = [];
+  let left = n;
+  while (left > 0) { groups.push(Math.min(5, left)); left -= 5; }
+  host.innerHTML = groups.map(g => {
+    const marks = [];
+    const strike = g === 5;
+    for (let i = 0; i < Math.min(4, g); i++) marks.push(`<line x1="${3 + i * 5}" y1="1" x2="${3 + i * 5}" y2="19" stroke="var(--chalk)" stroke-width="2" stroke-linecap="round"/>`);
+    if (strike) marks.push(`<line x1="1" y1="16" x2="21" y2="3" stroke="var(--chalk-yellow)" stroke-width="2" stroke-linecap="round"/>`);
+    return `<svg width="24" height="20" viewBox="0 0 24 20">${marks.join('')}</svg>`;
+  }).join('');
+}
+
+/* ── confirmar asistencia ── */
+let confirmarCb = null;
+function abrirConfirmar(cb) { confirmarCb = cb; document.getElementById('confirmar-sheet').classList.add('on'); }
+function cerrarConfirmar() { document.getElementById('confirmar-sheet').classList.remove('on'); confirmarCb = null; }
+function ejecutarConfirmar() { document.getElementById('confirmar-sheet').classList.remove('on'); const cb = confirmarCb; confirmarCb = null; if (cb) cb(); }
+function confirmHoy(btn) {
+  abrirConfirmar(function () {
+    const st = document.getElementById('hoy-state');
+    st.className = 'stamp green'; st.textContent = 'Confirmada';
+    const warn = document.getElementById('hoy-warn');
+    warn.className = 'warn ok';
+    warn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>Cupo asegurado · te esperamos a las 19:00</span>';
+    document.getElementById('hoy-acts').innerHTML = '<button class="ink-btn ghost" data-go="board" style="width:100%">Ver la pizarra</button>';
+  });
+}
+
+/* ── anotar ── */
+const stNum = document.getElementById('st-num');
+const prHint = document.getElementById('pr-hint');
+let rounds = 17;
+function paintRounds() { stNum.textContent = rounds; prHint.style.visibility = rounds > 15 ? 'visible' : 'hidden'; }
+document.getElementById('st-plus').onclick = () => { rounds++; paintRounds(); };
+document.getElementById('st-minus').onclick = () => { if (rounds > 0) rounds--; paintRounds(); };
+function setDone(done) {
+  document.getElementById('done-yes').classList.toggle('on', done);
+  document.getElementById('done-no').classList.toggle('on', !done);
+  document.getElementById('res-time').style.display = done ? '' : 'none';
+  document.getElementById('res-rounds').style.display = done ? 'none' : '';
+}
+let tsec = 18 * 60 + 45;
+function tAdj(d) { tsec = Math.max(0, tsec + d); document.getElementById('t-num').textContent = Math.floor(tsec / 60) + ':' + String(tsec % 60).padStart(2, '0'); }
+
+const SK = [35, 35, 40, 40, 42.5];
+let unit = 'kg';
+const fmtWt = kg => unit === 'kg' ? (kg + ' kg') : (Math.round(kg * 2.20462) + ' lb');
+function renderSkill() { SK.forEach((v, i) => { const el = document.getElementById('sk-' + i); if (el) el.textContent = fmtWt(v); }); }
+function skAdj(i, d) { SK[i] = Math.max(0, SK[i] + d); renderSkill(); }
+renderSkill();
+
+const rpe = document.getElementById('rpe');
+rpe.innerHTML = '';
+for (let i = 1; i <= 10; i++) {
+  const b = document.createElement('div');
+  b.className = 'rpe-tick' + (i === 8 ? ' on' : '');
+  b.textContent = i;
+  b.onclick = () => { rpe.querySelectorAll('.rpe-tick').forEach(x => x.classList.remove('on')); b.classList.add('on'); };
+  rpe.appendChild(b);
+}
+
+/* ── especks de tinta al sellar ── */
+function inkSpecks() {
+  const host = document.getElementById('sparks');
+  host.innerHTML = '';
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('span');
+    s.className = 'speck';
+    const a = (Math.random() * 2 - 1) * Math.PI;
+    const d = 70 + Math.random() * 130;
+    s.style.cssText = `left:50%;top:44%;--sx:${Math.cos(a) * d}px;--sy:${Math.sin(a) * d - 40}px;--sd:${1.05 + Math.random() * 0.4}s;background:${Math.random() > 0.5 ? 'var(--stamp)' : 'var(--ink)'}`;
+    host.appendChild(s);
+  }
+}
+
+/* ── carrusel de la pizarra ── */
+(function () {
+  const track = document.getElementById('board-track');
+  if (!track) return;
+  const dots = [...document.querySelectorAll('#board-dots .bd-dot')];
+  const sync = () => { const i = Math.round(track.scrollLeft / track.clientWidth); dots.forEach((d, k) => d.classList.toggle('on', k === i)); };
+  track.addEventListener('scroll', sync, { passive: true });
+  dots.forEach((d, k) => d.onclick = () => track.scrollTo({ left: k * track.clientWidth, behavior: 'smooth' }));
+})();
+
+/* ── el teléfono se escala para caber ── */
+const phoneEl = document.querySelector('.phone');
+function fitPhone() {
+  if (window.innerWidth <= 520) { phoneEl.style.transform = ''; return; }
+  const s = Math.min(1, (window.innerHeight - 44) / 884);
+  phoneEl.style.transform = s < 1 ? `translateY(${Math.round((window.innerHeight - 832) / 2)}px) scale(${s})` : '';
+}
+window.addEventListener('resize', fitPhone);
+fitPhone();
+
+renderTally(14, 'tally');
+go('intro');
+</script>
+</body>
+</html>
