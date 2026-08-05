@@ -9,12 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════════════
-   FORJA · Propuesta "ELÉCTRICO LIGHT"
-   Versión clara de la propuesta eléctrico. Mismo esqueleto, mismos
-   acentos, pero fondo claro. Los neones se profundizan para mantener
-   contraste sobre blanco. Las sombras reemplazan a los borders como
-   separadores. El morado neón se siente más eléctrico aún sobre la
-   luminosidad del fondo.
+   FORJA · Propuesta "ELÉCTRICO"
+   Iteración sobre "atlético restringido" (el ganador). Mismo esqueleto:
+   off-dark, data-forward, sin skeuomorfismo, Space Grotesk como héroe.
+   Pero con paleta única: morado neón como acento primario, cian
+   eléctrico como secundario. Fondo veta carbón (frío, no cálido).
+   Deportivo, energético, con identidad de color que no es la típica
+   app de fitness verde-naranja.
    ═══════════════════════════════════════════════════════════════════ */
 :root{
   --bg:#F4F2F8;
@@ -226,7 +227,7 @@ body{
 .tabbar{
   position:absolute;left:0;right:0;bottom:0;z-index:500;
   display:flex;justify-content:space-around;padding:8px 8px 28px;
-  background:rgba(244,242,248,0.82);
+  background:rgba(11,10,15,0.82);
   backdrop-filter:saturate(180%) blur(20px);
   -webkit-backdrop-filter:saturate(180%) blur(20px);
   border-top:0.5px solid var(--line-2);
@@ -321,6 +322,259 @@ body{
 .forge .act{position:relative;display:flex;flex-direction:column;gap:8px;width:100%;max-width:280px;margin-top:28px}
 .forge .link{position:relative;all:unset;cursor:pointer;font-family:var(--display);font-size:14px;font-weight:500;color:var(--bone-3);margin-top:14px;transition:color 180ms}
 .forge .link:hover{color:var(--neon)}
+
+/* ═══════════ AUTH (login/firstlogin/gympick/recover) ═══════════ */
+.auth-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 28px 40px}
+.auth-card{width:100%;max-width:300px;text-align:center}
+.auth-glyph{width:56px;height:56px;border-radius:16px;background:var(--neon-soft);border:0.5px solid rgba(176,38,255,0.20);display:grid;place-items:center;color:var(--neon);margin:0 auto 18px}
+.auth-word{font-family:var(--display);font-weight:700;font-size:26px;letter-spacing:-0.03em;color:var(--bone)}
+.auth-word em{font-style:normal;color:var(--neon)}
+.auth-tag{font-size:13px;color:var(--bone-3);margin-top:6px;line-height:1.4}
+.auth-pill{display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:1px;color:var(--neon);background:var(--neon-soft);border-radius:20px;padding:5px 12px;margin-bottom:16px;text-transform:uppercase}
+.field{text-align:left;margin-top:12px}
+.field label{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--bone-4);margin-bottom:6px}
+.field input{width:100%;background:var(--surface);border:0.5px solid var(--line-2);border-radius:12px;padding:13px 14px;font-family:var(--ui);font-size:15px;color:var(--bone);outline:none;transition:border-color 150ms,box-shadow 150ms}
+.field input:focus{border-color:var(--neon);box-shadow:0 0 0 3px var(--neon-soft)}
+.field-hint{font-family:var(--mono);font-size:10.5px;color:var(--bone-4);margin-top:8px;letter-spacing:0.3px}
+.auth-links{margin-top:16px;font-size:13px;color:var(--neon);cursor:pointer}
+.auth-note{font-size:12.5px;color:var(--bone-4);line-height:1.5;margin-top:22px}
+.auth-powered{margin-top:36px;font-family:var(--mono);font-size:10px;letter-spacing:1.4px;color:var(--bone-4);text-transform:uppercase}
+.gym-card{display:flex;align-items:center;gap:14px;background:var(--surface);border:0.5px solid var(--line);border-radius:16px;padding:16px;margin-top:12px;cursor:pointer;text-align:left;transition:border-color 150ms}
+.gym-card:active{border-color:var(--line-2)}
+.gym-card .chev{margin-left:auto;color:var(--bone-4)}
+
+/* ═══════════ SHEETS / MODALES ═══════════ */
+.sheet-overlay{position:absolute;inset:0;z-index:900;display:flex;align-items:flex-end;opacity:0;pointer-events:none;transition:opacity 220ms}
+.sheet-overlay.on{opacity:1;pointer-events:auto}
+.sheet-scrim{position:absolute;inset:0;background:rgba(6,5,9,0.62);backdrop-filter:blur(2px)}
+.sheet{position:relative;z-index:1;width:100%;max-height:78%;background:var(--surface-2);border-radius:24px 24px 0 0;border:0.5px solid var(--line-2);border-bottom:none;padding:10px 20px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;transform:translateY(24px);transition:transform 260ms cubic-bezier(0.22,1,0.36,1)}
+.sheet-overlay.on .sheet{transform:translateY(0)}
+.sheet-grip{width:36px;height:4px;border-radius:4px;background:var(--line-3);margin:2px auto 16px}
+.sheet-ttl{font-family:var(--display);font-size:19px;font-weight:700;color:var(--bone);letter-spacing:-0.01em;display:flex;align-items:center;gap:10px}
+.sheet-body{font-size:14px;color:var(--bone-3);line-height:1.5;margin-top:10px}
+.sheet-opt{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:0.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:16px}
+.sheet-opt .k{font-size:14px;font-weight:600;color:var(--bone)}
+.sheet-opt .h{font-size:12.5px;color:var(--bone-4);margin-top:2px;line-height:1.35}
+.sheet-acts{display:flex;flex-direction:column;gap:8px;margin-top:20px}
+.roster-list{overflow-y:auto;flex:1;margin:0 -20px;padding:0 20px;mask-image:linear-gradient(to bottom,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 14px,#000 calc(100% - 14px),transparent 100%)}
+.rl-row{display:flex;align-items:center;gap:12px;padding:10px 0}
+.rl-row.you{background:var(--neon-soft);margin:0 -12px;padding:10px 12px;border-radius:12px}
+
+/* ═══════════ DISCOS FORJADOS ═══════════ */
+.disc-sm{width:64px;height:64px;border-radius:50%;background:var(--surface-2);border:1.5px solid var(--line-2);display:flex;flex-direction:column;align-items:center;justify-content:center;flex:0 0 auto;text-align:center;padding:4px}
+.disc-sm .k{font-family:var(--mono);font-size:8px;letter-spacing:0.4px;color:var(--bone-4);text-transform:uppercase}
+.disc-sm .v{font-family:var(--display);font-weight:700;font-size:14px;color:var(--bone);line-height:1.05}
+.disc-sm.bz{border-color:var(--bronze);background:rgba(168,113,66,0.08)}
+.disc-sm.sv{border-color:var(--silver);background:rgba(142,142,147,0.08)}
+.disc-sm.gd{border-color:var(--gold);background:rgba(201,154,26,0.10);box-shadow:0 0 0 3px rgba(201,154,26,0.06)}
+.disc-sm.locked{opacity:0.5}
+.disc-sm.locked .v{color:var(--bone-4)}
+.iron-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:10px 18px 0}
+.iron-cell{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--surface);border:0.5px solid var(--line);border-radius:14px;padding:14px 8px}
+.iron-cell .lbl{font-size:11px;color:var(--bone-3);text-align:center;line-height:1.25}
+
+/* ═══════════ DUELO / VS ═══════════ */
+.vs-stage{margin:8px 18px 0}
+.vs-row{display:flex;align-items:center;gap:10px}
+.vs-side{flex:1;background:var(--surface);border:0.5px solid var(--line);border-radius:16px;padding:16px 12px;text-align:center}
+.vs-side .nm{font-family:var(--display);font-size:14px;font-weight:600;color:var(--bone);margin-top:8px}
+.vs-side .elo{font-family:var(--mono);font-size:11px;color:var(--bone-4);margin-top:2px}
+.vs-mark{flex:0 0 auto;font-family:var(--display);font-size:13px;font-weight:700;color:var(--neon);background:var(--neon-soft);border-radius:50%;width:34px;height:34px;display:grid;place-items:center}
+.vs-wod{margin-top:10px;background:var(--surface);border:0.5px solid var(--line);border-radius:16px;padding:16px;cursor:pointer}
+.vs-wod .t{font-family:var(--display);font-size:17px;font-weight:700;color:var(--bone)}
+.vs-wod .s{font-size:13px;color:var(--bone-3);margin-top:3px}
+.vs-wod .exp-hint{font-family:var(--mono);font-size:10.5px;color:var(--neon);margin-top:10px;display:flex;align-items:center;gap:4px}
+.vs-wod .exp-hint svg{transition:transform 200ms}
+.vs-wod.on .exp-hint svg{transform:rotate(180deg)}
+.vs-detail{max-height:0;overflow:hidden;transition:max-height 260ms ease}
+.vs-wod.on .vs-detail{max-height:260px;margin-top:12px}
+.elo-stakes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px 18px 0}
+.elo-cell{background:var(--surface);border:0.5px solid var(--line);border-radius:12px;padding:12px 8px;text-align:center}
+.elo-cell .v{font-family:var(--display);font-size:15px;font-weight:700}
+.elo-cell .v.up{color:var(--lime)}
+.elo-cell .v.dn{color:var(--rose)}
+.elo-cell .k{font-size:10.5px;color:var(--bone-4);margin-top:3px}
+
+/* ═══════════ MURO / RANKING ═══════════ */
+.podium{display:flex;align-items:flex-end;gap:8px;padding:16px 18px 0}
+.pod{flex:1;background:var(--surface);border:0.5px solid var(--line);border-radius:14px 14px 8px 8px;padding:14px 8px 12px;text-align:center;position:relative}
+.pod.gd{border-color:var(--gold);background:rgba(201,154,26,0.08)}
+.pod .pos{font-family:var(--display);font-size:12px;font-weight:700;color:var(--bone-4)}
+.pod .who{font-size:12px;font-weight:600;color:var(--bone);margin-top:6px}
+.pod .sc{font-family:var(--display);font-size:16px;font-weight:700;color:var(--bone);margin-top:2px}
+.wallrow{display:flex;align-items:center;gap:12px;padding:12px 16px;border-top:0.5px solid var(--line)}
+.wallrow:first-child{border-top:0}
+.wallrow.you{background:var(--neon-soft)}
+.wallrow .pos{font-family:var(--display);font-size:13px;font-weight:700;color:var(--bone-4);width:20px}
+.wallrow .nm{flex:1;font-size:14px;font-weight:500;color:var(--bone)}
+.wallrow .sc{font-family:var(--display);font-size:14px;font-weight:600;color:var(--bone-2)}
+
+/* ═══════════ COMUNIDAD / FEED ═══════════ */
+.fpost{background:var(--surface);border:0.5px solid var(--line);border-radius:16px;margin:12px 18px 0;padding:16px}
+.post-head{display:flex;align-items:center;gap:10px}
+.post-head .nm{font-size:13.5px;font-weight:600;color:var(--bone)}
+.post-head .ts{font-size:11.5px;color:var(--bone-4);margin-top:1px}
+.post-body{font-size:14px;color:var(--bone-2);line-height:1.45;margin-top:12px}
+.post-foot{display:flex;align-items:center;gap:16px;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--line)}
+.bump-btn{all:unset;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--bone-3)}
+.bump-btn.on{color:var(--rose)}
+.cmt-toggle{all:unset;cursor:pointer;font-size:12.5px;color:var(--bone-4)}
+.cmt-thread{display:none;margin-top:12px;padding-top:12px;border-top:0.5px solid var(--line)}
+.cmt-thread.on{display:block}
+.cmt{display:flex;gap:8px;margin-top:10px}
+.cmt .nm{font-size:12.5px;font-weight:600;color:var(--bone)}
+.cmt .tx{font-size:12.5px;color:var(--bone-3);line-height:1.4}
+
+/* ═══════════ NOTIFICACIONES ═══════════ */
+.row .ndot{width:7px;height:7px;border-radius:50%;background:var(--neon);flex:0 0 auto;box-shadow:0 0 6px var(--neon-glow)}
+.row .ndot.off{background:transparent}
+.n-acts{display:flex;gap:8px;margin-top:8px}
+.n-acts .mini{all:unset;cursor:pointer;font-family:var(--display);font-size:12px;font-weight:600;padding:7px 12px;border-radius:9px}
+.n-acts .mini.solid{background:var(--neon);color:#fff}
+.n-acts .mini.ghost{background:var(--surface-2);color:var(--bone-2)}
+
+/* ═══════════ AGENDA ═══════════ */
+.week{display:flex;gap:8px;padding:10px 18px 0;overflow-x:auto;scrollbar-width:none}
+.week::-webkit-scrollbar{display:none}
+.day-chip{all:unset;cursor:pointer;flex:0 0 auto;width:46px;padding:10px 0;border-radius:12px;text-align:center;background:var(--surface);border:0.5px solid var(--line)}
+.day-chip .d{display:block;font-family:var(--mono);font-size:10px;color:var(--bone-4);text-transform:uppercase}
+.day-chip .n{display:block;font-family:var(--display);font-size:16px;font-weight:700;color:var(--bone);margin-top:2px}
+.day-chip.on{background:var(--neon);border-color:var(--neon)}
+.day-chip.on .d,.day-chip.on .n{color:#fff}
+
+/* ═══════════ TOGGLE ═══════════ */
+.tgl{all:unset;cursor:pointer;width:44px;height:26px;border-radius:14px;background:var(--surface-3);position:relative;flex:0 0 auto;transition:background 180ms}
+.tgl::after{content:"";position:absolute;top:2px;left:2px;width:22px;height:22px;border-radius:50%;background:#fff;transition:transform 180ms}
+.tgl.on{background:var(--neon)}
+.tgl.on::after{transform:translateX(18px)}
+
+/* ═══════════ STEPPER ═══════════ */
+.stepper{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.stepper button{all:unset;cursor:pointer;width:28px;height:28px;border-radius:50%;background:var(--surface-2);color:var(--bone-2);display:grid;place-items:center;font-family:var(--display);font-size:16px;font-weight:600;line-height:1;transition:background 120ms}
+.stepper button:active{background:var(--surface-3)}
+.stepper .num{font-family:var(--display);font-variant-numeric:tabular-nums;font-weight:700;color:var(--bone);min-width:2ch;text-align:center}
+
+/* ═══════════ RELOJ ═══════════ */
+.clk-modes{display:flex;gap:8px;padding:10px 18px 0;overflow-x:auto;scrollbar-width:none}
+.clk-modes::-webkit-scrollbar{display:none}
+.clk-chip-mode{all:unset;cursor:pointer;flex:0 0 auto;font-family:var(--display);font-size:13px;font-weight:600;padding:9px 16px;border-radius:20px;background:var(--surface);border:0.5px solid var(--line-2);color:var(--bone-3)}
+.clk-chip-mode.on{background:var(--neon);border-color:var(--neon);color:#fff}
+.clk-face{display:flex;flex-direction:column;align-items:center;padding:28px 18px 6px;text-align:center}
+.clk-sub{font-family:var(--mono);font-size:12px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase}
+.clk-time{font-family:var(--display);font-size:74px;font-weight:700;letter-spacing:-0.03em;color:var(--bone);font-variant-numeric:tabular-nums;line-height:1;margin-top:6px}
+.clk-face.done .clk-time{color:var(--lime)}
+.clk-cfg{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;justify-content:center}
+.clk-chip{font-family:var(--mono);font-size:10.5px;letter-spacing:0.6px;color:var(--bone-3);background:var(--surface-2);border-radius:8px;padding:5px 10px}
+.clk-ctrls{display:flex;gap:10px;padding:20px 18px 0}
+#clk-config{padding:6px 18px 24px}
+#clk-config.hide{display:none}
+.rcfg-panel{display:none}
+.rcfg-panel.on{display:block}
+.rcfg-row{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--surface);border:0.5px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:10px}
+.rcfg-row .k{font-size:14px;font-weight:600;color:var(--bone)}
+.cd-chips{display:flex;gap:8px;margin-top:14px}
+.cd-chips button{all:unset;cursor:pointer;flex:1;text-align:center;font-family:var(--display);font-size:13px;font-weight:600;padding:9px 0;border-radius:10px;background:var(--surface);border:0.5px solid var(--line-2);color:var(--bone-3)}
+.cd-chips button.on{background:var(--neon-soft);border-color:var(--neon);color:var(--neon)}
+
+/* ═══════════ REMIX ═══════════ */
+.remix-block{background:var(--surface);border:0.5px solid var(--line);border-radius:14px;margin-top:10px;padding:12px}
+.remix-block.dragging{opacity:0.4}
+.remix-block-head{display:flex;align-items:center;gap:10px}
+.remix-block-head .drag{cursor:grab;color:var(--bone-4)}
+.remix-block-head .lbl{flex:1;font-family:var(--display);font-size:13px;font-weight:600;color:var(--bone-2)}
+.remix-block-head .del{all:unset;cursor:pointer;color:var(--bone-4);padding:4px}
+.remix-items{margin-top:8px;min-height:8px}
+.remix-items.over{background:var(--neon-soft);border-radius:10px}
+.remix-item{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--surface-2);border-radius:10px;padding:10px;margin-top:6px}
+.remix-item.dragging{opacity:0.4}
+.remix-item .drag{cursor:grab;color:var(--bone-4)}
+.remix-badge{font-family:var(--display);font-size:10px;font-weight:700;color:#fff;border-radius:6px;padding:3px 7px;flex:0 0 auto}
+.remix-badge.amrap{background:var(--neon)}
+.remix-badge.fortime{background:var(--rose)}
+.remix-badge.emom{background:#00C8E8;color:#0B0A0F}
+.remix-badge.tabata{background:#A8D920;color:#0B0A0F}
+.remix-badge.rest{background:#FFB740;color:#0B0A0F}
+.remix-item .sum{flex:1;font-size:13px;color:var(--bone-2)}
+.remix-item .chev{cursor:pointer;color:var(--bone-4)}
+.remix-detail{display:none;flex-direction:column;gap:8px;width:100%;margin-top:8px;padding-top:8px;border-top:0.5px solid var(--line)}
+.remix-detail.on{display:flex}
+.remix-add{all:unset;cursor:pointer;display:block;width:100%;text-align:center;font-family:var(--display);font-size:12.5px;font-weight:600;color:var(--neon);padding:9px 0;margin-top:6px}
+.remix-pick{display:none;gap:6px;flex-wrap:wrap;margin-top:8px}
+.remix-pick.on{display:flex}
+.remix-pick button{all:unset;cursor:pointer;font-family:var(--display);font-size:11px;font-weight:600;padding:6px 10px;border-radius:8px;background:var(--surface-3);color:var(--bone-2)}
+
+/* ═══════════ CALCULADORA ═══════════ */
+.div-row{display:flex;gap:8px;padding:0 18px}
+.div-plate{flex:1;background:var(--surface);border:0.5px solid var(--line);border-radius:12px;padding:12px 8px;text-align:center;cursor:pointer}
+.div-plate.on{border-color:var(--neon);background:var(--neon-soft)}
+.div-plate .t{font-family:var(--display);font-size:13px;font-weight:600;color:var(--bone)}
+.div-plate .s{font-size:10.5px;color:var(--bone-4);margin-top:2px}
+.calc-panel{display:none;padding:0 18px}
+.calc-panel.on{display:block}
+.pct-row{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:var(--surface);border-radius:12px;margin-top:8px;border:0.5px solid var(--line)}
+.pct-row .p{font-family:var(--mono);font-size:12px;color:var(--bone-4)}
+.pct-row .w{font-family:var(--display);font-size:16px;font-weight:700;color:var(--bone)}
+.pct-row .w span{font-size:11px;color:var(--bone-4);font-weight:500;margin-left:3px}
+.conv-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.conv-glyph{font-family:var(--display);font-size:20px;color:var(--bone-4)}
+.plate-vis{display:flex;align-items:flex-end;gap:3px;min-height:60px;padding:16px 0 4px;flex-wrap:wrap}
+.plate-disc{border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700}
+.plate-empty{font-size:12.5px;color:var(--bone-4)}
+
+/* ═══════════ COMPETENCIA ═══════════ */
+.heat-card{margin:8px 18px 0;background:var(--surface);border:0.5px solid var(--line);border-radius:18px;padding:20px;text-align:center}
+.heat-card .k{font-family:var(--mono);font-size:10.5px;letter-spacing:1.4px;color:var(--bone-4);text-transform:uppercase}
+.heat-card .v{font-family:var(--display);font-size:26px;font-weight:700;color:var(--bone);margin-top:6px}
+.heat-card .s{font-size:12.5px;color:var(--bone-3);margin-top:4px}
+.lockrow{display:flex;align-items:center;gap:14px;padding:13px 16px;opacity:0.55}
+.lockrow .lk{color:var(--bone-4)}
+
+/* ═══════════ PERFIL: título robable ═══════════ */
+.belt-card{margin:8px 18px 0;background:var(--surface);border:0.5px solid var(--line);border-radius:16px;padding:16px;display:flex;align-items:center;gap:14px}
+.belt-card .ic{width:40px;height:40px;border-radius:11px;background:#FFB740;color:#0B0A0F;display:grid;place-items:center;flex:0 0 auto}
+.belt-card .t{font-family:var(--display);font-size:14px;font-weight:600;color:var(--bone)}
+.belt-card .s{font-size:12px;color:var(--bone-4);margin-top:2px;line-height:1.35}
+
+/* ═══════════ EJERCICIO / MOVIMIENTO ═══════════ */
+.video-card{margin:8px 18px 0;background:var(--surface-2);border-radius:18px;height:180px;position:relative;display:grid;place-items:center;overflow:hidden}
+.figure{color:var(--bone-4)}
+.play-btn{all:unset;cursor:pointer;position:absolute;width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,0.14);backdrop-filter:blur(6px);color:#fff;display:grid;place-items:center}
+.video-tag{position:absolute;bottom:10px;left:12px;font-family:var(--mono);font-size:10.5px;color:rgba(255,255,255,0.8);background:rgba(0,0,0,0.4);border-radius:6px;padding:4px 8px}
+.rx-tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:12px 18px 0}
+.rx-tile{background:var(--surface);border:0.5px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+.rx-tile .v{font-family:var(--display);font-size:24px;font-weight:700;color:var(--bone)}
+.rx-tile .v.em{color:var(--neon)}
+.rx-tile .k{font-size:11px;color:var(--bone-4);margin-top:4px;line-height:1.3}
+.my-iron{display:flex;align-items:center;gap:14px;margin:8px 18px 0;background:var(--surface);border:0.5px solid var(--line);border-radius:16px;padding:14px}
+.my-iron p{font-size:13px;color:var(--bone-3);line-height:1.4}
+.my-iron b{color:var(--bone)}
+.key-row{display:flex;gap:12px;padding:12px 16px;border-top:0.5px solid var(--line)}
+.key-row:first-child{border-top:0}
+.key-row .n{font-family:var(--display);font-weight:700;font-size:13px;color:var(--neon);flex:0 0 auto}
+.key-row p{font-size:13.5px;color:var(--bone-2);line-height:1.45}
+.coach-cue{margin:16px 18px 0;font-size:13.5px;color:var(--bone-3);font-style:italic;line-height:1.4}
+
+/* ═══════════ SCORE ═══════════ */
+.score-hero{padding:18px;background:var(--surface);border:0.5px solid var(--line);border-radius:16px;margin-top:10px;text-align:center}
+.score-hero .eb{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;color:var(--bone-4);text-transform:uppercase}
+.score-hero .big-num{font-family:var(--display);font-size:44px;font-weight:700;color:var(--bone);margin:8px 0}
+.score-hero .stepline{display:flex;align-items:center;justify-content:center;gap:16px}
+.rpe{margin:8px 18px 0;background:var(--surface);border:0.5px solid var(--line);border-radius:16px;padding:16px}
+.rpe-scale{display:flex;gap:4px;margin-top:12px}
+.rpe-tick{all:unset;cursor:pointer;flex:1;text-align:center;padding:10px 0;border-radius:8px;background:var(--surface-2);font-family:var(--display);font-size:12px;font-weight:600;color:var(--bone-3)}
+.rpe-tick.on{background:var(--neon);color:#fff}
+.rpe-lbl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--bone-4);margin-top:6px}
+.cmt-input{margin-top:14px;background:var(--surface-2);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--bone-4)}
+
+/* ═══════════ FORJA: sparks ═══════════ */
+#sparks{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.spark-particle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--neon);box-shadow:0 0 6px var(--neon-glow);animation:spark-fly var(--sd) ease-out forwards}
+.spark-particle:nth-child(3n){background:var(--rose)}
+.spark-particle:nth-child(5n){background:var(--cyan)}
+@keyframes spark-fly{
+  0%{transform:translate(0,0);opacity:1}
+  100%{transform:translate(var(--sx),var(--sy));opacity:0}
+}
 </style>
 </head>
 <body>
@@ -331,7 +585,7 @@ body{
     <h1 class="rail-title">Forja<em>.</em></h1>
     <p class="rail-sub">Versión clara de la propuesta eléctrico. Mismo esqueleto, mismos acentos. El morado neón se siente más eléctrico aún sobre fondo luminoso. Sombras reemplazan a los borders como separadores.</p>
     <ul class="rail-list" id="rail"></ul>
-    <div class="rail-note"><b>3 pantallas:</b> Hoy, La pizarra y La forja. Si te encaja la paleta, extiendo al resto del flujo.</div>
+    <div class="rail-note"><b>Flujo completo · 26 pantallas:</b> auth, agenda, comunidad, duelos, perfil y herramientas — timer, calculadora y librería incluidos.</div>
   </aside>
 
   <div class="phone">
@@ -391,7 +645,7 @@ body{
                 <span>Si no confirmas, tu cupo se libera a las 18:00</span>
               </div>
               <div class="cc-act">
-                <button class="btn" style="flex:1">Confirmar</button>
+                <button class="btn" style="flex:1" onclick="confirmHoy(this)">Confirmar</button>
                 <button class="btn ghost" data-go="board" style="flex:1">La pizarra</button>
               </div>
             </div>
@@ -488,7 +742,7 @@ body{
               <div class="av b3">CP</div>
               <div class="av b4">DS</div>
               <div class="av b5">VF</div>
-              <button class="more-pill">+ 7 más</button>
+              <button class="more-pill" onclick="document.getElementById('roster-sheet').classList.add('on')">+ 7 más</button>
             </div>
 
             <!-- Desglose -->
@@ -529,6 +783,7 @@ body{
           <div class="nav-title"><h1 class="lt">La forja</h1></div>
         </div>
         <div class="forge">
+          <div id="sparks"></div>
           <span class="pre">Nuevo récord personal</span>
           <div class="spark"><span class="l"></span><span class="d"></span><span class="r"></span></div>
           <span class="bm">“Cindy” · AMRAP 20'</span>
@@ -552,6 +807,828 @@ body{
         </div>
       </section>
 
+      <!-- ════════ 04 · LOGIN ════════ -->
+      <section class="screen" id="s-login">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <div class="auth-glyph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></div>
+            <p class="auth-word">For<em>ja</em></p>
+            <p class="auth-tag">Una cuenta · todos tus gimnasios</p>
+            <div class="field"><label>Correo</label><input type="email" placeholder="tu correo"></div>
+            <div class="field"><label>Contraseña</label><input type="password" placeholder="contraseña"></div>
+            <button class="btn full" style="margin-top:18px" data-go="firstlogin">Entrar</button>
+            <p class="auth-links" data-go="recover">Olvidé mi clave</p>
+            <p class="auth-note">¿Primera vez? Tu cuenta la creó tu gimnasio — usa el correo y la clave temporal que te llegaron por mail.</p>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 05 · PRIMER INGRESO ════════ -->
+      <section class="screen" id="s-firstlogin">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <span class="auth-pill">Primer ingreso detectado</span>
+            <p class="auth-word" style="font-size:20px">Crea tu clave</p>
+            <p class="auth-tag">La clave temporal del correo es de un solo uso. Deja una tuya y listo.</p>
+            <div class="field"><label>Nueva clave</label><input type="password" placeholder="nueva clave"></div>
+            <div class="field"><label>Repítela</label><input type="password" placeholder="repite la clave"></div>
+            <p class="field-hint">Mínimo 8 caracteres · una mayúscula · un número</p>
+            <button class="btn full" style="margin-top:18px" data-go="gympick">Guardar y entrar</button>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 06 · ELIGE TU BOX ════════ -->
+      <section class="screen" id="s-gympick">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <p class="auth-word" style="font-size:20px">¿Dónde entrenas?</p>
+            <p class="auth-tag">Hola Vale — tienes dos gimnasios asociados.</p>
+            <div class="gym-card" data-go="hoy">
+              <div class="av b1">EY</div>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600;color:var(--bone)">El Yunque</p><p style="font-size:12px;color:var(--bone-4);margin-top:2px">CrossFit · Osorno · racha 14 🔥</p></div>
+              <span class="chev" style="color:var(--neon)">›</span>
+            </div>
+            <div class="gym-card" data-go="hoy">
+              <div class="av b2">AS</div>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600;color:var(--bone)">AquaSur</p><p style="font-size:12px;color:var(--bone-4);margin-top:2px">Natación · Puerto Varas</p></div>
+              <span class="chev">›</span>
+            </div>
+            <p class="auth-note">Cada gimnasio tiene su propio portal, sus colores y su comunidad. Si tuvieras uno solo, entrarías directo.</p>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 07 · RECUPERAR CLAVE ════════ -->
+      <section class="screen" id="s-recover">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <div class="auth-glyph"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <p class="auth-word" style="font-size:20px">¿Olvidaste tu clave?</p>
+            <p class="auth-tag">Te mandamos un enlace al correo para que crees una nueva.</p>
+            <div class="field"><label>Correo</label><input type="email" placeholder="tu correo"></div>
+            <button class="btn full" style="margin-top:18px" onclick="this.textContent='Enlace enviado — revisa tu correo ✓';this.style.background='var(--lime)';this.style.color='#0B0A0F'">Enviarme el enlace</button>
+            <p class="auth-links" data-go="login">← Volver a entrar</p>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 00 · PORTADA ════════ -->
+      <section class="screen" id="s-intro">
+        <div class="auth-wrap" style="justify-content:center">
+          <div class="auth-card">
+            <p class="eyebrow">Ronda 1 · Prototipo navegable</p>
+            <p class="auth-word" style="font-size:44px;margin-top:10px">For<em>ja</em></p>
+            <p class="auth-tag">Fierro y tiza — la fragua a plena luz</p>
+            <p style="font-size:13px;color:var(--bone-3);font-style:italic;line-height:1.5;margin-top:18px">«El WOD de hoy se escribe con plumón. Tu récord queda guardado para siempre.»</p>
+            <button class="btn" style="margin:28px auto 0;width:fit-content;padding:14px 32px" data-go="login">Entrar al box</button>
+            <p class="auth-note" style="margin-top:30px">Box El Yunque · Osorno, Chile — 40°34′ S</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 08 · EJERCICIO ════════ -->
+      <section class="screen" id="s-exercise">
+        <div class="navbar" id="nb-exercise">
+          <div class="nav-row">
+            <span class="l" data-go="board"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Pizarra</span>
+            <span class="c">Power Clean</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Power Clean</h1></div>
+        </div>
+        <div class="scrolly" id="sc-exercise" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-size:13px;color:var(--bone-3);padding:0 18px">Skill de hoy · 2×5 + 3×3 @ 75%</p>
+            <div class="video-card">
+              <div class="figure"><svg width="120" height="70" viewBox="0 0 280 130" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M30 84 Q140 92 250 84"/><rect x="36" y="50" width="11" height="66" rx="5"/><rect x="233" y="50" width="11" height="66" rx="5"/><circle cx="140" cy="34" r="9"/><path d="M140 43 v22 M140 50 L118 78 M140 50 L162 78 M118 78 L112 106 M162 78 L168 106"/></svg></div>
+              <button class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <span class="video-tag">1:24 · técnica</span>
+            </div>
+            <div class="rx-tiles">
+              <div class="rx-tile"><div class="v">75<span style="font-size:13px">%</span></div><div class="k">Prescrito hoy · de tu 1RM</div></div>
+              <div class="rx-tile"><div class="v em wt" data-kg="35">35 kg</div><div class="k">Te toca a ti</div></div>
+            </div>
+            <div class="ghead first"><span>Tu marca</span></div>
+            <div class="my-iron">
+              <div class="disc-sm sv"><span class="k">Clean</span><span class="v wt" data-kg="47">47 kg</span><span class="k">plata</span></div>
+              <div style="flex:1"><p>Tu 1RM: <b><span class="wt" data-kg="47">47 kg</span></b>, logrado el 3 de mayo. A <b style="color:var(--neon)"><span class="wt" data-kg="3">3 kg</span></b> del disco de oro.</p><p style="font-family:var(--mono);font-size:10px;color:var(--neon);margin-top:6px;letter-spacing:0.6px;cursor:pointer" data-go="progreso">VER EVOLUCIÓN →</p></div>
+            </div>
+            <div style="padding:12px 18px 0"><button class="btn ghost full" data-go="forge">+ Añadir nueva marca</button></div>
+            <div class="ghead"><span>Las claves</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="key-row"><span class="n">1</span><p>Espalda firme y la barra pegada al cuerpo — sube rozando.</p></div>
+              <div class="key-row"><span class="n">2</span><p>Extiende la cadera completa antes de tirar con los brazos.</p></div>
+              <div class="key-row"><span class="n">3</span><p>Codos rápidos al frente para recibir en los hombros.</p></div>
+            </div>
+            <p class="coach-cue">→ pecho orgulloso y paciencia con la barra — Vale</p>
+            <div style="height:16px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 09 · ANOTAR ════════ -->
+      <section class="screen" id="s-score">
+        <div class="navbar" id="nb-score">
+          <div class="nav-row">
+            <span class="l" data-go="board"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Pizarra</span>
+            <span class="c">Anotar</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Anotar</h1></div>
+        </div>
+        <div class="scrolly" id="sc-score" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--bone-4);text-transform:uppercase;text-align:center">Anota cada sección — el calentamiento no se anota</p>
+            <div class="ghead first"><span>Skill · Power Clean</span><span class="x">peso por serie</span></div>
+            <div class="grp" style="margin:0 18px" id="sk-rows">
+              <div class="row"><div class="lbl"><p>Serie 1</p><p class="m">5 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(0,-2.5)">−</button><span class="num" id="sk-0">35</span><button onclick="skAdj(0,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 2</p><p class="m">5 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(1,-2.5)">−</button><span class="num" id="sk-1">35</span><button onclick="skAdj(1,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 3</p><p class="m">3 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(2,-2.5)">−</button><span class="num" id="sk-2">40</span><button onclick="skAdj(2,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 4</p><p class="m">3 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(3,-2.5)">−</button><span class="num" id="sk-3">40</span><button onclick="skAdj(3,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 5</p><p class="m">3 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(4,-2.5)">−</button><span class="num" id="sk-4">42.5</span><button onclick="skAdj(4,2.5)">+</button></div></div>
+            </div>
+            <div class="ghead"><span>WOD · "Cindy"</span><span class="x">cap 20 min</span></div>
+            <div class="div-row">
+              <div class="div-plate" id="done-yes" onclick="setDone(true)"><div class="t">Lo terminé</div><div class="s">se anota tu tiempo</div></div>
+              <div class="div-plate on" id="done-no" onclick="setDone(false)"><div class="t">No alcancé</div><div class="s">rondas + reps extra</div></div>
+            </div>
+            <div class="score-hero" id="res-rounds">
+              <p class="eb">Rondas completas</p>
+              <span class="stepper" style="justify-content:center;margin-top:8px"><button onclick="stAdj(-1)">−</button><span class="num" id="st-num" style="font-size:44px">17</span><button onclick="stAdj(1)">+</button></span>
+              <p style="font-size:12px;color:var(--bone-4);margin-top:6px">+ 3 reps extra</p>
+              <p class="badge lime" id="pr-hint" style="margin-top:10px;display:inline-block">● Tu mejor: 15 · esto es un PR</p>
+            </div>
+            <div class="score-hero" id="res-time" style="display:none">
+              <p class="eb">Tu tiempo</p>
+              <span class="stepper" style="justify-content:center;margin-top:8px"><button onclick="tAdj(-5)">−</button><span class="num" id="t-num" style="font-size:44px">18:45</span><button onclick="tAdj(5)">+</button></span>
+              <p style="font-size:11px;color:var(--bone-4);margin-top:6px">minutos : segundos</p>
+            </div>
+            <div class="rpe">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><p class="eb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;color:var(--bone-4);text-transform:uppercase">¿Cómo se sintió?</p><span class="badge neon">Encuesta del box</span></div>
+              <div class="rpe-scale" id="rpe"></div>
+              <div class="rpe-lbl"><span>Paseo</span><span>Al límite</span></div>
+              <div class="cmt-input">¿Algo que decirle al coach? (opcional)</div>
+              <div class="sheet-opt" style="margin-top:12px"><div><p class="k">Enviar como anónimo</p><p class="h">Si lo apagas, el coach ve tu nombre</p></div><button class="tgl on"></button></div>
+            </div>
+            <div class="btn-row"><button class="btn full" data-go="forge">Guardar resultado</button></div>
+            <div style="height:12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 10 · DUELO ════════ -->
+      <section class="screen" id="s-duel">
+        <div class="navbar" id="nb-duel">
+          <div class="nav-row">
+            <span class="l" data-go="forge"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Forja</span>
+            <span class="c">Duelo</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Duelo</h1></div>
+        </div>
+        <div class="scrolly" id="sc-duel" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-size:13px;color:var(--bone-3);padding:0 18px">Matías te retó · expira en 6 días</p>
+            <div class="vs-stage">
+              <div class="vs-row">
+                <div class="vs-side"><div class="av b1" style="margin:0 auto">VF</div><p class="nm">Tú</p><p class="elo">1.482 ELO</p></div>
+                <span class="vs-mark">VS</span>
+                <div class="vs-side"><div class="av b5" style="margin:0 auto">MR</div><p class="nm">Matías R.</p><p class="elo">1.535 ELO</p></div>
+              </div>
+              <div class="vs-wod" id="duel-wod" onclick="this.classList.toggle('on')">
+                <p class="t">"Fran" — por tiempo</p>
+                <p class="s">21-15-9 · thrusters + pull-ups</p>
+                <p class="exp-hint">Ver detalle <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></p>
+                <div class="vs-detail">
+                  <div class="grp" style="margin-top:0"><div class="row"><div class="lbl"><p>Thrusters</p><p class="m">21-15-9 · Rx <span class="wt" data-kg="43">43 kg</span> · Scaled <span class="wt" data-kg="30">30 kg</span> · acordado: Rx</p></div></div><div class="row"><div class="lbl"><p>Pull-ups</p><p class="m">Rx kipping · Scaled con banda</p></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="elo-stakes">
+              <div class="elo-cell"><div class="v up">+18</div><div class="k">si ganas</div></div>
+              <div class="elo-cell"><div class="v dn">−9</div><div class="k">si pierdes</div></div>
+              <div class="elo-cell"><div class="v">7 días</div><div class="k">ventana</div></div>
+            </div>
+            <div class="ghead"><span>Las reglas</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><div class="lbl"><p>Profundidad del thruster</p><p class="m">Cadera bajo paralelo y lockout arriba — si no, la rep no cuenta</p></div></div>
+              <div class="row"><div class="lbl"><p>Barbilla sobre la barra</p><p class="m">Ambos corren dentro de la ventana, en cualquier clase</p></div></div>
+              <div class="row"><div class="lbl"><p>El ELO se mueve solo con el resultado</p><p class="m">Nada se apuesta — el rango se gana</p></div></div>
+            </div>
+            <div class="btn-row"><button class="btn" style="flex:1" onclick="this.textContent='Duelo aceptado ⚒';this.style.background='#1F8A4C'">Aceptar duelo</button><button class="btn ghost" style="flex:1" data-go="wall">El muro</button></div>
+            <div class="ghead"><span>¿Quieres retar tú?</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><div class="av b3" style="width:30px;height:30px;font-size:11px">IV</div><div class="lbl"><p>Ignacio Vera</p><p class="m">PRs a ±5% de los tuyos — rival pareja</p></div><span class="badge neon">Retar</span></div>
+              <div class="row"><div class="ic amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></div><div class="lbl"><p>"Rey de Fran" está en juego</p><p class="m">De Camila · PR 2:58 · si le ganas el duelo, te lo llevas</p></div></div>
+            </div>
+            <p class="gfoot" style="text-align:center">Todo duelo pasa por aprobación del box</p>
+            <div style="height:12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 11 · EL MURO ════════ -->
+      <section class="screen" id="s-wall">
+        <div class="navbar" id="nb-wall">
+          <div class="nav-row">
+            <span class="l" data-go="social"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Comunidad</span>
+            <span class="c">El muro</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">El muro</h1></div>
+        </div>
+        <div class="scrolly" id="sc-wall" style="padding-bottom:100px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-size:13px;color:var(--bone-3);padding:0 18px">Ranking del box · Otoño sem 6</p>
+            <div class="seg" id="wall-seg" style="margin-top:10px">
+              <div class="pill" style="display:none"></div>
+              <button class="on">"Cindy"</button><button>"Fran"</button><button>Clean 1RM</button><button>Asistencia</button>
+            </div>
+            <div class="podium">
+              <div class="pod"><p class="pos">2</p><p class="who">Matías R.</p><p class="sc">19</p></div>
+              <div class="pod gd" style="padding-top:22px"><p class="pos">1</p><p class="who">Camila P.</p><p class="sc">21</p></div>
+              <div class="pod"><p class="pos">3</p><p class="who">Javiera N.</p><p class="sc">18</p></div>
+            </div>
+            <div class="grp" style="margin:14px 18px 0">
+              <div class="wallrow"><span class="pos">4</span><span class="nm">Ignacio Vera</span><span class="sc">17+8</span></div>
+              <div class="wallrow you"><span class="pos">5</span><span class="nm">Valentina F. <span class="badge neon">Tú · PR</span></span><span class="sc">17+3</span></div>
+              <div class="wallrow"><span class="pos">6</span><span class="nm">Carlos Soto</span><span class="sc">16+12</span></div>
+              <div class="wallrow"><span class="pos">7</span><span class="nm">Daniela Mora</span><span class="sc">15+4</span></div>
+              <div class="wallrow"><span class="pos">8</span><span class="nm">Seba Díaz</span><span class="sc">14+9</span></div>
+            </div>
+            <p class="gfoot" style="text-align:center;margin-top:16px">El muro es el ranking vivo del box: la mejor marca de cada atleta en cada benchmark, esta temporada.<br><b style="color:var(--bone-2)">Se borra al partir la temporada nueva — tus PRs quedan en tu historial para siempre.</b></p>
+            <div style="height:12px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="social"></nav>
+      </section>
+
+      <!-- ════════ 12 · AGENDA ════════ -->
+      <section class="screen" id="s-agenda">
+        <div class="navbar" id="nb-agenda">
+          <div class="nav-row"><span class="l"></span><span class="c">Agenda</span><span class="r"><span class="badge neon" data-go="plan" style="cursor:pointer">Quedan 7/12</span></span></div>
+          <div class="nav-title"><h1 class="lt">Agenda</h1><p class="eyebrow" style="margin-top:4px">Semana 6 · Otoño</p></div>
+        </div>
+        <div class="scrolly" id="sc-agenda" style="padding-bottom:100px">
+          <div class="content">
+            <div class="week">
+              <button class="day-chip"><span class="d">Lu</span><span class="n">8</span></button>
+              <button class="day-chip"><span class="d">Ma</span><span class="n">9</span></button>
+              <button class="day-chip on"><span class="d">Mié</span><span class="n">10</span></button>
+              <button class="day-chip"><span class="d">Ju</span><span class="n">11</span></button>
+              <button class="day-chip"><span class="d">Vi</span><span class="n">12</span></button>
+              <button class="day-chip"><span class="d">Sá</span><span class="n">13</span></button>
+            </div>
+            <div class="ghead first"><span>Miércoles 10</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><div class="lbl"><p>07:00 · CrossFit</p><p class="m">Coach Nico · 9/12</p></div><button class="badge neon" style="cursor:pointer;border:none" onclick="reservar(this)">Reservar</button></div>
+              <div class="row"><div class="lbl"><p>12:30 · Halterofilia</p><p class="m">Coach Pau · 5/8</p></div><button class="badge neon" style="cursor:pointer;border:none" onclick="reservar(this)">Reservar</button></div>
+              <div class="row" style="background:rgba(74,150,0,0.06)"><div class="lbl"><p style="color:var(--lime)">17:00 · Funcional</p><p class="m">Coach Nico · 8/10</p></div><button class="badge lime" style="cursor:default;border:none">Confirmada ✓</button></div>
+              <div class="row" style="background:rgba(184,112,0,0.08)"><div class="lbl"><p style="color:var(--amber)">19:00 · CrossFit</p><p class="m">Coach Vale · 11/12</p></div><button class="badge amber" style="cursor:pointer;border:none" onclick="confirmar(this)">Confirmar</button></div>
+              <div class="row"><div class="lbl"><p>20:00 · Funcional</p><p class="m">Coach Nico · 12/12 <span class="cls-state"></span></p></div><button class="badge" style="cursor:pointer;border:0.5px solid var(--line-2);background:transparent;color:var(--bone-2)" onclick="avisar(this)">🔔 Avísame</button></div>
+              <div class="row"><div class="lbl"><p>20:00 · Halterofilia</p><p class="m">Coach Pau · 8/8 <span class="cls-state" title="En lista · te inscribimos automáticamente" style="color:var(--amber)">⚡</span></p></div><button class="badge" style="cursor:pointer;border:0.5px solid var(--line-2);background:transparent;color:var(--bone-2)" onclick="salir(this)">🔕 Silenciar</button></div>
+            </div>
+            <p class="gfoot" style="text-align:center">Reservar guarda el cupo · confirmar lo asegura</p>
+            <div style="height:20px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="agenda"></nav>
+      </section>
+
+      <!-- ════════ 13 · COMUNIDAD ════════ -->
+      <section class="screen" id="s-social">
+        <div class="navbar" id="nb-social">
+          <div class="nav-row"><span class="l"></span><span class="c">Comunidad</span><span class="r"><span class="badge neon">11 hoy</span></span></div>
+          <div class="nav-title"><h1 class="lt">Comunidad</h1><p class="eyebrow" style="margin-top:4px">Box El Yunque</p></div>
+        </div>
+        <div class="scrolly" id="sc-social" style="padding-bottom:100px">
+          <div class="content">
+            <div class="grp tap" style="margin:8px 18px 0" data-go="wall"><div class="row tap"><span class="ic amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></span><div class="lbl"><p>El muro</p><p class="m">Ranking del box · esta temporada</p></div><span class="chev">›</span></div></div>
+            <div class="fpost" style="cursor:pointer" data-go="compe">
+              <p style="font-size:12px;color:var(--amber);font-weight:600">📌 Sábado: Open interno + asado</p>
+              <p class="post-body" style="margin-top:6px">→ anótate en recepción · traen los discos, nosotros la parrilla</p>
+            </div>
+            <div class="fpost">
+              <div class="post-head"><div class="av b1">VF</div><div><p class="nm">Valentina Fuentes</p><p class="ts">hace 1 min · "Cindy" · <span class="badge neon">PR</span></p></div></div>
+              <div class="post-body"><div class="disc-sm gd" style="float:left;margin-right:12px">"Cindy"<span class="v">17</span><span class="k">rondas · oro</span></div>Subió a <b>disco de oro</b> — superó su marca de 15 rondas después de 3 meses.</div>
+              <div class="post-foot" style="clear:both"><button class="bump-btn on" onclick="bump(this)">🤜 Chócala · <b class="ct">12</b></button><button class="cmt-toggle" onclick="document.getElementById('cmts1').classList.toggle('on')">3 comentarios</button></div>
+              <div class="cmt-thread" id="cmts1">
+                <p style="font-size:11.5px;color:var(--bone-4)">Le chocaron <b style="color:var(--bone-2)">Matías, Javiera, Coach Vale y 9 más</b></p>
+                <div class="cmt"><div class="av b5" style="width:26px;height:26px;font-size:10px">MR</div><div><p class="nm">Matías</p><p class="tx">¡Vamos! Te dije que hoy caía 💪</p></div></div>
+                <div class="cmt"><div class="av b1" style="width:26px;height:26px;font-size:10px">CV</div><div><p class="nm">Coach Vale</p><p class="tx">Tres meses de ritmo parejo — bien merecido.</p></div></div>
+                <div class="cmt"><div class="av b3" style="width:26px;height:26px;font-size:10px">JN</div><div><p class="nm">Javiera</p><p class="tx">La próxima vamos por las 18 🔥</p></div></div>
+                <div class="cmt-input" style="margin-top:10px">Comenta…</div>
+              </div>
+            </div>
+            <div class="fpost">
+              <div class="post-head"><div class="av b5">MR</div><div><p class="nm">Matías Rojas</p><p class="ts">hace 40 min · Clean 1RM</p></div></div>
+              <div class="post-body">Por fin los <b>100 kg de Clean</b>. Seis meses persiguiendo este número 🔥 Gracias coach Vale por el ojo en la técnica.</div>
+              <div class="post-foot"><button class="bump-btn" onclick="bump(this)">🤜 Chócala · <b class="ct">8</b></button><span class="cmt-toggle">1 comentario</span></div>
+            </div>
+            <div class="fpost">
+              <div class="post-head"><div class="av b3">JN</div><div><p class="nm">Javiera Núñez</p><p class="ts">hace 2 h · logro · <span class="badge">50 clases</span></p></div></div>
+              <div class="post-body">Completó <b>50 clases</b> en El Yunque — medio centenar de WODs al cuerpo.</div>
+              <div class="post-foot"><button class="bump-btn" onclick="bump(this)">🤜 Chócala · <b class="ct">15</b></button></div>
+            </div>
+            <div style="height:20px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="social"></nav>
+      </section>
+
+      <!-- ════════ 14 · COMPETENCIA ════════ -->
+      <section class="screen" id="s-compe">
+        <div class="navbar" id="nb-compe">
+          <div class="nav-row">
+            <span class="l" data-go="social"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Comunidad</span>
+            <span class="c">Open de Otoño</span>
+            <span class="r"><span class="badge neon">Inscrita · Rx</span></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:22px">Open interno de Otoño</h1><p class="eyebrow" style="margin-top:4px">Sábado 13 jun · 10:00</p></div>
+        </div>
+        <div class="scrolly" id="sc-compe" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="heat-card"><p class="k">Tu tanda</p><p class="v">Tanda 2 · 10:24</p><p class="s">Calle 3 · juez: coach Nico</p></div>
+            <div class="ghead"><span>Las pruebas</span><span class="x">toca para ver el detalle</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row tap" onclick="document.getElementById('comp-exp1').classList.toggle('on')"><div class="lbl"><p>"Cindy" con chaleco</p><p class="m">AMRAP 15 · variante por división</p></div><span class="chev">›</span></div>
+              <div class="remix-detail on" id="comp-exp1" style="display:none;padding:0 16px 14px">
+                <p style="font-size:12.5px;color:var(--bone-3)">Pull-ups — 5 · Rx estrictas · Scaled kipping · Masters con banda</p>
+                <p style="font-size:12.5px;color:var(--bone-3)">Push-ups — 10 · Todas las divisiones: pecho al suelo</p>
+                <p style="font-size:12.5px;color:var(--bone-3)">Air squats con chaleco — 15 · Rx <span class="wt" data-kg="9">9 kg</span> · Scaled <span class="wt" data-kg="5">5 kg</span> · Masters sin chaleco</p>
+              </div>
+              <div class="row tap" onclick="document.getElementById('comp-exp2').classList.toggle('on')"><div class="lbl"><p>Fran modificada</p><p class="m">Por tiempo · cap 8:00</p></div><span class="chev">›</span></div>
+              <div class="remix-detail on" id="comp-exp2" style="display:none;padding:0 16px 14px">
+                <p style="font-size:12.5px;color:var(--bone-3)">Thrusters — 15-12-9 · Rx 43/30 kg · Scaled 30/20 kg · Masters 20/15 kg</p>
+                <p style="font-size:12.5px;color:var(--bone-3)">Pull-ups — 15-12-9 · Rx kipping · Scaled banda · Masters ring rows</p>
+              </div>
+              <div class="lockrow"><span class="lk">🔒</span><div class="lbl"><p>Prueba sorpresa</p><p class="m">Se escribe en la pizarra 24 h antes</p></div></div>
+            </div>
+            <div class="ghead"><span>Leaderboard</span></div>
+            <div class="seg" style="margin:8px 18px 0"><div class="pill" style="display:none"></div><button class="on">Rx</button><button>Scaled</button><button>Masters</button></div>
+            <div class="grp" style="margin:10px 18px 0">
+              <div class="wallrow"><span class="pos">1</span><span class="nm">Camila Paredes</span><span class="sc">192</span></div>
+              <div class="wallrow"><span class="pos">2</span><span class="nm">Matías Rojas</span><span class="sc">180</span></div>
+              <div class="wallrow you"><span class="pos">3</span><span class="nm">Valentina F. <span class="badge neon">Tú</span></span><span class="sc">171</span></div>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 15 · NOTIFICACIONES ════════ -->
+      <section class="screen" id="s-notifs">
+        <div class="navbar" id="nb-notifs">
+          <div class="nav-row">
+            <span class="l" data-go="hoy"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Hoy</span>
+            <span class="c">Ponerse al día</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Ponerse al día</h1><p class="eyebrow" style="margin-top:4px">3 nuevas</p></div>
+        </div>
+        <div class="scrolly" id="sc-notifs" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><span class="av b5" style="width:34px;height:34px;font-size:11px">MR</span><div class="lbl"><p><b>Matías</b> te retó a "Fran"</p><p class="m">hace 2 h · Duelo · +18 ELO si ganas</p><div class="n-acts"><button class="mini solid" data-go="duel">Aceptar reto</button><button class="mini ghost" data-go="duel">Ver duelo</button></div></div><span class="ndot"></span></div>
+              <div class="row"><span class="ic neon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div class="lbl"><p>¿Cómo estuvo la clase de las <b>19:00</b>?</p><p class="m">hace 3 h</p><div class="n-acts"><button class="mini solid" onclick="this.textContent='¡Gracias! +20 XP';this.classList.remove('solid')">Responder · +20 XP</button></div></div><span class="ndot"></span></div>
+              <div class="row tap" data-go="social"><span class="ic amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14.5 9.5-5 5"/></svg></span><div class="lbl"><p>Tu disco de oro juntó <b>12 chócalas</b></p><p class="m">"Cindy" · 17 rondas · 19:42</p></div><span class="ndot"></span></div>
+              <div class="row"><span class="ic gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></span><div class="lbl"><p>Tu racha llegó a <b>14 días</b> — la mejor del año</p><p class="m">ayer</p></div><span class="ndot off"></span></div>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 16 · PERFIL ════════ -->
+      <section class="screen" id="s-perfil">
+        <div class="scrolly" id="sc-perfil" style="padding-bottom:100px">
+          <div class="content" style="padding-top:60px">
+            <button class="nav-ic" data-go="ajustes" style="position:absolute;top:52px;right:14px;z-index:10"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+            <div style="text-align:center;padding:0 18px">
+              <div class="av b1" style="width:84px;height:84px;font-size:26px;margin:0 auto">VF</div>
+              <p class="lt" style="font-size:22px;margin-top:14px">Valentina Fuentes</p>
+              <p style="font-size:13px;color:var(--bone-4);margin-top:2px">@vale.fuentes · en El Yunque desde 2024</p>
+              <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px">
+                <span class="badge" style="background:var(--surface-2);color:var(--bone-2)">Nivel 12 · Forjadora</span>
+                <span class="badge neon">1.482 ELO</span>
+              </div>
+            </div>
+            <div class="tiles">
+              <div class="tile" style="cursor:default"><div class="tk">Racha</div><div class="tv">14</div></div>
+              <div class="tile" style="cursor:default"><div class="tk">Clases</div><div class="tv">134</div></div>
+              <div class="tile" style="cursor:default"><div class="tk">PRs</div><div class="tv">9</div></div>
+            </div>
+            <div class="ghead"><span>En tu poder</span></div>
+            <div class="belt-card">
+              <div class="ic"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></div>
+              <div style="flex:1"><p class="t">Reina de "Cindy"</p><p class="s">Lo defiendes hace 2 días — cualquiera puede retarte por él.</p></div>
+              <span class="badge amber">Robable</span>
+            </div>
+            <div class="ghead" style="display:flex"><span>Tus marcas</span><span class="x" style="color:var(--neon);cursor:pointer" data-go="progreso">VER PROGRESO →</span></div>
+            <div class="iron-grid">
+              <div class="iron-cell"><div class="disc-sm gd"><span class="v">17</span><span class="k">rondas</span></div><p class="lbl">"Cindy" · Oro</p></div>
+              <div class="iron-cell"><div class="disc-sm"><span class="v">9:12</span><span class="k">min</span></div><p class="lbl">"Fran" · Plata</p></div>
+              <div class="iron-cell"><div class="disc-sm"><span class="v">47</span><span class="k">kg</span></div><p class="lbl">Clean · Plata</p></div>
+              <div class="iron-cell"><div class="disc-sm bz"><span class="v">82</span><span class="k">kg</span></div><p class="lbl">Deadlift · Bronce</p></div>
+              <div class="iron-cell"><div class="disc-sm bz"><span class="v">68</span><span class="k">kg</span></div><p class="lbl">Back squat · Bronce</p></div>
+              <div class="iron-cell"><div class="disc-sm locked"><span class="v">?</span></div><p class="lbl">Snatch · Por forjar</p></div>
+            </div>
+            <p class="gfoot" style="text-align:center;margin-top:16px">Cada disco es un PR grabado.<br><b style="color:var(--bone-2)">Nadie te los puede quitar — solo tú los puedes superar.</b></p>
+            <div style="height:16px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="yo"></nav>
+      </section>
+
+      <!-- ════════ 17 · PROGRESO ════════ -->
+      <section class="screen" id="s-progreso">
+        <div class="navbar" id="nb-progreso">
+          <div class="nav-row">
+            <span class="l" data-go="perfil"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Perfil</span>
+            <span class="c">Tu progreso</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Tu progreso</h1></div>
+        </div>
+        <div class="scrolly" id="sc-progreso" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="seg" id="prog-seg">
+              <div class="pill" style="display:none"></div>
+              <button class="on" onclick="progSel('clean',this)">Clean</button>
+              <button onclick="progSel('cindy',this)">"Cindy"</button>
+              <button onclick="progSel('deadlift',this)">Deadlift</button>
+              <button onclick="progSel('backsquat',this)">Back squat</button>
+            </div>
+            <div class="wod" style="padding:18px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><p class="eyebrow" id="prog-cap" style="color:var(--bone-4)">Clean 1RM · 5 meses</p><span class="badge lime" id="prog-pct">+24%</span></div>
+              <div id="prog-bars" style="display:flex;align-items:flex-end;gap:10px;height:120px;margin-top:16px"></div>
+            </div>
+            <div class="my-iron">
+              <div class="disc-sm gd"><span class="v" id="prog-goal">50</span><span class="k" id="prog-goal-u">kg · oro</span></div>
+              <p id="prog-note" style="flex:1"></p>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 18 · MI PLAN ════════ -->
+      <section class="screen" id="s-plan">
+        <div class="navbar" id="nb-plan">
+          <div class="nav-row">
+            <span class="l" data-go="ajustes"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Ajustes</span>
+            <span class="c">Mi plan</span>
+            <span class="r"><span class="badge lime">Al día</span></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Mi plan</h1><p class="eyebrow" style="margin-top:4px">El Yunque · plan atleta</p></div>
+        </div>
+        <div class="scrolly" id="sc-plan" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="cc">
+              <div class="cc-top"><span class="cc-hour dnum">12</span><span style="font-size:13px;color:var(--bone-3)">clases al mes</span></div>
+              <p class="cc-meta"><b>Plan recurrente</b> · 12 clases al mes</p>
+              <div class="cc-slots"><span class="cc-hour" style="font-size:20px">$45.000</span><span class="badge amber" style="margin-left:auto">en 21 días</span></div>
+              <p class="cc-meta" style="padding-top:4px">próximo cobro · 1 jul</p>
+              <div style="padding:12px 18px 0"><p style="font-size:12.5px;color:var(--bone-4)">Usadas este mes · 7 de 12</p><div class="hero-bar" style="margin-top:6px"><i style="width:58%"></i></div></div>
+              <div class="cc-act"><button class="btn" style="flex:1">Renovar ahora</button><button class="btn ghost" style="flex:1">Congelar</button></div>
+            </div>
+            <p class="gfoot" style="text-align:center">Congelar lo aprueba el box · máx 30 días al año</p>
+            <div class="ghead"><span>Pagos</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><div class="lbl"><p>1 jun · $45.000</p><p class="m">MercadoPago</p></div><span class="badge lime">Pagado</span></div>
+              <div class="row"><div class="lbl"><p>1 may · $45.000</p><p class="m">Transferencia · comprobante ✓</p></div><span class="badge lime">Pagado</span></div>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 19 · AJUSTES ════════ -->
+      <section class="screen" id="s-ajustes">
+        <div class="navbar" id="nb-ajustes">
+          <div class="nav-row">
+            <span class="l" data-go="perfil"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Perfil</span>
+            <span class="c">Ajustes</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Ajustes</h1><p class="eyebrow" style="margin-top:4px">Tu cuenta</p></div>
+        </div>
+        <div class="scrolly" id="sc-ajustes" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="grp" style="margin:0 18px">
+              <div class="row tap" data-go="plan"><div class="lbl"><p>Mi plan y pagos</p></div><span class="chev">›</span></div>
+              <div class="row"><div class="lbl"><p>Notificaciones</p><p class="m">Clases, duelos, comunidad</p></div><button class="tgl on"></button></div>
+              <div class="row"><div class="lbl"><p>Perfil público</p><p class="m">Tus PRs se ven en el box</p></div><button class="tgl on"></button></div>
+              <div class="row tap"><div class="lbl"><p>Cambiar contraseña</p></div><span class="chev">›</span></div>
+              <div class="row"><div class="lbl"><p>Idioma</p></div><span class="val">Español · CL</span></div>
+              <div class="row"><div class="lbl"><p>Unidad de medida</p><p class="m">kg o lb en toda la app</p></div><div class="seg" id="unit-seg" style="margin:0;width:110px"><div class="pill" style="display:none"></div><button class="us-opt on" data-unit="kg" onclick="setUnit('kg')">kg</button><button class="us-opt" data-unit="lb" onclick="setUnit('lb')">lb</button></div></div>
+            </div>
+            <div class="grp" style="margin:14px 18px 0">
+              <div class="row tap" data-go="login"><div class="lbl"><p style="color:var(--rose)">Cerrar sesión</p></div></div>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 20 · DESAFÍOS ════════ -->
+      <section class="screen" id="s-desafios">
+        <div class="navbar" id="nb-desafios">
+          <div class="nav-row">
+            <span class="l" data-go="hoy"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Hoy</span>
+            <span class="c">Desafíos</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Desafíos</h1><p class="eyebrow" style="margin-top:4px">Los valida un coach · presencial</p></div>
+        </div>
+        <div class="scrolly" id="sc-desafios" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="wod">
+              <p class="scheme">Desafío de la semana</p>
+              <h2 style="font-size:26px">15 strict push-ups seguidas</h2>
+              <p class="sub">→ pecho al suelo, sin perder la plancha · lo cuenta un coach</p>
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px"><span class="badge amber">+80 XP · badge</span><span style="font-size:12.5px;color:var(--bone-3)">4 de 32 lo lograron · Juez: un coach o un atleta que se ofrezca</span></div>
+              <button class="btn full" onclick="this.textContent='Aviso enviado al coach ✓';this.style.background='var(--lime)';this.style.color='#0B0A0F'">Intentarlo ahora — avisar al coach</button>
+            </div>
+            <div class="ghead"><span>Esta temporada</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><span class="ic lime"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div class="lbl"><p>10 pull-ups estrictas</p><p class="m">Validó coach Nico · 2 jun</p></div><span class="val" style="color:var(--lime)">+60 XP</span></div>
+              <div class="row"><span class="ic lime"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span><div class="lbl"><p>Plancha 3 minutos</p><p class="m">Validó coach Vale · 19 may</p></div><span class="val" style="color:var(--lime)">+50 XP</span></div>
+              <div class="row"><span class="ic gray"></span><div class="lbl"><p>30 double-unders seguidos</p><p class="m">Disponible toda la temporada</p></div><span class="val">+70 XP</span></div>
+            </div>
+            <p class="gfoot" style="text-align:center">Desafío ≠ duelo: el desafío lo validas con un juez; <b style="color:var(--bone-2)">el duelo es contra otro atleta.</b></p>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 21 · HERRAMIENTAS ════════ -->
+      <section class="screen" id="s-tools">
+        <div class="navbar" id="nb-tools">
+          <div class="nav-row"><span class="l"></span><span class="c">Herramientas</span><span class="r"></span></div>
+          <div class="nav-title"><h1 class="lt">Herramientas</h1><p class="eyebrow" style="margin-top:4px">Tu caja de herramientas</p></div>
+        </div>
+        <div class="scrolly" id="sc-tools" style="padding-bottom:100px">
+          <div class="content">
+            <div class="grp" style="margin:8px 18px 0">
+              <div class="row tap" data-go="reloj"><span class="ic neon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span><div class="lbl"><p>Reloj</p><p class="m">AMRAP · EMOM · Tabata · For Time</p></div><span class="chev">›</span></div>
+              <div class="row tap" data-go="calc"><span class="ic cyan"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8" y2="10"/><line x1="12" y1="10" x2="12" y2="10"/><line x1="16" y1="10" x2="16" y2="10"/></svg></span><div class="lbl"><p>Calculadora</p><p class="m">% de 1RM · lb/kg · discos</p></div><span class="chev">›</span></div>
+              <div class="row tap" data-go="libreria"><span class="ic lime"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span><div class="lbl"><p>Librería de ejercicios</p><p class="m">Técnica de cada movimiento</p></div><span class="chev">›</span></div>
+            </div>
+            <p class="gfoot" style="text-align:center;margin-top:14px">Lo que necesitas en el box, a un toque.</p>
+            <div style="height:20px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="tools"></nav>
+      </section>
+
+      <!-- ════════ 22 · LIBRERÍA ════════ -->
+      <section class="screen" id="s-libreria">
+        <div class="navbar" id="nb-libreria">
+          <div class="nav-row">
+            <span class="l" data-go="tools"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Herramientas</span>
+            <span class="c">Librería</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Librería</h1><p class="eyebrow" style="margin-top:4px">Todos los movimientos</p></div>
+        </div>
+        <div class="scrolly" id="sc-libreria" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="field" style="margin:0 18px"><input placeholder="Buscar movimiento…"></div>
+            <div class="ghead first"><span>Halterofilia</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Back Squat</p></div><span class="badge">Fuerza</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Clean</p></div><span class="badge">Potencia</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Snatch</p></div><span class="badge">Potencia</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Deadlift</p></div><span class="badge">Fuerza</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Push Press</p></div><span class="badge">Fuerza</span></div>
+            </div>
+            <div class="ghead"><span>Gimnásticos</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Pull-up</p></div><span class="badge">Tirón</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Toes-to-bar</p></div><span class="badge">Core</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Handstand Push-up</p></div><span class="badge">Empuje</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Muscle-up</p></div><span class="badge">Avanzado</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Air Squat</p></div><span class="badge">Base</span></div>
+            </div>
+            <div class="ghead"><span>Cardio / Mono</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Remo (Row)</p></div><span class="badge">Cardio</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Assault Bike</p></div><span class="badge">Cardio</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Double Under</p></div><span class="badge">Salto</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Wall Ball</p></div><span class="badge">Mixto</span></div>
+              <div class="row tap" data-go="mov"><div class="lbl"><p>Burpee</p></div><span class="badge">Mono</span></div>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 23 · MOVIMIENTO ════════ -->
+      <section class="screen" id="s-mov">
+        <div class="navbar" id="nb-mov">
+          <div class="nav-row">
+            <span class="l" data-go="libreria"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Librería</span>
+            <span class="c">Air Squat</span>
+            <span class="r"><span class="badge">Gimnásticos</span></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Air Squat</h1><p class="eyebrow" style="margin-top:4px">Sentadilla sin peso</p></div>
+        </div>
+        <div class="scrolly" id="sc-mov" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="video-card">
+              <div class="figure"><svg width="90" height="110" viewBox="0 0 100 130" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="50" cy="20" r="10"/><path d="M50 30v28M50 58 30 90M50 58 70 90M30 90 25 118M70 90 75 118"/></svg></div>
+              <button class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <span class="video-tag">0:48 · técnica</span>
+            </div>
+            <div class="ghead first"><span>Tu marca</span></div>
+            <div class="my-iron">
+              <div class="disc-sm gd"><span class="k">A. Squat</span><span class="v">150</span><span class="k">reps · oro</span></div>
+              <div style="flex:1"><p>Tu récord: <b>150 reps</b> seguidas, el 12 de abril. <b style="color:var(--lime)">+18</b> sobre tu marca anterior.</p><p style="font-family:var(--mono);font-size:10px;color:var(--neon);margin-top:6px;letter-spacing:0.6px;cursor:pointer" data-go="progreso">VER EVOLUCIÓN →</p></div>
+            </div>
+            <div style="padding:12px 18px 0"><button class="btn ghost full" data-go="forge">+ Añadir nueva marca</button></div>
+            <div class="ghead"><span>Las claves</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="key-row"><span class="n">1</span><p>Pies al ancho de hombros, punta levemente hacia afuera.</p></div>
+              <div class="key-row"><span class="n">2</span><p>Baja con el pecho arriba hasta romper la paralela; las rodillas siguen la punta del pie.</p></div>
+              <div class="key-row"><span class="n">3</span><p>Sube empujando con los talones y abre la cadera por completo arriba.</p></div>
+            </div>
+            <p class="coach-cue">→ profundidad antes que velocidad — Vale</p>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 24 · CALCULADORA ════════ -->
+      <section class="screen" id="s-calc">
+        <div class="navbar" id="nb-calc">
+          <div class="nav-row">
+            <span class="l" data-go="tools"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Herramientas</span>
+            <span class="c">Calculadora</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Calculadora</h1><p class="eyebrow" style="margin-top:4px">Pesos y porcentajes</p></div>
+        </div>
+        <div class="scrolly" id="sc-calc" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="div-row">
+              <div class="div-plate on" id="ct-pct" onclick="calcTab('pct')"><div class="t">% de 1RM</div><div class="s">porcentajes</div></div>
+              <div class="div-plate" id="ct-conv" onclick="calcTab('conv')"><div class="t">lb ⇄ kg</div><div class="s">conversor</div></div>
+              <div class="div-plate" id="ct-plate" onclick="calcTab('plate')"><div class="t">Discos</div><div class="s">en la barra</div></div>
+            </div>
+
+            <div class="calc-panel on" id="cp-pct">
+              <div class="field" style="margin-top:16px"><label id="pct-unit-lbl">Tu 1RM (kg)</label><input type="number" id="pct-1rm" value="100" oninput="pctPaint()"></div>
+              <div id="pct-table" style="margin-top:4px"></div>
+            </div>
+
+            <div class="calc-panel" id="cp-conv">
+              <div class="conv-row" style="margin-top:16px">
+                <div class="field" style="flex:1;margin-top:0"><label>Libras</label><input type="number" id="conv-lb" value="135" oninput="convFrom('lb')"></div>
+                <span class="conv-glyph">⇅</span>
+                <div class="field" style="flex:1;margin-top:0"><label>Kilos</label><input type="number" id="conv-kg" value="61.2" oninput="convFrom('kg')"></div>
+              </div>
+              <p class="gfoot" style="text-align:center;margin-top:14px">1 kg = 2.205 lb</p>
+            </div>
+
+            <div class="calc-panel" id="cp-plate">
+              <div class="field" style="margin-top:16px"><label id="pl-unit-lbl">Peso objetivo (kg)</label><input type="number" id="pl-target" value="60" oninput="platePaint()"></div>
+              <div class="field"><label>Barra</label><select id="pl-bar" onchange="platePaint()" style="width:100%;background:var(--surface);border:0.5px solid var(--line-2);border-radius:12px;padding:13px 14px;font-family:var(--ui);font-size:15px;color:var(--bone)"></select></div>
+              <div class="ghead" style="padding-left:0"><span>Por lado</span></div>
+              <div class="plate-vis" id="plate-vis"></div>
+              <p class="gfoot" id="plate-note"></p>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 25 · RELOJ ════════ -->
+      <section class="screen" id="s-reloj">
+        <div class="navbar" id="nb-reloj">
+          <div class="nav-row">
+            <span class="l" data-go="tools"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Herramientas</span>
+            <span class="c">Reloj</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Reloj</h1><p class="eyebrow" style="margin-top:4px">Timer del box</p></div>
+        </div>
+        <div class="scrolly" id="sc-reloj" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="clk-modes" id="clk-modes">
+              <button class="clk-chip-mode on" data-mode="amrap" onclick="clkMode('amrap')">AMRAP</button>
+              <button class="clk-chip-mode" data-mode="emom" onclick="clkMode('emom')">EMOM</button>
+              <button class="clk-chip-mode" data-mode="tabata" onclick="clkMode('tabata')">Tabata</button>
+              <button class="clk-chip-mode" data-mode="fortime" onclick="clkMode('fortime')">For Time</button>
+              <button class="clk-chip-mode" data-mode="crono" onclick="clkMode('crono')">Cronómetro</button>
+              <button class="clk-chip-mode" data-mode="remix" onclick="clkMode('remix')">REMIX</button>
+            </div>
+            <div class="clk-face" id="clk-face">
+              <p class="clk-sub" id="clk-sub">AMRAP</p>
+              <p class="clk-time" id="clk-time">20:00</p>
+              <div class="clk-cfg" id="clk-cfg"></div>
+            </div>
+            <div class="clk-ctrls">
+              <button class="btn" style="flex:1" id="clk-go" onclick="clkToggle()">Comenzar</button>
+              <button class="btn ghost" id="reiniciar-btn" onclick="clkReset()">Reiniciar</button>
+            </div>
+            <div id="clk-config">
+              <div class="rcfg-panel on" id="rcfg-amrap">
+                <div class="rcfg-row"><span class="k">Tiempo total</span><span class="stepper"><button onclick="cfgAdj('amrap','total',-5)">−</button><span class="num" id="v-amrap-total">20:00</span><button onclick="cfgAdj('amrap','total',5)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-emom">
+                <div class="rcfg-row"><span class="k">Cada</span><span class="stepper"><button onclick="cfgAdj('emom','every',-5)">−</button><span class="num" id="v-emom-every">1:00</span><button onclick="cfgAdj('emom','every',5)">+</button></span></div>
+                <div class="rcfg-row"><span class="k">Rondas</span><span class="stepper"><button onclick="cfgAdj('emom','rounds',-1,1)">−</button><span class="num" id="v-emom-rounds">10</span><button onclick="cfgAdj('emom','rounds',1,1)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-tabata">
+                <div class="rcfg-row"><span class="k">Rondas</span><span class="stepper"><button onclick="cfgAdj('tabata','rounds',-1,1)">−</button><span class="num" id="v-tabata-rounds">8</span><button onclick="cfgAdj('tabata','rounds',1,1)">+</button></span></div>
+                <div class="rcfg-row"><span class="k">Trabajo</span><span class="stepper"><button onclick="cfgAdj('tabata','work',-5)">−</button><span class="num" id="v-tabata-work">0:20</span><button onclick="cfgAdj('tabata','work',5)">+</button></span></div>
+                <div class="rcfg-row"><span class="k">Descanso</span><span class="stepper"><button onclick="cfgAdj('tabata','rest',-5)">−</button><span class="num" id="v-tabata-rest">0:10</span><button onclick="cfgAdj('tabata','rest',5)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-fortime">
+                <div class="sheet-opt" style="margin-top:0"><div><p class="k">Con tope (Time cap)</p><p class="h" id="ft-hint">Apágalo para NOT FOR TIME</p></div><button class="tgl on" id="ft-tgl" onclick="ftToggle(event)"></button></div>
+                <div class="rcfg-row" id="ft-cap-row"><span class="k">Time cap</span><span class="stepper"><button onclick="cfgAdj('fortime','cap',-5)">−</button><span class="num" id="v-fortime-cap">10:00</span><button onclick="cfgAdj('fortime','cap',5)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-crono">
+                <p class="gfoot">El cronómetro cuenta hacia arriba sin tope. Sin configuración.</p>
+              </div>
+              <div class="rcfg-panel" id="rcfg-remix">
+                <p class="gfoot">Arma tu WOD: arrastra bloques e items (⠿) para ordenarlos o moverlos entre bloques.</p>
+                <div id="remix-blocks"></div>
+              </div>
+              <div class="ghead" style="padding-left:0"><span>Cuenta regresiva</span></div>
+              <div class="cd-chips" id="cd-chips">
+                <button data-ready="0" onclick="setReady(0)">0s</button>
+                <button data-ready="3" class="on" onclick="setReady(3)">3s</button>
+                <button data-ready="5" onclick="setReady(5)">5s</button>
+                <button data-ready="10" onclick="setReady(10)">10s</button>
+              </div>
+            </div>
+            <p class="gfoot" style="text-align:center;margin-top:6px">El reloj corre en tu teléfono — proyéctalo en la pizarra</p>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="sheet-overlay" id="confirmar-sheet">
+        <div class="sheet-scrim" onclick="cerrarConfirmar()"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <p class="sheet-ttl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ¿Confirmar tu asistencia?</p>
+          <p class="sheet-body">Una vez confirmada, tu cupo queda asegurado y no vas a poder cancelarlo.</p>
+          <div class="sheet-acts">
+            <button class="btn full" onclick="ejecutarConfirmar()">Sí, confirmar</button>
+            <button class="btn ghost full" onclick="cerrarConfirmar()">Volver</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet-overlay" id="roster-sheet">
+        <div class="sheet-scrim" onclick="document.getElementById('roster-sheet').classList.remove('on')"></div>
+        <div class="sheet" style="max-height:70%">
+          <div class="sheet-grip"></div>
+          <p class="sheet-ttl">Hoy entrenan · 12</p>
+          <p class="sheet-body" style="margin-top:2px">CrossFit · 19:00 · Coach Vale</p>
+          <div class="roster-list" style="margin-top:12px">
+            <div class="rl-row"><span class="av b1">MR</span><span>Matías Rojas</span></div>
+            <div class="rl-row"><span class="av b2">JN</span><span>Javiera Núñez</span></div>
+            <div class="rl-row"><span class="av b3">CP</span><span>Camila Paredes</span></div>
+            <div class="rl-row"><span class="av b4">DS</span><span>Daniela Soto</span></div>
+            <div class="rl-row"><span class="av b5">IV</span><span>Ignacio Vera</span></div>
+            <div class="rl-row"><span class="av b1">CS</span><span>Carlos Soto</span></div>
+            <div class="rl-row"><span class="av b2">SD</span><span>Seba Díaz</span></div>
+            <div class="rl-row"><span class="av b3">PL</span><span>Paula López</span></div>
+            <div class="rl-row"><span class="av b4">RT</span><span>Ricardo Torres</span></div>
+            <div class="rl-row"><span class="av b5">MG</span><span>Macarena Gómez</span></div>
+            <div class="rl-row"><span class="av b1">AF</span><span>Andrés Flores</span></div>
+            <div class="rl-row you"><span class="av b2">VF</span><span>Valentina Fuentes · tú</span></div>
+          </div>
+          <button class="btn ghost full" style="margin-top:14px" onclick="document.getElementById('roster-sheet').classList.remove('on')">Cerrar</button>
+        </div>
+      </div>
+
+      <div class="sheet-overlay" id="avisar-sheet">
+        <div class="sheet-scrim" onclick="cerrarAviso()"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <p class="sheet-ttl">Te avisamos si se libera un cupo</p>
+          <p class="sheet-body">Te mandamos una notificación apenas alguien libere su lugar en esta clase.</p>
+          <div class="sheet-opt">
+            <div><p class="k">Tomar el cupo automáticamente</p><p class="h" id="aviso-hint">Solo te avisamos. El cupo queda libre para quien lo confirme primero.</p></div>
+            <button class="tgl" id="aviso-auto" onclick="autoHint(this,event)"></button>
+          </div>
+          <div class="sheet-acts">
+            <button class="btn full" onclick="activarAviso()">Activar aviso</button>
+            <button class="btn ghost full" onclick="cerrarAviso()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <div></div>
@@ -559,14 +1636,37 @@ body{
 
 <script>
 const SCREENS=[
-  {id:"hoy",  n:"01", nm:"Hoy"},
-  {id:"board",n:"02", nm:"La pizarra"},
-  {id:"forge",n:"03", nm:"La forja"},
+  {id:"intro",      n:"00", nm:"Portada"},
+  {id:"login",      n:"01", nm:"Login"},
+  {id:"firstlogin", n:"02", nm:"Primer ingreso"},
+  {id:"gympick",    n:"03", nm:"Elige tu box"},
+  {id:"recover",    n:"04", nm:"Recuperar clave"},
+  {id:"hoy",        n:"05", nm:"Hoy"},
+  {id:"notifs",     n:"06", nm:"Notificaciones"},
+  {id:"agenda",     n:"07", nm:"Agenda"},
+  {id:"board",      n:"08", nm:"Pizarra"},
+  {id:"exercise",   n:"09", nm:"Ejercicio"},
+  {id:"score",      n:"10", nm:"Anotar"},
+  {id:"forge",      n:"11", nm:"Nuevo PR"},
+  {id:"duel",       n:"12", nm:"Duelos"},
+  {id:"desafios",   n:"13", nm:"Desafíos"},
+  {id:"compe",      n:"14", nm:"Competencia"},
+  {id:"social",     n:"15", nm:"Comunidad"},
+  {id:"wall",       n:"16", nm:"El muro"},
+  {id:"progreso",   n:"17", nm:"Progreso"},
+  {id:"perfil",     n:"18", nm:"Perfil"},
+  {id:"plan",       n:"19", nm:"Mi plan"},
+  {id:"ajustes",    n:"20", nm:"Ajustes"},
+  {id:"tools",      n:"21", nm:"Herramientas"},
+  {id:"reloj",      n:"22", nm:"Reloj"},
+  {id:"calc",       n:"23", nm:"Calculadora"},
+  {id:"libreria",   n:"24", nm:"Librería"},
+  {id:"mov",        n:"25", nm:"Movimiento"},
 ];
 const rail=document.getElementById('rail');
 SCREENS.forEach((s,i)=>{
   const b=document.createElement('button');
-  if(i===0)b.classList.add('active');
+  if(s.id==='hoy')b.classList.add('active');
   b.dataset.go=s.id;
   b.innerHTML=`<span class="n">${s.n}</span><span class="nm">${s.nm}</span>`;
   rail.appendChild(b);
@@ -581,6 +1681,7 @@ function go(id){
   });
   document.querySelectorAll('.scrolly').forEach(s=>{s.scrollTop=0;});
   document.querySelectorAll('.navbar').forEach(nb=>nb.classList.remove('scrolled'));
+  if(id==='forge') forgeSparks();
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-go]');
@@ -588,24 +1689,26 @@ document.addEventListener('click',e=>{
 });
 
 const TABS=[
-  {id:"hoy",l:"Hoy",on:"hoy"},
-  {id:"hoy",l:"Agenda",on:"age"},
-  {id:"hoy",l:"Box",on:"box"},
-  {id:"hoy",l:"Yo",on:"yo"},
+  {key:"hoy",    l:"Hoy",          go:"hoy"},
+  {key:"agenda", l:"Agenda",       go:"agenda"},
+  {key:"social", l:"Comunidad",    go:"social"},
+  {key:"tools",  l:"Herramientas", go:"tools"},
+  {key:"yo",     l:"Yo",           go:"perfil"},
 ];
 const ICONS={
-  hoy:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/>',
-  age:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 15h.01"/>',
-  box:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  hoy:'<path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
+  agenda:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  social:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  tools:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
   yo:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
 };
 document.querySelectorAll('.tabbar').forEach(tb=>{
   const cur=tb.dataset.tabs;
   TABS.forEach(t=>{
     const b=document.createElement('button');
-    if(t.on===cur)b.classList.add('on');
-    b.innerHTML=`<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[t.on]}</svg><span class="tl">${t.l}</span>`;
-    b.addEventListener('click',()=>go(t.id));
+    if(t.key===cur)b.classList.add('on');
+    b.innerHTML=`<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[t.key]}</svg><span class="tl">${t.l}</span>`;
+    b.addEventListener('click',()=>go(t.go));
     tb.appendChild(b);
   });
 });
@@ -686,6 +1789,549 @@ segBtns.forEach((b,i)=>b.addEventListener('click',()=>{
   b.classList.add('on');
   setWod(b.textContent.trim(),i);
 }));
+
+/* ═══════ SCORE ═══════ */
+const SK = [35,35,40,40,42.5];
+function skAdj(i,d){ SK[i]=Math.max(0,SK[i]+d); renderSkill(); }
+function renderSkill(){ SK.forEach((v,i)=>{ const el=document.getElementById('sk-'+i); if(el) el.textContent = (unit==='kg') ? v : Math.round(v*2.20462); }); }
+function setDone(done){
+  document.getElementById('done-yes').classList.toggle('on',done);
+  document.getElementById('done-no').classList.toggle('on',!done);
+  document.getElementById('res-time').style.display = done ? 'block' : 'none';
+  document.getElementById('res-rounds').style.display = done ? 'none' : 'block';
+}
+let rounds = 17;
+function stAdj(d){ rounds = Math.max(0, rounds+d); paintRounds(); }
+function paintRounds(){
+  document.getElementById('st-num').textContent = rounds;
+  document.getElementById('pr-hint').style.display = rounds > 15 ? 'inline-block' : 'none';
+}
+let tsec = 18*60+45;
+function tAdj(d){ tsec = Math.max(0, tsec+d); paintTime(); }
+function paintTime(){
+  const m = Math.floor(tsec/60), s = tsec%60;
+  document.getElementById('t-num').textContent = m+':'+String(s).padStart(2,'0');
+}
+const rpeHost = document.getElementById('rpe');
+if (rpeHost) {
+  for (let i=1;i<=10;i++){
+    const b = document.createElement('button');
+    b.className = 'rpe-tick' + (i===8 ? ' on' : '');
+    b.textContent = i;
+    b.onclick = () => { rpeHost.querySelectorAll('.rpe-tick').forEach(x=>x.classList.remove('on')); b.classList.add('on'); };
+    rpeHost.appendChild(b);
+  }
+}
+
+/* ═══════ AGENDA ═══════ */
+function reservar(btn){
+  const row = btn.closest('.row');
+  row.style.background = 'rgba(255,183,64,0.08)';
+  row.querySelector('.lbl p').style.color = 'var(--amber)';
+  btn.textContent = 'Confirmar';
+  btn.onclick = () => confirmar(btn);
+}
+function confirmar(btn){
+  abrirConfirmar(function(){
+    btn.textContent = 'Confirmada ✓';
+    btn.style.cursor = 'default';
+    btn.onclick = null;
+    btn.classList.remove('amber'); btn.classList.add('lime');
+  });
+}
+let avisoRow = null;
+function avisar(btn){
+  avisoRow = btn.closest('.row');
+  document.getElementById('aviso-auto').classList.remove('on');
+  document.getElementById('aviso-hint').textContent = 'Solo te avisamos. El cupo queda libre para quien lo confirme primero.';
+  document.getElementById('avisar-sheet').classList.add('on');
+}
+function autoHint(t,e){
+  e.stopPropagation();
+  t.classList.toggle('on');
+  document.getElementById('aviso-hint').textContent = t.classList.contains('on')
+    ? 'Si se libera, lo reservamos a tu nombre. Igual deberás confirmar la clase.'
+    : 'Solo te avisamos. El cupo queda libre para quien lo confirme primero.';
+}
+function cerrarAviso(){ document.getElementById('avisar-sheet').classList.remove('on'); avisoRow = null; }
+function activarAviso(){
+  if (avisoRow){
+    const auto = document.getElementById('aviso-auto').classList.contains('on');
+    const st = avisoRow.querySelector('.cls-state');
+    st.style.color = 'var(--amber)';
+    st.textContent = auto ? '⚡' : '👁';
+    st.title = auto ? 'En lista · te inscribimos automáticamente' : 'Te avisamos si se libera';
+    const b = avisoRow.querySelector('button.badge, button[onclick^="avisar"]') || avisoRow.querySelector('button');
+    b.textContent = '🔕 Silenciar';
+    b.setAttribute('onclick','salir(this)');
+  }
+  cerrarAviso();
+}
+function salir(btn){
+  const row = btn.closest('.row');
+  const st = row.querySelector('.cls-state');
+  st.textContent = ''; st.title = ''; st.style.color = '';
+  btn.textContent = '🔔 Avísame';
+  btn.setAttribute('onclick','avisar(this)');
+}
+
+/* ═══════ PROGRESO ═══════ */
+const PROG = {
+  clean:     { cap: 'Clean 1RM',      pct: '+24%', kg: true,  data: [['Ene',38],['Feb',41],['Mar',43],['Abr',45],['May',47]], goal: 50,  gap: 3, note: 'El disco de oro de Clean se forja en {g} — estás a {d}. Al ritmo de estos meses, lo grabas en julio.' },
+  cindy:     { cap: '"Cindy"',        pct: '+13%', kg: false, ub: 'rondas', data: [['Feb',15],['Mar',15],['Abr',16],['May',17]], goal: 18, gap: 1, note: 'El disco de oro de "Cindy" se forja en {g} — estás a {d}.' },
+  deadlift:  { cap: 'Deadlift 1RM',   pct: '+11%', kg: true,  data: [['Ene',92],['Feb',95],['Mar',98],['Abr',100],['May',102]], goal: 110, gap: 8, note: 'El oro de Deadlift está en {g} — a {d} de tu marca.' },
+  backsquat: { cap: 'Back squat 1RM', pct: '+9%',  kg: true,  data: [['Ene',70],['Feb',72],['Mar',74],['Abr',76],['May',78]], goal: 85, gap: 7, note: 'El oro de Back squat está en {g} — a {d}.' },
+};
+let progKey = 'clean';
+function progSel(k, btn) {
+  progKey = k;
+  document.querySelectorAll('#prog-seg button').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderProgreso();
+}
+function renderProgreso() {
+  const host = document.getElementById('prog-bars');
+  if (!host) return;
+  const p = PROG[progKey];
+  const conv = v => p.kg ? (unit === 'kg' ? v : Math.round(v * 2.20462)) : v;
+  const u = p.kg ? unit : p.ub;
+  const max = Math.max(...p.data.map(d => d[1]), p.goal);
+  document.getElementById('prog-cap').textContent = p.cap + ' · ' + p.data.length + ' meses';
+  document.getElementById('prog-pct').textContent = p.pct;
+  host.innerHTML = p.data.map((d, i) =>
+    `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%">
+       <span style="font-family:var(--display);font-size:11px;font-weight:600;color:var(--bone-2)">${conv(d[1])}</span>
+       <i style="display:block;width:100%;max-width:28px;margin-top:4px;border-radius:6px 6px 0 0;background:${i===p.data.length-1?'var(--neon)':'var(--surface-2)'};height:${Math.round(d[1]/max*88)}%"></i>
+       <span style="font-family:var(--mono);font-size:10px;color:var(--bone-4);margin-top:6px">${d[0]}</span>
+     </div>`
+  ).join('');
+  document.getElementById('prog-goal').textContent = conv(p.goal);
+  document.getElementById('prog-goal-u').textContent = u + ' · oro';
+  const du = (!p.kg && conv(p.gap) === 1) ? p.ub.replace(/s$/, '') : u;
+  document.getElementById('prog-note').innerHTML = p.note
+    .replace('{g}', '<b style="color:var(--bone)">' + conv(p.goal) + ' ' + u + '</b>')
+    .replace('{d}', '<b style="color:var(--bone)">' + conv(p.gap) + ' ' + du + '</b>');
+}
+
+/* ═══════ CALCULADORA ═══════ */
+function calcTab(k){
+  document.querySelectorAll('.div-plate').forEach(b=>b.classList.remove('on'));
+  document.getElementById('ct-'+k).classList.add('on');
+  document.querySelectorAll('.calc-panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('cp-'+k).classList.add('on');
+}
+const PCTS = [95, 90, 85, 80, 75, 70, 65, 60, 50];
+function pctPaint(){
+  const el = document.getElementById('pct-1rm'); if (!el) return;
+  const rm = parseFloat(el.value) || 0;
+  document.getElementById('pct-table').innerHTML = PCTS.map(p =>
+    `<div class="pct-row"><span class="p">${p}%</span><span class="w">${(rm*p/100).toFixed(1).replace(/\.0$/,'')} <span>${unit}</span></span></div>`
+  ).join('');
+}
+const LB = 2.20462;
+function convFrom(which){
+  const lb = document.getElementById('conv-lb'), kg = document.getElementById('conv-kg');
+  if (which === 'lb') kg.value = (parseFloat(lb.value) / LB || 0).toFixed(1);
+  else lb.value = (parseFloat(kg.value) * LB || 0).toFixed(1);
+}
+const PLATES = { kg: [25, 20, 15, 10, 5, 2.5, 1.25], lb: [45, 35, 25, 10, 5, 2.5] };
+const BARS = {
+  kg: [{v:20,l:'Olímpica · 20 kg'},{v:15,l:'Mujer · 15 kg'},{v:10,l:'Técnica · 10 kg'}],
+  lb: [{v:45,l:'Olímpica · 45 lb'},{v:35,l:'Mujer · 35 lb'},{v:15,l:'Técnica · 15 lb'}],
+};
+const TIER = [
+  {bg:'var(--neon)',fg:'#fff'},
+  {bg:'var(--neon-2)',fg:'#fff'},
+  {bg:'#00C8E8',fg:'#0B0A0F'},
+  {bg:'#A8D920',fg:'#0B0A0F'},
+  {bg:'#FFB740',fg:'#0B0A0F'},
+  {bg:'var(--bone-4)',fg:'#0B0A0F'},
+  {bg:'var(--surface-3)',fg:'var(--bone-2)'},
+];
+function fillBarOptions(){
+  const el = document.getElementById('pl-bar'); if (!el) return;
+  el.innerHTML = BARS[unit].map(b=>`<option value="${b.v}">${b.l}</option>`).join('');
+}
+function platePaint(){
+  const vis = document.getElementById('plate-vis'), note = document.getElementById('plate-note');
+  if (!vis) return;
+  const target = parseFloat(document.getElementById('pl-target').value) || 0;
+  const bar = parseFloat(document.getElementById('pl-bar').value) || BARS[unit][0].v;
+  if (target < bar) { vis.innerHTML=''; note.textContent = 'Menos que la barra ('+bar+' '+unit+').'; return; }
+  const plates = PLATES[unit], max = plates[0];
+  let perSide = (target - bar) / 2, html = '', used = false;
+  plates.forEach((d, i) => {
+    while (perSide >= d - 1e-9) {
+      perSide -= d; used = true;
+      const r = d / max;
+      html += `<span class="plate-disc" style="width:${14+r*14}px;height:${44+r*46}px;font-size:${d>=5?11:9}px;background:${TIER[i].bg};color:${TIER[i].fg}">${d}</span>`;
+    }
+  });
+  vis.innerHTML = html || '<span class="plate-empty">solo la barra</span>';
+  const leftover = perSide > 0.01 ? ' · faltan ' + (perSide*2).toFixed(2).replace(/\.?0+$/,'') + ' ' + unit : '';
+  note.textContent = (used ? 'por lado, de mayor a menor' : 'solo la barra') + leftover;
+}
+
+/* ═══════ RELOJ: motor de fases ═══════ */
+const RCFG = {
+  amrap:   { total: 1200 },
+  emom:    { every: 60, rounds: 10 },
+  tabata:  { rounds: 8, work: 20, rest: 10 },
+  fortime: { cap: 600, capped: true },
+  crono:   {},
+};
+const MODE_LABEL = {amrap:'AMRAP',emom:'EMOM',tabata:'TABATA',fortime:'FOR TIME',crono:'CRONÓMETRO',remix:'REMIX'};
+let clkKey='amrap', getReady=3, run=null, clkTick=null;
+
+function mmss(s){ if (s===Infinity) return '∞'; s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+
+function pushItemPhases(ph, item, blockInfo){
+  const extra = blockInfo ? {blockRound:blockInfo.round, blockOf:blockInfo.of} : {};
+  if (item.type==='amrap') ph.push(Object.assign({kind:'go',dur:item.total,dir:'down',label:'AMRAP'},extra));
+  else if (item.type==='fortime') ph.push(Object.assign({kind:'go',dur:item.cap,dir:'up',label:'FOR TIME'},extra));
+  else if (item.type==='emom') for(let r=1;r<=item.rounds;r++) ph.push(Object.assign({kind:'go',dur:item.every,dir:'down',label:'EMOM',round:r,of:item.rounds},extra));
+  else if (item.type==='tabata') for(let r=1;r<=item.rounds;r++){ ph.push(Object.assign({kind:'work',dur:item.work,dir:'down',label:'TRABAJO',round:r,of:item.rounds},extra)); ph.push(Object.assign({kind:'rest',dur:item.rest,dir:'down',label:'DESCANSO',round:r,of:item.rounds},extra)); }
+  else if (item.type==='rest') ph.push(Object.assign({kind:'rest',dur:item.dur,dir:'down',label:'DESCANSO'},extra));
+}
+
+function buildPhases(){
+  const ph = [];
+  if (getReady > 0) ph.push({kind:'ready', dur:getReady, dir:'down', label:'PREPARADO'});
+  if (clkKey === 'amrap'){
+    ph.push({kind:'go', dur:RCFG.amrap.total, dir:'down', label:'AMRAP'});
+  } else if (clkKey === 'emom'){
+    for (let r=1;r<=RCFG.emom.rounds;r++) ph.push({kind:'go', dur:RCFG.emom.every, dir:'down', label:'EMOM', round:r, of:RCFG.emom.rounds});
+  } else if (clkKey === 'tabata'){
+    for (let r=1;r<=RCFG.tabata.rounds;r++){
+      ph.push({kind:'work', dur:RCFG.tabata.work, dir:'down', label:'TRABAJO', round:r, of:RCFG.tabata.rounds});
+      ph.push({kind:'rest', dur:RCFG.tabata.rest, dir:'down', label:'DESCANSO', round:r, of:RCFG.tabata.rounds});
+    }
+  } else if (clkKey === 'fortime'){
+    ph.push({kind:'go', dur: RCFG.fortime.capped ? RCFG.fortime.cap : Infinity, dir:'up', label: RCFG.fortime.capped ? 'FOR TIME' : 'NOT FOR TIME'});
+  } else if (clkKey === 'crono'){
+    ph.push({kind:'go', dur:Infinity, dir:'up', label:'CRONÓMETRO'});
+  } else if (clkKey === 'remix'){
+    remix.forEach(block => {
+      for (let r=1;r<=block.rounds;r++) block.items.forEach(item => pushItemPhases(ph, item, block.rounds>1 ? {round:r, of:block.rounds} : null));
+    });
+  }
+  return ph;
+}
+
+function tick() {
+  run.t++;
+  let cur = run.phases[run.idx];
+  const remaining = cur.dur - run.t;
+  if (cur.dur !== Infinity && remaining <= 3 && remaining >= 1) beep('soft');
+  if (cur.dur !== Infinity && run.t >= cur.dur) {
+    run.idx++; run.t = 0;
+    if (run.idx >= run.phases.length) { clkDone(); return; }
+    cur = run.phases[run.idx];
+    beep(cur.kind === 'rest' ? 'rest' : 'go');
+  }
+  paintRun();
+}
+function paintRun(){
+  const cur = run.phases[run.idx];
+  const shown = cur.dir==='down' ? Math.max(0, cur.dur-run.t) : run.t;
+  document.getElementById('clk-time').textContent = mmss(shown);
+  let sub = cur.label; if (cur.round) sub += ' · ' + cur.round + '/' + cur.of;
+  document.getElementById('clk-sub').textContent = sub;
+  const chips = [];
+  if (cur.blockOf) chips.push('BLOQUE ' + cur.blockRound + '/' + cur.blockOf);
+  document.getElementById('clk-cfg').innerHTML = chips.map(c=>`<span class="clk-chip">${c}</span>`).join('');
+}
+function paintReady(){
+  document.getElementById('clk-face').classList.remove('done');
+  const ph = buildPhases();
+  const first = ph[0];
+  document.getElementById('clk-sub').textContent = MODE_LABEL[clkKey];
+  document.getElementById('clk-time').textContent = first ? mmss(first.dir==='down' ? first.dur : 0) : '0:00';
+  const chips = [];
+  if (clkKey==='amrap') chips.push('CAP '+mmss(RCFG.amrap.total));
+  if (clkKey==='emom') chips.push(RCFG.emom.rounds+' rondas');
+  if (clkKey==='tabata') chips.push(RCFG.tabata.rounds+'× '+RCFG.tabata.work+'s/'+RCFG.tabata.rest+'s');
+  if (clkKey==='fortime') chips.push(RCFG.fortime.capped ? 'CAP '+mmss(RCFG.fortime.cap) : 'sin tope');
+  if (clkKey==='remix') chips.push('total '+mmss(remixTotal()));
+  if (getReady>0) chips.push('go '+getReady+'s');
+  document.getElementById('clk-cfg').innerHTML = chips.map(c=>`<span class="clk-chip">${c}</span>`).join('');
+}
+function clkMode(k){
+  clkKey = k;
+  document.querySelectorAll('.clk-chip-mode').forEach(b=>b.classList.toggle('on', b.dataset.mode===k));
+  document.querySelectorAll('.rcfg-panel').forEach(p=>p.classList.toggle('on', p.id==='rcfg-'+k));
+  clkReset();
+}
+function clkToggle(){
+  const btn = document.getElementById('clk-go');
+  if (!run){
+    run = { phases: buildPhases(), idx:0, t:0 };
+    document.getElementById('clk-config').classList.add('hide');
+    btn.textContent = 'Pausar';
+    clkTick = setInterval(tick, 1000);
+    paintRun();
+  } else if (clkTick){
+    clearInterval(clkTick); clkTick=null;
+    btn.textContent = 'Continuar';
+  } else {
+    clkTick = setInterval(tick, 1000);
+    btn.textContent = 'Pausar';
+  }
+}
+function clkReset(){
+  if (clkTick){ clearInterval(clkTick); clkTick=null; }
+  run = null;
+  document.getElementById('clk-config').classList.remove('hide');
+  document.getElementById('clk-go').textContent = 'Comenzar';
+  paintReady();
+}
+function clkDone(){
+  if (clkTick){ clearInterval(clkTick); clkTick=null; }
+  run = null;
+  document.getElementById('clk-face').classList.add('done');
+  document.getElementById('clk-time').textContent = '0:00';
+  document.getElementById('clk-sub').textContent = 'TERMINADO';
+  document.getElementById('clk-cfg').innerHTML = '<span class="clk-chip">¡bien ahí!</span>';
+  document.getElementById('clk-config').classList.remove('hide');
+  document.getElementById('clk-go').textContent = 'Comenzar';
+  beep('end');
+}
+function cfgAdj(mode, field, delta, min){
+  RCFG[mode][field] = Math.max(min!=null?min:0, RCFG[mode][field]+delta);
+  document.getElementById('v-'+mode+'-'+field).textContent = (field==='rounds') ? RCFG[mode][field] : mmss(RCFG[mode][field]);
+  if (!run) paintReady();
+}
+function ftToggle(e){
+  if (e) e.stopPropagation();
+  RCFG.fortime.capped = !RCFG.fortime.capped;
+  document.getElementById('ft-tgl').classList.toggle('on', RCFG.fortime.capped);
+  document.getElementById('ft-hint').textContent = RCFG.fortime.capped ? 'Apágalo para NOT FOR TIME' : 'NOT FOR TIME · tiempo ilimitado';
+  document.getElementById('ft-cap-row').style.display = RCFG.fortime.capped ? 'flex' : 'none';
+  if (!run) paintReady();
+}
+function setReady(n){
+  getReady = n;
+  document.querySelectorAll('#cd-chips button').forEach(b=>b.classList.toggle('on', +b.dataset.ready===n));
+  if (!run) paintReady();
+}
+let actx=null;
+function beep(kind){
+  try{
+    if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)();
+    const freq = {end:1200, go:880, rest:440, soft:660}[kind] || 660;
+    const dur = kind==='end' ? 0.5 : 0.16;
+    const osc = actx.createOscillator(), gain = actx.createGain();
+    osc.type='sine'; osc.frequency.value=freq;
+    osc.connect(gain); gain.connect(actx.destination);
+    const t0 = actx.currentTime;
+    gain.gain.setValueAtTime(0.0001,t0);
+    gain.gain.exponentialRampToValueAtTime(0.25,t0+0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }catch(e){}
+}
+
+/* ═══════ REMIX: constructor de WOD con drag & drop ═══════ */
+const ITEM_DEF = { amrap:{total:300}, fortime:{cap:240}, emom:{every:60,rounds:5}, tabata:{rounds:8,work:20,rest:10}, rest:{dur:60} };
+const ITEM_BADGE = { amrap:'AMRAP', fortime:'FT', emom:'EMOM', tabata:'TBT', rest:'REST' };
+const ITEM_FIELDS = {
+  amrap:   [{k:'total',l:'Duración',step:5}],
+  fortime: [{k:'cap',l:'Tope',step:5}],
+  emom:    [{k:'every',l:'Cada',step:5},{k:'rounds',l:'Rondas',step:1}],
+  tabata:  [{k:'rounds',l:'Rondas',step:1},{k:'work',l:'Trabajo',step:5},{k:'rest',l:'Descanso',step:5}],
+  rest:    [{k:'dur',l:'Duración',step:5}],
+};
+let ridN = 0;
+function nid(){ return 'x'+(ridN++); }
+function mkItem(type){ return Object.assign({id:nid(), type}, ITEM_DEF[type]); }
+function itemSummary(item){
+  if (item.type==='amrap') return 'AMRAP ' + mmss(item.total);
+  if (item.type==='fortime') return 'For Time · cap ' + mmss(item.cap);
+  if (item.type==='emom') return 'EMOM cada ' + mmss(item.every) + ' × ' + item.rounds;
+  if (item.type==='tabata') return item.rounds + '× ' + item.work + 's/' + item.rest + 's';
+  return 'Descanso ' + mmss(item.dur);
+}
+let remix = [
+  { id:nid(), rounds:3, items:[mkItem('amrap'), mkItem('rest'), mkItem('fortime')] },
+  { id:nid(), rounds:1, items:[mkItem('rest')] },
+  { id:nid(), rounds:1, items:[mkItem('fortime')] },
+];
+function findItem(iid){ for(const b of remix) for(const it of b.items) if(it.id===iid) return {block:b,item:it}; return null; }
+function remixItemHTML(bid, item){
+  return `<div class="remix-item" draggable="true" data-item="${item.id}" data-block="${bid}">
+    <span class="drag">⠿</span>
+    <span class="remix-badge ${item.type}">${ITEM_BADGE[item.type]}</span>
+    <span class="sum">${itemSummary(item)}</span>
+    <span class="chev" onclick="toggleItem('${item.id}')">▾</span>
+    <button class="del" onclick="delItem('${bid}','${item.id}')">✕</button>
+    <div class="remix-detail" id="detail-${item.id}">
+      ${ITEM_FIELDS[item.type].map(f=>`<div class="rcfg-row"><span class="k">${f.l}</span><span class="stepper"><button onclick="itemAdj('${item.id}','${f.k}',-${f.step})">−</button><span class="num" id="iv-${item.id}-${f.k}">${f.k==='rounds'?item[f.k]:mmss(item[f.k])}</span><button onclick="itemAdj('${item.id}','${f.k}',${f.step})">+</button></span></div>`).join('')}
+    </div>
+  </div>`;
+}
+function remixRender(){
+  const host = document.getElementById('remix-blocks');
+  if (!host) return;
+  host.innerHTML = remix.map(block => `
+    <div class="remix-block" draggable="true" data-block="${block.id}">
+      <div class="remix-block-head">
+        <span class="drag">⠿</span>
+        <span class="lbl">Bloque</span>
+        <span class="stepper"><button onclick="blockRounds('${block.id}',-1)">−</button><span class="num">${block.rounds}</span><button onclick="blockRounds('${block.id}',1)">+</button></span>
+        <button class="del" onclick="delBlock('${block.id}')">✕</button>
+      </div>
+      <div class="remix-items" data-block-items="${block.id}">${block.items.map(item => remixItemHTML(block.id, item)).join('')}</div>
+      <button class="remix-add" onclick="togglePick('${block.id}')">+ item</button>
+      <div class="remix-pick" id="pick-${block.id}">${Object.keys(ITEM_DEF).map(t=>`<button onclick="addItem('${block.id}','${t}')">${ITEM_BADGE[t]}</button>`).join('')}</div>
+    </div>`).join('') + `<button class="remix-add" onclick="addBlock()">+ Bloque</button>`;
+  if (!run) paintReady();
+}
+function addBlock(){ remix.push({id:nid(), rounds:1, items:[]}); remixRender(); }
+function delBlock(bid){ remix = remix.filter(b=>b.id!==bid); remixRender(); }
+function blockRounds(bid,d){ const b=remix.find(x=>x.id===bid); if(b) b.rounds=Math.max(1,Math.min(99,b.rounds+d)); remixRender(); }
+function addItem(bid,type){ const b=remix.find(x=>x.id===bid); if(b) b.items.push(mkItem(type)); remixRender(); }
+function delItem(bid,iid){ const b=remix.find(x=>x.id===bid); if(b) b.items=b.items.filter(i=>i.id!==iid); remixRender(); }
+function toggleItem(iid){ const el=document.getElementById('detail-'+iid); if(el) el.classList.toggle('on'); }
+function itemAdj(iid,field,delta){
+  const found = findItem(iid); if(!found) return;
+  const min = field==='rounds' ? 1 : 5;
+  found.item[field] = Math.max(min, found.item[field]+delta);
+  remixRender();
+}
+function togglePick(bid){ const el=document.getElementById('pick-'+bid); if(el) el.classList.toggle('on'); }
+function remixTotal(){
+  const ph=[]; remix.forEach(block=>{ for(let r=1;r<=block.rounds;r++) block.items.forEach(item=>pushItemPhases(ph,item,null)); });
+  return ph.reduce((s,p)=> s + (p.dur===Infinity?0:p.dur), 0);
+}
+function getAfter(container, y, sel) {
+  let best = { off: -Infinity, el: null };
+  container.querySelectorAll(sel + ':not(.dragging)').forEach(ch => {
+    const box = ch.getBoundingClientRect(), off = y - box.top - box.height / 2;
+    if (off < 0 && off > best.off) best = { off, el: ch };
+  });
+  return best.el;
+}
+function moveItem(srcBid, iid, tgtBid, beforeIid){
+  const src = remix.find(b=>b.id===srcBid); if(!src) return;
+  const idx = src.items.findIndex(i=>i.id===iid); if(idx<0) return;
+  const [item] = src.items.splice(idx,1);
+  const tgt = remix.find(b=>b.id===tgtBid); if(!tgt) return;
+  const beforeIdx = beforeIid ? tgt.items.findIndex(i=>i.id===beforeIid) : -1;
+  if (beforeIdx<0) tgt.items.push(item); else tgt.items.splice(beforeIdx,0,item);
+  remixRender();
+}
+function moveBlock(bid, beforeBid){
+  const idx = remix.findIndex(b=>b.id===bid); if(idx<0) return;
+  const [blk] = remix.splice(idx,1);
+  const beforeIdx = beforeBid ? remix.findIndex(b=>b.id===beforeBid) : -1;
+  if (beforeIdx<0) remix.push(blk); else remix.splice(beforeIdx,0,blk);
+  remixRender();
+}
+let dragKind=null, dragInfo=null;
+const remixHost = document.getElementById('remix-blocks');
+if (remixHost) {
+  remixHost.addEventListener('dragstart', e=>{
+    const item = e.target.closest('.remix-item');
+    const block = e.target.closest('.remix-block');
+    if (item){ dragKind='item'; dragInfo={bid:item.dataset.block, iid:item.dataset.item}; setTimeout(()=>item.classList.add('dragging'),0); }
+    else if (block){ dragKind='block'; dragInfo={bid:block.dataset.block}; setTimeout(()=>block.classList.add('dragging'),0); }
+  });
+  remixHost.addEventListener('dragend', ()=>{
+    remixHost.querySelectorAll('.dragging').forEach(el=>el.classList.remove('dragging'));
+    remixHost.querySelectorAll('.remix-items.over').forEach(el=>el.classList.remove('over'));
+  });
+  remixHost.addEventListener('dragover', e=>{
+    e.preventDefault();
+    if (dragKind==='item'){
+      const itemsHost = e.target.closest('.remix-items');
+      remixHost.querySelectorAll('.remix-items').forEach(el=>el.classList.toggle('over', el===itemsHost));
+    }
+  });
+  remixHost.addEventListener('drop', e=>{
+    e.preventDefault();
+    if (dragKind==='item'){
+      const itemsHost = e.target.closest('.remix-items');
+      if (itemsHost) { const after = getAfter(itemsHost, e.clientY, '.remix-item'); moveItem(dragInfo.bid, dragInfo.iid, itemsHost.dataset.blockItems, after ? after.dataset.item : null); }
+    } else if (dragKind==='block'){
+      const after = getAfter(remixHost, e.clientY, '.remix-block');
+      moveBlock(dragInfo.bid, after ? after.dataset.block : null);
+    }
+    dragKind=null; dragInfo=null;
+  });
+}
+remixRender();
+if (document.getElementById('clk-face')) clkReset();
+
+/* ═══════ GLOBAL: unidad kg/lb ═══════ */
+let unit = 'kg';
+const fmtWt = kg => unit === 'kg' ? (kg + ' kg') : (Math.round(kg * 2.20462) + ' lb');
+function setUnit(u){
+  unit = u;
+  document.querySelectorAll('.us-opt').forEach(b => b.classList.toggle('on', b.dataset.unit === u));
+  applyUnit();
+}
+function applyUnit(){
+  const pl = document.getElementById('pct-unit-lbl'); if (pl) pl.textContent = 'Tu 1RM (' + unit + ')';
+  const pll = document.getElementById('pl-unit-lbl'); if (pll) pll.textContent = 'Peso objetivo (' + unit + ')';
+  if (typeof fillBarOptions === 'function') fillBarOptions();
+  if (typeof pctPaint === 'function') pctPaint();
+  if (typeof platePaint === 'function') platePaint();
+  document.querySelectorAll('.wt').forEach(e => e.textContent = fmtWt(parseFloat(e.dataset.kg)));
+  if (typeof renderSkill === 'function') renderSkill();
+  if (typeof renderProgreso === 'function') renderProgreso();
+}
+
+/* ═══════ GLOBAL: toggle genérico ═══════ */
+document.addEventListener('click', e => {
+  const t = e.target.closest('.tgl');
+  if (t) t.classList.toggle('on');
+});
+
+/* ═══════ GLOBAL: chócala (bump) ═══════ */
+function bump(btn){
+  const ct = btn.querySelector('.ct');
+  const on = btn.classList.toggle('on');
+  if (ct) ct.textContent = +ct.textContent + (on ? 1 : -1);
+}
+
+/* ═══════ GLOBAL: partículas de la forja ═══════ */
+function forgeSparks(){
+  const host = document.getElementById('sparks');
+  if (!host) return;
+  host.innerHTML = '';
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.className = 'spark-particle';
+    const a = (Math.random() * 2 - 1) * Math.PI;
+    const d = 90 + Math.random() * 150;
+    s.style.cssText = `left:50%;top:46%;--sx:${Math.cos(a)*d}px;--sy:${Math.sin(a)*d - 60}px;--sd:${1.4 + Math.random()*0.5}s`;
+    host.appendChild(s);
+  }
+}
+
+/* ═══════ GLOBAL: sheet de confirmar asistencia ═══════ */
+let confirmarCb = null;
+function abrirConfirmar(cb){ confirmarCb = cb; document.getElementById('confirmar-sheet').classList.add('on'); }
+function cerrarConfirmar(){ document.getElementById('confirmar-sheet').classList.remove('on'); confirmarCb = null; }
+function ejecutarConfirmar(){
+  document.getElementById('confirmar-sheet').classList.remove('on');
+  const cb = confirmarCb; confirmarCb = null;
+  if (cb) cb();
+}
+
+/* ═══════ GLOBAL: confirmar asistencia en Hoy ═══════ */
+function confirmHoy(btn){
+  abrirConfirmar(function(){
+    const card = btn.closest('.cc');
+    const badge = card.querySelector('.badge.amber');
+    if (badge){ badge.classList.remove('amber'); badge.classList.add('lime'); badge.textContent = 'Confirmada'; }
+    const warn = card.querySelector('.cc-warn span');
+    if (warn) warn.textContent = 'Cupo asegurado · te esperamos a las 19:00';
+    card.querySelector('.cc-act').innerHTML = '<button class="btn ghost" data-go="board" style="width:100%">Ver la pizarra</button>';
+  });
+}
+
+applyUnit();
 </script>
 </body>
 </html>
