@@ -2327,6 +2327,27 @@ function confirmHoy(btn){
 }
 
 applyUnit();
+
+/* ═══════ GLOBAL: escalar el teléfono si el viewport de escritorio es muy bajo ═══════ */
+function fitPhone(){
+  const ph = document.querySelector('.phone');
+  if (!ph) return;
+  if (window.innerWidth <= 980){
+    ph.style.position=''; ph.style.top=''; ph.style.left=''; ph.style.transform='';
+    return;
+  }
+  const s = Math.min(1, (window.innerHeight - 40) / 844);
+  if (s < 1){
+    ph.style.position='fixed';
+    ph.style.top='50%';
+    ph.style.left='50%';
+    ph.style.transform=`translate(-50%,-50%) scale(${s})`;
+  } else {
+    ph.style.position=''; ph.style.top=''; ph.style.left=''; ph.style.transform='';
+  }
+}
+window.addEventListener('resize', fitPhone);
+fitPhone();
 </script>
 </body>
 </html>
