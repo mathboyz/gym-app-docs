@@ -480,7 +480,7 @@ body{
 .remix-block-head .del{all:unset;cursor:pointer;color:var(--bone-4);padding:4px}
 .remix-items{margin-top:8px;min-height:8px}
 .remix-items.over{background:var(--neon-soft);border-radius:10px}
-.remix-item{display:flex;align-items:center;gap:10px;background:var(--surface-2);border-radius:10px;padding:10px;margin-top:6px}
+.remix-item{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--surface-2);border-radius:10px;padding:10px;margin-top:6px}
 .remix-item.dragging{opacity:0.4}
 .remix-item .drag{cursor:grab;color:var(--bone-4)}
 .remix-badge{font-family:var(--display);font-size:10px;font-weight:700;color:#fff;border-radius:6px;padding:3px 7px;flex:0 0 auto}
@@ -1492,6 +1492,73 @@ body{
         </div>
       </section>
 
+      <!-- ════════ 25 · RELOJ ════════ -->
+      <section class="screen" id="s-reloj">
+        <div class="navbar" id="nb-reloj">
+          <div class="nav-row">
+            <span class="l" data-go="tools"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Herramientas</span>
+            <span class="c">Reloj</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Reloj</h1><p class="eyebrow" style="margin-top:4px">Timer del box</p></div>
+        </div>
+        <div class="scrolly" id="sc-reloj" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="clk-modes" id="clk-modes">
+              <button class="clk-chip-mode on" data-mode="amrap" onclick="clkMode('amrap')">AMRAP</button>
+              <button class="clk-chip-mode" data-mode="emom" onclick="clkMode('emom')">EMOM</button>
+              <button class="clk-chip-mode" data-mode="tabata" onclick="clkMode('tabata')">Tabata</button>
+              <button class="clk-chip-mode" data-mode="fortime" onclick="clkMode('fortime')">For Time</button>
+              <button class="clk-chip-mode" data-mode="crono" onclick="clkMode('crono')">Cronómetro</button>
+              <button class="clk-chip-mode" data-mode="remix" onclick="clkMode('remix')">REMIX</button>
+            </div>
+            <div class="clk-face" id="clk-face">
+              <p class="clk-sub" id="clk-sub">AMRAP</p>
+              <p class="clk-time" id="clk-time">20:00</p>
+              <div class="clk-cfg" id="clk-cfg"></div>
+            </div>
+            <div class="clk-ctrls">
+              <button class="btn" style="flex:1" id="clk-go" onclick="clkToggle()">Comenzar</button>
+              <button class="btn ghost" id="reiniciar-btn" onclick="clkReset()">Reiniciar</button>
+            </div>
+            <div id="clk-config">
+              <div class="rcfg-panel on" id="rcfg-amrap">
+                <div class="rcfg-row"><span class="k">Tiempo total</span><span class="stepper"><button onclick="cfgAdj('amrap','total',-5)">−</button><span class="num" id="v-amrap-total">20:00</span><button onclick="cfgAdj('amrap','total',5)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-emom">
+                <div class="rcfg-row"><span class="k">Cada</span><span class="stepper"><button onclick="cfgAdj('emom','every',-5)">−</button><span class="num" id="v-emom-every">1:00</span><button onclick="cfgAdj('emom','every',5)">+</button></span></div>
+                <div class="rcfg-row"><span class="k">Rondas</span><span class="stepper"><button onclick="cfgAdj('emom','rounds',-1,1)">−</button><span class="num" id="v-emom-rounds">10</span><button onclick="cfgAdj('emom','rounds',1,1)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-tabata">
+                <div class="rcfg-row"><span class="k">Rondas</span><span class="stepper"><button onclick="cfgAdj('tabata','rounds',-1,1)">−</button><span class="num" id="v-tabata-rounds">8</span><button onclick="cfgAdj('tabata','rounds',1,1)">+</button></span></div>
+                <div class="rcfg-row"><span class="k">Trabajo</span><span class="stepper"><button onclick="cfgAdj('tabata','work',-5)">−</button><span class="num" id="v-tabata-work">0:20</span><button onclick="cfgAdj('tabata','work',5)">+</button></span></div>
+                <div class="rcfg-row"><span class="k">Descanso</span><span class="stepper"><button onclick="cfgAdj('tabata','rest',-5)">−</button><span class="num" id="v-tabata-rest">0:10</span><button onclick="cfgAdj('tabata','rest',5)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-fortime">
+                <div class="sheet-opt" style="margin-top:0"><div><p class="k">Con tope (Time cap)</p><p class="h" id="ft-hint">Apágalo para NOT FOR TIME</p></div><button class="tgl on" id="ft-tgl" onclick="ftToggle(event)"></button></div>
+                <div class="rcfg-row" id="ft-cap-row"><span class="k">Time cap</span><span class="stepper"><button onclick="cfgAdj('fortime','cap',-5)">−</button><span class="num" id="v-fortime-cap">10:00</span><button onclick="cfgAdj('fortime','cap',5)">+</button></span></div>
+              </div>
+              <div class="rcfg-panel" id="rcfg-crono">
+                <p class="gfoot">El cronómetro cuenta hacia arriba sin tope. Sin configuración.</p>
+              </div>
+              <div class="rcfg-panel" id="rcfg-remix">
+                <p class="gfoot">Arma tu WOD: arrastra bloques e items (⠿) para ordenarlos o moverlos entre bloques.</p>
+                <div id="remix-blocks"></div>
+              </div>
+              <div class="ghead" style="padding-left:0"><span>Cuenta regresiva</span></div>
+              <div class="cd-chips" id="cd-chips">
+                <button data-ready="0" onclick="setReady(0)">0s</button>
+                <button data-ready="3" class="on" onclick="setReady(3)">3s</button>
+                <button data-ready="5" onclick="setReady(5)">5s</button>
+                <button data-ready="10" onclick="setReady(10)">10s</button>
+              </div>
+            </div>
+            <p class="gfoot" style="text-align:center;margin-top:6px">El reloj corre en tu teléfono — proyéctalo en la pizarra</p>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
   <div></div>
@@ -1808,7 +1875,296 @@ function platePaint(){
   const leftover = perSide > 0.01 ? ' · faltan ' + (perSide*2).toFixed(2).replace(/\.?0+$/,'') + ' ' + unit : '';
   note.textContent = (used ? 'por lado, de mayor a menor' : 'solo la barra') + leftover;
 }
-fillBarOptions(); pctPaint(); platePaint();
+
+/* ═══════ RELOJ: motor de fases ═══════ */
+const RCFG = {
+  amrap:   { total: 1200 },
+  emom:    { every: 60, rounds: 10 },
+  tabata:  { rounds: 8, work: 20, rest: 10 },
+  fortime: { cap: 600, capped: true },
+  crono:   {},
+};
+const MODE_LABEL = {amrap:'AMRAP',emom:'EMOM',tabata:'TABATA',fortime:'FOR TIME',crono:'CRONÓMETRO',remix:'REMIX'};
+let clkKey='amrap', getReady=3, run=null, clkTick=null;
+
+function mmss(s){ if (s===Infinity) return '∞'; s=Math.max(0,Math.round(s)); return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+
+function pushItemPhases(ph, item, blockInfo){
+  const extra = blockInfo ? {blockRound:blockInfo.round, blockOf:blockInfo.of} : {};
+  if (item.type==='amrap') ph.push(Object.assign({kind:'go',dur:item.total,dir:'down',label:'AMRAP'},extra));
+  else if (item.type==='fortime') ph.push(Object.assign({kind:'go',dur:item.cap,dir:'up',label:'FOR TIME'},extra));
+  else if (item.type==='emom') for(let r=1;r<=item.rounds;r++) ph.push(Object.assign({kind:'go',dur:item.every,dir:'down',label:'EMOM',round:r,of:item.rounds},extra));
+  else if (item.type==='tabata') for(let r=1;r<=item.rounds;r++){ ph.push(Object.assign({kind:'work',dur:item.work,dir:'down',label:'TRABAJO',round:r,of:item.rounds},extra)); ph.push(Object.assign({kind:'rest',dur:item.rest,dir:'down',label:'DESCANSO',round:r,of:item.rounds},extra)); }
+  else if (item.type==='rest') ph.push(Object.assign({kind:'rest',dur:item.dur,dir:'down',label:'DESCANSO'},extra));
+}
+
+function buildPhases(){
+  const ph = [];
+  if (getReady > 0) ph.push({kind:'ready', dur:getReady, dir:'down', label:'PREPARADO'});
+  if (clkKey === 'amrap'){
+    ph.push({kind:'go', dur:RCFG.amrap.total, dir:'down', label:'AMRAP'});
+  } else if (clkKey === 'emom'){
+    for (let r=1;r<=RCFG.emom.rounds;r++) ph.push({kind:'go', dur:RCFG.emom.every, dir:'down', label:'EMOM', round:r, of:RCFG.emom.rounds});
+  } else if (clkKey === 'tabata'){
+    for (let r=1;r<=RCFG.tabata.rounds;r++){
+      ph.push({kind:'work', dur:RCFG.tabata.work, dir:'down', label:'TRABAJO', round:r, of:RCFG.tabata.rounds});
+      ph.push({kind:'rest', dur:RCFG.tabata.rest, dir:'down', label:'DESCANSO', round:r, of:RCFG.tabata.rounds});
+    }
+  } else if (clkKey === 'fortime'){
+    ph.push({kind:'go', dur: RCFG.fortime.capped ? RCFG.fortime.cap : Infinity, dir:'up', label: RCFG.fortime.capped ? 'FOR TIME' : 'NOT FOR TIME'});
+  } else if (clkKey === 'crono'){
+    ph.push({kind:'go', dur:Infinity, dir:'up', label:'CRONÓMETRO'});
+  } else if (clkKey === 'remix'){
+    remix.forEach(block => {
+      for (let r=1;r<=block.rounds;r++) block.items.forEach(item => pushItemPhases(ph, item, block.rounds>1 ? {round:r, of:block.rounds} : null));
+    });
+  }
+  return ph;
+}
+
+function tick() {
+  run.t++;
+  let cur = run.phases[run.idx];
+  const remaining = cur.dur - run.t;
+  if (cur.dur !== Infinity && remaining <= 3 && remaining >= 1) beep('soft');
+  if (cur.dur !== Infinity && run.t >= cur.dur) {
+    run.idx++; run.t = 0;
+    if (run.idx >= run.phases.length) { clkDone(); return; }
+    cur = run.phases[run.idx];
+    beep(cur.kind === 'rest' ? 'rest' : 'go');
+  }
+  paintRun();
+}
+function paintRun(){
+  const cur = run.phases[run.idx];
+  const shown = cur.dir==='down' ? Math.max(0, cur.dur-run.t) : run.t;
+  document.getElementById('clk-time').textContent = mmss(shown);
+  let sub = cur.label; if (cur.round) sub += ' · ' + cur.round + '/' + cur.of;
+  document.getElementById('clk-sub').textContent = sub;
+  const chips = [];
+  if (cur.blockOf) chips.push('BLOQUE ' + cur.blockRound + '/' + cur.blockOf);
+  document.getElementById('clk-cfg').innerHTML = chips.map(c=>`<span class="clk-chip">${c}</span>`).join('');
+}
+function paintReady(){
+  document.getElementById('clk-face').classList.remove('done');
+  const ph = buildPhases();
+  const first = ph[0];
+  document.getElementById('clk-sub').textContent = MODE_LABEL[clkKey];
+  document.getElementById('clk-time').textContent = first ? mmss(first.dir==='down' ? first.dur : 0) : '0:00';
+  const chips = [];
+  if (clkKey==='amrap') chips.push('CAP '+mmss(RCFG.amrap.total));
+  if (clkKey==='emom') chips.push(RCFG.emom.rounds+' rondas');
+  if (clkKey==='tabata') chips.push(RCFG.tabata.rounds+'× '+RCFG.tabata.work+'s/'+RCFG.tabata.rest+'s');
+  if (clkKey==='fortime') chips.push(RCFG.fortime.capped ? 'CAP '+mmss(RCFG.fortime.cap) : 'sin tope');
+  if (clkKey==='remix') chips.push('total '+mmss(remixTotal()));
+  if (getReady>0) chips.push('go '+getReady+'s');
+  document.getElementById('clk-cfg').innerHTML = chips.map(c=>`<span class="clk-chip">${c}</span>`).join('');
+}
+function clkMode(k){
+  clkKey = k;
+  document.querySelectorAll('.clk-chip-mode').forEach(b=>b.classList.toggle('on', b.dataset.mode===k));
+  document.querySelectorAll('.rcfg-panel').forEach(p=>p.classList.toggle('on', p.id==='rcfg-'+k));
+  clkReset();
+}
+function clkToggle(){
+  const btn = document.getElementById('clk-go');
+  if (!run){
+    run = { phases: buildPhases(), idx:0, t:0 };
+    document.getElementById('clk-config').classList.add('hide');
+    btn.textContent = 'Pausar';
+    clkTick = setInterval(tick, 1000);
+    paintRun();
+  } else if (clkTick){
+    clearInterval(clkTick); clkTick=null;
+    btn.textContent = 'Continuar';
+  } else {
+    clkTick = setInterval(tick, 1000);
+    btn.textContent = 'Pausar';
+  }
+}
+function clkReset(){
+  if (clkTick){ clearInterval(clkTick); clkTick=null; }
+  run = null;
+  document.getElementById('clk-config').classList.remove('hide');
+  document.getElementById('clk-go').textContent = 'Comenzar';
+  paintReady();
+}
+function clkDone(){
+  if (clkTick){ clearInterval(clkTick); clkTick=null; }
+  run = null;
+  document.getElementById('clk-face').classList.add('done');
+  document.getElementById('clk-time').textContent = '0:00';
+  document.getElementById('clk-sub').textContent = 'TERMINADO';
+  document.getElementById('clk-cfg').innerHTML = '<span class="clk-chip">¡bien ahí!</span>';
+  document.getElementById('clk-config').classList.remove('hide');
+  document.getElementById('clk-go').textContent = 'Comenzar';
+  beep('end');
+}
+function cfgAdj(mode, field, delta, min){
+  RCFG[mode][field] = Math.max(min!=null?min:0, RCFG[mode][field]+delta);
+  document.getElementById('v-'+mode+'-'+field).textContent = (field==='rounds') ? RCFG[mode][field] : mmss(RCFG[mode][field]);
+  if (!run) paintReady();
+}
+function ftToggle(e){
+  if (e) e.stopPropagation();
+  RCFG.fortime.capped = !RCFG.fortime.capped;
+  document.getElementById('ft-tgl').classList.toggle('on', RCFG.fortime.capped);
+  document.getElementById('ft-hint').textContent = RCFG.fortime.capped ? 'Apágalo para NOT FOR TIME' : 'NOT FOR TIME · tiempo ilimitado';
+  document.getElementById('ft-cap-row').style.display = RCFG.fortime.capped ? 'flex' : 'none';
+  if (!run) paintReady();
+}
+function setReady(n){
+  getReady = n;
+  document.querySelectorAll('#cd-chips button').forEach(b=>b.classList.toggle('on', +b.dataset.ready===n));
+  if (!run) paintReady();
+}
+let actx=null;
+function beep(kind){
+  try{
+    if(!actx) actx = new (window.AudioContext||window.webkitAudioContext)();
+    const freq = {end:1200, go:880, rest:440, soft:660}[kind] || 660;
+    const dur = kind==='end' ? 0.5 : 0.16;
+    const osc = actx.createOscillator(), gain = actx.createGain();
+    osc.type='sine'; osc.frequency.value=freq;
+    osc.connect(gain); gain.connect(actx.destination);
+    const t0 = actx.currentTime;
+    gain.gain.setValueAtTime(0.0001,t0);
+    gain.gain.exponentialRampToValueAtTime(0.25,t0+0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001,t0+dur);
+    osc.start(t0); osc.stop(t0+dur+0.02);
+  }catch(e){}
+}
+
+/* ═══════ REMIX: constructor de WOD con drag & drop ═══════ */
+const ITEM_DEF = { amrap:{total:300}, fortime:{cap:240}, emom:{every:60,rounds:5}, tabata:{rounds:8,work:20,rest:10}, rest:{dur:60} };
+const ITEM_BADGE = { amrap:'AMRAP', fortime:'FT', emom:'EMOM', tabata:'TBT', rest:'REST' };
+const ITEM_FIELDS = {
+  amrap:   [{k:'total',l:'Duración',step:5}],
+  fortime: [{k:'cap',l:'Tope',step:5}],
+  emom:    [{k:'every',l:'Cada',step:5},{k:'rounds',l:'Rondas',step:1}],
+  tabata:  [{k:'rounds',l:'Rondas',step:1},{k:'work',l:'Trabajo',step:5},{k:'rest',l:'Descanso',step:5}],
+  rest:    [{k:'dur',l:'Duración',step:5}],
+};
+let ridN = 0;
+function nid(){ return 'x'+(ridN++); }
+function mkItem(type){ return Object.assign({id:nid(), type}, ITEM_DEF[type]); }
+function itemSummary(item){
+  if (item.type==='amrap') return 'AMRAP ' + mmss(item.total);
+  if (item.type==='fortime') return 'For Time · cap ' + mmss(item.cap);
+  if (item.type==='emom') return 'EMOM cada ' + mmss(item.every) + ' × ' + item.rounds;
+  if (item.type==='tabata') return item.rounds + '× ' + item.work + 's/' + item.rest + 's';
+  return 'Descanso ' + mmss(item.dur);
+}
+let remix = [
+  { id:nid(), rounds:3, items:[mkItem('amrap'), mkItem('rest'), mkItem('fortime')] },
+  { id:nid(), rounds:1, items:[mkItem('rest')] },
+  { id:nid(), rounds:1, items:[mkItem('fortime')] },
+];
+function findItem(iid){ for(const b of remix) for(const it of b.items) if(it.id===iid) return {block:b,item:it}; return null; }
+function remixItemHTML(bid, item){
+  return `<div class="remix-item" draggable="true" data-item="${item.id}" data-block="${bid}">
+    <span class="drag">⠿</span>
+    <span class="remix-badge ${item.type}">${ITEM_BADGE[item.type]}</span>
+    <span class="sum">${itemSummary(item)}</span>
+    <span class="chev" onclick="toggleItem('${item.id}')">▾</span>
+    <button class="del" onclick="delItem('${bid}','${item.id}')">✕</button>
+    <div class="remix-detail" id="detail-${item.id}">
+      ${ITEM_FIELDS[item.type].map(f=>`<div class="rcfg-row"><span class="k">${f.l}</span><span class="stepper"><button onclick="itemAdj('${item.id}','${f.k}',-${f.step})">−</button><span class="num" id="iv-${item.id}-${f.k}">${f.k==='rounds'?item[f.k]:mmss(item[f.k])}</span><button onclick="itemAdj('${item.id}','${f.k}',${f.step})">+</button></span></div>`).join('')}
+    </div>
+  </div>`;
+}
+function remixRender(){
+  const host = document.getElementById('remix-blocks');
+  if (!host) return;
+  host.innerHTML = remix.map(block => `
+    <div class="remix-block" draggable="true" data-block="${block.id}">
+      <div class="remix-block-head">
+        <span class="drag">⠿</span>
+        <span class="lbl">Bloque</span>
+        <span class="stepper"><button onclick="blockRounds('${block.id}',-1)">−</button><span class="num">${block.rounds}</span><button onclick="blockRounds('${block.id}',1)">+</button></span>
+        <button class="del" onclick="delBlock('${block.id}')">✕</button>
+      </div>
+      <div class="remix-items" data-block-items="${block.id}">${block.items.map(item => remixItemHTML(block.id, item)).join('')}</div>
+      <button class="remix-add" onclick="togglePick('${block.id}')">+ item</button>
+      <div class="remix-pick" id="pick-${block.id}">${Object.keys(ITEM_DEF).map(t=>`<button onclick="addItem('${block.id}','${t}')">${ITEM_BADGE[t]}</button>`).join('')}</div>
+    </div>`).join('') + `<button class="remix-add" onclick="addBlock()">+ Bloque</button>`;
+  if (!run) paintReady();
+}
+function addBlock(){ remix.push({id:nid(), rounds:1, items:[]}); remixRender(); }
+function delBlock(bid){ remix = remix.filter(b=>b.id!==bid); remixRender(); }
+function blockRounds(bid,d){ const b=remix.find(x=>x.id===bid); if(b) b.rounds=Math.max(1,Math.min(99,b.rounds+d)); remixRender(); }
+function addItem(bid,type){ const b=remix.find(x=>x.id===bid); if(b) b.items.push(mkItem(type)); remixRender(); }
+function delItem(bid,iid){ const b=remix.find(x=>x.id===bid); if(b) b.items=b.items.filter(i=>i.id!==iid); remixRender(); }
+function toggleItem(iid){ const el=document.getElementById('detail-'+iid); if(el) el.classList.toggle('on'); }
+function itemAdj(iid,field,delta){
+  const found = findItem(iid); if(!found) return;
+  const min = field==='rounds' ? 1 : 5;
+  found.item[field] = Math.max(min, found.item[field]+delta);
+  remixRender();
+}
+function togglePick(bid){ const el=document.getElementById('pick-'+bid); if(el) el.classList.toggle('on'); }
+function remixTotal(){
+  const ph=[]; remix.forEach(block=>{ for(let r=1;r<=block.rounds;r++) block.items.forEach(item=>pushItemPhases(ph,item,null)); });
+  return ph.reduce((s,p)=> s + (p.dur===Infinity?0:p.dur), 0);
+}
+function getAfter(container, y, sel) {
+  let best = { off: -Infinity, el: null };
+  container.querySelectorAll(sel + ':not(.dragging)').forEach(ch => {
+    const box = ch.getBoundingClientRect(), off = y - box.top - box.height / 2;
+    if (off < 0 && off > best.off) best = { off, el: ch };
+  });
+  return best.el;
+}
+function moveItem(srcBid, iid, tgtBid, beforeIid){
+  const src = remix.find(b=>b.id===srcBid); if(!src) return;
+  const idx = src.items.findIndex(i=>i.id===iid); if(idx<0) return;
+  const [item] = src.items.splice(idx,1);
+  const tgt = remix.find(b=>b.id===tgtBid); if(!tgt) return;
+  const beforeIdx = beforeIid ? tgt.items.findIndex(i=>i.id===beforeIid) : -1;
+  if (beforeIdx<0) tgt.items.push(item); else tgt.items.splice(beforeIdx,0,item);
+  remixRender();
+}
+function moveBlock(bid, beforeBid){
+  const idx = remix.findIndex(b=>b.id===bid); if(idx<0) return;
+  const [blk] = remix.splice(idx,1);
+  const beforeIdx = beforeBid ? remix.findIndex(b=>b.id===beforeBid) : -1;
+  if (beforeIdx<0) remix.push(blk); else remix.splice(beforeIdx,0,blk);
+  remixRender();
+}
+let dragKind=null, dragInfo=null;
+const remixHost = document.getElementById('remix-blocks');
+if (remixHost) {
+  remixHost.addEventListener('dragstart', e=>{
+    const item = e.target.closest('.remix-item');
+    const block = e.target.closest('.remix-block');
+    if (item){ dragKind='item'; dragInfo={bid:item.dataset.block, iid:item.dataset.item}; setTimeout(()=>item.classList.add('dragging'),0); }
+    else if (block){ dragKind='block'; dragInfo={bid:block.dataset.block}; setTimeout(()=>block.classList.add('dragging'),0); }
+  });
+  remixHost.addEventListener('dragend', ()=>{
+    remixHost.querySelectorAll('.dragging').forEach(el=>el.classList.remove('dragging'));
+    remixHost.querySelectorAll('.remix-items.over').forEach(el=>el.classList.remove('over'));
+  });
+  remixHost.addEventListener('dragover', e=>{
+    e.preventDefault();
+    if (dragKind==='item'){
+      const itemsHost = e.target.closest('.remix-items');
+      remixHost.querySelectorAll('.remix-items').forEach(el=>el.classList.toggle('over', el===itemsHost));
+    }
+  });
+  remixHost.addEventListener('drop', e=>{
+    e.preventDefault();
+    if (dragKind==='item'){
+      const itemsHost = e.target.closest('.remix-items');
+      if (itemsHost) { const after = getAfter(itemsHost, e.clientY, '.remix-item'); moveItem(dragInfo.bid, dragInfo.iid, itemsHost.dataset.blockItems, after ? after.dataset.item : null); }
+    } else if (dragKind==='block'){
+      const after = getAfter(remixHost, e.clientY, '.remix-block');
+      moveBlock(dragInfo.bid, after ? after.dataset.block : null);
+    }
+    dragKind=null; dragInfo=null;
+  });
+}
+remixRender();
+if (document.getElementById('clk-face')) clkReset();
 </script>
 </body>
 </html>
