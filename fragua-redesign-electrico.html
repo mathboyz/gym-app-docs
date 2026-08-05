@@ -64,8 +64,11 @@ body{
 }
 
 /* ── Escritorio + rail ── */
-.desk{position:fixed;inset:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;z-index:1}
-.rail{justify-self:end;padding-right:48px;max-width:300px;position:relative;z-index:2}
+.desk{position:fixed;inset:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;align-content:center;z-index:1}
+/* el rail se limita al alto del viewport: con 26 pantallas es más alto que la
+   ventana, y sin tope inflaba la fila del grid y empujaba al teléfono fuera de vista */
+.rail{justify-self:end;padding-right:48px;max-width:300px;position:relative;z-index:2;max-height:100vh;overflow-y:auto;scrollbar-width:none;padding-top:16px;padding-bottom:16px}
+.rail::-webkit-scrollbar{display:none}
 .rail-pre{font-family:var(--mono);font-size:10px;letter-spacing:2.2px;color:var(--bone-4);text-transform:uppercase;margin-bottom:14px}
 .rail-title{font-family:var(--display);font-weight:700;font-size:32px;letter-spacing:-0.03em;line-height:1;color:var(--bone)}
 .rail-title em{font-style:normal;color:var(--neon)}
@@ -2332,19 +2335,10 @@ applyUnit();
 function fitPhone(){
   const ph = document.querySelector('.phone');
   if (!ph) return;
-  if (window.innerWidth <= 980){
-    ph.style.position=''; ph.style.top=''; ph.style.left=''; ph.style.transform='';
-    return;
-  }
-  const s = Math.min(1, (window.innerHeight - 40) / 844);
-  if (s < 1){
-    ph.style.position='fixed';
-    ph.style.top='50%';
-    ph.style.left='50%';
-    ph.style.transform=`translate(-50%,-50%) scale(${s})`;
-  } else {
-    ph.style.position=''; ph.style.top=''; ph.style.left=''; ph.style.transform='';
-  }
+  if (window.innerWidth <= 980){ ph.style.transform=''; return; }
+  // el teléfono se queda en el grid (para no taparse con el rail); solo se escala
+  const s = Math.min(1, (window.innerHeight - 32) / 844);
+  ph.style.transform = s < 1 ? `scale(${s})` : '';
 }
 window.addEventListener('resize', fitPhone);
 fitPhone();
