@@ -791,6 +791,90 @@ body{
         </div>
       </section>
 
+      <!-- ════════ 04 · LOGIN ════════ -->
+      <section class="screen" id="s-login">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <div class="auth-glyph"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></div>
+            <p class="auth-word">For<em>ja</em></p>
+            <p class="auth-tag">Una cuenta · todos tus gimnasios</p>
+            <div class="field"><label>Correo</label><input type="email" placeholder="tu correo"></div>
+            <div class="field"><label>Contraseña</label><input type="password" placeholder="contraseña"></div>
+            <button class="btn full" style="margin-top:18px" data-go="firstlogin">Entrar</button>
+            <p class="auth-links" data-go="recover">Olvidé mi clave</p>
+            <p class="auth-note">¿Primera vez? Tu cuenta la creó tu gimnasio — usa el correo y la clave temporal que te llegaron por mail.</p>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 05 · PRIMER INGRESO ════════ -->
+      <section class="screen" id="s-firstlogin">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <span class="auth-pill">Primer ingreso detectado</span>
+            <p class="auth-word" style="font-size:20px">Crea tu clave</p>
+            <p class="auth-tag">La clave temporal del correo es de un solo uso. Deja una tuya y listo.</p>
+            <div class="field"><label>Nueva clave</label><input type="password" placeholder="nueva clave"></div>
+            <div class="field"><label>Repítela</label><input type="password" placeholder="repite la clave"></div>
+            <p class="field-hint">Mínimo 8 caracteres · una mayúscula · un número</p>
+            <button class="btn full" style="margin-top:18px" data-go="gympick">Guardar y entrar</button>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 06 · ELIGE TU BOX ════════ -->
+      <section class="screen" id="s-gympick">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <p class="auth-word" style="font-size:20px">¿Dónde entrenas?</p>
+            <p class="auth-tag">Hola Vale — tienes dos gimnasios asociados.</p>
+            <div class="gym-card" data-go="hoy">
+              <div class="av b1">EY</div>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600;color:var(--bone)">El Yunque</p><p style="font-size:12px;color:var(--bone-4);margin-top:2px">CrossFit · Osorno · racha 14 🔥</p></div>
+              <span class="chev" style="color:var(--neon)">›</span>
+            </div>
+            <div class="gym-card" data-go="hoy">
+              <div class="av b2">AS</div>
+              <div style="flex:1"><p style="font-size:14px;font-weight:600;color:var(--bone)">AquaSur</p><p style="font-size:12px;color:var(--bone-4);margin-top:2px">Natación · Puerto Varas</p></div>
+              <span class="chev">›</span>
+            </div>
+            <p class="auth-note">Cada gimnasio tiene su propio portal, sus colores y su comunidad. Si tuvieras uno solo, entrarías directo.</p>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 07 · RECUPERAR CLAVE ════════ -->
+      <section class="screen" id="s-recover">
+        <div class="auth-wrap">
+          <div class="auth-card">
+            <div class="auth-glyph"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+            <p class="auth-word" style="font-size:20px">¿Olvidaste tu clave?</p>
+            <p class="auth-tag">Te mandamos un enlace al correo para que crees una nueva.</p>
+            <div class="field"><label>Correo</label><input type="email" placeholder="tu correo"></div>
+            <button class="btn full" style="margin-top:18px" onclick="this.textContent='Enlace enviado — revisa tu correo ✓';this.style.background='var(--lime)';this.style.color='#0B0A0F'">Enviarme el enlace</button>
+            <p class="auth-links" data-go="login">← Volver a entrar</p>
+            <p class="auth-powered">Forjado con Forja</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 00 · PORTADA ════════ -->
+      <section class="screen" id="s-intro">
+        <div class="auth-wrap" style="justify-content:center">
+          <div class="auth-card">
+            <p class="eyebrow">Ronda 1 · Prototipo navegable</p>
+            <p class="auth-word" style="font-size:44px;margin-top:10px">For<em>ja</em></p>
+            <p class="auth-tag">Fierro y tiza — la fragua a plena luz</p>
+            <p style="font-size:13px;color:var(--bone-3);font-style:italic;line-height:1.5;margin-top:18px">«El WOD de hoy se escribe con plumón. Tu récord queda guardado para siempre.»</p>
+            <button class="btn" style="margin:28px auto 0;width:fit-content;padding:14px 32px" data-go="login">Entrar al box</button>
+            <p class="auth-note" style="margin-top:30px">Box El Yunque · Osorno, Chile — 40°34′ S</p>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
   <div></div>
