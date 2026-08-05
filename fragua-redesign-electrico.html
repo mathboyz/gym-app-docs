@@ -875,6 +875,183 @@ body{
         </div>
       </section>
 
+      <!-- ════════ 08 · EJERCICIO ════════ -->
+      <section class="screen" id="s-exercise">
+        <div class="navbar" id="nb-exercise">
+          <div class="nav-row">
+            <span class="l" data-go="board"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Pizarra</span>
+            <span class="c">Power Clean</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Power Clean</h1></div>
+        </div>
+        <div class="scrolly" id="sc-exercise" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-size:13px;color:var(--bone-3);padding:0 18px">Skill de hoy · 2×5 + 3×3 @ 75%</p>
+            <div class="video-card">
+              <div class="figure"><svg width="120" height="70" viewBox="0 0 280 130" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M30 84 Q140 92 250 84"/><rect x="36" y="50" width="11" height="66" rx="5"/><rect x="233" y="50" width="11" height="66" rx="5"/><circle cx="140" cy="34" r="9"/><path d="M140 43 v22 M140 50 L118 78 M140 50 L162 78 M118 78 L112 106 M162 78 L168 106"/></svg></div>
+              <button class="play-btn"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+              <span class="video-tag">1:24 · técnica</span>
+            </div>
+            <div class="rx-tiles">
+              <div class="rx-tile"><div class="v">75<span style="font-size:13px">%</span></div><div class="k">Prescrito hoy · de tu 1RM</div></div>
+              <div class="rx-tile"><div class="v em wt" data-kg="35">35 kg</div><div class="k">Te toca a ti</div></div>
+            </div>
+            <div class="ghead first"><span>Tu marca</span></div>
+            <div class="my-iron">
+              <div class="disc-sm sv"><span class="k">Clean</span><span class="v wt" data-kg="47">47 kg</span><span class="k">plata</span></div>
+              <div style="flex:1"><p>Tu 1RM: <b><span class="wt" data-kg="47">47 kg</span></b>, logrado el 3 de mayo. A <b style="color:var(--neon)"><span class="wt" data-kg="3">3 kg</span></b> del disco de oro.</p><p style="font-family:var(--mono);font-size:10px;color:var(--neon);margin-top:6px;letter-spacing:0.6px;cursor:pointer" data-go="progreso">VER EVOLUCIÓN →</p></div>
+            </div>
+            <div style="padding:12px 18px 0"><button class="btn ghost full" data-go="forge">+ Añadir nueva marca</button></div>
+            <div class="ghead"><span>Las claves</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="key-row"><span class="n">1</span><p>Espalda firme y la barra pegada al cuerpo — sube rozando.</p></div>
+              <div class="key-row"><span class="n">2</span><p>Extiende la cadera completa antes de tirar con los brazos.</p></div>
+              <div class="key-row"><span class="n">3</span><p>Codos rápidos al frente para recibir en los hombros.</p></div>
+            </div>
+            <p class="coach-cue">→ pecho orgulloso y paciencia con la barra — Vale</p>
+            <div style="height:16px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 09 · ANOTAR ════════ -->
+      <section class="screen" id="s-score">
+        <div class="navbar" id="nb-score">
+          <div class="nav-row">
+            <span class="l" data-go="board"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Pizarra</span>
+            <span class="c">Anotar</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Anotar</h1></div>
+        </div>
+        <div class="scrolly" id="sc-score" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-family:var(--mono);font-size:10px;letter-spacing:1px;color:var(--bone-4);text-transform:uppercase;text-align:center">Anota cada sección — el calentamiento no se anota</p>
+            <div class="ghead first"><span>Skill · Power Clean</span><span class="x">peso por serie</span></div>
+            <div class="grp" style="margin:0 18px" id="sk-rows">
+              <div class="row"><div class="lbl"><p>Serie 1</p><p class="m">5 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(0,-2.5)">−</button><span class="num" id="sk-0">35</span><button onclick="skAdj(0,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 2</p><p class="m">5 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(1,-2.5)">−</button><span class="num" id="sk-1">35</span><button onclick="skAdj(1,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 3</p><p class="m">3 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(2,-2.5)">−</button><span class="num" id="sk-2">40</span><button onclick="skAdj(2,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 4</p><p class="m">3 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(3,-2.5)">−</button><span class="num" id="sk-3">40</span><button onclick="skAdj(3,2.5)">+</button></div></div>
+              <div class="row"><div class="lbl"><p>Serie 5</p><p class="m">3 reps · Rx <span class="wt" data-kg="35">35 kg</span></p></div><div class="stepper"><button onclick="skAdj(4,-2.5)">−</button><span class="num" id="sk-4">42.5</span><button onclick="skAdj(4,2.5)">+</button></div></div>
+            </div>
+            <div class="ghead"><span>WOD · "Cindy"</span><span class="x">cap 20 min</span></div>
+            <div class="div-row">
+              <div class="div-plate" id="done-yes" onclick="setDone(true)"><div class="t">Lo terminé</div><div class="s">se anota tu tiempo</div></div>
+              <div class="div-plate on" id="done-no" onclick="setDone(false)"><div class="t">No alcancé</div><div class="s">rondas + reps extra</div></div>
+            </div>
+            <div class="score-hero" id="res-rounds">
+              <p class="eb">Rondas completas</p>
+              <span class="stepper" style="justify-content:center;margin-top:8px"><button onclick="stAdj(-1)">−</button><span class="num" id="st-num" style="font-size:44px">17</span><button onclick="stAdj(1)">+</button></span>
+              <p style="font-size:12px;color:var(--bone-4);margin-top:6px">+ 3 reps extra</p>
+              <p class="badge lime" id="pr-hint" style="margin-top:10px;display:inline-block">● Tu mejor: 15 · esto es un PR</p>
+            </div>
+            <div class="score-hero" id="res-time" style="display:none">
+              <p class="eb">Tu tiempo</p>
+              <span class="stepper" style="justify-content:center;margin-top:8px"><button onclick="tAdj(-5)">−</button><span class="num" id="t-num" style="font-size:44px">18:45</span><button onclick="tAdj(5)">+</button></span>
+              <p style="font-size:11px;color:var(--bone-4);margin-top:6px">minutos : segundos</p>
+            </div>
+            <div class="rpe">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><p class="eb" style="font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;color:var(--bone-4);text-transform:uppercase">¿Cómo se sintió?</p><span class="badge neon">Encuesta del box</span></div>
+              <div class="rpe-scale" id="rpe"></div>
+              <div class="rpe-lbl"><span>Paseo</span><span>Al límite</span></div>
+              <div class="cmt-input">¿Algo que decirle al coach? (opcional)</div>
+              <div class="sheet-opt" style="margin-top:12px"><div><p class="k">Enviar como anónimo</p><p class="h">Si lo apagas, el coach ve tu nombre</p></div><button class="tgl on"></button></div>
+            </div>
+            <div class="btn-row"><button class="btn full" data-go="forge">Guardar resultado</button></div>
+            <div style="height:12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 10 · DUELO ════════ -->
+      <section class="screen" id="s-duel">
+        <div class="navbar" id="nb-duel">
+          <div class="nav-row">
+            <span class="l" data-go="forge"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Forja</span>
+            <span class="c">Duelo</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Duelo</h1></div>
+        </div>
+        <div class="scrolly" id="sc-duel" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-size:13px;color:var(--bone-3);padding:0 18px">Matías te retó · expira en 6 días</p>
+            <div class="vs-stage">
+              <div class="vs-row">
+                <div class="vs-side"><div class="av b1" style="margin:0 auto">VF</div><p class="nm">Tú</p><p class="elo">1.482 ELO</p></div>
+                <span class="vs-mark">VS</span>
+                <div class="vs-side"><div class="av b5" style="margin:0 auto">MR</div><p class="nm">Matías R.</p><p class="elo">1.535 ELO</p></div>
+              </div>
+              <div class="vs-wod" id="duel-wod" onclick="this.classList.toggle('on')">
+                <p class="t">"Fran" — por tiempo</p>
+                <p class="s">21-15-9 · thrusters + pull-ups</p>
+                <p class="exp-hint">Ver detalle <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></p>
+                <div class="vs-detail">
+                  <div class="grp" style="margin-top:0"><div class="row"><div class="lbl"><p>Thrusters</p><p class="m">21-15-9 · Rx <span class="wt" data-kg="43">43 kg</span> · Scaled <span class="wt" data-kg="30">30 kg</span> · acordado: Rx</p></div></div><div class="row"><div class="lbl"><p>Pull-ups</p><p class="m">Rx kipping · Scaled con banda</p></div></div></div>
+                </div>
+              </div>
+            </div>
+            <div class="elo-stakes">
+              <div class="elo-cell"><div class="v up">+18</div><div class="k">si ganas</div></div>
+              <div class="elo-cell"><div class="v dn">−9</div><div class="k">si pierdes</div></div>
+              <div class="elo-cell"><div class="v">7 días</div><div class="k">ventana</div></div>
+            </div>
+            <div class="ghead"><span>Las reglas</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><div class="lbl"><p>Profundidad del thruster</p><p class="m">Cadera bajo paralelo y lockout arriba — si no, la rep no cuenta</p></div></div>
+              <div class="row"><div class="lbl"><p>Barbilla sobre la barra</p><p class="m">Ambos corren dentro de la ventana, en cualquier clase</p></div></div>
+              <div class="row"><div class="lbl"><p>El ELO se mueve solo con el resultado</p><p class="m">Nada se apuesta — el rango se gana</p></div></div>
+            </div>
+            <div class="btn-row"><button class="btn" style="flex:1" onclick="this.textContent='Duelo aceptado ⚒';this.style.background='#1F8A4C'">Aceptar duelo</button><button class="btn ghost" style="flex:1" data-go="wall">El muro</button></div>
+            <div class="ghead"><span>¿Quieres retar tú?</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><div class="av b3" style="width:30px;height:30px;font-size:11px">IV</div><div class="lbl"><p>Ignacio Vera</p><p class="m">PRs a ±5% de los tuyos — rival pareja</p></div><span class="badge neon">Retar</span></div>
+              <div class="row"><div class="ic amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></div><div class="lbl"><p>"Rey de Fran" está en juego</p><p class="m">De Camila · PR 2:58 · si le ganas el duelo, te lo llevas</p></div></div>
+            </div>
+            <p class="gfoot" style="text-align:center">Todo duelo pasa por aprobación del box</p>
+            <div style="height:12px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 11 · EL MURO ════════ -->
+      <section class="screen" id="s-wall">
+        <div class="navbar" id="nb-wall">
+          <div class="nav-row">
+            <span class="l" data-go="social"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Comunidad</span>
+            <span class="c">El muro</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">El muro</h1></div>
+        </div>
+        <div class="scrolly" id="sc-wall" style="padding-bottom:100px">
+          <div class="content" style="padding-top:140px">
+            <p style="font-size:13px;color:var(--bone-3);padding:0 18px">Ranking del box · Otoño sem 6</p>
+            <div class="seg" id="wall-seg" style="margin-top:10px">
+              <div class="pill" style="display:none"></div>
+              <button class="on">"Cindy"</button><button>"Fran"</button><button>Clean 1RM</button><button>Asistencia</button>
+            </div>
+            <div class="podium">
+              <div class="pod"><p class="pos">2</p><p class="who">Matías R.</p><p class="sc">19</p></div>
+              <div class="pod gd" style="padding-top:22px"><p class="pos">1</p><p class="who">Camila P.</p><p class="sc">21</p></div>
+              <div class="pod"><p class="pos">3</p><p class="who">Javiera N.</p><p class="sc">18</p></div>
+            </div>
+            <div class="grp" style="margin:14px 18px 0">
+              <div class="wallrow"><span class="pos">4</span><span class="nm">Ignacio Vera</span><span class="sc">17+8</span></div>
+              <div class="wallrow you"><span class="pos">5</span><span class="nm">Valentina F. <span class="badge neon">Tú · PR</span></span><span class="sc">17+3</span></div>
+              <div class="wallrow"><span class="pos">6</span><span class="nm">Carlos Soto</span><span class="sc">16+12</span></div>
+              <div class="wallrow"><span class="pos">7</span><span class="nm">Daniela Mora</span><span class="sc">15+4</span></div>
+              <div class="wallrow"><span class="pos">8</span><span class="nm">Seba Díaz</span><span class="sc">14+9</span></div>
+            </div>
+            <p class="gfoot" style="text-align:center;margin-top:16px">El muro es el ranking vivo del box: la mejor marca de cada atleta en cada benchmark, esta temporada.<br><b style="color:var(--bone-2)">Se borra al partir la temporada nueva — tus PRs quedan en tu historial para siempre.</b></p>
+            <div style="height:12px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="social"></nav>
+      </section>
+
     </div>
   </div>
   <div></div>
@@ -1009,6 +1186,39 @@ segBtns.forEach((b,i)=>b.addEventListener('click',()=>{
   b.classList.add('on');
   setWod(b.textContent.trim(),i);
 }));
+
+/* ═══════ SCORE ═══════ */
+const SK = [35,35,40,40,42.5];
+function skAdj(i,d){ SK[i]=Math.max(0,SK[i]+d); renderSkill(); }
+function renderSkill(){ SK.forEach((v,i)=>{ const el=document.getElementById('sk-'+i); if(el) el.textContent = (unit==='kg') ? v : Math.round(v*2.20462); }); }
+function setDone(done){
+  document.getElementById('done-yes').classList.toggle('on',done);
+  document.getElementById('done-no').classList.toggle('on',!done);
+  document.getElementById('res-time').style.display = done ? 'block' : 'none';
+  document.getElementById('res-rounds').style.display = done ? 'none' : 'block';
+}
+let rounds = 17;
+function stAdj(d){ rounds = Math.max(0, rounds+d); paintRounds(); }
+function paintRounds(){
+  document.getElementById('st-num').textContent = rounds;
+  document.getElementById('pr-hint').style.display = rounds > 15 ? 'inline-block' : 'none';
+}
+let tsec = 18*60+45;
+function tAdj(d){ tsec = Math.max(0, tsec+d); paintTime(); }
+function paintTime(){
+  const m = Math.floor(tsec/60), s = tsec%60;
+  document.getElementById('t-num').textContent = m+':'+String(s).padStart(2,'0');
+}
+const rpeHost = document.getElementById('rpe');
+if (rpeHost) {
+  for (let i=1;i<=10;i++){
+    const b = document.createElement('button');
+    b.className = 'rpe-tick' + (i===8 ? ' on' : '');
+    b.textContent = i;
+    b.onclick = () => { rpeHost.querySelectorAll('.rpe-tick').forEach(x=>x.classList.remove('on')); b.classList.add('on'); };
+    rpeHost.appendChild(b);
+  }
+}
 </script>
 </body>
 </html>
