@@ -1052,6 +1052,142 @@ body{
         <nav class="tabbar" data-tabs="social"></nav>
       </section>
 
+      <!-- ════════ 12 · AGENDA ════════ -->
+      <section class="screen" id="s-agenda">
+        <div class="navbar" id="nb-agenda">
+          <div class="nav-row"><span class="l"></span><span class="c">Agenda</span><span class="r"><span class="badge neon" data-go="plan" style="cursor:pointer">Quedan 7/12</span></span></div>
+          <div class="nav-title"><h1 class="lt">Agenda</h1><p class="eyebrow" style="margin-top:4px">Semana 6 · Otoño</p></div>
+        </div>
+        <div class="scrolly" id="sc-agenda" style="padding-bottom:100px">
+          <div class="content">
+            <div class="week">
+              <button class="day-chip"><span class="d">Lu</span><span class="n">8</span></button>
+              <button class="day-chip"><span class="d">Ma</span><span class="n">9</span></button>
+              <button class="day-chip on"><span class="d">Mié</span><span class="n">10</span></button>
+              <button class="day-chip"><span class="d">Ju</span><span class="n">11</span></button>
+              <button class="day-chip"><span class="d">Vi</span><span class="n">12</span></button>
+              <button class="day-chip"><span class="d">Sá</span><span class="n">13</span></button>
+            </div>
+            <div class="ghead first"><span>Miércoles 10</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><div class="lbl"><p>07:00 · CrossFit</p><p class="m">Coach Nico · 9/12</p></div><button class="badge neon" style="cursor:pointer;border:none" onclick="reservar(this)">Reservar</button></div>
+              <div class="row"><div class="lbl"><p>12:30 · Halterofilia</p><p class="m">Coach Pau · 5/8</p></div><button class="badge neon" style="cursor:pointer;border:none" onclick="reservar(this)">Reservar</button></div>
+              <div class="row" style="background:rgba(198,255,61,0.06)"><div class="lbl"><p style="color:var(--lime)">17:00 · Funcional</p><p class="m">Coach Nico · 8/10</p></div><button class="badge lime" style="cursor:default;border:none">Confirmada ✓</button></div>
+              <div class="row" style="background:rgba(255,183,64,0.08)"><div class="lbl"><p style="color:var(--amber)">19:00 · CrossFit</p><p class="m">Coach Vale · 11/12</p></div><button class="badge amber" style="cursor:pointer;border:none" onclick="confirmar(this)">Confirmar</button></div>
+              <div class="row"><div class="lbl"><p>20:00 · Funcional</p><p class="m">Coach Nico · 12/12 <span class="cls-state"></span></p></div><button class="badge" style="cursor:pointer;border:0.5px solid var(--line-2);background:transparent;color:var(--bone-2)" onclick="avisar(this)">🔔 Avísame</button></div>
+              <div class="row"><div class="lbl"><p>20:00 · Halterofilia</p><p class="m">Coach Pau · 8/8 <span class="cls-state" title="En lista · te inscribimos automáticamente" style="color:var(--amber)">⚡</span></p></div><button class="badge" style="cursor:pointer;border:0.5px solid var(--line-2);background:transparent;color:var(--bone-2)" onclick="salir(this)">🔕 Silenciar</button></div>
+            </div>
+            <p class="gfoot" style="text-align:center">Reservar guarda el cupo · confirmar lo asegura</p>
+            <div style="height:20px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="agenda"></nav>
+      </section>
+
+      <!-- ════════ 13 · COMUNIDAD ════════ -->
+      <section class="screen" id="s-social">
+        <div class="navbar" id="nb-social">
+          <div class="nav-row"><span class="l"></span><span class="c">Comunidad</span><span class="r"><span class="badge neon">11 hoy</span></span></div>
+          <div class="nav-title"><h1 class="lt">Comunidad</h1><p class="eyebrow" style="margin-top:4px">Box El Yunque</p></div>
+        </div>
+        <div class="scrolly" id="sc-social" style="padding-bottom:100px">
+          <div class="content">
+            <div class="grp tap" style="margin:8px 18px 0" data-go="wall"><div class="row tap"><span class="ic amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></span><div class="lbl"><p>El muro</p><p class="m">Ranking del box · esta temporada</p></div><span class="chev">›</span></div></div>
+            <div class="fpost" style="cursor:pointer" data-go="compe">
+              <p style="font-size:12px;color:var(--amber);font-weight:600">📌 Sábado: Open interno + asado</p>
+              <p class="post-body" style="margin-top:6px">→ anótate en recepción · traen los discos, nosotros la parrilla</p>
+            </div>
+            <div class="fpost">
+              <div class="post-head"><div class="av b1">VF</div><div><p class="nm">Valentina Fuentes</p><p class="ts">hace 1 min · "Cindy" · <span class="badge neon">PR</span></p></div></div>
+              <div class="post-body"><div class="disc-sm gd" style="float:left;margin-right:12px">"Cindy"<span class="v">17</span><span class="k">rondas · oro</span></div>Subió a <b>disco de oro</b> — superó su marca de 15 rondas después de 3 meses.</div>
+              <div class="post-foot" style="clear:both"><button class="bump-btn on" onclick="bump(this)">🤜 Chócala · <b class="ct">12</b></button><button class="cmt-toggle" onclick="document.getElementById('cmts1').classList.toggle('on')">3 comentarios</button></div>
+              <div class="cmt-thread" id="cmts1">
+                <p style="font-size:11.5px;color:var(--bone-4)">Le chocaron <b style="color:var(--bone-2)">Matías, Javiera, Coach Vale y 9 más</b></p>
+                <div class="cmt"><div class="av b5" style="width:26px;height:26px;font-size:10px">MR</div><div><p class="nm">Matías</p><p class="tx">¡Vamos! Te dije que hoy caía 💪</p></div></div>
+                <div class="cmt"><div class="av b1" style="width:26px;height:26px;font-size:10px">CV</div><div><p class="nm">Coach Vale</p><p class="tx">Tres meses de ritmo parejo — bien merecido.</p></div></div>
+                <div class="cmt"><div class="av b3" style="width:26px;height:26px;font-size:10px">JN</div><div><p class="nm">Javiera</p><p class="tx">La próxima vamos por las 18 🔥</p></div></div>
+                <div class="cmt-input" style="margin-top:10px">Comenta…</div>
+              </div>
+            </div>
+            <div class="fpost">
+              <div class="post-head"><div class="av b5">MR</div><div><p class="nm">Matías Rojas</p><p class="ts">hace 40 min · Clean 1RM</p></div></div>
+              <div class="post-body">Por fin los <b>100 kg de Clean</b>. Seis meses persiguiendo este número 🔥 Gracias coach Vale por el ojo en la técnica.</div>
+              <div class="post-foot"><button class="bump-btn" onclick="bump(this)">🤜 Chócala · <b class="ct">8</b></button><span class="cmt-toggle">1 comentario</span></div>
+            </div>
+            <div class="fpost">
+              <div class="post-head"><div class="av b3">JN</div><div><p class="nm">Javiera Núñez</p><p class="ts">hace 2 h · logro · <span class="badge">50 clases</span></p></div></div>
+              <div class="post-body">Completó <b>50 clases</b> en El Yunque — medio centenar de WODs al cuerpo.</div>
+              <div class="post-foot"><button class="bump-btn" onclick="bump(this)">🤜 Chócala · <b class="ct">15</b></button></div>
+            </div>
+            <div style="height:20px"></div>
+          </div>
+        </div>
+        <nav class="tabbar" data-tabs="social"></nav>
+      </section>
+
+      <!-- ════════ 14 · COMPETENCIA ════════ -->
+      <section class="screen" id="s-compe">
+        <div class="navbar" id="nb-compe">
+          <div class="nav-row">
+            <span class="l" data-go="social"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Comunidad</span>
+            <span class="c">Open de Otoño</span>
+            <span class="r"><span class="badge neon">Inscrita · Rx</span></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:22px">Open interno de Otoño</h1><p class="eyebrow" style="margin-top:4px">Sábado 13 jun · 10:00</p></div>
+        </div>
+        <div class="scrolly" id="sc-compe" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="heat-card"><p class="k">Tu tanda</p><p class="v">Tanda 2 · 10:24</p><p class="s">Calle 3 · juez: coach Nico</p></div>
+            <div class="ghead"><span>Las pruebas</span><span class="x">toca para ver el detalle</span></div>
+            <div class="grp" style="margin:0 18px">
+              <div class="row tap" onclick="document.getElementById('comp-exp1').classList.toggle('on')"><div class="lbl"><p>"Cindy" con chaleco</p><p class="m">AMRAP 15 · variante por división</p></div><span class="chev">›</span></div>
+              <div class="remix-detail on" id="comp-exp1" style="display:none;padding:0 16px 14px">
+                <p style="font-size:12.5px;color:var(--bone-3)">Pull-ups — 5 · Rx estrictas · Scaled kipping · Masters con banda</p>
+                <p style="font-size:12.5px;color:var(--bone-3)">Push-ups — 10 · Todas las divisiones: pecho al suelo</p>
+                <p style="font-size:12.5px;color:var(--bone-3)">Air squats con chaleco — 15 · Rx <span class="wt" data-kg="9">9 kg</span> · Scaled <span class="wt" data-kg="5">5 kg</span> · Masters sin chaleco</p>
+              </div>
+              <div class="row tap" onclick="document.getElementById('comp-exp2').classList.toggle('on')"><div class="lbl"><p>Fran modificada</p><p class="m">Por tiempo · cap 8:00</p></div><span class="chev">›</span></div>
+              <div class="remix-detail on" id="comp-exp2" style="display:none;padding:0 16px 14px">
+                <p style="font-size:12.5px;color:var(--bone-3)">Thrusters — 15-12-9 · Rx 43/30 kg · Scaled 30/20 kg · Masters 20/15 kg</p>
+                <p style="font-size:12.5px;color:var(--bone-3)">Pull-ups — 15-12-9 · Rx kipping · Scaled banda · Masters ring rows</p>
+              </div>
+              <div class="lockrow"><span class="lk">🔒</span><div class="lbl"><p>Prueba sorpresa</p><p class="m">Se escribe en la pizarra 24 h antes</p></div></div>
+            </div>
+            <div class="ghead"><span>Leaderboard</span></div>
+            <div class="seg" style="margin:8px 18px 0"><div class="pill" style="display:none"></div><button class="on">Rx</button><button>Scaled</button><button>Masters</button></div>
+            <div class="grp" style="margin:10px 18px 0">
+              <div class="wallrow"><span class="pos">1</span><span class="nm">Camila Paredes</span><span class="sc">192</span></div>
+              <div class="wallrow"><span class="pos">2</span><span class="nm">Matías Rojas</span><span class="sc">180</span></div>
+              <div class="wallrow you"><span class="pos">3</span><span class="nm">Valentina F. <span class="badge neon">Tú</span></span><span class="sc">171</span></div>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ 15 · NOTIFICACIONES ════════ -->
+      <section class="screen" id="s-notifs">
+        <div class="navbar" id="nb-notifs">
+          <div class="nav-row">
+            <span class="l" data-go="hoy"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Hoy</span>
+            <span class="c">Ponerse al día</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Ponerse al día</h1><p class="eyebrow" style="margin-top:4px">3 nuevas</p></div>
+        </div>
+        <div class="scrolly" id="sc-notifs" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="grp" style="margin:0 18px">
+              <div class="row"><span class="av b5" style="width:34px;height:34px;font-size:11px">MR</span><div class="lbl"><p><b>Matías</b> te retó a "Fran"</p><p class="m">hace 2 h · Duelo · +18 ELO si ganas</p><div class="n-acts"><button class="mini solid" data-go="duel">Aceptar reto</button><button class="mini ghost" data-go="duel">Ver duelo</button></div></div><span class="ndot"></span></div>
+              <div class="row"><span class="ic neon"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div class="lbl"><p>¿Cómo estuvo la clase de las <b>19:00</b>?</p><p class="m">hace 3 h</p><div class="n-acts"><button class="mini solid" onclick="this.textContent='¡Gracias! +20 XP';this.classList.remove('solid')">Responder · +20 XP</button></div></div><span class="ndot"></span></div>
+              <div class="row tap" data-go="social"><span class="ic amber"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m14.5 9.5-5 5"/></svg></span><div class="lbl"><p>Tu disco de oro juntó <b>12 chócalas</b></p><p class="m">"Cindy" · 17 rondas · 19:42</p></div><span class="ndot"></span></div>
+              <div class="row"><span class="ic gray"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2 4 7v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V7z"/></svg></span><div class="lbl"><p>Tu racha llegó a <b>14 días</b> — la mejor del año</p><p class="m">ayer</p></div><span class="ndot off"></span></div>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
   <div></div>
@@ -1218,6 +1354,58 @@ if (rpeHost) {
     b.onclick = () => { rpeHost.querySelectorAll('.rpe-tick').forEach(x=>x.classList.remove('on')); b.classList.add('on'); };
     rpeHost.appendChild(b);
   }
+}
+
+/* ═══════ AGENDA ═══════ */
+function reservar(btn){
+  const row = btn.closest('.row');
+  row.style.background = 'rgba(255,183,64,0.08)';
+  row.querySelector('.lbl p').style.color = 'var(--amber)';
+  btn.textContent = 'Confirmar';
+  btn.onclick = () => confirmar(btn);
+}
+function confirmar(btn){
+  abrirConfirmar(function(){
+    btn.textContent = 'Confirmada ✓';
+    btn.style.cursor = 'default';
+    btn.onclick = null;
+    btn.classList.remove('amber'); btn.classList.add('lime');
+  });
+}
+let avisoRow = null;
+function avisar(btn){
+  avisoRow = btn.closest('.row');
+  document.getElementById('aviso-auto').classList.remove('on');
+  document.getElementById('aviso-hint').textContent = 'Solo te avisamos. El cupo queda libre para quien lo confirme primero.';
+  document.getElementById('avisar-sheet').classList.add('on');
+}
+function autoHint(t,e){
+  e.stopPropagation();
+  t.classList.toggle('on');
+  document.getElementById('aviso-hint').textContent = t.classList.contains('on')
+    ? 'Si se libera, lo reservamos a tu nombre. Igual deberás confirmar la clase.'
+    : 'Solo te avisamos. El cupo queda libre para quien lo confirme primero.';
+}
+function cerrarAviso(){ document.getElementById('avisar-sheet').classList.remove('on'); avisoRow = null; }
+function activarAviso(){
+  if (avisoRow){
+    const auto = document.getElementById('aviso-auto').classList.contains('on');
+    const st = avisoRow.querySelector('.cls-state');
+    st.style.color = 'var(--amber)';
+    st.textContent = auto ? '⚡' : '👁';
+    st.title = auto ? 'En lista · te inscribimos automáticamente' : 'Te avisamos si se libera';
+    const b = avisoRow.querySelector('button.badge, button[onclick^="avisar"]') || avisoRow.querySelector('button');
+    b.textContent = '🔕 Silenciar';
+    b.setAttribute('onclick','salir(this)');
+  }
+  cerrarAviso();
+}
+function salir(btn){
+  const row = btn.closest('.row');
+  const st = row.querySelector('.cls-state');
+  st.textContent = ''; st.title = ''; st.style.color = '';
+  btn.textContent = '🔔 Avísame';
+  btn.setAttribute('onclick','avisar(this)');
 }
 </script>
 </body>
