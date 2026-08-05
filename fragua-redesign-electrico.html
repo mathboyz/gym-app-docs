@@ -1448,6 +1448,50 @@ body{
         </div>
       </section>
 
+      <!-- ════════ 24 · CALCULADORA ════════ -->
+      <section class="screen" id="s-calc">
+        <div class="navbar" id="nb-calc">
+          <div class="nav-row">
+            <span class="l" data-go="tools"><svg width="11" height="18" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="10 2 2 10 10 18"/></svg> Herramientas</span>
+            <span class="c">Calculadora</span>
+            <span class="r"></span>
+          </div>
+          <div class="nav-title"><h1 class="lt" style="font-size:24px">Calculadora</h1><p class="eyebrow" style="margin-top:4px">Pesos y porcentajes</p></div>
+        </div>
+        <div class="scrolly" id="sc-calc" style="padding-bottom:24px">
+          <div class="content" style="padding-top:140px">
+            <div class="div-row">
+              <div class="div-plate on" id="ct-pct" onclick="calcTab('pct')"><div class="t">% de 1RM</div><div class="s">porcentajes</div></div>
+              <div class="div-plate" id="ct-conv" onclick="calcTab('conv')"><div class="t">lb ⇄ kg</div><div class="s">conversor</div></div>
+              <div class="div-plate" id="ct-plate" onclick="calcTab('plate')"><div class="t">Discos</div><div class="s">en la barra</div></div>
+            </div>
+
+            <div class="calc-panel on" id="cp-pct">
+              <div class="field" style="margin-top:16px"><label id="pct-unit-lbl">Tu 1RM (kg)</label><input type="number" id="pct-1rm" value="100" oninput="pctPaint()"></div>
+              <div id="pct-table" style="margin-top:4px"></div>
+            </div>
+
+            <div class="calc-panel" id="cp-conv">
+              <div class="conv-row" style="margin-top:16px">
+                <div class="field" style="flex:1;margin-top:0"><label>Libras</label><input type="number" id="conv-lb" value="135" oninput="convFrom('lb')"></div>
+                <span class="conv-glyph">⇅</span>
+                <div class="field" style="flex:1;margin-top:0"><label>Kilos</label><input type="number" id="conv-kg" value="61.2" oninput="convFrom('kg')"></div>
+              </div>
+              <p class="gfoot" style="text-align:center;margin-top:14px">1 kg = 2.205 lb</p>
+            </div>
+
+            <div class="calc-panel" id="cp-plate">
+              <div class="field" style="margin-top:16px"><label id="pl-unit-lbl">Peso objetivo (kg)</label><input type="number" id="pl-target" value="60" oninput="platePaint()"></div>
+              <div class="field"><label>Barra</label><select id="pl-bar" onchange="platePaint()" style="width:100%;background:var(--surface);border:0.5px solid var(--line-2);border-radius:12px;padding:13px 14px;font-family:var(--ui);font-size:15px;color:var(--bone)"></select></div>
+              <div class="ghead" style="padding-left:0"><span>Por lado</span></div>
+              <div class="plate-vis" id="plate-vis"></div>
+              <p class="gfoot" id="plate-note"></p>
+            </div>
+            <div style="height:14px"></div>
+          </div>
+        </div>
+      </section>
+
     </div>
   </div>
   <div></div>
@@ -1705,6 +1749,66 @@ function renderProgreso() {
     .replace('{g}', '<b style="color:var(--bone)">' + conv(p.goal) + ' ' + u + '</b>')
     .replace('{d}', '<b style="color:var(--bone)">' + conv(p.gap) + ' ' + du + '</b>');
 }
+
+/* ═══════ CALCULADORA ═══════ */
+function calcTab(k){
+  document.querySelectorAll('.div-plate').forEach(b=>b.classList.remove('on'));
+  document.getElementById('ct-'+k).classList.add('on');
+  document.querySelectorAll('.calc-panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('cp-'+k).classList.add('on');
+}
+const PCTS = [95, 90, 85, 80, 75, 70, 65, 60, 50];
+function pctPaint(){
+  const el = document.getElementById('pct-1rm'); if (!el) return;
+  const rm = parseFloat(el.value) || 0;
+  document.getElementById('pct-table').innerHTML = PCTS.map(p =>
+    `<div class="pct-row"><span class="p">${p}%</span><span class="w">${(rm*p/100).toFixed(1).replace(/\.0$/,'')} <span>${unit}</span></span></div>`
+  ).join('');
+}
+const LB = 2.20462;
+function convFrom(which){
+  const lb = document.getElementById('conv-lb'), kg = document.getElementById('conv-kg');
+  if (which === 'lb') kg.value = (parseFloat(lb.value) / LB || 0).toFixed(1);
+  else lb.value = (parseFloat(kg.value) * LB || 0).toFixed(1);
+}
+const PLATES = { kg: [25, 20, 15, 10, 5, 2.5, 1.25], lb: [45, 35, 25, 10, 5, 2.5] };
+const BARS = {
+  kg: [{v:20,l:'Olímpica · 20 kg'},{v:15,l:'Mujer · 15 kg'},{v:10,l:'Técnica · 10 kg'}],
+  lb: [{v:45,l:'Olímpica · 45 lb'},{v:35,l:'Mujer · 35 lb'},{v:15,l:'Técnica · 15 lb'}],
+};
+const TIER = [
+  {bg:'var(--neon)',fg:'#fff'},
+  {bg:'var(--neon-2)',fg:'#fff'},
+  {bg:'var(--cyan)',fg:'#0B0A0F'},
+  {bg:'var(--lime)',fg:'#0B0A0F'},
+  {bg:'var(--amber)',fg:'#0B0A0F'},
+  {bg:'var(--bone-4)',fg:'#0B0A0F'},
+  {bg:'var(--surface-3)',fg:'var(--bone-2)'},
+];
+function fillBarOptions(){
+  const el = document.getElementById('pl-bar'); if (!el) return;
+  el.innerHTML = BARS[unit].map(b=>`<option value="${b.v}">${b.l}</option>`).join('');
+}
+function platePaint(){
+  const vis = document.getElementById('plate-vis'), note = document.getElementById('plate-note');
+  if (!vis) return;
+  const target = parseFloat(document.getElementById('pl-target').value) || 0;
+  const bar = parseFloat(document.getElementById('pl-bar').value) || BARS[unit][0].v;
+  if (target < bar) { vis.innerHTML=''; note.textContent = 'Menos que la barra ('+bar+' '+unit+').'; return; }
+  const plates = PLATES[unit], max = plates[0];
+  let perSide = (target - bar) / 2, html = '', used = false;
+  plates.forEach((d, i) => {
+    while (perSide >= d - 1e-9) {
+      perSide -= d; used = true;
+      const r = d / max;
+      html += `<span class="plate-disc" style="width:${14+r*14}px;height:${44+r*46}px;font-size:${d>=5?11:9}px;background:${TIER[i].bg};color:${TIER[i].fg}">${d}</span>`;
+    }
+  });
+  vis.innerHTML = html || '<span class="plate-empty">solo la barra</span>';
+  const leftover = perSide > 0.01 ? ' · faltan ' + (perSide*2).toFixed(2).replace(/\.?0+$/,'') + ' ' + unit : '';
+  note.textContent = (used ? 'por lado, de mayor a menor' : 'solo la barra') + leftover;
+}
+fillBarOptions(); pctPaint(); platePaint();
 </script>
 </body>
 </html>
