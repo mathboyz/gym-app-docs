@@ -560,6 +560,16 @@ body{
 .rpe-tick.on{background:var(--neon);color:#fff}
 .rpe-lbl{display:flex;justify-content:space-between;font-size:10.5px;color:var(--bone-4);margin-top:6px}
 .cmt-input{margin-top:14px;background:var(--surface-2);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--bone-4)}
+
+/* ═══════════ FORJA: sparks ═══════════ */
+#sparks{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.spark-particle{position:absolute;width:3px;height:3px;border-radius:50%;background:var(--neon);box-shadow:0 0 6px var(--neon-glow);animation:spark-fly var(--sd) ease-out forwards}
+.spark-particle:nth-child(3n){background:var(--rose)}
+.spark-particle:nth-child(5n){background:var(--cyan)}
+@keyframes spark-fly{
+  0%{transform:translate(0,0);opacity:1}
+  100%{transform:translate(var(--sx),var(--sy));opacity:0}
+}
 </style>
 </head>
 <body>
@@ -630,7 +640,7 @@ body{
                 <span>Si no confirmas, tu cupo se libera a las 18:00</span>
               </div>
               <div class="cc-act">
-                <button class="btn" style="flex:1">Confirmar</button>
+                <button class="btn" style="flex:1" onclick="confirmHoy(this)">Confirmar</button>
                 <button class="btn ghost" data-go="board" style="flex:1">La pizarra</button>
               </div>
             </div>
@@ -727,7 +737,7 @@ body{
               <div class="av b3">CP</div>
               <div class="av b4">DS</div>
               <div class="av b5">VF</div>
-              <button class="more-pill">+ 7 más</button>
+              <button class="more-pill" onclick="document.getElementById('roster-sheet').classList.add('on')">+ 7 más</button>
             </div>
 
             <!-- Desglose -->
@@ -768,6 +778,7 @@ body{
           <div class="nav-title"><h1 class="lt">La forja</h1></div>
         </div>
         <div class="forge">
+          <div id="sparks"></div>
           <span class="pre">Nuevo récord personal</span>
           <div class="spark"><span class="l"></span><span class="d"></span><span class="r"></span></div>
           <span class="bm">“Cindy” · AMRAP 20'</span>
@@ -1559,6 +1570,60 @@ body{
         </div>
       </section>
 
+      <div class="sheet-overlay" id="confirmar-sheet">
+        <div class="sheet-scrim" onclick="cerrarConfirmar()"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <p class="sheet-ttl"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--amber)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ¿Confirmar tu asistencia?</p>
+          <p class="sheet-body">Una vez confirmada, tu cupo queda asegurado y no vas a poder cancelarlo.</p>
+          <div class="sheet-acts">
+            <button class="btn full" onclick="ejecutarConfirmar()">Sí, confirmar</button>
+            <button class="btn ghost full" onclick="cerrarConfirmar()">Volver</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheet-overlay" id="roster-sheet">
+        <div class="sheet-scrim" onclick="document.getElementById('roster-sheet').classList.remove('on')"></div>
+        <div class="sheet" style="max-height:70%">
+          <div class="sheet-grip"></div>
+          <p class="sheet-ttl">Hoy entrenan · 12</p>
+          <p class="sheet-body" style="margin-top:2px">CrossFit · 19:00 · Coach Vale</p>
+          <div class="roster-list" style="margin-top:12px">
+            <div class="rl-row"><span class="av b1">MR</span><span>Matías Rojas</span></div>
+            <div class="rl-row"><span class="av b2">JN</span><span>Javiera Núñez</span></div>
+            <div class="rl-row"><span class="av b3">CP</span><span>Camila Paredes</span></div>
+            <div class="rl-row"><span class="av b4">DS</span><span>Daniela Soto</span></div>
+            <div class="rl-row"><span class="av b5">IV</span><span>Ignacio Vera</span></div>
+            <div class="rl-row"><span class="av b1">CS</span><span>Carlos Soto</span></div>
+            <div class="rl-row"><span class="av b2">SD</span><span>Seba Díaz</span></div>
+            <div class="rl-row"><span class="av b3">PL</span><span>Paula López</span></div>
+            <div class="rl-row"><span class="av b4">RT</span><span>Ricardo Torres</span></div>
+            <div class="rl-row"><span class="av b5">MG</span><span>Macarena Gómez</span></div>
+            <div class="rl-row"><span class="av b1">AF</span><span>Andrés Flores</span></div>
+            <div class="rl-row you"><span class="av b2">VF</span><span>Valentina Fuentes · tú</span></div>
+          </div>
+          <button class="btn ghost full" style="margin-top:14px" onclick="document.getElementById('roster-sheet').classList.remove('on')">Cerrar</button>
+        </div>
+      </div>
+
+      <div class="sheet-overlay" id="avisar-sheet">
+        <div class="sheet-scrim" onclick="cerrarAviso()"></div>
+        <div class="sheet">
+          <div class="sheet-grip"></div>
+          <p class="sheet-ttl">Te avisamos si se libera un cupo</p>
+          <p class="sheet-body">Te mandamos una notificación apenas alguien libere su lugar en esta clase.</p>
+          <div class="sheet-opt">
+            <div><p class="k">Tomar el cupo automáticamente</p><p class="h" id="aviso-hint">Solo te avisamos. El cupo queda libre para quien lo confirme primero.</p></div>
+            <button class="tgl" id="aviso-auto" onclick="autoHint(this,event)"></button>
+          </div>
+          <div class="sheet-acts">
+            <button class="btn full" onclick="activarAviso()">Activar aviso</button>
+            <button class="btn ghost full" onclick="cerrarAviso()">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
   <div></div>
@@ -1566,14 +1631,37 @@ body{
 
 <script>
 const SCREENS=[
-  {id:"hoy",  n:"01", nm:"Hoy"},
-  {id:"board",n:"02", nm:"La pizarra"},
-  {id:"forge",n:"03", nm:"La forja"},
+  {id:"intro",      n:"00", nm:"Portada"},
+  {id:"login",      n:"01", nm:"Login"},
+  {id:"firstlogin", n:"02", nm:"Primer ingreso"},
+  {id:"gympick",    n:"03", nm:"Elige tu box"},
+  {id:"recover",    n:"04", nm:"Recuperar clave"},
+  {id:"hoy",        n:"05", nm:"Hoy"},
+  {id:"notifs",     n:"06", nm:"Notificaciones"},
+  {id:"agenda",     n:"07", nm:"Agenda"},
+  {id:"board",      n:"08", nm:"Pizarra"},
+  {id:"exercise",   n:"09", nm:"Ejercicio"},
+  {id:"score",      n:"10", nm:"Anotar"},
+  {id:"forge",      n:"11", nm:"Nuevo PR"},
+  {id:"duel",       n:"12", nm:"Duelos"},
+  {id:"desafios",   n:"13", nm:"Desafíos"},
+  {id:"compe",      n:"14", nm:"Competencia"},
+  {id:"social",     n:"15", nm:"Comunidad"},
+  {id:"wall",       n:"16", nm:"El muro"},
+  {id:"progreso",   n:"17", nm:"Progreso"},
+  {id:"perfil",     n:"18", nm:"Perfil"},
+  {id:"plan",       n:"19", nm:"Mi plan"},
+  {id:"ajustes",    n:"20", nm:"Ajustes"},
+  {id:"tools",      n:"21", nm:"Herramientas"},
+  {id:"reloj",      n:"22", nm:"Reloj"},
+  {id:"calc",       n:"23", nm:"Calculadora"},
+  {id:"libreria",   n:"24", nm:"Librería"},
+  {id:"mov",        n:"25", nm:"Movimiento"},
 ];
 const rail=document.getElementById('rail');
 SCREENS.forEach((s,i)=>{
   const b=document.createElement('button');
-  if(i===0)b.classList.add('active');
+  if(s.id==='hoy')b.classList.add('active');
   b.dataset.go=s.id;
   b.innerHTML=`<span class="n">${s.n}</span><span class="nm">${s.nm}</span>`;
   rail.appendChild(b);
@@ -1588,6 +1676,7 @@ function go(id){
   });
   document.querySelectorAll('.scrolly').forEach(s=>{s.scrollTop=0;});
   document.querySelectorAll('.navbar').forEach(nb=>nb.classList.remove('scrolled'));
+  if(id==='forge') forgeSparks();
 }
 document.addEventListener('click',e=>{
   const t=e.target.closest('[data-go]');
@@ -1595,24 +1684,26 @@ document.addEventListener('click',e=>{
 });
 
 const TABS=[
-  {id:"hoy",l:"Hoy",on:"hoy"},
-  {id:"hoy",l:"Agenda",on:"age"},
-  {id:"hoy",l:"Box",on:"box"},
-  {id:"hoy",l:"Yo",on:"yo"},
+  {key:"hoy",    l:"Hoy",          go:"hoy"},
+  {key:"agenda", l:"Agenda",       go:"agenda"},
+  {key:"social", l:"Comunidad",    go:"social"},
+  {key:"tools",  l:"Herramientas", go:"tools"},
+  {key:"yo",     l:"Yo",           go:"perfil"},
 ];
 const ICONS={
-  hoy:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/>',
-  age:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M12 15h.01"/>',
-  box:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  hoy:'<path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>',
+  agenda:'<rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  social:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  tools:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
   yo:'<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
 };
 document.querySelectorAll('.tabbar').forEach(tb=>{
   const cur=tb.dataset.tabs;
   TABS.forEach(t=>{
     const b=document.createElement('button');
-    if(t.on===cur)b.classList.add('on');
-    b.innerHTML=`<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[t.on]}</svg><span class="tl">${t.l}</span>`;
-    b.addEventListener('click',()=>go(t.id));
+    if(t.key===cur)b.classList.add('on');
+    b.innerHTML=`<svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[t.key]}</svg><span class="tl">${t.l}</span>`;
+    b.addEventListener('click',()=>go(t.go));
     tb.appendChild(b);
   });
 });
@@ -2165,6 +2256,77 @@ if (remixHost) {
 }
 remixRender();
 if (document.getElementById('clk-face')) clkReset();
+
+/* ═══════ GLOBAL: unidad kg/lb ═══════ */
+let unit = 'kg';
+const fmtWt = kg => unit === 'kg' ? (kg + ' kg') : (Math.round(kg * 2.20462) + ' lb');
+function setUnit(u){
+  unit = u;
+  document.querySelectorAll('.us-opt').forEach(b => b.classList.toggle('on', b.dataset.unit === u));
+  applyUnit();
+}
+function applyUnit(){
+  const pl = document.getElementById('pct-unit-lbl'); if (pl) pl.textContent = 'Tu 1RM (' + unit + ')';
+  const pll = document.getElementById('pl-unit-lbl'); if (pll) pll.textContent = 'Peso objetivo (' + unit + ')';
+  if (typeof fillBarOptions === 'function') fillBarOptions();
+  if (typeof pctPaint === 'function') pctPaint();
+  if (typeof platePaint === 'function') platePaint();
+  document.querySelectorAll('.wt').forEach(e => e.textContent = fmtWt(parseFloat(e.dataset.kg)));
+  if (typeof renderSkill === 'function') renderSkill();
+  if (typeof renderProgreso === 'function') renderProgreso();
+}
+
+/* ═══════ GLOBAL: toggle genérico ═══════ */
+document.addEventListener('click', e => {
+  const t = e.target.closest('.tgl');
+  if (t) t.classList.toggle('on');
+});
+
+/* ═══════ GLOBAL: chócala (bump) ═══════ */
+function bump(btn){
+  const ct = btn.querySelector('.ct');
+  const on = btn.classList.toggle('on');
+  if (ct) ct.textContent = +ct.textContent + (on ? 1 : -1);
+}
+
+/* ═══════ GLOBAL: partículas de la forja ═══════ */
+function forgeSparks(){
+  const host = document.getElementById('sparks');
+  if (!host) return;
+  host.innerHTML = '';
+  for (let i = 0; i < 18; i++) {
+    const s = document.createElement('span');
+    s.className = 'spark-particle';
+    const a = (Math.random() * 2 - 1) * Math.PI;
+    const d = 90 + Math.random() * 150;
+    s.style.cssText = `left:50%;top:46%;--sx:${Math.cos(a)*d}px;--sy:${Math.sin(a)*d - 60}px;--sd:${1.4 + Math.random()*0.5}s`;
+    host.appendChild(s);
+  }
+}
+
+/* ═══════ GLOBAL: sheet de confirmar asistencia ═══════ */
+let confirmarCb = null;
+function abrirConfirmar(cb){ confirmarCb = cb; document.getElementById('confirmar-sheet').classList.add('on'); }
+function cerrarConfirmar(){ document.getElementById('confirmar-sheet').classList.remove('on'); confirmarCb = null; }
+function ejecutarConfirmar(){
+  document.getElementById('confirmar-sheet').classList.remove('on');
+  const cb = confirmarCb; confirmarCb = null;
+  if (cb) cb();
+}
+
+/* ═══════ GLOBAL: confirmar asistencia en Hoy ═══════ */
+function confirmHoy(btn){
+  abrirConfirmar(function(){
+    const card = btn.closest('.cc');
+    const badge = card.querySelector('.badge.amber');
+    if (badge){ badge.classList.remove('amber'); badge.classList.add('lime'); badge.textContent = 'Confirmada'; }
+    const warn = card.querySelector('.cc-warn span');
+    if (warn) warn.textContent = 'Cupo asegurado · te esperamos a las 19:00';
+    card.querySelector('.cc-act').innerHTML = '<button class="btn ghost" data-go="board" style="width:100%">Ver la pizarra</button>';
+  });
+}
+
+applyUnit();
 </script>
 </body>
 </html>
